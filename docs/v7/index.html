@@ -23,7 +23,7 @@
 
       <div class="app-shell">
       <div class="streak-banner" id="streakBanner" role="status" aria-live="polite">
-        <p class="streak-banner-title" id="streakBannerTitle">🔥 0 Day Streak!</p>
+        <p class="streak-banner-title" id="streakBannerTitle">&#128293; 0 Day Streak!</p>
         <p class="streak-banner-copy">You showed up again today.</p>
       </div>
       <header class="page-header">
@@ -65,13 +65,13 @@
                   />
                 </svg>
               </button>
-              <button class="nav-button home-progress-button" type="button" data-view-target="progress" onclick="requestView('progress')">
+              <button class="nav-button home-progress-button" type="button" data-view-target="progress">
                 Progress
               </button>
-              <button class="nav-button home-learn-button" type="button" data-view-target="techniques" onclick="requestView('techniques')">
+              <button class="nav-button home-learn-button" type="button" data-view-target="techniques">
                 Learn
               </button>
-              <button class="primary-button home-start-button" type="button" data-view-target="setup" onclick="requestView('setup')">
+              <button class="primary-button home-start-button" type="button" data-view-target="setup">
                 Start Workout
               </button>
             </div>
@@ -100,6 +100,9 @@
         <main class="screen-stage">
           <section class="screen" data-view="setup" id="setupScreen">
             <div class="focused-view-head">
+              <div class="focused-view-kicker-row" aria-hidden="true">
+                <p class="section-kicker">Skill to Train</p>
+              </div>
               <button class="ghost-button" type="button" data-view-target="home" aria-label="Back to home">
                 <svg viewBox="0 0 24 24" aria-hidden="true" role="presentation">
                   <path
@@ -108,12 +111,18 @@
                   />
                 </svg>
               </button>
+              <button class="utility-button global-options-button" type="button" data-open-options aria-label="Open settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                  <path
+                    d="M9.6 2h4.8l.54 2.44c.53.18 1.03.39 1.5.65l2.33-.94 2.4 4.16-1.8 1.73c.05.32.08.64.08.96s-.03.64-.08.96l1.8 1.73-2.4 4.16-2.33-.94c-.47.26-.97.47-1.5.65L14.4 22H9.6l-.54-2.44a8.494 8.494 0 0 1-1.5-.65l-2.33.94-2.4-4.16 1.8-1.73A6.89 6.89 0 0 1 4.56 13c0-.32.03-.64.08-.96l-1.8-1.73 2.4-4.16 2.33.94c.47-.26.97-.47 1.5-.65ZM12 8.4A3.6 3.6 0 1 0 12 15.6 3.6 3.6 0 0 0 12 8.4Z"
+                  />
+                </svg>
+              </button>
             </div>
             <div class="screen-grid setup-grid">
               <section class="panel operation-panel" id="setupOperationPanel">
                 <div class="section-heading compact">
                   <div>
-                    <p class="section-kicker">Skill to Train</p>
                     <h2>Choose which operation to focus on.</h2>
                   </div>
                 </div>
@@ -129,7 +138,24 @@
                     <span class="operation-choice-copy">
                       <strong>Addition</strong>
                       <span class="operation-choice-meta">
-                        <small class="operation-choice-status">Ready</small>
+                        <button
+                          class="operation-change-button is-hidden"
+                          type="button"
+                          data-operation-reset
+                          aria-label="Change operation"
+                        >
+                          <span aria-hidden="true">&#10227;</span>
+                          <span>Change</span>
+                        </button>
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="operation-choice">
+                    <input type="radio" name="operation" value="subtraction" />
+                    <span class="operation-choice-copy">
+                      <strong>Subtraction</strong>
+                      <span class="operation-choice-meta">
                         <button
                           class="operation-change-button is-hidden"
                           type="button"
@@ -148,7 +174,6 @@
                     <span class="operation-choice-copy">
                       <strong>Multiplication</strong>
                       <span class="operation-choice-meta">
-                        <small class="operation-choice-status">Ready</small>
                         <button
                           class="operation-change-button is-hidden"
                           type="button"
@@ -162,19 +187,21 @@
                     </span>
                   </label>
 
-                  <label class="operation-choice is-disabled">
-                    <input type="radio" name="operation" value="subtraction" disabled />
-                    <span class="operation-choice-copy">
-                      <strong>Subtraction</strong>
-                      <small>Coming Soon</small>
-                    </span>
-                  </label>
-
-                  <label class="operation-choice is-disabled">
-                    <input type="radio" name="operation" value="division" disabled />
+                  <label class="operation-choice">
+                    <input type="radio" name="operation" value="division" />
                     <span class="operation-choice-copy">
                       <strong>Division</strong>
-                      <small>Coming Soon</small>
+                      <span class="operation-choice-meta">
+                        <button
+                          class="operation-change-button is-hidden"
+                          type="button"
+                          data-operation-reset
+                          aria-label="Change operation"
+                        >
+                          <span aria-hidden="true">&#10227;</span>
+                          <span>Change</span>
+                        </button>
+                      </span>
                     </span>
                   </label>
                 </div>
@@ -198,6 +225,29 @@
                       </label>
                       <label class="choice-pill compact">
                         <input type="checkbox" name="additionDifficulty" value="hard" />
+                        <span>Hard</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="field option-field is-hidden setup-step-field" id="subtractionDifficultyField">
+                    <span>Subtraction Difficulty</span>
+                    <p class="field-hint">You can choose more than one.</p>
+                    <div
+                      class="choice-row choice-row-compact"
+                      role="group"
+                      aria-label="Subtraction difficulty"
+                    >
+                      <label class="choice-pill compact">
+                        <input type="checkbox" name="subtractionDifficulty" value="easy" />
+                        <span>Easy</span>
+                      </label>
+                      <label class="choice-pill compact">
+                        <input type="checkbox" name="subtractionDifficulty" value="medium" />
+                        <span>Medium</span>
+                      </label>
+                      <label class="choice-pill compact">
+                        <input type="checkbox" name="subtractionDifficulty" value="hard" />
                         <span>Hard</span>
                       </label>
                     </div>
@@ -296,6 +346,7 @@
                   </div>
 
                   <section class="field option-field extra-options-field">
+
                     <div class="field is-hidden" id="isolationField">
                       <span>Isolation Target</span>
                       <label class="field centered-field">
@@ -475,7 +526,7 @@
                     <button class="primary-button" type="submit" form="settingsForm" id="setupStartButton">
                       Start
                     </button>
-                  </div>
+            </div>
                 </form>
                 </div>
               </section>
@@ -483,11 +534,21 @@
           </section>
           <section class="screen" data-view="techniques" id="techniquesScreen">
             <div class="focused-view-head">
+              <div class="focused-view-kicker-row" aria-hidden="true">
+                <p class="section-kicker">Learn</p>
+              </div>
               <button class="ghost-button" type="button" data-view-target="home" aria-label="Back to home">
                 <svg viewBox="0 0 24 24" aria-hidden="true" role="presentation">
                   <path
                     d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-5v-6h-5v6h-5A1.5 1.5 0 0 1 3 19.5v-9Z"
                     fill="currentColor"
+                  />
+                </svg>
+              </button>
+              <button class="utility-button global-options-button" type="button" data-open-options aria-label="Open settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                  <path
+                    d="M9.6 2h4.8l.54 2.44c.53.18 1.03.39 1.5.65l2.33-.94 2.4 4.16-1.8 1.73c.05.32.08.64.08.96s-.03.64-.08.96l1.8 1.73-2.4 4.16-2.33-.94c-.47.26-.97.47-1.5.65L14.4 22H9.6l-.54-2.44a8.494 8.494 0 0 1-1.5-.65l-2.33.94-2.4-4.16 1.8-1.73A6.89 6.89 0 0 1 4.56 13c0-.32.03-.64.08-.96l-1.8-1.73 2.4-4.16 2.33.94c.47-.26.97-.47 1.5-.65ZM12 8.4A3.6 3.6 0 1 0 12 15.6 3.6 3.6 0 0 0 12 8.4Z"
                   />
                 </svg>
               </button>
@@ -513,7 +574,7 @@
                 <button class="ghost-button subtle-button" type="button" id="finishSessionButton">
                   End Workout
                 </button>
-              </div>
+            </div>
 
               <div class="hud-row">
                 <div class="hud-card">
@@ -570,6 +631,7 @@
                     placeholder="Type your answer"
                     disabled
                   />
+                  <span class="answer-status-icon" id="answerStatusIcon" aria-hidden="true"></span>
                 </label>
 
                 <button class="primary-button" type="submit" id="checkButton" disabled>
@@ -592,7 +654,7 @@
                 </button>
                 <button class="ghost-button" type="button" data-keypad-key="0">0</button>
                 <button class="ghost-button" type="button" data-keypad-key="backspace">&#9003;</button>
-              </div>
+            </div>
 
               <p class="feedback" id="feedback" aria-live="polite"></p>
             </section>
@@ -608,35 +670,28 @@
                   />
                 </svg>
               </button>
+              <button class="utility-button global-options-button" type="button" data-open-options aria-label="Open settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                  <path
+                    d="M9.6 2h4.8l.54 2.44c.53.18 1.03.39 1.5.65l2.33-.94 2.4 4.16-1.8 1.73c.05.32.08.64.08.96s-.03.64-.08.96l1.8 1.73-2.4 4.16-2.33-.94c-.47.26-.97.47-1.5.65L14.4 22H9.6l-.54-2.44a8.494 8.494 0 0 1-1.5-.65l-2.33.94-2.4-4.16 1.8-1.73A6.89 6.89 0 0 1 4.56 13c0-.32.03-.64.08-.96l-1.8-1.73 2.4-4.16 2.33.94c.47-.26.97-.47 1.5-.65ZM12 8.4A3.6 3.6 0 1 0 12 15.6 3.6 3.6 0 0 0 12 8.4Z"
+                  />
+                </svg>
+              </button>
             </div>
             <section class="carousel-panel results-screen-panel">
-              <div class="carousel-shell-head">
-                <p class="section-kicker">Results</p>
-              </div>
-              <div class="carousel-actions carousel-actions-floating" aria-label="Results navigation">
-                <button
-                  class="carousel-button"
-                  type="button"
-                  id="resultsPrevButton"
-                  aria-label="Previous results panel"
-                >
-                  &#8249;
-                </button>
+              <div class="carousel-shell-head carousel-shell-head-kicker-nav" aria-hidden="true"></div>
+              <div class="carousel-actions carousel-actions-floating" aria-hidden="true">
                 <div class="carousel-position-indicator" id="resultsCarouselIndicator" aria-live="polite"></div>
-                <button
-                  class="carousel-button"
-                  type="button"
-                  id="resultsNextButton"
-                  aria-label="Next results panel"
-                >
-                  &#8250;
-                </button>
               </div>
 
               <div class="results-carousel">
-                <section class="results-slide is-active" data-results-slide="summary">
+                <section class="results-slide is-active" data-results-slide="summary" data-carousel-kicker="Workout Summary">
                   <div class="slide-heading">
-                    <p class="slide-subtitle">Workout Summary</p>
+                    <div class="carousel-inline-nav-row">
+                      <button class="carousel-inline-nav-button" type="button" data-carousel-target="results" data-carousel-shift="-1" aria-label="Previous results panel">&#8249;</button>
+                      <p class="slide-subtitle carousel-inline-kicker">Workout Summary</p>
+                      <button class="carousel-inline-nav-button" type="button" data-carousel-target="results" data-carousel-shift="1" aria-label="Next results panel">&#8250;</button>
+            </div>
                     <h2 id="resultsTitle">Great job on showing up today.</h2>
                   </div>
 
@@ -679,14 +734,18 @@
                     <button class="ghost-button" type="button" data-view-target="setup">
                       Adjust Workout
                     </button>
-                  </div>
+            </div>
                 </section>
 
-                <section class="results-slide" data-results-slide="tracker">
+                <section class="results-slide" data-results-slide="tracker" data-carousel-kicker="Workout Tracker">
                   <div class="tracker-layout">
                     <div class="tracker-left-column">
                       <div class="tracker-slide-head tracker-title-block">
-                        <p class="section-kicker">Workout Tracker</p>
+                        <div class="carousel-inline-nav-row">
+                          <button class="carousel-inline-nav-button" type="button" data-carousel-target="results" data-carousel-shift="-1" aria-label="Previous results panel">&#8249;</button>
+                          <p class="section-kicker carousel-inline-kicker">Workout Tracker</p>
+                          <button class="carousel-inline-nav-button" type="button" data-carousel-target="results" data-carousel-shift="1" aria-label="Next results panel">&#8250;</button>
+            </div>
                         <h2>This month</h2>
                       </div>
 
@@ -741,7 +800,7 @@
                           >
                             &#8250;
                           </button>
-                        </div>
+            </div>
                       </div>
                       <div class="calendar-weekdays compact" aria-hidden="true">
                         <span>Sun</span>
@@ -757,9 +816,13 @@
                   </div>
                 </section>
 
-                <section class="results-slide" data-results-slide="focus">
+                <section class="results-slide" data-results-slide="focus" data-carousel-kicker="Next Focus">
                   <div class="slide-heading">
-                    <p class="section-kicker">Next Focus</p>
+                    <div class="carousel-inline-nav-row">
+                      <button class="carousel-inline-nav-button" type="button" data-carousel-target="results" data-carousel-shift="-1" aria-label="Previous results panel">&#8249;</button>
+                      <p class="section-kicker carousel-inline-kicker">Next Focus</p>
+                      <button class="carousel-inline-nav-button" type="button" data-carousel-target="results" data-carousel-shift="1" aria-label="Next results panel">&#8250;</button>
+            </div>
                     <h2>Where to build next</h2>
                   </div>
 
@@ -786,6 +849,9 @@
 
           <section class="screen" data-view="progress" id="progressScreen">
             <div class="focused-view-head">
+              <div class="focused-view-kicker-row" aria-hidden="true">
+                <p class="section-kicker" id="progressCarouselKickerLabel">Workout Log</p>
+              </div>
               <button class="ghost-button" type="button" data-view-target="home" aria-label="Back to home">
                 <svg viewBox="0 0 24 24" aria-hidden="true" role="presentation">
                   <path
@@ -794,44 +860,39 @@
                   />
                 </svg>
               </button>
+              <button class="utility-button global-options-button" type="button" data-open-options aria-label="Open settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                  <path
+                    d="M9.6 2h4.8l.54 2.44c.53.18 1.03.39 1.5.65l2.33-.94 2.4 4.16-1.8 1.73c.05.32.08.64.08.96s-.03.64-.08.96l1.8 1.73-2.4 4.16-2.33-.94c-.47.26-.97.47-1.5.65L14.4 22H9.6l-.54-2.44a8.494 8.494 0 0 1-1.5-.65l-2.33.94-2.4-4.16 1.8-1.73A6.89 6.89 0 0 1 4.56 13c0-.32.03-.64.08-.96l-1.8-1.73 2.4-4.16 2.33.94c.47-.26.97-.47 1.5-.65ZM12 8.4A3.6 3.6 0 1 0 12 15.6 3.6 3.6 0 0 0 12 8.4Z"
+                  />
+                </svg>
+              </button>
             </div>
             <section class="carousel-panel progress-screen-panel">
-              <div class="carousel-shell-head">
-                <p class="section-kicker">My Progress</p>
-              </div>
-              <div class="carousel-actions carousel-actions-floating" aria-label="Progress navigation">
-                <button
-                  class="carousel-button"
-                  type="button"
-                  id="progressPrevButton"
-                  aria-label="Previous progress panel"
-                >
-                  &#8249;
-                </button>
+              <div class="carousel-shell-head carousel-shell-head-kicker-nav" aria-hidden="true"></div>
+              <div class="carousel-actions carousel-actions-floating" aria-hidden="true">
                 <div class="carousel-position-indicator" id="progressCarouselIndicator" aria-live="polite"></div>
-                <button
-                  class="carousel-button"
-                  type="button"
-                  id="progressNextButton"
-                  aria-label="Next progress panel"
-                >
-                  &#8250;
-                </button>
               </div>
 
               <div class="progress-carousel">
-                <section class="progress-slide is-active" data-progress-slide="overview">
+                <section class="progress-slide is-active" data-progress-slide="overview" data-carousel-kicker="Workout Log">
                   <div class="slide-heading slide-heading-with-filter">
                     <div>
-                      <p class="section-kicker">Workout Log</p>
                       <h2>Your progress so far</h2>
                     </div>
-                    <label class="records-filter progress-filter">
+                    <div class="fact-carousel-selector progress-inline-selector" aria-label="Workout log operation">
+                      <button class="fact-range-button" id="overviewOperationPrevButton" type="button" aria-label="Previous workout log operation">&#8249;</button>
+                      <span class="fact-carousel-label" id="overviewOperationLabel">All Operations</span>
+                      <button class="fact-range-button" id="overviewOperationNextButton" type="button" aria-label="Next workout log operation">&#8250;</button>
+                    </div>
+                    <label class="records-filter progress-filter is-visually-hidden">
                       <span class="sr-only">Workout log operation</span>
                       <select id="overviewOperationFilter">
                         <option value="all">All Operations</option>
                         <option value="multiplication">Multiplication</option>
                         <option value="addition">Addition</option>
+                        <option value="subtraction">Subtraction</option>
+                        <option value="division">Division</option>
                       </select>
                     </label>
                   </div>
@@ -869,11 +930,10 @@
                   </div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="tracker">
+                <section class="progress-slide" data-progress-slide="tracker" data-carousel-kicker="Workout Tracker">
                   <div class="tracker-layout">
                     <div class="tracker-left-column">
                       <div class="tracker-slide-head tracker-title-block">
-                        <p class="section-kicker">Workout Tracker</p>
                         <h2 class="stacked-heading">
                           <span>Every.</span>
                           <span>Moment.</span>
@@ -932,7 +992,7 @@
                           >
                             &#8250;
                           </button>
-                        </div>
+            </div>
                       </div>
                       <div class="calendar-weekdays" aria-hidden="true">
                         <span>Sun</span>
@@ -948,62 +1008,65 @@
                   </div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="facts">
+                <section class="progress-slide" data-progress-slide="facts" data-carousel-kicker="Fact Tracker">
                   <div class="slide-heading slide-heading-with-filter">
-                    <div>
-                      <p class="section-kicker">Fact Tracker</p>
+                    <div class="facts-header-content">
                       <h2 id="factsSlideTitle">Track the development of your skills.</h2>
-                      <p class="section-note tracker-action-hint">Click a category to train it.</p>
-                    </div>
-                    <div class="records-filter-row facts-filter-row">
-                      <label class="records-filter facts-filter">
+                      <p class="section-note tracker-action-hint" id="trackerActionHint">Click a category to train it.</p>
+                      <div class="facts-selector-row" id="factsSelectorRow" aria-label="Fact tracker controls">
+                        <div class="fact-carousel-selector" id="factOperationSelector" aria-label="Fact tracker operation">
+                          <button class="fact-range-button" id="factOperationPrevButton" type="button" aria-label="Previous operation">&#8249;</button>
+                          <span class="fact-carousel-label" id="factOperationLabel">Multiplication</span>
+                          <button class="fact-range-button" id="factOperationNextButton" type="button" aria-label="Next operation">&#8250;</button>
+                        </div>
+                        <div class="fact-carousel-selector" id="factDetailSelector" aria-label="Fact tracker detail">
+                          <button class="fact-range-button" id="factDetailPrevButton" type="button" aria-label="Previous detail view">&#8249;</button>
+                          <span class="fact-carousel-label" id="factDetailLabel">Overall</span>
+                          <button class="fact-range-button" id="factDetailNextButton" type="button" aria-label="Next detail view">&#8250;</button>
+                        </div>
+                        <div class="fact-range-nav fact-carousel-selector" id="factRangeNav" aria-label="Fact tracker range">
+                          <button class="fact-range-button" id="factRangePrevButton" type="button" aria-label="Show previous fact range">&#8249;</button>
+                          <span class="fact-carousel-label" id="factRangeLabel">x 1 - x 6</span>
+                          <button class="fact-range-button" id="factRangeNextButton" type="button" aria-label="Show next fact range">&#8250;</button>
+                        </div>
+                      </div>
+                      <label class="records-filter facts-filter is-visually-hidden">
                         <span class="sr-only">Fact tracker operation</span>
                         <select id="factOperationFilter">
                           <option value="multiplication">Multiplication</option>
                           <option value="addition">Addition</option>
+                          <option value="subtraction">Subtraction</option>
+                          <option value="division">Division</option>
                         </select>
                       </label>
-                      <label class="records-filter facts-filter">
+                      <label class="records-filter facts-filter is-visually-hidden">
                         <span class="sr-only">Fact tracker view</span>
                         <select id="factDetailFilter"></select>
                       </label>
-                      <div class="fact-range-nav" id="factRangeNav" aria-label="Fact tracker range">
-                        <button
-                          class="fact-range-button"
-                          id="factRangePrevButton"
-                          type="button"
-                          aria-label="Show previous fact range"
-                        >
-                          &#8249;
-                        </button>
-                        <span id="factRangeLabel">x1–x6</span>
-                        <button
-                          class="fact-range-button"
-                          id="factRangeNextButton"
-                          type="button"
-                          aria-label="Show next fact range"
-                        >
-                          &#8250;
-                        </button>
-                      </div>
-                    </div>
+            </div>
                   </div>
 
                   <div class="table-grid" id="tableGrid"></div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="focus">
+                <section class="progress-slide" data-progress-slide="focus" data-carousel-kicker="Next Focus">
                   <div class="slide-heading slide-heading-with-filter">
                     <div>
-                      <p class="section-kicker">Next Focus</p>
                       <h2>Where to build next</h2>
                     </div>
-                    <label class="records-filter progress-filter">
+                    <div class="fact-carousel-selector progress-inline-selector" aria-label="Next focus operation">
+                      <button class="fact-range-button" id="focusOperationPrevButton" type="button" aria-label="Previous focus operation">&#8249;</button>
+                      <span class="fact-carousel-label" id="focusOperationLabel">All Operations</span>
+                      <button class="fact-range-button" id="focusOperationNextButton" type="button" aria-label="Next focus operation">&#8250;</button>
+                    </div>
+                    <label class="records-filter progress-filter is-visually-hidden">
                       <span class="sr-only">Next focus operation</span>
                       <select id="focusOperationFilter">
                         <option value="all">All Operations</option>
                         <option value="multiplication">Multiplication</option>
                         <option value="addition">Addition</option>
+                        <option value="subtraction">Subtraction</option>
+                        <option value="division">Division</option>
                       </select>
                     </label>
                   </div>
@@ -1026,18 +1089,24 @@
                   </div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="coach">
+                <section class="progress-slide" data-progress-slide="coach" data-carousel-kicker="Coach Notes">
                   <div class="slide-heading slide-heading-with-filter">
                     <div>
-                      <p class="section-kicker">Coach Notes</p>
                       <h2>What to practice next</h2>
                     </div>
-                    <label class="records-filter progress-filter">
+                    <div class="fact-carousel-selector progress-inline-selector" aria-label="Coach notes operation">
+                      <button class="fact-range-button" id="coachOperationPrevButton" type="button" aria-label="Previous coach operation">&#8249;</button>
+                      <span class="fact-carousel-label" id="coachOperationLabel">All Operations</span>
+                      <button class="fact-range-button" id="coachOperationNextButton" type="button" aria-label="Next coach operation">&#8250;</button>
+                    </div>
+                    <label class="records-filter progress-filter is-visually-hidden">
                       <span class="sr-only">Coach notes operation</span>
                       <select id="coachOperationFilter">
                         <option value="all">All Operations</option>
                         <option value="multiplication">Multiplication</option>
                         <option value="addition">Addition</option>
+                        <option value="subtraction">Subtraction</option>
+                        <option value="division">Division</option>
                       </select>
                     </label>
                   </div>
@@ -1045,22 +1114,33 @@
                   <div class="coach-card" id="coachTip"></div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="records">
+                <section class="progress-slide" data-progress-slide="records" data-carousel-kicker="Workout Records">
                   <div class="slide-heading slide-heading-with-filter">
                     <div>
-                      <p class="section-kicker">Workout Records</p>
                       <h2>How your workouts are stacking up</h2>
                     </div>
-                    <div class="records-filter-row records-filter-row-head">
-                      <label class="records-filter">
+                    <div class="facts-selector-row records-selector-row" id="recordsSelectorRow">
+                      <div class="fact-carousel-selector progress-inline-selector" aria-label="Records operation">
+                        <button class="fact-range-button" id="recordsOperationPrevButton" type="button" aria-label="Previous records operation">&#8249;</button>
+                        <span class="fact-carousel-label" id="recordsOperationLabel">All Operations</span>
+                        <button class="fact-range-button" id="recordsOperationNextButton" type="button" aria-label="Next records operation">&#8250;</button>
+                      </div>
+                      <div class="fact-carousel-selector progress-inline-selector" id="recordsModeSelector" aria-label="Personal best mode">
+                        <button class="fact-range-button" id="recordsModePrevButton" type="button" aria-label="Previous records mode">&#8249;</button>
+                        <span class="fact-carousel-label" id="recordsModeLabel">Overall</span>
+                        <button class="fact-range-button" id="recordsModeNextButton" type="button" aria-label="Next records mode">&#8250;</button>
+                      </div>
+                      <label class="records-filter is-visually-hidden">
                         <span class="sr-only">Records operation</span>
                         <select id="recordsOperationSelect">
                           <option value="all">All Operations</option>
                           <option value="multiplication">Multiplication</option>
                           <option value="addition">Addition</option>
+                          <option value="subtraction">Subtraction</option>
+                          <option value="division">Division</option>
                         </select>
                       </label>
-                      <label class="records-filter">
+                      <label class="records-filter is-visually-hidden">
                         <span class="sr-only">Personal best mode</span>
                         <select id="recordsModeSelect"></select>
                       </label>
@@ -1100,7 +1180,7 @@
           <button class="carousel-button" type="button" id="optionsCloseButton" aria-label="Close options">
             &#10005;
           </button>
-        </div>
+            </div>
 
         <div class="options-stack">
           <button class="ghost-button options-reset-button" type="button" id="resetProgressButton">
@@ -1127,6 +1207,14 @@
                 <option value="light">Light</option>
               </select>
             </label>
+            <label class="field">
+              <span>Number Pad</span>
+              <select id="keypadPreferenceOptionsSelect">
+                <option value="auto">Auto (touch devices)</option>
+                <option value="always-on">Always on</option>
+                <option value="always-off">Always off</option>
+              </select>
+            </label>
           </section>
         </div>
       </dialog>
@@ -1140,7 +1228,7 @@
           <button class="carousel-button" type="button" id="aboutCloseButton" aria-label="Close about">
             &#10005;
           </button>
-        </div>
+            </div>
 
         <div class="options-stack">
           <section class="options-card">
@@ -1186,7 +1274,7 @@
             <button class="primary-button" type="button" id="confirmEndWorkoutButton">
               <span id="endWorkoutDialogConfirmLabel">End Workout</span>
             </button>
-          </div>
+            </div>
         </div>
       </dialog>
 
@@ -1209,7 +1297,7 @@
             <button class="primary-button" type="button" id="confirmExitTechniqueButton">
               Exit Lesson
             </button>
-          </div>
+            </div>
         </div>
       </dialog>
     </div>
@@ -1221,3 +1309,5 @@
     <script src="js/app-init.js"></script>
   </body>
 </html>
+
+

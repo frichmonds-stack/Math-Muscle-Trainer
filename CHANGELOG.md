@@ -6,6 +6,19 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+### Added
+- Added carousel-style left/right operation selectors for Progress panels (`Workout Log`, `Next Focus`, `Coach Notes`) and Workout Records filters while keeping native `select` controls hidden for compatibility.
+
+### Changed
+- Updated Fact Tracker selector behavior to operation-aware visibility:
+  - Addition: operation + detail
+  - Subtraction: operation only
+  - Division: operation + range
+  - Multiplication: operation + detail + range
+- Stabilized Fact Tracker selector widths to a fixed single-line cap using `Without regrouping` as the maximum display target.
+- Switched Fact Tracker selector arrows to shared white/neutral defaults with accent hover.
+- Updated in-app version resolution to parse all semantic versions in `CHANGELOG.md` and display the highest release version.
+
 ## [0.10.0] - 2026-04-28
 
 ### Added

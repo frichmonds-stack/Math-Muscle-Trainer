@@ -1,16 +1,29 @@
 function evaluateFactAnswer(operation, left, right) {
-  return operation === "addition" ? left + right : left * right;
+  if (operation === "addition") {
+    return left + right;
+  }
+  if (operation === "subtraction") {
+    return left - right;
+  }
+  if (operation === "division") {
+    return right === 0 ? 0 : left / right;
+  }
+  return left * right;
 }
 
 function createFact(operation, left, right) {
-  const ordered = [left, right].sort((first, second) => first - second);
-  const symbol = OPERATION_SYMBOLS[operation] || "x";
+  const commutative = operation === "addition" || operation === "multiplication";
+  const ordered = commutative
+    ? [left, right].sort((first, second) => first - second)
+    : [left, right];
+  const storageSymbol = operation === "division" ? "/" : OPERATION_SYMBOLS[operation] || "x";
+  const displaySymbol = operation === "division" ? "÷" : OPERATION_SYMBOLS[operation] || "x";
   return {
     operation,
-    symbol,
+    symbol: displaySymbol,
     a: ordered[0],
     b: ordered[1],
-    key: `${operation}:${ordered[0]}${symbol}${ordered[1]}`,
+    key: `${operation}:${ordered[0]}${storageSymbol}${ordered[1]}`,
     answer: evaluateFactAnswer(operation, left, right),
   };
 }
@@ -134,11 +147,78 @@ function buildAdditionPool(settings) {
   return Array.from(map.values());
 }
 
+function buildSubtractionPool(settings) {
+  const selectedDifficulties = Array.isArray(settings.subtractionDifficulties)
+    ? settings.subtractionDifficulties.filter((value) => ["easy", "medium", "hard"].includes(value))
+    : [];
+  const fallbackDifficulty =
+    settings.subtractionDifficulty === "easy" ||
+    settings.subtractionDifficulty === "medium" ||
+    settings.subtractionDifficulty === "hard"
+      ? settings.subtractionDifficulty
+      : "easy";
+  const difficulties = selectedDifficulties.length ? selectedDifficulties : [fallbackDifficulty];
+  const buckets = difficulties.flatMap((difficulty) => SUBTRACTION_DIGIT_BUCKETS[difficulty] || []);
+  const targetTotal = 120;
+  const perBucketTarget = Math.max(24, Math.floor(targetTotal / Math.max(1, buckets.length)));
+  const map = new Map();
+
+  buckets.forEach(([leftDigits, rightDigits]) => {
+    let created = 0;
+    let attempts = 0;
+    const maxAttempts = perBucketTarget * 40;
+
+    while (created < perBucketTarget && attempts < maxAttempts) {
+      attempts += 1;
+      const beforeSize = map.size;
+      let left = getRandomNumberByDigits(leftDigits);
+      let right = getRandomNumberByDigits(rightDigits);
+      if (left < right) {
+        const swap = left;
+        left = right;
+        right = swap;
+      }
+      addFactVariant(map, "subtraction", left, right);
+      if (map.size > beforeSize) {
+        created += 1;
+      }
+    }
+  });
+
+  if (!map.size) {
+    addFactVariant(map, "subtraction", 5, 2);
+  }
+  return Array.from(map.values());
+}
+
+function buildDivisionPool(settings) {
+  const map = new Map();
+  for (let divisor = settings.minFactor; divisor <= settings.maxFactor; divisor += 1) {
+    for (let quotient = settings.minFactor; quotient <= settings.maxFactor; quotient += 1) {
+      const dividend = divisor * quotient;
+      addFactVariant(map, "division", dividend, divisor);
+    }
+  }
+
+  if (!map.size) {
+    addFactVariant(map, "division", 12, 3);
+  }
+  return Array.from(map.values());
+}
+
 function buildPool(settings) {
   return OPERATION_CONFIG[settings.operation]?.buildPool(settings) || [];
 }
 
 function randomiseDisplay(fact) {
+  if (fact.operation === "subtraction" || fact.operation === "division") {
+    return {
+      ...fact,
+      left: fact.a,
+      right: fact.b,
+    };
+  }
+
   const swap = Math.random() > 0.5;
 
   return {
@@ -156,12 +236,22 @@ function inferOperationFromFactKey(key) {
   if (key.startsWith("addition:")) {
     return "addition";
   }
+  if (key.startsWith("subtraction:")) {
+    return "subtraction";
+  }
+  if (key.startsWith("division:")) {
+    return "division";
+  }
 
   return "multiplication";
 }
 
 function inferSymbolFromFactKey(key) {
-  return inferOperationFromFactKey(key) === "addition" ? "+" : "x";
+  const operation = inferOperationFromFactKey(key);
+  if (operation === "division") {
+    return "÷";
+  }
+  return OPERATION_SYMBOLS[operation] || "x";
 }
 
 function getFactProgress(key) {
@@ -511,6 +601,43 @@ function setFeedback(message, tone = "") {
   }
 }
 
+function clearAnswerFeedbackVisuals() {
+  const field = elements.answerInput?.closest(".answer-field");
+  if (field) {
+    field.classList.remove("is-correct", "is-error", "is-sign-error");
+  }
+  if (elements.answerStatusIcon) {
+    elements.answerStatusIcon.textContent = "";
+    elements.answerStatusIcon.classList.remove("is-correct", "is-error", "is-sign-error");
+  }
+}
+
+function setAnswerFeedbackVisual(tone) {
+  const field = elements.answerInput?.closest(".answer-field");
+  if (!field || !elements.answerStatusIcon) {
+    return;
+  }
+
+  clearAnswerFeedbackVisuals();
+  if (tone === "success") {
+    field.classList.add("is-correct");
+    elements.answerStatusIcon.classList.add("is-correct");
+    elements.answerStatusIcon.textContent = "✓";
+    return;
+  }
+
+  if (tone === "sign-error") {
+    field.classList.add("is-sign-error");
+    elements.answerStatusIcon.classList.add("is-sign-error");
+    elements.answerStatusIcon.textContent = "±";
+    return;
+  }
+
+  field.classList.add("is-error");
+  elements.answerStatusIcon.classList.add("is-error");
+  elements.answerStatusIcon.textContent = "✕";
+}
+
 function sanitisePracticeAnswerInput(value) {
   const raw = String(value || "");
   const hasLeadingSign = raw.trim().startsWith("-");
@@ -529,6 +656,7 @@ function handlePracticeAnswerInput(event) {
   if (cleaned !== input.value) {
     input.value = cleaned;
   }
+  clearAnswerFeedbackVisuals();
   syncKeypadSignToggleState();
 }
 
@@ -550,6 +678,7 @@ function askNextQuestion() {
   elements.skipButton.disabled = isSparMode(state.settings);
   elements.answerInput.focus();
   syncKeypadSignToggleState();
+  clearAnswerFeedbackVisuals();
   setFeedback("");
   renderQuestionTimer(0);
   renderPracticeProgress();
@@ -651,7 +780,11 @@ function startSession(settings) {
     elements.countdownCopy.textContent =
       settings.operation === "addition"
         ? "Type the answer to each addition fact."
-        : "Type the answer to the times tables.";
+        : settings.operation === "subtraction"
+          ? "Type the answer to each subtraction fact."
+          : settings.operation === "division"
+            ? "Type the answer to each division fact."
+            : "Type the answer to the times tables.";
   }
   elements.answerInput.disabled = true;
   elements.checkButton.disabled = true;
@@ -896,6 +1029,7 @@ function registerAnswer(evaluation, answerValue, options = {}) {
   elements.checkButton.disabled = true;
   elements.skipButton.disabled = true;
   syncKeypadSignToggleState();
+  clearAnswerFeedbackVisuals();
 }
 
 function queueNextQuestion(delay) {
@@ -923,14 +1057,20 @@ function handleSubmit(event) {
 
   const rawValue = elements.answerInput.value.trim();
   if (!rawValue) {
+    setAnswerFeedbackVisual("error");
     setFeedback("Type an answer first.", "error");
-    elements.answerInput.focus();
+    if (!state.useTouchKeypad) {
+      elements.answerInput.focus();
+    }
     return;
   }
 
   if (!/^-?\d+$/.test(rawValue)) {
+    setAnswerFeedbackVisual("error");
     setFeedback("Use whole numbers only.", "error");
-    elements.answerInput.focus();
+    if (!state.useTouchKeypad) {
+      elements.answerInput.focus();
+    }
     return;
   }
 
@@ -947,6 +1087,9 @@ function handleSubmit(event) {
   };
 
   registerAnswer(evaluation, numericValue);
+  setAnswerFeedbackVisual(
+    evaluation.isCorrect ? "success" : evaluation.signError ? "sign-error" : "error",
+  );
   setFeedback(
     evaluation.isCorrect
       ? "Correct."
@@ -963,6 +1106,7 @@ function handleSkip() {
 
   const correctAnswer = state.currentQuestion.answer;
   registerAnswer(null, "Skipped", { skipped: true });
+  setAnswerFeedbackVisual("error");
   setFeedback(`Skipped. Correct answer: ${correctAnswer}`, "error");
   queueNextQuestion(420);
 }
@@ -1019,7 +1163,6 @@ function handlePracticeKeypadClick(event) {
 
   elements.answerInput.value = sanitisePracticeAnswerInput(nextValue);
   syncKeypadSignToggleState();
-  elements.answerInput.focus();
 }
 
 function renderResults(reason) {
@@ -1097,6 +1240,7 @@ function completeSession(reason = "manual") {
   elements.answerInput.disabled = true;
   elements.checkButton.disabled = true;
   elements.skipButton.disabled = true;
+  clearAnswerFeedbackVisuals();
 
   updateDailyRecordForSessionCompletion();
   finishSessionProgress();

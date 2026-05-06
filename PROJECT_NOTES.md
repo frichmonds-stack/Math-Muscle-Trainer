@@ -21,7 +21,11 @@ Use it for:
 - Main files:
   - `index.html`
   - `styles.css`
-  - `app.js`
+  - `js/app-core.js`
+  - `js/app-practice.js`
+  - `js/app-progress.js`
+  - `js/app-techniques.js`
+  - `js/app-init.js`
   - `README.md`
   - `CHANGELOG.md`
 - Hosting:
@@ -222,3 +226,14 @@ Use it for:
 
 - Published `v0.9.0` refinement state to GitHub Pages first, then shipped `v0.10.0` as `docs/v6` with a single-shell navigation model.
 - Captured immediate follow-up risk: Results/Progress currently render all sections in a long vertical flow and need controlled section switching in the next stabilization pass.
+
+### 2026-05-06
+
+- Progress filters now use carousel-style left/right selectors (with hidden native selects retained for state compatibility).
+- Fact Tracker selector visibility is operation-aware:
+  - Addition: operation + detail
+  - Subtraction: operation only
+  - Division: operation + range
+  - Multiplication: operation + detail + range
+- Fact Tracker selector width is stabilized to a fixed single-line target based on `Without regrouping`.
+- Version badge parsing now resolves the highest semantic release from `CHANGELOG.md` instead of relying on one strict heading match.

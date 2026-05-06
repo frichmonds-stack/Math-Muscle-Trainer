@@ -4,7 +4,11 @@ function getOperationFilterValue(selectElement, fallback = "all") {
   }
 
   const value = selectElement.value;
-  return value === "addition" || value === "multiplication" || value === "all"
+  return value === "addition" ||
+    value === "multiplication" ||
+    value === "subtraction" ||
+    value === "division" ||
+    value === "all"
     ? value
     : fallback;
 }
@@ -25,7 +29,9 @@ function getFactOperationFilterValue() {
   if (!elements.factOperationFilter) {
     return "multiplication";
   }
-  return elements.factOperationFilter.value === "addition" ? "addition" : "multiplication";
+  return OPERATION_OPTIONS.includes(elements.factOperationFilter.value)
+    ? elements.factOperationFilter.value
+    : "multiplication";
 }
 
 function syncFactDetailFilterOptions() {
@@ -34,10 +40,7 @@ function syncFactDetailFilterOptions() {
   }
 
   const operation = getFactOperationFilterValue();
-  const definitions =
-    operation === "addition"
-      ? FACT_TRACKER_DETAIL_OPTIONS.addition
-      : FACT_TRACKER_DETAIL_OPTIONS.multiplication;
+  const definitions = FACT_TRACKER_DETAIL_OPTIONS[operation] || FACT_TRACKER_DETAIL_OPTIONS.multiplication;
   const previousValue = elements.factDetailFilter.value;
 
   elements.factDetailFilter.innerHTML = definitions
@@ -50,10 +53,7 @@ function syncFactDetailFilterOptions() {
 
 function getFactDetailFilterValue() {
   const operation = getFactOperationFilterValue();
-  const definitions =
-    operation === "addition"
-      ? FACT_TRACKER_DETAIL_OPTIONS.addition
-      : FACT_TRACKER_DETAIL_OPTIONS.multiplication;
+  const definitions = FACT_TRACKER_DETAIL_OPTIONS[operation] || FACT_TRACKER_DETAIL_OPTIONS.multiplication;
   const fallback = definitions[0]?.key || "overall";
   if (!elements.factDetailFilter) {
     return fallback;
@@ -63,9 +63,53 @@ function getFactDetailFilterValue() {
   return definitions.some((definition) => definition.key === value) ? value : fallback;
 }
 
+function updateFactSelectorCarouselState() {
+  const operation = getFactOperationFilterValue();
+  if (elements.factOperationLabel) {
+    elements.factOperationLabel.textContent = OPERATION_LABELS[operation] || "Multiplication";
+  }
+  const definitions = FACT_TRACKER_DETAIL_OPTIONS[operation] || FACT_TRACKER_DETAIL_OPTIONS.multiplication;
+  const detailValue = getFactDetailFilterValue();
+  const detailIndex = definitions.findIndex((definition) => definition.key === detailValue);
+  const boundedIndex = detailIndex < 0 ? 0 : detailIndex;
+  const activeDefinition = definitions[boundedIndex] || definitions[0];
+  const showDetailSelector = definitions.length > 1;
+  const showRangeSelector = operation === "multiplication" || operation === "division";
+
+  if (elements.factDetailLabel) {
+    elements.factDetailLabel.textContent = activeDefinition?.label || "Overall";
+  }
+  if (elements.factDetailSelector) {
+    elements.factDetailSelector.hidden = !showDetailSelector;
+    elements.factDetailSelector.style.display = showDetailSelector ? "" : "none";
+  }
+  if (elements.factRangeNav) {
+    elements.factRangeNav.hidden = !showRangeSelector;
+    elements.factRangeNav.style.display = showRangeSelector ? "" : "none";
+  }
+
+  if (elements.factOperationPrevButton) {
+    elements.factOperationPrevButton.disabled = false;
+  }
+  if (elements.factOperationNextButton) {
+    elements.factOperationNextButton.disabled = false;
+  }
+  if (elements.factDetailPrevButton) {
+    elements.factDetailPrevButton.disabled = !showDetailSelector || boundedIndex === 0;
+  }
+  if (elements.factDetailNextButton) {
+    elements.factDetailNextButton.disabled = !showDetailSelector || boundedIndex >= definitions.length - 1;
+  }
+
+  if (elements.factsSelectorRow) {
+    const widthCh = Math.max(12, "Without regrouping".length + 4);
+    elements.factsSelectorRow.style.setProperty("--facts-selector-width", `${widthCh}ch`);
+  }
+}
+
 const FACT_TRACKER_MULTIPLICATION_RANGES = [
-  { label: "x1–x6", minFactor: 1, maxFactor: 6 },
-  { label: "x7–x12", minFactor: 7, maxFactor: 12 },
+  { label: "x 1 - x 6", minFactor: 1, maxFactor: 6 },
+  { label: "x 7 - x 12", minFactor: 7, maxFactor: 12 },
 ];
 
 function getFactTrackerRangeCount() {
@@ -87,7 +131,7 @@ function updateFactTrackerRangeControls(isMultiplicationView) {
   }
 
   if (!isMultiplicationView) {
-    elements.factRangeNav.hidden = false;
+    elements.factRangeNav.hidden = true;
     elements.factRangeLabel.textContent = "all";
     if (elements.factRangePrevButton) {
       elements.factRangePrevButton.disabled = true;
@@ -95,6 +139,7 @@ function updateFactTrackerRangeControls(isMultiplicationView) {
     if (elements.factRangeNextButton) {
       elements.factRangeNextButton.disabled = true;
     }
+    updateFactSelectorCarouselState();
     return;
   }
 
@@ -110,11 +155,12 @@ function updateFactTrackerRangeControls(isMultiplicationView) {
     elements.factRangeNextButton.disabled =
       state.factTrackerRangeIndex >= getFactTrackerRangeCount() - 1;
   }
+  updateFactSelectorCarouselState();
 }
 
 function shiftFactTrackerRange(direction) {
   const operation = getFactOperationFilterValue();
-  if (operation !== "multiplication") {
+  if (operation !== "multiplication" && operation !== "division") {
     return;
   }
 
@@ -126,12 +172,134 @@ function shiftFactTrackerRange(direction) {
   renderTableRadar();
 }
 
+function shiftFactOperation(direction) {
+  if (!elements.factOperationFilter) {
+    return;
+  }
+  const current = getFactOperationFilterValue();
+  const currentIndex = Math.max(0, OPERATION_OPTIONS.indexOf(current));
+  const nextIndex = (currentIndex + direction + OPERATION_OPTIONS.length) % OPERATION_OPTIONS.length;
+  elements.factOperationFilter.value = OPERATION_OPTIONS[nextIndex];
+  handleFactOperationFilterChange();
+}
+
+function shiftFactDetail(direction) {
+  if (!elements.factDetailFilter) {
+    return;
+  }
+  const operation = getFactOperationFilterValue();
+  const definitions = FACT_TRACKER_DETAIL_OPTIONS[operation] || FACT_TRACKER_DETAIL_OPTIONS.multiplication;
+  if (definitions.length <= 1) {
+    return;
+  }
+  const current = getFactDetailFilterValue();
+  const currentIndex = Math.max(
+    0,
+    definitions.findIndex((definition) => definition.key === current),
+  );
+  const nextIndex = Math.max(0, Math.min(definitions.length - 1, currentIndex + direction));
+  if (nextIndex === currentIndex) {
+    return;
+  }
+  elements.factDetailFilter.value = definitions[nextIndex].key;
+  handleFactDetailFilterChange();
+}
+
+function shiftSelectValue(selectElement, direction) {
+  if (!(selectElement instanceof HTMLSelectElement)) {
+    return false;
+  }
+  const options = Array.from(selectElement.options);
+  if (!options.length) {
+    return false;
+  }
+  const currentIndex = Math.max(0, options.findIndex((option) => option.value === selectElement.value));
+  const nextIndex = (currentIndex + direction + options.length) % options.length;
+  if (nextIndex === currentIndex) {
+    return false;
+  }
+  selectElement.value = options[nextIndex].value;
+  return true;
+}
+
+function syncOverviewSelectorLabel() {
+  if (!elements.overviewOperationLabel) {
+    return;
+  }
+  const value = getOverviewOperationFilterValue();
+  elements.overviewOperationLabel.textContent = value === "all" ? "All Operations" : getOperationLabel(value);
+}
+
+function syncFocusSelectorLabel() {
+  if (!elements.focusOperationLabel) {
+    return;
+  }
+  const value = getFocusOperationFilterValue();
+  elements.focusOperationLabel.textContent = value === "all" ? "All Operations" : getOperationLabel(value);
+}
+
+function syncCoachSelectorLabel() {
+  if (!elements.coachOperationLabel) {
+    return;
+  }
+  const value = getCoachOperationFilterValue();
+  elements.coachOperationLabel.textContent = value === "all" ? "All Operations" : getOperationLabel(value);
+}
+
+function syncRecordsSelectorLabels() {
+  if (elements.recordsOperationLabel) {
+    const value = getRecordsOperationFilterValue();
+    elements.recordsOperationLabel.textContent = value === "all" ? "All Operations" : getOperationLabel(value);
+  }
+  if (elements.recordsModeLabel && elements.recordsModeSelect instanceof HTMLSelectElement) {
+    const selected = Array.from(elements.recordsModeSelect.options).find(
+      (option) => option.value === elements.recordsModeSelect.value,
+    );
+    elements.recordsModeLabel.textContent = selected?.textContent?.trim() || "Workout Type";
+  }
+}
+
+function shiftOverviewOperation(direction) {
+  if (shiftSelectValue(elements.overviewOperationFilter, direction)) {
+    handleOverviewOperationFilterChange();
+  }
+}
+
+function shiftFocusOperation(direction) {
+  if (shiftSelectValue(elements.focusOperationFilter, direction)) {
+    handleFocusOperationFilterChange();
+  }
+}
+
+function shiftCoachOperation(direction) {
+  if (shiftSelectValue(elements.coachOperationFilter, direction)) {
+    handleCoachOperationFilterChange();
+  }
+}
+
+function shiftRecordsOperation(direction) {
+  if (shiftSelectValue(elements.recordsOperationSelect, direction)) {
+    handleRecordsFilterChange();
+  }
+}
+
+function shiftRecordsMode(direction) {
+  if (shiftSelectValue(elements.recordsModeSelect, direction)) {
+    renderWorkoutHistory();
+    syncRecordsSelectorLabels();
+  }
+}
+
 function getRecordsOperationFilterValue() {
   if (!elements.recordsOperationSelect) {
     return "all";
   }
   const value = elements.recordsOperationSelect.value;
-  return value === "addition" || value === "multiplication" || value === "all"
+  return value === "addition" ||
+    value === "multiplication" ||
+    value === "subtraction" ||
+    value === "division" ||
+    value === "all"
     ? value
     : "all";
 }
@@ -182,6 +350,10 @@ function updatePracticeInputMode() {
   state.useTouchKeypad = shouldUseTouchKeypad();
   if (elements.practiceKeypad) {
     elements.practiceKeypad.classList.toggle("is-hidden", !state.useTouchKeypad);
+  }
+  if (elements.answerInput instanceof HTMLInputElement) {
+    elements.answerInput.readOnly = false;
+    elements.answerInput.setAttribute("inputmode", state.useTouchKeypad ? "none" : "numeric");
   }
   if (elements.practicePanel) {
     elements.practicePanel.classList.toggle("has-touch-keypad", state.useTouchKeypad);
@@ -310,6 +482,7 @@ function syncRecordsModeOptions() {
     ? previousValue
     : definitions[0]?.key || "timed";
   elements.recordsModeSelect.value = nextValue;
+  syncRecordsSelectorLabels();
 }
 
 function renderPersonalBests() {
@@ -340,7 +513,7 @@ function renderPersonalBests() {
     .map((record, index) => `
       <article class="focus-card record-card">
         <div class="focus-card-top">
-          <div class="fact-name">#${index + 1} ${getWorkoutModeLabel(record)}</div>
+          <div class="fact-name">#${index + 1} ${escapeHtml(getWorkoutModeLabel(record))}</div>
           <div class="focus-chip success-chip">${record.correct} correct</div>
         </div>
         <div class="fact-meta focus-meta-row">${getOperationLabel(record.operation || "multiplication")}${
@@ -377,7 +550,7 @@ function renderRecentWorkouts() {
     .map((record) => `
       <article class="focus-card record-card">
         <div class="focus-card-top">
-          <div class="fact-name">${getWorkoutModeLabel(record)}</div>
+          <div class="fact-name">${escapeHtml(getWorkoutModeLabel(record))}</div>
           <div class="focus-chip subtle-chip">${formatRecordDateLabel(record)}</div>
         </div>
         <div class="fact-meta focus-meta-row">${getOperationLabel(record.operation || "multiplication")}${
@@ -827,11 +1000,13 @@ function parseFactKey(key) {
     };
   }
 
-  const modernMatch = key.match(/^(multiplication|addition):(-?\d+)([x+])(-?\d+)$/i);
+  const modernMatch = key.match(/^(multiplication|addition|subtraction|division):(-?\d+)([x+\-\/])(-?\d+)$/i);
   if (modernMatch) {
-    const operation = modernMatch[1] === "addition" ? "addition" : "multiplication";
+    const operation = OPERATION_OPTIONS.includes(modernMatch[1])
+      ? modernMatch[1]
+      : "multiplication";
     const left = Number(modernMatch[2]);
-    const symbol = modernMatch[3] === "+" ? "+" : "x";
+    const symbol = OPERATION_SYMBOLS[operation] || modernMatch[3];
     const right = Number(modernMatch[4]);
     return {
       operation,
@@ -990,6 +1165,12 @@ function getAdditionTrackerBucketKey(left, right) {
   return `${low}-${high}`;
 }
 
+function getSubtractionTrackerBucketKey(left, right) {
+  const leftDigits = getDigitBucket(left);
+  const rightDigits = getDigitBucket(right);
+  return `${leftDigits}-${rightDigits}`;
+}
+
 function buildAdditionTrackerStats() {
   const summary = Object.fromEntries(
     ADDITION_TRACKER_BUCKETS.map((bucket) => [
@@ -1106,6 +1287,277 @@ function formatAdditionExampleEquation(entry) {
   return `${left} + ${right} = ${answer}`;
 }
 
+function buildSubtractionTrackerStats() {
+  const summary = Object.fromEntries(
+    SUBTRACTION_TRACKER_BUCKETS.map((bucket) => [
+      bucket.key,
+      {
+        attempts: 0,
+        correct: 0,
+      },
+    ]),
+  );
+
+  const subtractionFacts = getFactEntriesByOperation("subtraction");
+  subtractionFacts.forEach((fact) => {
+    if (!fact.attempts) {
+      return;
+    }
+    const bucketKey = getSubtractionTrackerBucketKey(fact.left, fact.right);
+    if (!SUBTRACTION_TRACKER_BUCKET_KEYS.has(bucketKey) || !summary[bucketKey]) {
+      return;
+    }
+    summary[bucketKey].attempts += fact.attempts;
+    summary[bucketKey].correct += fact.correct;
+  });
+
+  return summary;
+}
+
+function buildDivisionTrackerStats() {
+  const summary = Object.fromEntries(
+    TABLE_FACTORS.map((factor) => [
+      factor,
+      {
+        attempts: 0,
+        correct: 0,
+      },
+    ]),
+  );
+
+  const divisionFacts = getFactEntriesByOperation("division");
+  divisionFacts.forEach((fact) => {
+    if (!fact.attempts) {
+      return;
+    }
+    const divisor = clampNumber(Number(fact.right), 1, FACTOR_LIMIT, 1);
+    if (!summary[divisor]) {
+      return;
+    }
+    summary[divisor].attempts += fact.attempts;
+    summary[divisor].correct += fact.correct;
+  });
+
+  return summary;
+}
+
+function startAdditionTrackerTraining(bucketKey, detailMode) {
+  const bucketDifficultyMap = {
+    "make-10": ["easy"],
+    "1-1": ["easy"],
+    "1-2": ["medium"],
+    "2-2": ["medium"],
+    "1-3": ["hard"],
+    "2-3": ["hard"],
+    "3-3": ["hard"],
+  };
+  const additionDifficulties = bucketDifficultyMap[bucketKey] || ["easy"];
+  applySettingsSnapshot({
+    ...getFormSettingsSnapshot(),
+    operation: "addition",
+    sessionType: "question-goal",
+    questionPreset: "20",
+    questionTarget: 20,
+    timePreset: "3",
+    timeLimitMinutes: 3,
+    additionDifficulty: additionDifficulties[0],
+    additionDifficulties,
+    additionRegrouping: detailMode !== "without-regrouping",
+    negativesMode: false,
+  });
+  toggleSetupFields();
+  requestView("setup");
+}
+
+function inferSubtractionDifficulty(entry) {
+  const leftDigits = String(Math.abs(Number(entry.left) || 0)).length;
+  const rightDigits = String(Math.abs(Number(entry.right) || 0)).length;
+  if (leftDigits <= 1 && rightDigits <= 1) {
+    return "easy";
+  }
+  if (leftDigits <= 2 && rightDigits <= 2) {
+    return "medium";
+  }
+  return "hard";
+}
+
+function startGenericTrackerTraining(operation, entry) {
+  if (operation === "subtraction") {
+    const subtractionDifficulty = inferSubtractionDifficulty(entry);
+    applySettingsSnapshot({
+      ...getFormSettingsSnapshot(),
+      operation: "subtraction",
+      sessionType: "question-goal",
+      questionPreset: "20",
+      questionTarget: 20,
+      timePreset: "3",
+      timeLimitMinutes: 3,
+      subtractionDifficulty,
+      subtractionDifficulties: [subtractionDifficulty],
+      negativesMode: false,
+    });
+    toggleSetupFields();
+    requestView("setup");
+    return;
+  }
+
+  if (operation === "division") {
+    const divisor = clampNumber(Number(entry.right), 1, FACTOR_LIMIT, 2);
+    const quotient = clampNumber(Number(entry.answer), 1, FACTOR_LIMIT, divisor);
+    applySettingsSnapshot({
+      ...getFormSettingsSnapshot(),
+      operation: "division",
+      sessionType: "question-goal",
+      questionPreset: "20",
+      questionTarget: 20,
+      timePreset: "3",
+      timeLimitMinutes: 3,
+      minFactor: Math.max(1, Math.min(divisor, quotient)),
+      maxFactor: Math.max(divisor, quotient),
+      negativesMode: false,
+    });
+    toggleSetupFields();
+    requestView("setup");
+  }
+}
+
+function startSubtractionTrackerTraining(bucketKey) {
+  const bucketDifficultyMap = {
+    "1-1": ["easy"],
+    "2-1": ["medium"],
+    "2-2": ["medium"],
+    "3-1": ["hard"],
+    "3-2": ["hard"],
+    "3-3": ["hard"],
+  };
+  const subtractionDifficulties = bucketDifficultyMap[bucketKey] || ["easy"];
+  applySettingsSnapshot({
+    ...getFormSettingsSnapshot(),
+    operation: "subtraction",
+    sessionType: "question-goal",
+    questionPreset: "20",
+    questionTarget: 20,
+    timePreset: "3",
+    timeLimitMinutes: 3,
+    subtractionDifficulty: subtractionDifficulties[0],
+    subtractionDifficulties,
+    negativesMode: false,
+  });
+  toggleSetupFields();
+  requestView("setup");
+}
+
+function startDivisionTrackerTraining(factor) {
+  const safeFactor = clampNumber(Number(factor), 1, FACTOR_LIMIT, 1);
+  applySettingsSnapshot({
+    ...getFormSettingsSnapshot(),
+    operation: "division",
+    sessionType: "question-goal",
+    questionPreset: "20",
+    questionTarget: 20,
+    timePreset: "3",
+    timeLimitMinutes: 3,
+    minFactor: safeFactor,
+    maxFactor: safeFactor,
+    negativesMode: false,
+  });
+  toggleSetupFields();
+  requestView("setup");
+}
+
+function renderSubtractionTracker() {
+  updateFactTrackerRangeControls(false);
+  const statsByBucket = buildSubtractionTrackerStats();
+  elements.tableGrid.classList.add("addition-table-grid");
+  elements.tableGrid.innerHTML = SUBTRACTION_TRACKER_BUCKETS.map((bucketMeta) => {
+    const bucket = statsByBucket[bucketMeta.key];
+    const attempts = bucket?.attempts || 0;
+    const correct = bucket?.correct || 0;
+    const accuracy = attempts ? correct / attempts : 0;
+    const status = getBucketStatus(attempts, accuracy);
+    return `
+      <article
+        class="table-card ${status.tone}"
+        data-train-subtraction-bucket="${bucketMeta.key}"
+        role="button"
+        tabindex="0"
+      >
+        <div class="table-card-top table-zone table-zone-head">
+          <div class="table-name">${bucketMeta.label}</div>
+          <span class="table-pill ${status.tone}">${status.label}</span>
+        </div>
+        <div class="fact-meta table-card-middle table-zone table-zone-summary">
+          ${correct} / ${attempts} correct
+        </div>
+        <div class="bar-track table-zone table-zone-progress" aria-hidden="true">
+          <div class="bar-fill ${status.tone}" style="width: ${Math.round(accuracy * 100)}%"></div>
+        </div>
+        <div class="table-card-stats table-zone table-zone-footer">
+          <span>${formatPercent(accuracy)} accuracy</span>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderDivisionTracker() {
+  updateFactTrackerRangeControls(true);
+  elements.tableGrid.classList.add("multiplication-table-grid");
+  const statsByFactor = buildDivisionTrackerStats();
+  const activeRange = FACT_TRACKER_MULTIPLICATION_RANGES[clampFactTrackerRangeIndex(state.factTrackerRangeIndex)];
+  const visibleFactors = TABLE_FACTORS.filter(
+    (factor) => factor >= activeRange.minFactor && factor <= activeRange.maxFactor,
+  );
+
+  elements.tableGrid.innerHTML = visibleFactors.map((factor) => {
+    const bucket = statsByFactor[factor] || { attempts: 0, correct: 0 };
+    const attempts = bucket.attempts || 0;
+    const correct = bucket.correct || 0;
+    const accuracy = attempts ? correct / attempts : 0;
+    const status = getBucketStatus(attempts, accuracy);
+    return `
+      <article
+          class="table-card ${status.tone}"
+          data-train-division-factor="${factor}"
+          role="button"
+          tabindex="0"
+        >
+          <div class="table-card-top table-zone table-zone-head">
+          <div class="table-name">÷ ${factor}</div>
+          <span class="table-pill ${status.tone}">${status.label}</span>
+          </div>
+        <div class="fact-meta table-card-middle table-zone table-zone-summary">
+          ${correct} / ${attempts} correct
+        </div>
+        <div class="bar-track table-zone table-zone-progress" aria-hidden="true">
+          <div class="bar-fill ${status.tone}" style="width: ${Math.round(accuracy * 100)}%"></div>
+        </div>
+        <div class="table-card-stats table-zone table-zone-footer">
+          <span>${formatPercent(accuracy)} accuracy</span>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function startMultiplicationTrackerTraining(factor, detailMode) {
+  applySettingsSnapshot({
+    ...getFormSettingsSnapshot(),
+    operation: "multiplication",
+    sessionType: "isolation",
+    questionPreset: "20",
+    questionTarget: 20,
+    timePreset: "3",
+    timeLimitMinutes: 3,
+    focusFactor: factor,
+    minFactor: 1,
+    maxFactor: FACTOR_LIMIT,
+    negativesMode: detailMode === "all-integers",
+  });
+  toggleSetupFields();
+  requestView("setup");
+}
+
 function renderAdditionTracker(detailMode = "overall") {
   const activeMode =
     detailMode === "with-regrouping" || detailMode === "without-regrouping"
@@ -1146,26 +1598,38 @@ function renderAdditionTracker(detailMode = "overall") {
       >
         <div class="addition-bucket-face addition-bucket-front">
           <div class="addition-bucket-head">
-            <button class="table-name table-name-button" type="button" data-train-bucket="${bucketMeta.key}" data-train-detail="${activeMode}">${bucketMeta.label}</button>
+            <div class="addition-bucket-title-row">
+              <div class="table-name">${bucketMeta.label}</div>
+              <button class="addition-card-toggle-button" type="button" data-addition-toggle="${bucketMeta.key}" data-addition-detail="${activeMode}" aria-label="More information">
+                <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                  <circle cx="8" cy="3.6" r="1.8" fill="currentColor" />
+                  <rect x="6.9" y="6.1" width="2.2" height="6.1" rx="1.1" fill="currentColor" />
+                </svg>
+              </button>
+            </div>
             <span class="table-pill ${status.tone}">${status.label}</span>
           </div>
-          <div class="fact-meta table-card-middle">${metric.label}</div>
           <div class="bar-track" aria-hidden="true">
             <div class="bar-fill ${status.tone}" style="width: ${Math.round(ratio * 100)}%"></div>
           </div>
           <div class="table-card-stats">
             <span>${getRatioLabel(metric.correct, metric.attempts)}</span>
           </div>
-          <div class="fact-meta addition-card-toggle-hint">Tap to view examples</div>
         </div>
         <div class="addition-bucket-face addition-bucket-back">
           <div class="addition-bucket-head">
-            <button class="table-name table-name-button" type="button" data-train-bucket="${bucketMeta.key}" data-train-detail="${activeMode}">${bucketMeta.label}</button>
+            <div class="addition-bucket-title-row">
+              <div class="table-name">${bucketMeta.label}</div>
+              <button class="addition-card-toggle-button" type="button" data-addition-toggle="${bucketMeta.key}" data-addition-detail="${activeMode}" aria-label="Return to summary">
+                <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                  <circle cx="8" cy="3.6" r="1.8" fill="currentColor" />
+                  <rect x="6.9" y="6.1" width="2.2" height="6.1" rx="1.1" fill="currentColor" />
+                </svg>
+              </button>
+            </div>
             <span class="table-pill subtle-chip">Recent</span>
           </div>
-          <div class="fact-meta table-card-middle">${metric.label} examples</div>
           ${examplesMarkup}
-          <div class="fact-meta addition-card-toggle-hint">Tap to return to summary</div>
         </div>
       </article>
     `;
@@ -1177,48 +1641,66 @@ function handleAdditionTrackerCardClick(event) {
   if (!(target instanceof Element)) {
     return;
   }
-  const trainButton = target.closest("[data-train-bucket]");
-  if (trainButton instanceof HTMLElement) {
-    const bucketKey = trainButton.dataset.trainBucket || "";
-    const detailMode = trainButton.dataset.trainDetail || "overall";
-    const bucketDifficultyMap = {
-      "make-10": ["easy"],
-      "1-1": ["easy"],
-      "1-2": ["medium"],
-      "2-2": ["medium"],
-      "1-3": ["hard"],
-      "2-3": ["hard"],
-      "3-3": ["hard"],
-    };
-    const additionDifficulties = bucketDifficultyMap[bucketKey] || ["easy"];
-    applySettingsSnapshot({
-      ...getFormSettingsSnapshot(),
-      operation: "addition",
-      sessionType: "question-goal",
-      questionPreset: "20",
-      questionTarget: 20,
-      timePreset: "3",
-      timeLimitMinutes: 3,
-      additionDifficulty: additionDifficulties[0],
-      additionDifficulties,
-      additionRegrouping: detailMode !== "without-regrouping",
-      negativesMode: false,
-    });
-    toggleSetupFields();
-    setView("setup");
+  const toggleButton = target.closest("[data-addition-toggle]");
+  if (toggleButton instanceof HTMLElement) {
+    const bucketKey = toggleButton.dataset.additionToggle || "";
+    const detailMode = toggleButton.dataset.additionDetail || "overall";
+    if (!bucketKey) {
+      return;
+    }
+    toggleAdditionTrackerBucketFlip(bucketKey, detailMode);
+    renderAdditionTracker(getFactDetailFilterValue());
     return;
   }
+
   const card = target.closest("[data-addition-bucket]");
-  if (!(card instanceof HTMLElement)) {
+  if (card instanceof HTMLElement) {
+    const bucketKey = card.dataset.additionBucket || "";
+    const detailMode = card.dataset.additionDetail || "overall";
+    if (!bucketKey) {
+      return;
+    }
+    startAdditionTrackerTraining(bucketKey, detailMode);
     return;
   }
-  const bucketKey = card.dataset.additionBucket || "";
-  const detailMode = card.dataset.additionDetail || "overall";
-  if (!bucketKey) {
+
+  const multiplicationCard = target.closest("[data-train-multiplication]");
+  if (multiplicationCard instanceof HTMLElement) {
+    const factor = clampNumber(Number(multiplicationCard.dataset.trainMultiplication), 1, FACTOR_LIMIT, 1);
+    const detailMode = multiplicationCard.dataset.trainDetail || "overall";
+    startMultiplicationTrackerTraining(factor, detailMode);
     return;
   }
-  toggleAdditionTrackerBucketFlip(bucketKey, detailMode);
-  renderAdditionTracker(getFactDetailFilterValue());
+
+  const subtractionBucketCard = target.closest("[data-train-subtraction-bucket]");
+  if (subtractionBucketCard instanceof HTMLElement) {
+    const bucketKey = subtractionBucketCard.dataset.trainSubtractionBucket || "";
+    if (bucketKey) {
+      startSubtractionTrackerTraining(bucketKey);
+      return;
+    }
+  }
+
+  const divisionCard = target.closest("[data-train-division-factor]");
+  if (divisionCard instanceof HTMLElement) {
+    const factor = clampNumber(Number(divisionCard.dataset.trainDivisionFactor), 1, FACTOR_LIMIT, 1);
+    startDivisionTrackerTraining(factor);
+    return;
+  }
+
+  const genericCard = target.closest("[data-train-operation]");
+  if (!(genericCard instanceof HTMLElement)) {
+    return;
+  }
+  const operation = genericCard.dataset.trainOperation || "";
+  const entry = {
+    left: Number(genericCard.dataset.trainLeft),
+    right: Number(genericCard.dataset.trainRight),
+    answer: Number(genericCard.dataset.trainAnswer),
+  };
+  if (operation === "subtraction" || operation === "division") {
+    startGenericTrackerTraining(operation, entry);
+  }
 }
 
 function handleAdditionTrackerCardKeydown(event) {
@@ -1226,21 +1708,21 @@ function handleAdditionTrackerCardKeydown(event) {
   if (!(target instanceof Element)) {
     return;
   }
-  const card = target.closest("[data-addition-bucket]");
-  if (!(card instanceof HTMLElement)) {
+  if (target.closest("[data-addition-toggle]")) {
     return;
   }
   if (event.key !== "Enter" && event.key !== " ") {
     return;
   }
   event.preventDefault();
-  const bucketKey = card.dataset.additionBucket || "";
-  const detailMode = card.dataset.additionDetail || "overall";
-  if (!bucketKey) {
+  const card =
+    target.closest(
+      "[data-addition-bucket], [data-train-subtraction-bucket], [data-train-multiplication], [data-train-division-factor], [data-train-operation]",
+    );
+  if (!(card instanceof HTMLElement)) {
     return;
   }
-  toggleAdditionTrackerBucketFlip(bucketKey, detailMode);
-  renderAdditionTracker(getFactDetailFilterValue());
+  card.click();
 }
 
 function getAdditionTechniqueGridMarkup() {
@@ -1252,9 +1734,6 @@ function getAdditionTechniqueGridMarkup() {
         data-addition-technique="${lesson.id}"
         ${lesson.selectable ? "" : "disabled"}
       >
-        <span class="technique-card-pill">${
-          lesson.status === "under-construction" ? "Under Construction" : "Coming Soon"
-        }</span>
         <strong>${lesson.title}</strong>
         <span class="technique-card-note">${lesson.description}</span>
       </button>
@@ -1262,9 +1741,61 @@ function getAdditionTechniqueGridMarkup() {
   ).join("");
 }
 
+function renderGenericOperationTracker(operation) {
+  updateFactTrackerRangeControls(false);
+  const entries = getFactEntriesByOperation(operation)
+    .filter((entry) => entry.attempts > 0)
+    .sort((left, right) => right.attempts - left.attempts || left.misses - right.misses)
+    .slice(0, 12);
+
+  if (!entries.length) {
+    elements.tableGrid.innerHTML = `
+      <div class="table-card unseen">
+        <div class="table-name">Start a workout</div>
+        <div class="fact-meta">The fact tracker fills in after you answer a few facts.</div>
+      </div>
+    `;
+    return;
+  }
+
+  elements.tableGrid.innerHTML = entries
+    .map((entry) => {
+      const accuracy = getAccuracy(entry.correct, entry.attempts);
+      const status = getBucketStatus(entry.attempts, accuracy);
+      const symbol = operation === "division" ? "÷" : entry.symbol;
+      return `
+        <article
+          class="table-card ${status.tone}"
+          data-train-operation="${operation}"
+          data-train-left="${entry.left}"
+          data-train-right="${entry.right}"
+          data-train-answer="${entry.answer}"
+          role="button"
+          tabindex="0"
+        >
+          <div class="table-card-top table-zone table-zone-head">
+            <div class="table-name">${entry.left} ${symbol} ${entry.right}</div>
+            <span class="table-pill ${status.tone}">${status.label}</span>
+          </div>
+          <div class="fact-meta table-card-middle table-zone table-zone-summary">
+            ${entry.correct} / ${entry.attempts} correct
+          </div>
+          <div class="bar-track table-zone table-zone-progress" aria-hidden="true">
+            <div class="bar-fill ${status.tone}" style="width: ${Math.round(accuracy * 100)}%"></div>
+          </div>
+          <div class="table-card-stats table-zone table-zone-footer">
+            <span>${formatPercent(accuracy)} accuracy</span>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function renderTableRadar() {
   const factOperation = getFactOperationFilterValue();
   const factDetail = getFactDetailFilterValue();
+  updateFactSelectorCarouselState();
   elements.tableGrid.classList.remove("multiplication-table-grid");
   elements.tableGrid.classList.remove("addition-table-grid");
   if (elements.factsSlideTitle) {
@@ -1273,15 +1804,34 @@ function renderTableRadar() {
         ? "addition"
         : factOperation === "multiplication"
           ? "multiplication"
-          : "";
+          : factOperation === "subtraction"
+            ? "subtraction"
+            : factOperation === "division"
+              ? "division"
+              : "";
     elements.factsSlideTitle.textContent = operationCopy
-      ? `Track the development of your ${operationCopy} skills.`
-      : "Track the development of your skills.";
+      ? `Track your ${operationCopy} skills.`
+      : "Track your skills.";
+  }
+  if (elements.trackerActionHint) {
+    elements.trackerActionHint.textContent =
+      factOperation === "addition"
+        ? "Click a category to train it. Click the i for more information."
+        : "Click a category to train it.";
   }
 
   if (factOperation === "addition") {
     updateFactTrackerRangeControls(false);
     renderAdditionTracker(factDetail);
+    return;
+  }
+
+  if (factOperation === "subtraction" || factOperation === "division") {
+    if (factOperation === "subtraction") {
+      renderSubtractionTracker();
+    } else {
+      renderDivisionTracker();
+    }
     return;
   }
 
@@ -1318,7 +1868,13 @@ function renderTableRadar() {
       const detailLabel = table.attempts ? table.detailLabel : "Fresh range";
 
       return `
-        <article class="table-card ${table.tone}">
+        <article
+          class="table-card ${table.tone}"
+          data-train-multiplication="${table.factor}"
+          data-train-detail="${factDetail}"
+          role="button"
+          tabindex="0"
+        >
           <div class="table-card-top table-zone table-zone-head">
             <div class="table-name">x ${table.factor}</div>
             <span class="table-pill ${table.tone}">${table.label}</span>
@@ -1329,7 +1885,6 @@ function renderTableRadar() {
           </div>
           <div class="table-card-stats table-zone table-zone-footer">
             <span>${accuracyLabel}</span>
-            <span class="fact-meta table-action-cue">Keep stacking reps</span>
           </div>
         </article>
       `;
@@ -1518,7 +2073,7 @@ function showHomeStreakBanner(streakDays) {
   if (!elements.streakBanner || !elements.streakBannerTitle || streakDays < 1) {
     return;
   }
-  elements.streakBannerTitle.textContent = `🔥 ${streakDays} Day Streak!`;
+  elements.streakBannerTitle.textContent = `\u{1F525} ${streakDays} Day Streak!`;
   elements.streakBanner.classList.add("is-visible");
   window.clearTimeout(state.streakBannerTimeoutId);
   state.streakBannerTimeoutId = window.setTimeout(() => {
@@ -1698,6 +2253,11 @@ function renderResultsCarousel() {
       RESULTS_SLIDES.length,
     );
   }
+  if (elements.resultsCarouselKickerLabel) {
+    const activeSlide = elements.resultsSlides.find((slide) => slide.classList.contains("is-active"));
+    const activeKicker = activeSlide?.dataset.carouselKicker?.trim();
+    elements.resultsCarouselKickerLabel.textContent = activeKicker || "Results";
+  }
 }
 
 function shiftResultsCarousel(direction) {
@@ -1730,6 +2290,11 @@ function renderProgressCarousel() {
       state.progressSlideIndex,
       PROGRESS_SLIDES.length,
     );
+  }
+  if (elements.progressCarouselKickerLabel) {
+    const activeSlide = elements.progressSlides.find((slide) => slide.classList.contains("is-active"));
+    const activeKicker = activeSlide?.dataset.carouselKicker?.trim();
+    elements.progressCarouselKickerLabel.textContent = activeKicker || "My Progress";
   }
 }
 
@@ -1890,30 +2455,36 @@ function handleSettingsChange(event) {
 
 function handleOverviewOperationFilterChange() {
   renderOverall();
+  syncOverviewSelectorLabel();
 }
 
 function handleFocusOperationFilterChange() {
   renderProgressFocusAreas();
+  syncFocusSelectorLabel();
 }
 
 function handleCoachOperationFilterChange() {
   renderCoachTip();
+  syncCoachSelectorLabel();
 }
 
 function handleFactOperationFilterChange() {
   resetFactTrackerRange();
   syncFactDetailFilterOptions();
   renderTableRadar();
+  updateFactSelectorCarouselState();
 }
 
 function handleFactDetailFilterChange() {
   resetFactTrackerRange();
   renderTableRadar();
+  updateFactSelectorCarouselState();
 }
 
 function handleRecordsFilterChange() {
   syncRecordsModeOptions();
   renderWorkoutHistory();
+  syncRecordsSelectorLabels();
 }
 
 function handleThemeChange(event) {
@@ -1943,6 +2514,12 @@ function handleKeypadPreferenceChange(event) {
   }
   const preference = sanitiseKeypadPreference(select.value);
   state.keypadPreference = preference;
+  if (elements.keypadPreferenceSelect && elements.keypadPreferenceSelect !== select) {
+    elements.keypadPreferenceSelect.value = preference;
+  }
+  if (elements.keypadPreferenceOptionsSelect && elements.keypadPreferenceOptionsSelect !== select) {
+    elements.keypadPreferenceOptionsSelect.value = preference;
+  }
   saveKeypadPreference(preference);
   updatePracticeInputMode();
 }
@@ -1967,4 +2544,3 @@ function resetProgress() {
   renderProgressCarousel();
   window.alert("Saved progress cleared.");
 }
-

@@ -70,4 +70,7 @@
 - Prepared the `v0.13.0` lesson expansion batch for publish close.
 - Confirmed `docs/v10` is marked latest in `docs/index.html`.
 - Confirmed the Git remote points at `https://github.com/frichmonds-stack/Math-Muscle-Trainer.git`.
-- Live GitHub Pages verification still needs to happen after push.
+- Ran `scripts/check-repo.ps1`; all repo checks passed.
+- Committed and pushed the batch to `origin/main`.
+- Verified the pushed `main` branch matches local commit `50197ed79f3e25e1fab5c289cc6cfd9448240f3d`.
+- Verified the GitHub Pages version index, `docs/v10` app, and live `v10/js/app-core.js` are reachable; app core serves `APP_VERSION = "v0.13.0"`.

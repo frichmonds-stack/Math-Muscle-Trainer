@@ -7,8 +7,7 @@ Last updated: 2026-05-08
 - Project/product naming is standardized as `Math Muscle Trainer`.
 - Root app is at `v0.13.0`.
 - Latest docs snapshot is `docs/v10`, marked latest in `docs/index.html`.
-- Current publish-close batch prepares the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates for GitHub.
-- Previous `v0.12.0` publish-close verified the live GitHub Pages site.
+- Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
 - `ai/task-map.md` routes future AI sessions from work type to relevant files, pre-reads, docs, and risks.
 - Session close protocol now requires affected docs, GitHub push status, and live internet verification status to be addressed explicitly.
@@ -34,10 +33,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 ```
 
 - Result on 2026-05-08: `All repo checks passed.`
-- GitHub Pages last verified live on 2026-05-07 before the `v0.13.0` publish:
+- GitHub Pages verified live on 2026-05-08:
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/`
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v9/`
-- Verify the version index and `docs/v10` app after pushing `v0.13.0`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/index.html`
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/js/app-core.js` served `APP_VERSION = "v0.13.0"`.
 
 ## Working Tree Note
 

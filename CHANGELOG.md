@@ -6,6 +6,21 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-05-08
+
+### Added
+- Added a reusable addition lesson runner for atomic `Idea -> Practice` components plus final mixed practice.
+- Added linked addition lessons for Make 10, adding by 1s/10s/100s/1000s, Counting On Easy/Medium, and the Bridging ladder from Easy through Expert.
+- Added linked multiplication lessons for every table from `x1` through `x12`, with table-specific strategy copy, examples, hints, warm-ups, assisted reps, solo reps, and completion states.
+- Added addition lesson completion tracking in the Techniques menu and focused workout handoffs for completed lessons.
+- Published `docs/v10` as the latest lesson expansion snapshot.
+
+### Changed
+- Unlocked all multiplication and addition lesson stage pills so learners can jump directly to any section without completing previous sections first.
+
+### Fixed
+- Restored Progress panel previous/next controls around the top red panel label after aligning it with the header buttons.
+
 ## [0.12.0] - 2026-05-07
 
 ### Changed

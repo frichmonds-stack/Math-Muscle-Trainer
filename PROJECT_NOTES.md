@@ -175,20 +175,17 @@ Use it for:
   - reduce info density with tap-to-reveal card details
   - show status language as `Need Reps`, `Building`, `Strong`, and clean no-data states
 - Positive Progress and Growth Opportunities should use bucket/table level signals instead of individual fact cards.
-- Addition techniques menu polish direction:
-  - `Make 10` stays selectable and marked `Under Construction`
-  - non-built lessons are marked `Coming Soon`
-  - lesson order now includes adding-by-place-value cards (`1s`, `10s`, `100s`, `1000s`) immediately after `Make 10`.
+- Addition techniques implementation:
+  - `Make 10`, adding by place value (`1s`, `10s`, `100s`, `1000s`), Counting On Easy/Medium, and the Bridging ladder now use a reusable addition lesson runner.
+  - Each lesson follows atomic `Idea -> Practice` components, then a final mixed practice that combines the components.
+  - Lesson completion is saved with `addition:<lesson-id>` technique progress keys and the complete screen routes into an addition focused workout setup.
+- Multiplication techniques implementation:
+  - All multiplication table cards from `x1` through `x12` are selectable.
+  - The existing multiplication lesson flow now uses table-specific strategy copy, examples, hints, warm-up facts, assisted reps, solo reps, and completion states.
+  - Lesson stage pills are intentionally unlocked so learners can inspect any lesson section without completing earlier sections first.
 - Deferred items captured from the extended refinement session (discussed but not shipped in `v0.7.2`):
   - Addition techniques content pass:
-    - Full reorder target:
-      - `Make 10`
-      - `Counting On (Easy)`
-      - `Counting On (Medium)`
-      - `Adding by 10`
-      - `Adding by 100`
-      - `Adding by 1000`
-      - then `Bridging` ladder from easy to expert
+    - Review lesson order and copy now that the first full addition lesson set is implemented.
     - Add split-technique cards:
       - `Split Technique (Easy)` (2-digit + 2-digit place-value split)
       - `Split Technique (Medium)` (2-digit + 3-digit place-value split)
@@ -245,3 +242,9 @@ Use it for:
 - Fixed division tracker cards so `÷ n` starts divisor isolation training across the full quotient range.
 - Added PowerShell repo checks for version drift, stale docs latest markers, docs snapshot sync, duplicate IDs, missing script references, and removed-helper regressions.
 - Added a docs snapshot publishing helper so future root app updates can be copied into `docs/v*` consistently.
+
+### 2026-05-08
+
+- Initialized the lesson content workflow under `learn/` so teacher-authored specs can be reviewed before content moves into structured lesson data or app renderers.
+- Added workflow rules to `AGENTS.md`: the user is the pedagogy source of truth, teacher wording should be preserved, and content-only edits should stay separate from renderer/refactor work.
+- Added an empty Make 10 teacher spec and placeholder structured lesson JSON without changing visible lesson behavior.

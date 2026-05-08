@@ -69,7 +69,7 @@ Use this map to route future Codex/GPT sessions to the right files before editin
 ## Learn / Techniques Mode
 
 1. Relevant source files
-   - `js/app-techniques.js` - Learn menu, 10x lesson, Make 10 lesson, routing, dialogs.
+   - `js/app-techniques.js` - Learn menu, multiplication lessons, addition lessons, routing, dialogs.
    - `js/app-core.js` - technique state defaults and technique question helpers.
    - `index.html` - Learn screen shell and lesson exit dialog.
    - `styles.css` - lesson, keypad, stage, and full-screen Learn styling.
@@ -79,13 +79,38 @@ Use this map to route future Codex/GPT sessions to the right files before editin
    - `ai/current-state.md`
 3. Read before editing
    - `renderTechniqueScreen()` and `handleTechniqueAction()` in `js/app-techniques.js`
+   - Multiplication helpers around `getMultiplicationLessonPlan()` and the `renderTechnique*Stage()` functions.
    - Make 10 helpers around `createMake10LessonState()` and `renderMake10LessonScreen()`
+   - Generic addition lesson helpers around `ADDITION_LESSON_PLANS`, `createAdditionLessonState()`, and `renderAdditionLessonScreen()`
    - `createTechniqueState()` and related technique helpers in `js/app-core.js`
 4. Common risks or things not to break
    - Leaving a lesson should preserve the intended modal behavior.
    - `Start Focused Workout` actions should route through setup snapshots.
    - Technique completion state is saved in browser progress.
+   - Addition technique completion uses `addition:<lesson-id>` progress keys.
+   - Lesson section pills are intentionally unlocked; do not reintroduce section locking unless a new assessment mode requires it.
    - Keyboard and touch keypad behavior should remain usable on tablets.
+
+## Lesson Content Workflow
+
+1. Relevant source files
+   - `learn/specs/` - teacher-authored lesson specs.
+   - `learn/lessons/` - structured lesson data by operation.
+   - `learn/scaffolds/`, `learn/mental-models/`, `learn/review/` - supporting teacher-authored notes.
+   - `AGENTS.md` - lesson content workflow rules.
+   - `docs/decisions/ADR-0005-lesson-content-workflow.md`
+2. Related docs or ADRs
+   - `learn/README.md`
+   - `docs/decisions/ADR-0005-lesson-content-workflow.md`
+3. Read before editing
+   - `AGENTS.md` Lesson Content Workflow section.
+   - The relevant teacher spec in `learn/specs/`.
+   - The relevant structured lesson file in `learn/lessons/`.
+4. Common risks or things not to break
+   - The user is the pedagogy source of truth.
+   - Do not invent lesson wording unless explicitly asked.
+   - Preserve teacher-authored wording when converting specs to structured data.
+   - Keep content-only edits separate from renderer/refactor edits.
 
 ## Progress Tracking
 

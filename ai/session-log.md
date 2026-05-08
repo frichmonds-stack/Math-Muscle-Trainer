@@ -46,3 +46,28 @@
 - Committed and pushed the prepared batch to `origin/main`.
 - Verified the pushed `main` branch matches the local commit before live-site checks.
 - Verified the GitHub Pages version index and `docs/v9` app are live at the `Math-Muscle-Trainer` Pages URL.
+
+## 2026-05-08 - Addition Lessons Linked
+
+- Added a reusable addition lesson runner based on atomic `Idea -> Practice` components and final mixed practice.
+- Linked all current addition lesson cards into real lessons: Make 10, adding by 1s/10s/100s/1000s, Counting On Easy/Medium, and Bridging Easy/Medium/Advanced/Expert.
+- Added addition lesson completion tracking with `addition:<lesson-id>` technique progress keys and focused workout handoffs.
+- Recorded ADR-0003 for the reusable addition lesson loop.
+- Restored Progress carousel previous/next controls in the top red kicker row after the label/header alignment.
+- Added table-specific multiplication lessons for `x1` through `x12` using the existing five-section lesson flow.
+- Unlocked multiplication and addition lesson stage pills so content can be inspected without completing earlier sections.
+- Recorded ADR-0004 for unlocked lesson sections.
+
+## 2026-05-08 - Lesson Content Workflow Initialized
+
+- Added `AGENTS.md` rules for teacher-authored lesson content.
+- Created the `learn/` workflow structure for specs, structured lesson data, scaffolds, mental models, and review notes.
+- Added an empty Make 10 teacher spec and placeholder structured lesson data without changing app behavior.
+- Recorded ADR-0005 for the lesson content workflow.
+
+## 2026-05-08 - v0.13.0 Publish Close Prepared
+
+- Prepared the `v0.13.0` lesson expansion batch for publish close.
+- Confirmed `docs/v10` is marked latest in `docs/index.html`.
+- Confirmed the Git remote points at `https://github.com/frichmonds-stack/Math-Muscle-Trainer.git`.
+- Live GitHub Pages verification still needs to happen after push.

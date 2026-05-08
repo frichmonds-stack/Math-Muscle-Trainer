@@ -5,7 +5,7 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 ## What it does
 
 - Uses a slimmer app-style shell with a separate header band and dedicated Setup, Practice, Results, and Progress screens
-- Adds a Learn / Techniques mode with a full-screen `10x` lesson flow for learning a table trick before drilling it
+- Adds a Learn / Techniques mode with linked multiplication lessons for `x1` through `x12` and a linked addition lesson set
 - Supports operation-based training with Addition, Subtraction, Multiplication, and Division
 - Supports mixed-table multiplication practice or a focused single-table isolation mode
 - Supports High Intensity Training, Target Reps, Zen Mode, and Spar Mode workout types
@@ -29,9 +29,9 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 - Includes personal bests, recent workouts, and daily record stats like most attempts in a day
 - Uses a custom in-app end-workout modal instead of the browser confirm popup
 - Uses a matching in-app lesson exit modal for leaving a technique mid-way
-- Saves completed table lessons in the browser so finished techniques can be shown on the menu
+- Saves completed table and addition lessons in the browser so finished techniques can be shown on the menu
 - Uses operation selection in Learn / Techniques to load operation-specific lessons
-- Uses staged Learn progress pills with explicit unlocked/current/locked states
+- Uses staged Learn progress pills so learners can jump directly to any lesson section
 - Keeps a rolling recent-progress window for dated history data to keep storage lean
 - Saves long-term progress in the browser with localStorage
 - Supports independent palette and dark/light mode appearance controls with rotating strength-building banner messages

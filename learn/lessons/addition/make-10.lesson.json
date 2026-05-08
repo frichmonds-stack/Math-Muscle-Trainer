@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "addition.make-10",
+  "sourceSpec": "../../specs/make-10.md",
+  "content": {
+    "learningGoal": "",
+    "prerequisiteKnowledge": [],
+    "teacherExplanation": "",
+    "mentalModel": "",
+    "scaffoldSequence": [],
+    "workedExamples": [],
+    "guidedPractice": [],
+    "fadingSupport": [],
+    "independentCheck": [],
+    "commonMisconceptions": [],
+    "feedbackLanguage": [],
+    "notesFromTeacherReview": ""
+  }
+}

@@ -95,6 +95,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 - Use ASCII in source where practical; use escapes such as `\u00f7` for special symbols when centralizing display text.
 - Do not edit archived `docs/v*` snapshots manually except through the snapshot publishing flow or a targeted release fix.
 
+## Lesson Content Workflow
+
+- The user is the pedagogy source of truth for lesson explanations, scaffolds, mental models, worked examples, misconceptions, and feedback language.
+- Do not invent explanations, scaffolds, mental models, examples, or feedback language unless the user explicitly asks Codex to draft them.
+- Preserve teacher-authored wording. When structure or formatting must change, keep the wording intact and call out any unavoidable edits.
+- Prefer teacher specs in `learn/specs/` and structured lesson data in `learn/lessons/` over hardcoded lesson text in JavaScript.
+- Keep lesson content changes separate from renderer, state, styling, and refactor changes whenever possible.
+- Keep lesson-content edits small and reviewable. One lesson or one tightly related group of fields is usually the right scope.
+- Use `learn/scaffolds/`, `learn/mental-models/`, and `learn/review/` for supporting teacher-authored notes before promoting content into app-ready lesson data.
+- Do not change visible lesson behavior when the task is only to capture or refine teacher-authored content.
+
 ## AI Continuity File Rules
 
 - Ownership: `AGENTS.md`, `ai/`, and `docs/decisions/` are Codex-managed project memory. The user should not need to maintain them manually.

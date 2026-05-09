@@ -74,3 +74,14 @@
 - Committed and pushed the batch to `origin/main`.
 - Verified the pushed `main` branch matches local commit `50197ed79f3e25e1fab5c289cc6cfd9448240f3d`.
 - Verified the GitHub Pages version index, `docs/v10` app, and live `v10/js/app-core.js` are reachable; app core serves `APP_VERSION = "v0.13.0"`.
+
+## 2026-05-09 - Product Direction Clarified
+
+- Clarified that finishing lesson content is the highest-priority product direction before major dashboard expansion.
+- Clarified that lesson progression systems, four-operation mastery visibility, and stronger onboarding/new-user flow are the next major roadmap priorities.
+- Clarified that the product should remain iPad-first and oriented toward eventual Apple App Store deployment.
+- Clarified that gamification is not a core goal; long-term retention should come from meaningful skill-building, habit formation, visible growth, and mastery.
+- Clarified that the app should remain usable from primary students through adults while keeping a universal arithmetic-strength/mastery identity.
+- Clarified that speculative suggestions from brainstorming sessions should remain an idea bank unless explicitly promoted to roadmap status by the user.
+- Clarified that lesson specs act as the human-authored pedagogy source while structured lesson JSON acts as permanent stored app content.
+- No app runtime behavior, lesson content, renderer logic, or GitHub Pages deployment changed during this session.

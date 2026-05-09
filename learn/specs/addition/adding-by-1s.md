@@ -1,0 +1,25 @@
+﻿# Adding by 1s
+
+## Learning Goal
+
+## Prerequisite Knowledge
+
+## Teacher Explanation
+
+## Mental Model
+
+## Scaffold Sequence
+
+## Worked Examples
+
+## Guided Practice
+
+## Fading Support
+
+## Independent Check
+
+## Common Misconceptions
+
+## Feedback Language
+
+## Notes from Teacher Review

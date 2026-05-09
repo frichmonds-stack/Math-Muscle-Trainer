@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-05-08
+Last updated: 2026-05-09
 
 ## Implementation
 
@@ -24,6 +24,18 @@ Last updated: 2026-05-08
 - Version checks now compare `APP_VERSION` with the latest released `CHANGELOG.md` heading.
 - Repo-native release helpers exist in `scripts/`.
 
+## Product Direction
+
+- Highest priority is to finish the lesson content, then build a progression system through the lessons.
+- Four-operation mastery visibility is a high-priority product direction so learners can see progress toward full arithmetic mastery across Addition, Subtraction, Multiplication, and Division.
+- Mastery indicators should motivate improvement through meaningful metrics such as speed, precision, consistency, coverage, and lesson progress.
+- A stronger new-user flow is high priority so first-time learners are guided into a useful starting path instead of needing to understand the full app immediately.
+- Product philosophy is iPad-first and eventual Apple App Store oriented.
+- Gamification is not a goal by itself. Regular usage should come from useful skill-building, good learning habits, visible growth, and mastery rather than attention-hacking loops.
+- The app should be usable from primary students through adults; the theme should stay universal around mental/arithmetic strength.
+- Branding can remain strength-oriented, but mastery should not feel age-locked, overly childish, or narrowly targeted.
+- Speculative feature suggestions should be treated as an idea bank unless the user explicitly promotes them to roadmap.
+
 ## Verification
 
 - Latest known check:
@@ -37,6 +49,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/`
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/index.html`
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/js/app-core.js` served `APP_VERSION = "v0.13.0"`.
+- 2026-05-09 session changed AI continuity docs only. No app checks, push, or live verification were run from this chat environment.
 
 ## Working Tree Note
 

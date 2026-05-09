@@ -1,6 +1,6 @@
 # Open Threads
 
-Last updated: 2026-05-08
+Last updated: 2026-05-09
 
 - Should the next release add browser-level smoke tests for the main user flows?
 - Should Results and Progress keep carousel-style navigation or move to tabs/section switching?
@@ -14,3 +14,17 @@ Last updated: 2026-05-08
 - Should competitive `Flex` mode be built, and what rules should define it?
 - Should `PROJECT_NOTES.md` eventually be slimmed now that `ai/` continuity exists?
 - Should the live GitHub Pages URL be added to `README.md` once deployment is confirmed stable?
+- How should four-operation mastery be calculated?
+  - accuracy
+  - speed
+  - consistency
+  - lesson completion
+  - bucket coverage
+  - retention
+- What should the first-time onboarding/placement flow look like?
+- What visual style best balances:
+  - universal mastery
+  - strength/training identity
+  - adult usability
+  - and primary-student accessibility?
+- Which ideas remain exploratory idea-bank concepts versus explicit roadmap commitments?

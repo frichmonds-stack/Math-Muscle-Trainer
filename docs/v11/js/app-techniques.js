@@ -536,11 +536,7 @@ function renderTechniqueMenuScreen() {
       ? "Addition"
       : selectedOperation === "multiplication"
         ? "Multiplication"
-        : selectedOperation === "subtraction"
-          ? "Subtraction"
-          : selectedOperation === "division"
-            ? "Division"
-            : "Select an operation";
+        : "Select an operation";
   let bodyMarkup = "";
 
   if (selectedOperation === "multiplication") {
@@ -550,16 +546,6 @@ function renderTechniqueMenuScreen() {
   } else if (selectedOperation === "addition") {
     bodyMarkup = `
       <div class="technique-table-grid">${getAdditionTechniqueGridMarkup()}</div>
-    `;
-  } else if (selectedOperation === "subtraction" || selectedOperation === "division") {
-    bodyMarkup = `
-      <div class="technique-empty-state">
-        <section class="technique-coming-soon-card">
-          <p class="section-kicker">Coming Soon</p>
-          <h3>${escapeHtml(selectedOperationLabel)} Techniques</h3>
-          <p>We are building this pathway next. Keep training in Practice mode for now.</p>
-        </section>
-      </div>
     `;
   }
 
@@ -3303,7 +3289,7 @@ function handleTechniqueTableClick(event) {
     if (!direction) {
       return;
     }
-    const operationOptions = ["multiplication", "addition", "subtraction", "division"];
+    const operationOptions = ["multiplication", "addition"];
     const currentIndex = Math.max(0, operationOptions.indexOf(state.technique.selectedOperation));
     const nextIndex = (currentIndex + direction + operationOptions.length) % operationOptions.length;
     state.technique.selectedOperation = operationOptions[nextIndex];
@@ -3352,10 +3338,7 @@ function handleTechniqueMenuChange(event) {
 
   const selectedOperation = select.value;
   state.technique.selectedOperation =
-    selectedOperation === "addition" ||
-      selectedOperation === "multiplication" ||
-      selectedOperation === "subtraction" ||
-      selectedOperation === "division"
+    selectedOperation === "addition" || selectedOperation === "multiplication"
       ? selectedOperation
       : "";
   state.technique.mode = "menu";

@@ -6,6 +6,7 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 
 - Uses a slimmer app-style shell with a separate header band and dedicated Setup, Practice, Results, and Progress screens
 - Adds a Learn / Techniques mode with linked multiplication lessons for `x1` through `x12` and a linked addition lesson set
+- Includes Learn / Techniques operation navigation for Addition, Multiplication, Subtraction, and Division (with visible placeholders where content is still in progress)
 - Supports operation-based training with Addition, Subtraction, Multiplication, and Division
 - Supports mixed-table multiplication practice or a focused single-table isolation mode
 - Supports High Intensity Training, Target Reps, Zen Mode, and Spar Mode workout types
@@ -16,6 +17,8 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 - Adds a touch-first number pad for iPad/tablet-friendly answering without disabling keyboard input
 - Uses adaptive question weighting to bring back new or missed facts more often
 - Tracks daily star and heart goals with browser-local workout history
+- Captures browser-local answer telemetry so mastery can use accuracy, fluency, coverage, retention, and consistency signals
+- Shows operation mastery through a single cyclic selector (`Overview -> Addition -> Subtraction -> Multiplication -> Division`) with current and best-earned ranks
 - Shows a shared month-view workout tracker calendar across Results and Progress
 - Uses carousel-style Results and Progress screens to reduce scrolling
 - Supports swipe gestures and visible slide-position indicators on carousel screens
@@ -73,7 +76,7 @@ The latest hosted build is linked from `docs/index.html`.
 To publish a new static snapshot after updating the root app, run:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 10 -Label "v0.13.0 feature snapshot"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 12 -Label "v0.15.0 hybrid polish snapshot"
 ```
 
 ## Files

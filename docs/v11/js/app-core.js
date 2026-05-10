@@ -15,7 +15,7 @@ const KEYPAD_PREFERENCE_STORAGE_KEY = `${PRODUCT_STORAGE_PREFIX}-keypad-preferen
 const LEGACY_KEYPAD_PREFERENCE_STORAGE_KEYS = [
   `${LEGACY_PRODUCT_STORAGE_PREFIX}-keypad-preference-v1`,
 ];
-const APP_VERSION = "v0.15.0";
+const APP_VERSION = "v0.14.0";
 const FACTOR_LIMIT = 12;
 const TABLE_FACTORS = Array.from({ length: FACTOR_LIMIT }, (_, index) => index + 1);
 const QUESTION_PRESETS = [10, 20, 30];
@@ -295,28 +295,28 @@ const ADDITION_LESSONS = [
 
 const WORKOUT_MODE_DEFINITIONS = {
   multiplication: [
-    { key: "timed", label: "H.I.T" },
+    { key: "timed", label: "High Intensity Training" },
     { key: "question-goal", label: "Target Reps" },
-    { key: "isolation", label: "Isolation" },
+    { key: "isolation", label: "Isolation Training" },
     { key: "zen", label: "Zen Mode" },
     { key: "spar", label: "Spar Mode" },
   ],
   addition: [
-    { key: "timed", label: "H.I.T" },
+    { key: "timed", label: "High Intensity Training" },
     { key: "question-goal", label: "Target Reps" },
     { key: "zen", label: "Zen Mode" },
     { key: "spar", label: "Spar Mode" },
   ],
   subtraction: [
-    { key: "timed", label: "H.I.T" },
+    { key: "timed", label: "High Intensity Training" },
     { key: "question-goal", label: "Target Reps" },
     { key: "zen", label: "Zen Mode" },
     { key: "spar", label: "Spar Mode" },
   ],
   division: [
-    { key: "timed", label: "H.I.T" },
+    { key: "timed", label: "High Intensity Training" },
     { key: "question-goal", label: "Target Reps" },
-    { key: "isolation", label: "Isolation" },
+    { key: "isolation", label: "Isolation Training" },
     { key: "zen", label: "Zen Mode" },
     { key: "spar", label: "Spar Mode" },
   ],
@@ -402,7 +402,6 @@ const elements = {
   progressFill: document.getElementById("progressFill"),
   progressText: document.getElementById("progressText"),
   comboIndicator: document.getElementById("comboIndicator"),
-  practiceResponseRail: document.getElementById("practiceResponseRail"),
   problemText: document.getElementById("problemText"),
   answerForm: document.getElementById("answerForm"),
   answerInput: document.getElementById("answerInput"),
@@ -557,7 +556,8 @@ const state = {
   progressSaveTimeoutId: null,
   resultsSlideIndex: 0,
   progressSlideIndex: 0,
-  masterySelection: "overview",
+  masteryViewMode: "overview",
+  masteryDetailOperation: "addition",
   displayMonthKey: "",
   useTouchKeypad: false,
   theme: loadTheme(),
@@ -584,7 +584,6 @@ function createEmptySession(settings = null) {
     bestStreak: 0,
     responseTimes: [],
     recent: [],
-    feedbackHistory: [],
   };
 }
 
@@ -2311,20 +2310,27 @@ function getQuestionStyleLabel(settings) {
 }
 
 function getSessionBadgeLabel(settings) {
-  const operationLabel = getOperationLabel(settings.operation || "multiplication");
-  const modeLabel = settings.sessionType === "timed"
-    ? `H.I.T ${settings.timeLimitMinutes}m`
-    : settings.sessionType === "question-goal"
-      ? `Target Reps ${settings.questionTarget}`
-      : settings.sessionType === "isolation"
-        ? `Isolation x ${settings.focusFactor} (${settings.questionTarget})`
-        : settings.freeTrainingMode === "spar"
-          ? settings.sparTiming === "timed"
-            ? `Spar ${settings.timeLimitMinutes}m`
-            : "Spar Mode"
-          : "Zen Mode";
-  const negativesLabel = settings.negativesMode ? "Negatives On" : "Negatives Off";
-  return `${operationLabel} | ${modeLabel} | ${negativesLabel}`;
+  const styleLabel = getQuestionStyleLabel(settings).replace(/\s\(\d+-\d+\)$/, "");
+
+  if (settings.sessionType === "timed") {
+    return `${styleLabel} - HIT ${settings.timeLimitMinutes}m`;
+  }
+
+  if (settings.sessionType === "question-goal") {
+    return `${styleLabel} - ${settings.questionTarget} reps`;
+  }
+
+  if (settings.sessionType === "isolation") {
+    return `${styleLabel} - ${settings.questionTarget} reps`;
+  }
+
+  if (settings.freeTrainingMode === "spar") {
+    return settings.sparTiming === "timed"
+      ? `${styleLabel} - Spar ${settings.timeLimitMinutes}m`
+      : `${styleLabel} - Spar Mode`;
+  }
+
+  return `${styleLabel} - Zen Mode`;
 }
 
 function getHeroMessage() {

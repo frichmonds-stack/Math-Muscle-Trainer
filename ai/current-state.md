@@ -1,12 +1,12 @@
 # Current State
 
-Last updated: 2026-05-09
+Last updated: 2026-05-10
 
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.13.0`.
-- Latest docs snapshot is `docs/v10`, marked latest in `docs/index.html`.
+- Root app is at `v0.15.0` on feature branch `feature/learning-telemetry-mastery`.
+- Latest docs snapshot is `docs/v12`, marked latest in `docs/index.html`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
 - `ai/task-map.md` routes future AI sessions from work type to relevant files, pre-reads, docs, and risks.
@@ -23,6 +23,24 @@ Last updated: 2026-05-09
 - Operation display symbols are centralized; division stores `/` in fact keys and displays `\u00f7`.
 - Version checks now compare `APP_VERSION` with the latest released `CHANGELOG.md` heading.
 - Repo-native release helpers exist in `scripts/`.
+- Browser-local progress now includes capped answer-level telemetry (`answerTelemetry`) with operation, fact key, skill bucket, difficulty band, correctness/skipped state, response time, timestamp/date, session id, session source, and session position.
+- Progress now has an Operation Mastery slide showing Addition, Subtraction, Multiplication, and Division ranks using `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
+- Initial mastery scoring combines accuracy, fluency, coverage, retention, consistency, and difficulty evidence.
+- Current mastery ranks are derived from recent/lifetime evidence and can move up or down; best-earned ranks are stored in `operationBestRanks` and only rise.
+- Operation Mastery now uses an overview-to-detail layout: compact cards compare all four operations, and the selected operation opens a deeper evidence panel.
+- Operation Mastery now uses an explicit mode selector (`Overview` / `Operation Detail`) so the first state is snapshot-only, and detail view is opt-in.
+- Progress header kicker rows are centered consistently across slides while utility buttons remain right-aligned.
+- Progress layouts include an iPad polish pass for selector width/spacing and focus-column density in the `768-1366px` range.
+- Progress dynamic renderers now escape dynamic labels before inserting HTML in priority, growth, positive-progress, and coach-tip views.
+- Operation Mastery now uses a single cyclic selector (`Overview -> Addition -> Subtraction -> Multiplication -> Division`) instead of separate mode and operation selectors.
+- Operation Mastery overview cards are now a larger 2x2 grid to emphasize snapshot readability before detail drill-down.
+- Records mode selector labels now use compact naming (`H.I.T`, `Target Reps`, `Isolation`, `Zen Mode`, `Spar Mode`) to fit controls more cleanly.
+- Practice now uses speed-first micro feedback: persistent `Correct.` text was removed, answer status still flashes on the field/icon, and a rolling 5-answer dot rail shows recent correctness without slowing question advance.
+- Practice top-left status pill now shows operation/mode/negatives context as a non-primary status label (not a CTA-style button).
+- Learn/Techniques now includes subtraction and division operation slots with visible `Coming Soon` placeholders.
+- Light-mode polish pass includes stronger tooltip/info-icon default contrast and a non-purple active bottom-nav indicator to keep solo-leveling light mode consistent.
+- Progress/Techniques header kicker alignment now anchors to the same left content track instead of appearing centered off-grid.
+- ADR-0006 records the learning telemetry and operation mastery decision.
 
 ## Product Direction
 
@@ -38,7 +56,7 @@ Last updated: 2026-05-09
 
 ## Verification
 
-- Latest known check:
+- Latest known check before this feature branch:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
@@ -50,6 +68,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/index.html`
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/js/app-core.js` served `APP_VERSION = "v0.13.0"`.
 - 2026-05-09 session changed AI continuity docs only. No app checks, push, or live verification were run from this chat environment.
+- 2026-05-10 feature branch work refreshed `docs/v12` and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 
 ## Working Tree Note
 

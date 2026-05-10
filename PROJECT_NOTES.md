@@ -49,6 +49,7 @@ Use it for:
 - Treat this file as the flexible place for context, reasoning, and backlog items.
 - Prefer `workout` as the main user-facing term across the app instead of mixing `session` and `workout`.
 - Treat expressive results copy and small moments of visual "pop" as experiments that should be reviewed after seeing them live.
+- Use this mastery rank chain for the future operation achievement system: `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
 
 ## Open Questions
 
@@ -87,8 +88,37 @@ Use it for:
   - Continue light mode contrast cleanup across progress cards, coach notes, and utility controls.
   - Run a dedicated responsive spacing/alignment pass for tablet-first layouts.
   - Execute a structured regression QA pass before the next snapshot publish.
+- Adaptive learning ideas:
+  - Future operation mastery achievement system should use the selected rank chain: `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
+  - Infer a learner developmental profile automatically from reading speed, response latency, accuracy stability, session duration, and interaction patterns, then adapt quietly.
+  - Attention span and session design by learner profile:
+    - Younger learners: shorter sessions, more immediate rewards, more visual feedback, fewer consecutive failures.
+    - Older learners: longer practice blocks, delayed gratification, abstract explanations, statistics-heavy feedback.
+    - Example profile targets: age 7-style `~5 minute` celebration-heavy bursts versus age 15-style performance dashboards and streak analysis.
+  - Error tolerance and feedback tone by learner profile:
+    - Younger learners: avoid punitive feel, prioritize encouragement and hints.
+    - Teen/adult learners: allow direct corrective feedback and efficiency-first copy.
+  - Core arithmetic-learning metrics:
+    - Accuracy: overall accuracy percent, operation-specific accuracy, fact-family mastery, and error patterns (carrying/borrowing, sign, place-value, misread prompts).
+    - Speed/fluency: average response time, correct answers per minute, time-to-mastery, hesitation frequency.
+    - Retention: delayed retention checks (1 day/1 week/1 month), decay rate, relearning speed.
+    - Difficulty progression: maximum reliable difficulty, multi-step success rate, mental arithmetic capability, highest sustained adaptive level around `85-95%` accuracy.
+    - Consistency: accuracy variance, daily streaks, fatigue resistance across longer sessions.
+    - Cognitive strategy: method diversity, estimation ability, number sense, self-correction rate.
+    - Learning efficiency: improvement slope, attempts-to-mastery, weakness concentration, transfer to word problems/real contexts.
+  - High-value composite metrics candidates:
+    - Arithmetic Fluency Score (`accuracy + speed + consistency`).
+    - Mastery Confidence (recent performance + retention + difficulty).
+    - Cognitive Load Indicator (response delays + correction frequency + error clustering).
+    - Automaticity Index (instant recall versus step-by-step computation).
 
 ## Session Notes
+
+### 2026-05-10
+
+- Released a hybrid UI consistency pass focused on operation mastery flow, light-mode readability, Learn placeholders, and fast practice feedback visibility.
+- Confirmed product preference to keep speed-first feedback in Practice while improving correctness salience through lightweight visual cues.
+- Confirmed top navigation and carousel/kicker alignment consistency as a cross-screen design requirement.
 
 ### 2026-04-21
 
@@ -248,3 +278,21 @@ Use it for:
 - Initialized the lesson content workflow under `learn/` so teacher-authored specs can be reviewed before content moves into structured lesson data or app renderers.
 - Added workflow rules to `AGENTS.md`: the user is the pedagogy source of truth, teacher wording should be preserved, and content-only edits should stay separate from renderer/refactor work.
 - Added an empty Make 10 teacher spec and placeholder structured lesson JSON without changing visible lesson behavior.
+
+### 2026-05-09
+
+- Started feature branch `feature/learning-telemetry-mastery` for the data-capture and operation mastery system.
+- Confirmed the operation mastery rank chain as `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
+- Added browser-local answer telemetry as the evidence base for future ranks and adaptive behavior.
+- Added the first Operation Mastery Progress panel using accuracy, fluency, coverage, retention, consistency, and difficulty evidence.
+
+### 2026-05-10
+
+- Added separate current rank and best-earned rank concepts for Operation Mastery.
+- Current rank reflects current evidence and can move up or down; best-earned rank is preserved as the highest proven rank for each operation.
+- This avoids making a learner feel that earned progress disappeared when current fluency or consistency dips.
+- Revised Operation Mastery toward an overview-to-detail structure: the first read compares all four operations, then one selected operation shows fuller evidence and next-step guidance.
+- Updated Operation Mastery interaction so overview and individual detail are separate view modes rather than stacked on one screen.
+- Adjusted Progress header alignment so purple kicker labels remain centered while home/settings buttons stay anchored right.
+- Ran an iPad polish pass on Progress layouts (selector density, panel spacing, and mastery control fit in 768-1366px).
+- Ran a targeted security hardening pass on Progress dynamic markup by escaping labels before HTML injection in priority/growth/progress and coach-tip rendering.

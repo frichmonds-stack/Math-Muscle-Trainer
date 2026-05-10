@@ -197,7 +197,7 @@ function shiftFactDetail(direction) {
     0,
     definitions.findIndex((definition) => definition.key === current),
   );
-  const nextIndex = (currentIndex + direction + definitions.length) % definitions.length;
+  const nextIndex = Math.max(0, Math.min(definitions.length - 1, currentIndex + direction));
   if (nextIndex === currentIndex) {
     return;
   }
@@ -630,12 +630,8 @@ function getMasterySummaryCopy(strongest) {
     : "Complete a few workouts to start building operation ranks.";
 }
 
-function getMasterySelectionOptions() {
-  return ["overview", ...OPERATION_OPTIONS];
-}
-
-function getMasterySelectionLabel(selection) {
-  return selection === "overview" ? "Overview" : getOperationLabel(selection);
+function getMasteryViewModeLabel(mode) {
+  return mode === "detail" ? "Operation Detail" : "Overview";
 }
 
 function renderMasteryRankTrack(currentRankLabel) {
@@ -677,13 +673,19 @@ function renderMasterySnapshotCard(summary) {
   `;
 }
 
-function renderMasteryModeControls(selection) {
+function renderMasteryModeControls(mode, selectedSummary) {
+  const canChooseOperation = mode === "detail";
   return `
     <div class="mastery-view-controls">
       <div class="fact-carousel-selector progress-inline-selector" aria-label="Mastery view mode">
-        <button class="fact-range-button" type="button" data-mastery-selection-shift="-1" aria-label="Previous mastery view">&#8249;</button>
-        <span class="fact-carousel-label">${escapeHtml(getMasterySelectionLabel(selection))}</span>
-        <button class="fact-range-button" type="button" data-mastery-selection-shift="1" aria-label="Next mastery view">&#8250;</button>
+        <button class="fact-range-button" type="button" data-mastery-view-shift="-1" aria-label="Previous mastery view">&#8249;</button>
+        <span class="fact-carousel-label">${escapeHtml(getMasteryViewModeLabel(mode))}</span>
+        <button class="fact-range-button" type="button" data-mastery-view-shift="1" aria-label="Next mastery view">&#8250;</button>
+      </div>
+      <div class="fact-carousel-selector progress-inline-selector ${canChooseOperation ? "" : "is-disabled"}" aria-label="Mastery detail operation">
+        <button class="fact-range-button" type="button" data-mastery-operation-shift="-1" aria-label="Previous operation"${canChooseOperation ? "" : " disabled"}>&#8249;</button>
+        <span class="fact-carousel-label">${escapeHtml(selectedSummary.label)}</span>
+        <button class="fact-range-button" type="button" data-mastery-operation-shift="1" aria-label="Next operation"${canChooseOperation ? "" : " disabled"}>&#8250;</button>
       </div>
     </div>
   `;
@@ -754,40 +756,47 @@ function renderMasterySystem() {
   const strongest = summaries
     .filter((summary) => summary.attempts > 0)
     .sort((left, right) => right.score - left.score)[0];
-  const masterySelections = getMasterySelectionOptions();
-  if (!masterySelections.includes(state.masterySelection)) {
-    state.masterySelection = "overview";
+  if (!["overview", "detail"].includes(state.masteryViewMode)) {
+    state.masteryViewMode = "overview";
   }
-  if (!strongest && state.masterySelection === "overview") {
-    state.masterySelection = "overview";
+  if (!OPERATION_OPTIONS.includes(state.masteryDetailOperation)) {
+    state.masteryDetailOperation = strongest?.operation || OPERATION_OPTIONS[0];
   }
-  const selectedSummary = summaries.find((summary) => summary.operation === state.masterySelection) ||
+  const selectedSummary =
+    summaries.find((summary) => summary.operation === state.masteryDetailOperation) ||
     strongest ||
     summaries[0];
 
-  const modeControls = renderMasteryModeControls(state.masterySelection);
+  const summaryText = getMasterySummaryCopy(strongest);
+  const modeControls = renderMasteryModeControls(state.masteryViewMode, selectedSummary);
   const overviewMarkup = `<div class="mastery-overview-grid">${summaries.map(renderMasterySnapshotCard).join("")}</div>`;
   const detailMarkup = renderMasteryDetailPanel(selectedSummary);
   elements.masteryGrid.innerHTML = `
     ${modeControls}
-    ${state.masterySelection === "overview" ? overviewMarkup : detailMarkup}
+    ${state.masteryViewMode === "detail" ? detailMarkup : overviewMarkup}
+    <p class="section-note mastery-summary-note">${escapeHtml(summaryText)}</p>
   `;
 }
 
 function handleMasterySelection(event) {
-  const selectionShiftButton = event.target.closest("[data-mastery-selection-shift]");
-  if (selectionShiftButton) {
-    const direction = Number(selectionShiftButton.dataset.masterySelectionShift || 0);
-    if (!direction) {
-      return;
-    }
-    const masterySelections = getMasterySelectionOptions();
-    const currentIndex = Math.max(0, masterySelections.indexOf(state.masterySelection));
-    const nextIndex = (currentIndex + direction + masterySelections.length) % masterySelections.length;
-    state.masterySelection = masterySelections[nextIndex];
+  const viewShiftButton = event.target.closest("[data-mastery-view-shift]");
+  if (viewShiftButton) {
+    const direction = Number(viewShiftButton.dataset.masteryViewShift);
+    state.masteryViewMode = direction > 0 ? "detail" : "overview";
     renderMasterySystem();
     return;
   }
+  const operationShiftButton = event.target.closest("[data-mastery-operation-shift]");
+  if (operationShiftButton && state.masteryViewMode === "detail") {
+    const direction = Number(operationShiftButton.dataset.masteryOperationShift);
+    const operationIndex = OPERATION_OPTIONS.indexOf(state.masteryDetailOperation);
+    const total = OPERATION_OPTIONS.length;
+    const nextIndex = (operationIndex + direction + total) % total;
+    state.masteryDetailOperation = OPERATION_OPTIONS[nextIndex];
+    renderMasterySystem();
+    return;
+  }
+  renderMasterySystem();
 }
 
 function getRecordsModeSortValue(record, modeKey) {

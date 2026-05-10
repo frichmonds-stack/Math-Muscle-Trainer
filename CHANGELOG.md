@@ -6,6 +6,40 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-05-10
+
+### Added
+- Added a rolling 5-answer micro feedback rail in Practice to improve correctness visibility without slowing pacing.
+- Added Learn operation slots for Subtraction and Division with visible `Coming Soon` placeholders.
+
+### Changed
+- Changed Operation Mastery controls to a single cyclic selector: `Overview -> Addition -> Subtraction -> Multiplication -> Division`.
+- Changed Operation Mastery overview to a larger 2x2 snapshot grid for faster cross-operation scanning.
+- Changed workout mode display labels to compact control-friendly names: `H.I.T`, `Target Reps`, `Isolation`, `Zen Mode`, `Spar Mode`.
+- Changed the Practice session context pill to a compact status label with operation/mode/negatives context.
+- Changed Workout Records heading copy to `Workout history at a glance`.
+- Changed fact-detail carousel behavior to wrap cyclically instead of stopping at the end.
+
+### Fixed
+- Improved light-mode visibility of info tooltip dots.
+- Fixed light-mode bottom page indicator active-dot accent so Solo Leveling light mode no longer shows a stray purple accent.
+- Smoothed Learn screen light-mode background tinting for better consistency.
+
+## [0.14.0] - 2026-05-09
+
+### Added
+- Added browser-local answer telemetry for mastery evidence, including operation, fact key, skill bucket, difficulty band, response time, session source, and session position.
+- Added an Operation Mastery Progress panel with `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend` ranks for Addition, Subtraction, Multiplication, and Division.
+- Added mastery scoring based on accuracy, fluency, coverage, retention, consistency, and difficulty evidence.
+- Added best-earned operation ranks so the app can show current form separately from the highest rank proven.
+
+### Changed
+- Changed Operation Mastery into a four-operation overview with focused detail for the selected operation.
+- Changed Operation Mastery to use an explicit view selector: `Overview` for the 4-card snapshot and `Operation Detail` for a deeper single-operation panel.
+- Aligned the Progress-screen kicker/header row so carousel labels such as `Fact Tracker`, `Next Focus`, `Coach Notes`, and `Workout Log` stay centered.
+- Added iPad (768-1366px) spacing and selector polish for Progress slides, including mastery controls and focus columns.
+- Hardened Progress rendering by escaping dynamic labels in priority/growth/progress cards and coach-tip fact labels before `innerHTML` output.
+
 ## [0.13.0] - 2026-05-08
 
 ### Added

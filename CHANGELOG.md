@@ -6,6 +6,12 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-05-11
+
+### Changed
+- Changed the desktop/tablet-landscape app shell to preserve a fitted `1194 x 834` iPad-landscape canvas instead of stretching to arbitrary browser window shapes.
+- Updated ADR-0007 to record the app viewport frame rule and clarify that extra desktop browser space is ambient frame, not app content to fill.
+
 ## [0.16.0] - 2026-05-11
 
 ### Added

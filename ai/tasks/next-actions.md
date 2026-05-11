@@ -36,6 +36,7 @@ Safest next tasks:
 22. Manually test the new Operation Mastery single-selector cycle (`Overview -> Addition -> Subtraction -> Multiplication -> Division`) in both dark and light mode.
 23. Manually test Practice micro feedback rail visibility and pace impact across timed, target reps, isolation, zen, and spar sessions.
 24. Manually review Learn selector transitions for subtraction/division `Coming Soon` placeholders and check layout consistency on desktop + iPad widths.
-25. Continue visual review of the live `docs/v13` app-shell UI contract snapshot on Windows desktop and iPad-sized viewports.
+25. After push/deploy, verify `docs/index.html` and `docs/v14/index.html` are live on GitHub Pages and match `APP_VERSION = "v0.17.0"`.
 26. Manually review the 2026-05-11 UI system patch on Windows desktop and iPad-width viewports: Home menu modules, Progress/Results kicker/header stability, selector placement, static metric hover behavior, Workout Tracker calendar alignment, Learn canvas, lesson completion copy, and Practice More auto-advance.
-27. Track any follow-up polish from live `v0.16.0` review as a new batch before the next release snapshot.
+27. Track any follow-up polish from live `v0.17.0` app viewport frame review as a new batch before the next release snapshot.
+28. Manually review the app viewport frame on desktop browser sizes larger than iPad landscape and confirm the centered `1194 x 834` canvas feels right.

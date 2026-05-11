@@ -5,8 +5,8 @@ Last updated: 2026-05-11
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.16.0` on `main`.
-- Latest docs snapshot is `docs/v13`, marked latest in `docs/index.html`.
+- Root app is at `v0.17.0` on `main`.
+- Latest docs snapshot is `docs/v14`, marked latest in `docs/index.html`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
 - `ai/task-map.md` routes future AI sessions from work type to relevant files, pre-reads, docs, and risks.
@@ -44,6 +44,8 @@ Last updated: 2026-05-11
 - 2026-05-10 execution batch moved Results actions to top header, renamed `Adjust Workout` to `New Workout`, renamed lesson workout CTA to `Start Workout`, removed lesson-stage Back buttons, removed lesson-complete restart/back actions, added top-nav lesson exit visibility, changed Results/Progress month labels to month-only with year side labels, and upgraded practice response feedback badges/glow while hiding bottom feedback text.
 - 2026-05-11 UI system patch added ADR-0007 for the app-shell UI contract, converted Home primary navigation into compact app-style modules, moved Results actions into the summary content header, fixed Progress/Results carousel kicker labels to a stable width, moved local selectors into content headers, removed hover affordances from static metric panels, aligned tracker calendar headings/weekdays, removed Learn's nested background panel, and made multiplication Practice More auto-advance after correct answers.
 - 2026-05-11 publish close bumped runtime version to `v0.16.0`, added `CHANGELOG.md` release notes, published `docs/v13`, and updated README publish instructions.
+- 2026-05-11 app viewport frame release bumped runtime version to `v0.17.0`, updated ADR-0007, and published `docs/v14`.
+- Desktop/tablet-landscape rendering now fits the app into a centered `1194 x 834` iPad-landscape canvas instead of stretching to arbitrary browser dimensions; narrow/mobile layouts still switch to scroll-friendly responsive rules.
 
 ## Product Direction
 
@@ -80,6 +82,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `docs/v13` as latest.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/index.html` returned HTTP 200.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/js/app-core.js` served `APP_VERSION = "v0.16.0"`.
+- 2026-05-11 app viewport frame release ran `scripts/check-repo.ps1` after `docs/v14`; result: `All repo checks passed.`
+- 2026-05-11 app viewport frame release ran `node --check` for all root JS modules; all syntax checks passed.
 
 ## Working Tree Note
 

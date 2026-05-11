@@ -309,3 +309,4 @@ Use it for:
   - Learn's visible nested background panel was removed so Techniques sits on the app canvas.
   - Multiplication lesson completion copy is warmer, and Practice More now auto-advances after correct answers.
 - Published the UI system batch as `v0.16.0` in `docs/v13`; `scripts/check-repo.ps1` passes after snapshot publication.
+- Published `v0.17.0` in `docs/v14` to preserve a centered `1194 x 834` iPad-landscape app canvas on desktop/tablet-landscape viewports, while retaining scroll-friendly rules for narrow/mobile screens.

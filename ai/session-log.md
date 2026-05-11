@@ -489,3 +489,16 @@
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` returned HTTP 200 and lists `Version 13 - v0.16.0 app shell UI contract snapshot (latest)`.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/index.html` returned HTTP 200.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/js/app-core.js` returned HTTP 200 and serves `APP_VERSION = "v0.16.0"`.
+
+## 2026-05-11 - v0.17.0 App Viewport Frame
+
+- User confirmed the existing responsive rules and app end-goal make a preserved app viewport frame appropriate.
+- Changed desktop/tablet-landscape rendering so `.page-shell` fits a centered `1194 x 834` iPad-landscape canvas inside the browser viewport instead of stretching to arbitrary desktop window dimensions.
+- Kept narrow/mobile behavior scroll-friendly by allowing the existing small-screen rules to switch `.page-shell` back to full-width/auto-height below `700px`.
+- Updated ADR-0007 with the app viewport frame rule.
+- Bumped `APP_VERSION` to `v0.17.0`.
+- Added `0.17.0` release notes to `CHANGELOG.md`.
+- Updated `README.md` publish command to `docs/v14`.
+- Published `docs/v14` via `scripts/publish-snapshot.ps1` and marked it latest in `docs/index.html`.
+- Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+- Ran `node --check` on all root JS modules; all syntax checks passed.

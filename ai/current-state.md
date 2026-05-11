@@ -84,6 +84,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/js/app-core.js` served `APP_VERSION = "v0.16.0"`.
 - 2026-05-11 app viewport frame release ran `scripts/check-repo.ps1` after `docs/v14`; result: `All repo checks passed.`
 - 2026-05-11 app viewport frame release ran `node --check` for all root JS modules; all syntax checks passed.
+- GitHub Pages verified live for `v0.17.0` on 2026-05-11:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `docs/v14` as latest.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v14/index.html` returned HTTP 200.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v14/js/app-core.js` served `APP_VERSION = "v0.17.0"`.
 
 ## Working Tree Note
 

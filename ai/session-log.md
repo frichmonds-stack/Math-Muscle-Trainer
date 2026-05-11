@@ -502,3 +502,8 @@
 - Published `docs/v14` via `scripts/publish-snapshot.ps1` and marked it latest in `docs/index.html`.
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 - Ran `node --check` on all root JS modules; all syntax checks passed.
+- Committed and pushed `main` as `4c5ee82` (`Release v0.17.0 app viewport frame`).
+- Verified GitHub Pages after deployment:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` returned HTTP 200 and lists `Version 14 - v0.17.0 app viewport frame snapshot (latest)`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v14/index.html` returned HTTP 200.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v14/js/app-core.js` returned HTTP 200 and serves `APP_VERSION = "v0.17.0"`.

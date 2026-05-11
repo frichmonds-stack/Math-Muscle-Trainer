@@ -5,7 +5,7 @@ Last updated: 2026-05-11
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.16.0` on feature branch `feature/learning-telemetry-mastery` pending merge to `main`.
+- Root app is at `v0.16.0` on `main`.
 - Latest docs snapshot is `docs/v13`, marked latest in `docs/index.html`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.

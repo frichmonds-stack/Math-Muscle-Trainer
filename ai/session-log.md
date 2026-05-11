@@ -474,3 +474,10 @@
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 - Ran `node --check` on `js/app-core.js`, `js/app-init.js`, `js/app-practice.js`, `js/app-progress.js`, and `js/app-techniques.js`; all syntax checks passed.
 - Next steps in this publish close: commit the batch, merge into `main`, push, then verify GitHub Pages live URLs.
+
+## 2026-05-11 - v0.16.0 Main Merge
+
+- Committed the UI system batch on `feature/learning-telemetry-mastery` as `2d7a0ad` (`Release v0.16.0 app shell UI polish`).
+- Fetched `origin`, checked out `main`, confirmed it was up to date, and merged the feature branch into `main`.
+- Reran `scripts/check-repo.ps1` on `main`; result: `All repo checks passed.`
+- Reran `node --check` on all root JS modules on `main`; all syntax checks passed.

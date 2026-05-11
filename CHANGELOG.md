@@ -6,6 +6,25 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-05-11
+
+### Added
+- Added ADR-0007 to define the shared app-shell UI contract for headers, selectors, content roles, and interaction affordances.
+
+### Changed
+- Changed Home primary navigation from stacked CTA bars to compact app-style destination modules.
+- Changed Results and Progress carousel headers to use a fixed kicker label track so navigation arrows stay static between slides.
+- Moved Results workout actions into the Workout Summary content header.
+- Changed Practice More lesson mode to auto-advance after correct answers and behave like a lesson-scoped workout.
+- Updated multiplication lesson completion copy and CTAs toward clearer learn/practice/workout choices.
+
+### Fixed
+- Removed hover/lift affordances from display-only metric panels.
+- Aligned Progress/Results operation selectors with slide content headers instead of global utility controls.
+- Removed the visible nested Learn screen background so Techniques sits on the app canvas.
+- Improved Workout Tracker calendar alignment, year heading emphasis, and centered weekday labels.
+- Removed persistent success feedback text from lesson answer flows where field/icon feedback already confirms correctness.
+
 ## [0.15.0] - 2026-05-10
 
 ### Added

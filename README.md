@@ -76,7 +76,7 @@ The latest hosted build is linked from `docs/index.html`.
 To publish a new static snapshot after updating the root app, run:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 12 -Label "v0.15.0 hybrid polish snapshot"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 13 -Label "v0.16.0 app shell UI contract snapshot"
 ```
 
 ## Files

@@ -198,3 +198,279 @@
 - Updated `PROJECT_NOTES.md` session notes with the hybrid consistency pass outcomes.
 - Published `docs/v12` via `scripts/publish-snapshot.ps1` and marked it latest in `docs/index.html`.
 - Ran `scripts/check-repo.ps1` after snapshot publish; result: `All repo checks passed.`
+
+## 2026-05-10 - Header/Nav + Lesson Controls Execution Batch
+
+- Executed queued UI contract updates from planning-only intake:
+  - Moved Home-screen `Progress`, `Learn`, and `Start Workout` actions into a dedicated menu row below the hero banner.
+  - Kept top-right utility area focused on persistent utility controls.
+  - Moved Results `Repeat Workout` and `New Workout` actions into top header nav and removed duplicate lower action row.
+- Updated copy and lesson completion controls:
+  - `Adjust Workout` -> `New Workout`.
+  - `Start Focused Workout` -> `Start Workout`.
+  - Removed `Restart Lesson` and lower `Back to Lessons` buttons from lesson-complete blocks.
+  - Added explicit completion guidance: `If you want to practice more, press Start Workout.`
+- Learn lesson navigation updates:
+  - Removed stage-level `Back` buttons so stage pills remain the lesson navigation mechanism.
+  - Added top-nav `Exit Lesson` control visibility for lesson modes.
+- Calendar heading updates:
+  - Month navigation now shows month-only labels in Results/Progress trackers.
+  - Tracker header side label now shows dynamic year.
+- Practice feedback updates:
+  - Bottom feedback text is hidden.
+  - Right-edge answer status icon now uses circular, high-contrast success/error/sign badges.
+  - Question panel now flashes glow feedback for correct/error results.
+- Header consistency pass:
+  - Updated focused-view header and kicker alignment toward a shared-width contract to reduce cross-view control drift.
+- Checks:
+  - Ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported because root files changed and docs snapshot has not been republished yet.
+
+## 2026-05-11 - UI Polish Batch Intake
+
+- User requested that UI polish issues be logged for a batched update, specifically because prior model attempts were not getting the visual polish right.
+- Current screenshots/review are from a Windows desktop view; this should not override the product's iPad-app direction, but desktop layouts still need to look intentional and polished.
+- User hopes the desktop version will eventually look like the app, not like a separate desktop website adaptation.
+- Treat upcoming work as a careful visual/design-system pass rather than isolated copy tweaks.
+- Work from the current dirty root app state; do not revert existing uncommitted changes in `index.html`, `styles.css`, or `js/` files.
+- Before executing the batch, gather concrete polish targets by screen/screenshot and summarize the intended change before editing.
+- After executing the batch, run the best available checks and remember that a new docs snapshot is needed before repo checks can pass cleanly if root app files changed.
+
+## 2026-05-11 - Home Menu Visual Direction Intake
+
+- User flagged the new Home menu buttons (`Progress`, `Learn`, `Start Workout`) as ugly and not iPad-app-like enough.
+- Current issue visible in screenshot: the three wide horizontal pills sit under the hero as plain web buttons; the two dark pills feel low-energy/empty, and the gradient workout button feels disconnected from a cohesive app navigation system.
+- User does not yet know the desired interaction model, so future work should explore patterns rather than assume a final answer immediately.
+- User clarified that the screenshots are not a mandate to copy current mobile UI trends or "meta" ideas; they are inspiration because the current direction feels stuck.
+- Reference direction from screenshots:
+  - Mobile/tablet app home screens often use compact content modules, category chips, bottom navigation, and prominent task cards instead of stacked web CTA bars.
+  - iPad/app feel should come from clear navigation affordances, spatial grouping, icon-led controls, and polished touch targets.
+  - Dark app references suggest rounded panels, compact icon+label rows, strong hierarchy, and a more native-app rhythm.
+  - Light/dark paired references suggest the design should remain theme-capable and not depend on one mode only.
+  - The task-list reference suggests a possible model: a central app panel with tab/chip filters and action rows/cards, not full-width web buttons.
+- Constraints for the batch:
+  - Preserve the strength/mastery identity and existing hero branding.
+  - Avoid making the Home screen feel like a marketing landing page.
+  - Prefer a usable first-screen app dashboard/menu pattern.
+  - Treat `Start Workout` as the primary action, but make `Progress` and `Learn` feel like real destinations rather than secondary afterthought buttons.
+  - Consider icons, segmented/tab-like navigation, compact tiles, or a bottom/app-nav pattern; do not simply restyle the current three bars unless that solves the app-feel problem.
+  - Check desktop and iPad widths, especially the current hero/menu composition.
+
+## 2026-05-11 - Progress Header/Layout Polish Intake
+
+- User flagged the top Home and settings/cog buttons on the Progress screen as visually out of place.
+- In the Progress screenshot, the Workout Log carousel/kicker row appears centered in the overall page area instead of left-aligned with its content column/track.
+- The visible `WORKOUT LOG` text should be centered within its own reserved label space.
+- The left and right carousel nav buttons should stay static across all Progress screens/slides; reserve enough label width for the largest screen title so arrows do not shift when text length changes.
+- Workout Log label text sizing should be consistent across screens/slides.
+- Future batch should treat this as a header/navigation layout contract issue, not just a one-off alignment tweak.
+
+## 2026-05-11 - Progress Tile Interaction Intake
+
+- User flagged that static Progress metric tiles have hover animation/highlight states even though they do not currently link anywhere.
+- Example: `Facts Attempted`, `Accuracy`, `Best Fact Streak`, `Fastest Avg`, `Workouts Completed`, and `Most Attempts in a Day` appear to animate/highlight on hover.
+- Future batch should decide whether these tiles become real interactive drill-down links or have hover/click affordances removed.
+- If no destination exists, display-only metric tiles should read as static information units, not buttons/cards with actionable hover states.
+
+## 2026-05-11 - Progress Operation Selector Placement Intake
+
+- User flagged that the operation selector placement is inconsistent between Progress slides.
+- In the Workout Log / overall progress screenshot, `All Operations` sits high on the right beneath Home/settings controls.
+- In the Operation Mastery screenshot, the operation selector sits below the section heading on the left.
+- User wants universal placement across Progress screens/slides.
+- Recommendation for future batch: place the operation selector in the slide content header area directly below or beside the section title, aligned to the left content track, instead of under the top-right utility controls.
+- Rationale: the selector filters the slide content, so it should live with the slide title/content region; the top-right area should remain reserved for global utilities such as Home/settings.
+- For desktop/wide layouts, consider a title row where the heading is left-aligned and the selector sits either directly underneath on the same left track or at the right edge of the content header row. For iPad/tablet consistency, the safest first pass is below the title on the left track.
+
+## 2026-05-11 - Workout Tracker Calendar Alignment Intake
+
+- User flagged that the right-side calendar drops below the left-side tracker/stats column on the Workout Tracker screen.
+- Screenshot shows the left column heading/stats beginning higher while the calendar/year/month area appears lower, making the two-column layout feel misaligned.
+- Future batch should align the calendar panel's top edge/header baseline with the left tracker column in a deliberate two-column composition.
+- Check desktop and iPad widths so calendar grid height/row wrapping does not create accidental vertical drift.
+- User flagged that the year heading looks underexposed and does not match the strength/visibility of other headings.
+- Day-of-week titles may have the same issue; review their weight, contrast, and spacing.
+- Recommendation: center day titles over their calendar columns because they label grid columns/cells, while keeping the year/month header aligned within the calendar header system.
+
+## 2026-05-11 - Universal Section Style Direction Intake
+
+- User flagged ongoing uncertainty about section style direction after repeated card-vs-list/back-and-forth passes.
+- Prior model suggested a hybrid style, but the user does not feel that a clear hybrid direction actually appeared.
+- Current examples show two competing section treatments:
+  - Fact Tracker uses repeated rounded cards with status pills, progress bars, and card borders.
+  - Next Focus uses open columns with vertical dividers, list rows, subtle horizontal separators, and less card containment.
+- User wants a universal design direction rather than each Progress section feeling independently styled.
+- Recommendation to carry into batch: use an app-native hybrid based on information role, not arbitrary mixture.
+- Proposed universal rule:
+  - Use compact cards/tiles for actionable items, selectable drill-down targets, or repeated objects that can be tapped to train/open detail.
+  - Use open list/column layouts for summaries, ranked insights, logs, and coaching text where the primary job is scanning/comparison rather than tapping every block.
+  - Use static metric panels without hover states for display-only numbers.
+  - Avoid large nested website-style cards; let the app shell and section rhythm provide structure.
+- For the two screenshots specifically: Fact Tracker can keep tappable cards because categories are trainable, but Next Focus should either remain an open insight board or use smaller row units if items become actionable. Both should share the same header, selector, spacing, typography scale, badge language, and interaction-state rules.
+- User asked how to implement the unification; recommended adding a lightweight UI/design contract plus shared CSS roles, then refactoring one Progress surface at a time.
+- Implementation direction for current batch:
+  - Create/update a lasting design note or ADR for the Progress/app UI system if the batch formalizes these rules.
+  - Define the shared Progress page skeleton: global utility row, carousel/kicker title row, content header with title/subtitle/local selectors, then body content.
+  - Add or consolidate shared CSS role classes for metric panels, action tiles, insight boards/rows, selector chips, and status badges.
+  - Restrict hover/lift/focus affordances to truly interactive roles; remove them from display-only metric panels.
+  - Move operation selectors into the content header area and standardize placement.
+  - Fix carousel label sizing so arrows stay static across slides and label text sizing remains consistent.
+  - Align Workout Tracker calendar and left stats column; strengthen year/day heading hierarchy and center day titles over grid columns.
+  - Keep Fact Tracker as interactive action tiles if they train/open details.
+  - Keep Next Focus closer to an open insight board, but align its typography, badges, spacing, and selectors with the same system.
+
+## 2026-05-11 - Learn Screen App-Shell Intake
+
+- User flagged that the Learn screen is also not positioned where it should be.
+- Screenshot shows the Learn/Techniques content sitting inside a visibly darker rectangular background, creating a "box within a box" effect.
+- This conflicts with the intended iPad-app feel and the broader universal app-shell direction.
+- Future batch should remove or soften the nested page-section background so Learn feels like part of the same app canvas rather than a framed web section.
+- Align Learn's top title, selector, content grid, and Home/settings utilities to the same app-shell/header rules being defined for Progress.
+- Keep lesson tiles as actionable cards because they open lessons, but make their containment, spacing, and hover behavior follow the shared action-tile rules.
+
+## 2026-05-11 - Lesson Feedback Text Intake
+
+- User flagged that bottom feedback text in lesson/practice UI should be removed.
+- Screenshot shows `Correct. Solo reps complete.` appearing below the keypad after a correct assisted/lesson answer.
+- Future batch should remove this bottom feedback line when field/icon/question-panel feedback already communicates the result.
+- Keep necessary incorrect/error guidance only if it is still needed for learning clarity, but avoid persistent success text that crowds the keypad and slows the speed-first feel.
+
+## 2026-05-11 - Lesson Complete Copy Intake
+
+- User flagged the current lesson-complete copy as weird.
+- Screenshot example: `10x technique complete.` plus `You finished the 10x lesson and can review any section whenever you want. You locked in 5 solo reps.`
+- Teacher/user suggested direction: use warmer, clearer achievement copy such as `Congratulations on learning how to multiply by 10!`
+- Future batch should pair the completion message with clear CTAs to either practice more or learn more.
+- Review CTA wording for consistency; screenshot currently shows `Back to Techniques`, `Practice More`, and `Go to Work Out`, while prior intent was to simplify lesson-complete controls and use `Start Workout`.
+- Preserve user/teacher-authored wording direction and avoid inventing a large new lesson-complete pedagogy voice unless explicitly requested.
+
+## 2026-05-11 - Practice More Flow Stale UI Intake
+
+- User flagged that choosing `Practice More` from a completed lesson reverts to an older-looking UI.
+- Screenshot shows a Practice More lesson mode with `PRACTICE MORE`, `Keep the 10x table feeling easy.`, `Questions can flip either way now.`, `Back to Techniques`, `Hint`, and `Next Practice Question`.
+- User noted that entering an answer stops the learner in place instead of advancing to the next question, which feels wrong compared with the speed-first practice direction.
+- Bottom `Correct.` text is still visible in this flow, reinforcing that this mode may not have been updated with recent feedback changes.
+- Copy at the top feels weird/stale and should be reviewed.
+- Future batch should inspect the `Practice More` lesson path separately from normal lesson stages and focused workouts; update behavior so correct answers advance appropriately unless there is a clear pedagogical reason not to.
+- Align Practice More UI with the current lesson/practice shell, button naming, feedback behavior, and app-system styling.
+
+## 2026-05-11 - Results Summary/Tracker Layout Intake
+
+- User flagged that Workout Summary buttons are not in place on the Results screen.
+- Screenshot shows `Repeat Workout` and `New Workout` floating near the top center while Home/settings sit top-right; this feels disconnected from the app header contract.
+- User flagged that the `WORKOUT SUMMARY` title/kicker is out of place.
+- Results screen should follow the same global utility/header/carousel title/content header rules as Progress and Learn where applicable.
+- User flagged that the embedded Workout Tracker on Results is "all over the place."
+- Screenshot shows tracker calendar overlapping or drifting into the left stats column; year/month/day grid alignment is broken and the two-column layout collapses visually.
+- Future batch should inspect Results-specific tracker rendering/layout separately from the Progress tracker because the same component may be embedded under different constraints.
+- Ensure Results actions, title/kicker, summary metric panels, and tracker section use the shared app-shell width/gutter contract.
+
+## 2026-05-11 - UI Batch Execution Decisions
+
+- User confirmed the proposed header contract:
+  - Top-right global area should be Home/settings only.
+  - Kicker/carousel row should use fixed-width title space with static arrows.
+  - Content header should contain H1/subtitle/local selectors/actions.
+  - Body should use role-based content layouts.
+- User asked Codex to decide action placement in the next patch and then review the result.
+- User agreed with the interaction rules:
+  - Static metrics should not hover/lift.
+  - Actionable lesson/fact tiles may use hover/focus/press states.
+  - Insight rows should only show interactive affordances if clickable.
+  - Selectors should use a consistent chip style.
+- Chip style explanation for future work: a compact rounded control used for filters/segmented choices, with consistent height, border, padding, centered label, optional left/right chevrons, and clear selected/focus states.
+- User decided Practice More should auto-advance after correct answers and behave like a normal workout constrained to the specific lesson parameters.
+- User agreed to keep the next patch focused on structure first: shared header/layout rules, selector placement, hover affordances, Results/Progress tracker alignment, Learn nested-background issue, and stale Practice More behavior/copy.
+- Open release-flow question: whether to merge to `main` and align snapshots/versioning before or after the next patch.
+
+## 2026-05-11 - UI System Patch Executed
+
+- Added ADR-0007 to record the shared app-shell UI contract.
+- Changed Home primary actions from wide stacked CTA bars into compact app-style destination modules with small icon blocks, label, and supporting text.
+- Added a fixed-width Results carousel/kicker header matching the Progress header pattern so title arrows stay static across slides.
+- Moved Results `Repeat Workout` and `New Workout` actions into the Workout Summary content header instead of the global top rail.
+- Removed per-slide Results inline kicker rows so Results and Progress share the same header contract.
+- Adjusted Progress/Results content selectors to sit below/with content headings, not beneath global Home/settings utilities.
+- Removed hover/lift affordances from display-only metric panels while preserving interactive styling for actionable tiles.
+- Tightened Workout Tracker calendar alignment by removing extra top offset, strengthening year heading exposure, and centering weekday labels over grid columns.
+- Removed the visible nested Learn/Techniques panel background so Learn sits on the app canvas.
+- Updated multiplication lesson complete copy toward `Congratulations on learning how to multiply by n!`, with `Learn More`, `Practice More`, and `Start Workout` CTAs.
+- Updated Practice More copy and behavior: it now auto-advances after correct answers and hides success feedback text, while keeping error feedback visible.
+- Updated `CHANGELOG.md`, `PROJECT_NOTES.md`, `ai/current-state.md`, and `ai/tasks/next-actions.md`.
+- Ran `scripts/check-repo.ps1`; expected snapshot-drift failures remain because root app files differ from the latest docs snapshot.
+- Ran `node --check` on `js/app-core.js`, `js/app-init.js`, `js/app-practice.js`, `js/app-progress.js`, and `js/app-techniques.js`; all syntax checks passed.
+
+## 2026-05-11 - Results Next-Step Footer Adjustment
+
+- User asked to try bottom-right placement for Results summary actions because `Repeat Workout` and `New Workout` are next steps after reviewing the summary.
+- Moved the two Results summary actions out of the title row and into a bottom-right footer action row within the summary slide.
+- Made `Repeat Workout` and `New Workout` equal visual weight by using the same ghost-button treatment and consistent minimum widths.
+- Retained the global header rule: Home/settings stay in the top-right utility rail, while Results actions stay inside the content surface.
+- Ran `node --check js/app-techniques.js`; syntax check passed.
+- Reran `scripts/check-repo.ps1`; expected docs snapshot drift remains.
+
+## 2026-05-11 - Results Footer Placement Correction
+
+- User flagged that the bottom-right Results action row went far too low, effectively to the bottom edge of the iPad/app viewport.
+- Clarified that the Results screen is currently a landscape/tablet-style app shell that fills the available viewport height, so a grid footer can land at the bottom of the whole screen.
+- Corrected the layout so Results summary actions sit just below the stat grid, right-aligned, instead of being pushed to the bottom of the viewport.
+- Reran `scripts/check-repo.ps1`; expected docs snapshot drift remains.
+
+## 2026-05-11 - Results Header Follow-Up Intake
+
+- User requested logging only for a later batch update.
+- Results carousel left/right arrows do not work from the current `WORKOUT SUMMARY` header.
+- `WORKOUT SUMMARY` is not centered within its own reserved label space; the label appears shifted relative to the arrows.
+- The summary title/text starts too close to the top header/nav area and needs more breathing room.
+- Consider making the `WORKOUT SUMMARY` kicker/label larger or more visually established so it reads as intentional app navigation rather than tiny metadata.
+- The equal-weight `Repeat Workout` and `New Workout` buttons look okay in their current style, but need better vertical centering/alignment in their action row.
+- Current Results composition should be reviewed as a landscape/tablet app screen, not a web page; avoid pushing actions to the viewport bottom.
+
+## 2026-05-11 - Practice Shell Box Intake
+
+- User flagged an obvious "box within the shell" on the Practice screen.
+- Screenshot shows the practice panel/background visibly framed inside the app shell, creating the same nested-section problem previously noted on Learn.
+- Future batch should remove or soften the practice panel container so the HUD, progress bar, problem card, answer row, and keypad feel like they live on one app canvas.
+- Preserve the problem card/input/keypad as distinct functional units, but avoid a large rectangular page panel behind them.
+- Review dark/light mode after removing the nested practice panel background to ensure contrast remains strong.
+
+## 2026-05-11 - Lesson Exit Placement Intake
+
+- User asked whether `Exit Lesson` is in the wrong spot.
+- By the new app-shell contract, yes: `Exit Lesson` currently sits beside Home/settings in the top-right global utility rail.
+- Future batch should move `Exit Lesson` out of the global utility rail and into the lesson content/header area, because it is local to lesson mode rather than a global utility.
+- Possible placement: right side of the lesson content header near the lesson title/stage pills, or a quieter local action under/near the lesson heading.
+- Keep top-right global area reserved for Home and Settings only.
+
+## 2026-05-11 - Progress Kicker Spacing Follow-Up Intake
+
+- User flagged that Progress header spacing is still off.
+- `WORKOUT LOG` may need to be larger/more visually intentional, similar to the Results `WORKOUT SUMMARY` follow-up.
+- `WORKOUT LOG` should be centered within its reserved label space; current screenshot makes it appear shifted between the left/right arrows.
+- There should be more intentional spacing between the top carousel/kicker row, the page title (`Your progress so far`), selector chip, and metric grid.
+- Future batch should treat Results and Progress kicker rows together so the fixed-label-space contract actually centers text and gives the header enough breathing room.
+
+## 2026-05-11 - Tracker Static Info Highlight Intake
+
+- User flagged that the left-side Workout Tracker info/stats are highlightable even though they should not be.
+- Screenshot shows tracker summary blocks such as `Current Streak`, `Best Streak`, `Workouts`, `Hearts`, and `Stars` behaving visually like interactive/highlightable units.
+- Future batch should remove hover/highlight/action affordances from tracker summary stats unless they get real drill-down destinations.
+- This should follow the static metric rule from ADR-0007: display-only panels do not use hover/lift styling.
+
+## 2026-05-11 - Home Menu Tactical Centering
+
+- User requested a temporary Home menu layout until a fuller design pass happens later.
+- Reordered primary Home actions to `Learn` on the left, `Start Workout` in the center, and `Progress` on the right.
+- Centered the three-button Home menu group under the hero.
+- User explicitly deferred the full Home action design/composition pass.
+- Reran `scripts/check-repo.ps1`; expected docs snapshot drift remains.
+
+## 2026-05-11 - v0.16.0 Publish Close Prepared
+
+- User requested executing the current UI batch, merging to `main`, and ensuring it is live.
+- Bumped `APP_VERSION` to `v0.16.0` in `js/app-core.js`.
+- Moved current `CHANGELOG.md` Unreleased notes into `0.16.0 - 2026-05-11`.
+- Updated `README.md` publish command to use `docs/v13` with the `v0.16.0 app shell UI contract snapshot` label.
+- Published `docs/v13` via `scripts/publish-snapshot.ps1` and marked it latest in `docs/index.html`.
+- Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+- Ran `node --check` on `js/app-core.js`, `js/app-init.js`, `js/app-practice.js`, `js/app-progress.js`, and `js/app-techniques.js`; all syntax checks passed.
+- Next steps in this publish close: commit the batch, merge into `main`, push, then verify GitHub Pages live URLs.

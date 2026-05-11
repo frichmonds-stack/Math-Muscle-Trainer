@@ -296,3 +296,16 @@ Use it for:
 - Adjusted Progress header alignment so purple kicker labels remain centered while home/settings buttons stay anchored right.
 - Ran an iPad polish pass on Progress layouts (selector density, panel spacing, and mastery control fit in 768-1366px).
 - Ran a targeted security hardening pass on Progress dynamic markup by escaping labels before HTML injection in priority/growth/progress and coach-tip rendering.
+
+### 2026-05-11
+
+- Established a shared app-shell UI contract for future polish work: global utilities stay in the top-right rail, carousel/kicker labels use fixed title space, local selectors live with content headers, static metrics do not hover, and actionable tiles keep interactive affordances.
+- Added ADR-0007 to record the app-shell/content-role design decision.
+- Applied the first structural UI patch across Home, Progress, Results, Learn, and multiplication lesson Practice More:
+  - Home primary actions now read as compact app modules rather than stacked web CTA bars.
+  - Results/Progress carousel titles use a stable label track, and Results actions moved into the summary content header.
+  - Progress selectors now sit with content headers; display-only metric panels no longer advertise interaction.
+  - Workout Tracker calendar alignment and heading hierarchy were tightened.
+  - Learn's visible nested background panel was removed so Techniques sits on the app canvas.
+  - Multiplication lesson completion copy is warmer, and Practice More now auto-advances after correct answers.
+- Published the UI system batch as `v0.16.0` in `docs/v13`; `scripts/check-repo.ps1` passes after snapshot publication.

@@ -481,3 +481,11 @@
 - Fetched `origin`, checked out `main`, confirmed it was up to date, and merged the feature branch into `main`.
 - Reran `scripts/check-repo.ps1` on `main`; result: `All repo checks passed.`
 - Reran `node --check` on all root JS modules on `main`; all syntax checks passed.
+
+## 2026-05-11 - v0.16.0 Push and Live Verification
+
+- Pushed `main` to `origin`; push advanced `main` from `b31dccd` to `1ca84cb`.
+- Verified GitHub Pages after deployment:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` returned HTTP 200 and lists `Version 13 - v0.16.0 app shell UI contract snapshot (latest)`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/index.html` returned HTTP 200.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/js/app-core.js` returned HTTP 200 and serves `APP_VERSION = "v0.16.0"`.

@@ -101,3 +101,27 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 - Ran `node --check` on all root JS modules; syntax checks passed.
 - Pushed `main` to GitHub and verified GitHub Pages serving `docs/v15` with `APP_VERSION = "v0.18.0"`.
+
+## 2026-05-13 - First-Pass Home / Today Dashboard
+
+- Replaced the old launcher-style active Home with a native-app-style `Today's Training` dashboard.
+- Restored Home as the startup view while keeping the compact bottom dock for `Train`, `Learn`, and `Progress`.
+- Added a screen-level math-strength mark, one primary `Start Today's Training` CTA, Customize/setup handoff, quick operation tiles, Learn and Progress handoffs, Next Focus fallback copy, and a static training snapshot strip.
+- Wired `Start Today's Training` to a safe existing 5-question multiplication warm-up through the normal setup/session helpers.
+- Wired quick operation tiles to preselect the operation and route into the existing Train/setup flow.
+- Archived the previous Home direction in `docs/design/home-screen-archive-v0.18.0.md`, pointing to the exact `docs/v15` implementation.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Ran `scripts/check-repo.ps1`; expected snapshot-drift failures remain because root app files differ from latest `docs/v15` and no new snapshot was published.
+- Executed the Home follow-up batch: no `Start Today's Training` button, Daily Routine rows now launch 5-correct operation routines, Quick Workout tiles launch direct 20-rep workouts, Home uses the standalone strong-arm mark with old banner copy, and the dock is now `Home / Workout / Learn / Progress`.
+- Removed the Home Next Focus card, changed snapshot metrics to day streak with 7-day flame strip, total reps, accuracy, and average pace, and rebound the Results/Progress red kicker-row carousel arrows.
+
+## 2026-05-13 - v0.19.0 Home Dashboard Publish Batch
+
+- Finished the Home dashboard follow-up polish: larger Novare/banner treatment, tighter Home composition, redesigned Home metric cards, daily-thought tagline rotation, white Daily Routine row text, direct Make 10 lesson handoff, and direct 20-rep Quick Workout starts.
+- Removed the Results `New Workout` action because the persistent dock owns the Workout destination.
+- Removed decorative Practice HUD label icons and the bottom page-position indicator.
+- Changed Results/Progress tracker month summaries from Hearts/Stars to reps and accuracy, removed the reward icons from calendar days, and removed hover affordances from display-only tracker summary cards.
+- Published `docs/v16` as the `v0.19.0` Home dashboard snapshot.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`

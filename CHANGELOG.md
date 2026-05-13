@@ -6,6 +6,23 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.19.0] - 2026-05-13
+
+### Added
+- Added a first-pass Home / Today's Training dashboard with the strong-arm brand mark, Daily Routine checklist, direct Quick Workout tiles, Continue Learning handoff, and Home snapshot metrics.
+- Added a four-item bottom dock for Home, Workout, Learn, and Progress.
+- Added direct-start Home routines: Daily Routine items start 5-correct operation workouts and Quick Workout tiles start 20-rep operation workouts.
+
+### Changed
+- Restored Home as the startup surface and moved About/Settings utilities into the Home banner area.
+- Changed Home snapshot metrics to show day streak with a 7-day flame strip, total reps, accuracy, and average pace.
+- Changed the Home banner tagline into a rotating daily thought set seeded with `Grow your brain & begin your reign.`
+- Changed Continue Learning on Home to open the Make 10 lesson directly.
+- Changed Workout Tracker month summaries from Hearts/Stars to reps and accuracy, and removed reward icons from the calendar.
+- Removed decorative Practice HUD label icons and the bottom page-position indicator.
+- Removed the Results `New Workout` action now that the dock owns the Workout destination.
+- Rebound Results and Progress kicker-row carousel arrows so their controls work again.
+
 ## [0.18.0] - 2026-05-13
 
 ### Changed

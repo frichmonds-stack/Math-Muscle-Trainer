@@ -55,6 +55,15 @@ Last updated: 2026-05-13
 - Root app now opens to the Train/setup surface by default and includes a compact centered rounded training dock for `Train`, `Learn`, and `Progress` instead of relying on a launcher-style home menu as the main navigation.
 - Visual anchors were pulled back from destination/workout buttons; operation symbols and Practice status/HUD cues remain where they carry math/status meaning, while future visual richness should happen at the app, lesson, progress/status, and math-context level.
 - 2026-05-13 publish close bumped runtime version to `v0.18.0`, moved the UI direction notes from `Unreleased` into `CHANGELOG.md`, published `docs/v15`, and prepared the branch for GitHub sync.
+- Root app now has a first-pass Home / Today's Training dashboard and startup lands on Home again. The dashboard has app identity with the standalone strong-arm mark and `Novare Co. presents`, a clickable Daily Routine checklist, direct-start Quick Workout operation tiles, Learn handoff, and a static training snapshot strip.
+- Daily Routine checklist items start 5-correct operation routines and tick off after 5 correct answers for that operation today. Quick Workout operation tiles start direct 20-rep workouts.
+- The bottom dock now reads `Home`, `Workout`, `Learn`, `Progress`; focused-screen top Home/settings buttons are hidden so navigation lives in the dock and Home owns About/Settings.
+- The Home `Next Focus` card was removed. The snapshot now shows day streak with a 7-day animated flame strip, total reps, accuracy, and average pace.
+- Home banner copy now rotates through daily thoughts, including `Grow your brain & begin your reign.`, and Continue Learning opens the Make 10 lesson directly.
+- Results/Progress Workout Tracker month summaries now show workouts, reps, and accuracy; the older Hearts/Stars calendar reward icons were removed from the visible UI.
+- Practice HUD labels no longer carry decorative icons, display-only tracker stats no longer use hover affordances, and the bottom page-position indicator was removed now that the dock owns primary navigation.
+- Results/Progress red kicker-row carousel arrows have direct event bindings again.
+- The previous brand/launcher-style Home is archived by reference in `docs/design/home-screen-archive-v0.18.0.md`; the exact implementation remains in `docs/v15`.
 
 ## Product Direction
 
@@ -108,6 +117,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `docs/v15` as latest.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v15/index.html` returned HTTP 200.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v15/js/app-core.js` served `APP_VERSION = "v0.18.0"`.
+- 2026-05-13 Home dashboard pass ran `node --check` for all root JS modules; all syntax checks passed.
+- 2026-05-13 Home dashboard pass ran a CSS brace sanity check; braces are balanced.
+- 2026-05-13 Home dashboard pass ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for root app files because no new docs snapshot was published.
+- 2026-05-13 Home execution batch reran `node --check` for all root JS modules; all syntax checks passed.
+- 2026-05-13 Home execution batch reran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for root app files because no new docs snapshot was published.
 
 ## Working Tree Note
 

@@ -6,12 +6,13 @@ Use this file for concrete next work. Broader undecided questions belong in `ai/
 
 ## Best Next Batch
 
-1. Manually review the live `docs/v15` UI direction snapshot on Windows desktop and iPad-sized viewports.
-2. Remove or soften the large nested Practice panel background while preserving the problem card, input, HUD, progress bar, and keypad as distinct functional units.
-3. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
-4. Rework Results and Progress kicker spacing together so fixed label tracks center text and leave enough breathing room above titles, selectors, and metric grids.
-5. Remove hover/highlight affordances from display-only Workout Tracker summary stats.
-6. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
+1. Manually review the new root Home / Today's Training dashboard on desktop, iPad-landscape size, narrow/mobile widths, and light mode, especially no-scroll fit and dock clearance.
+2. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
+3. Confirm Quick Workout direct-start defaults should stay at 20 reps per operation.
+4. Decide the long-term learner-facing reward model now that Hearts/Stars are no longer visible tracker metrics.
+5. Remove or soften the large nested Practice panel background while preserving the problem card, input, HUD, progress bar, and keypad as distinct functional units.
+6. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
+7. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
 
 ## Lesson Content
 

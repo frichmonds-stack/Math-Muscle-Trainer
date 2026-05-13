@@ -1,6 +1,6 @@
 # Open Threads
 
-Last updated: 2026-05-12
+Last updated: 2026-05-13
 
 These are unresolved questions. Keep this file decision-focused; put executable work in `ai/tasks/next-actions.md`.
 
@@ -17,11 +17,13 @@ These are unresolved questions. Keep this file decision-focused; put executable 
 - Does the first four-operation mastery scoring model feel fair after real learner data accumulates?
 - Which metrics should carry the most learner-facing weight: accuracy, fluency, consistency, coverage, retention, or difficulty evidence?
 - How should current rank versus best-earned rank be explained to learners?
-- How should rewards explain Hearts and Stars more clearly?
+- What learner-facing rewards, if any, should sit alongside the stronger metric set of streaks, reps, accuracy, pace, and mastery?
 
 ## Onboarding And Adaptation
 
 - What should the first-time onboarding or placement flow look like?
+- Should the new `Today's Training` dashboard stay a simple handoff surface, or grow into a real adaptive daily-routine engine?
+- When multi-operation workouts exist, should Home add a `Do all` CTA that runs the whole Daily Routine checklist in one workout?
 - Which adaptive learning behaviors are explicit roadmap commitments versus idea-bank concepts?
 - How aggressive should difficulty adaptation be for different learner profiles?
 

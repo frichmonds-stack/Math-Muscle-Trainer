@@ -4,7 +4,7 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 
 ## What it does
 
-- Uses a slimmer app-style shell with a separate header band and dedicated Setup, Practice, Results, and Progress screens
+- Uses a slimmer app-style shell with a Home / Today's Training dashboard, separate workout surfaces, and a persistent Home, Workout, Learn, Progress dock
 - Adds a Learn / Techniques mode with linked multiplication lessons for `x1` through `x12` and a linked addition lesson set
 - Includes Learn / Techniques operation navigation for Addition, Multiplication, Subtraction, and Division (with visible placeholders where content is still in progress)
 - Supports operation-based training with Addition, Subtraction, Multiplication, and Division
@@ -16,12 +16,12 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 - Keeps the practice screen minimal with a question timer, workout timer, countdown start, and quick right/wrong feedback
 - Adds a touch-first number pad for iPad/tablet-friendly answering without disabling keyboard input
 - Uses adaptive question weighting to bring back new or missed facts more often
-- Tracks daily star and heart goals with browser-local workout history
+- Tracks daily workouts, reps, accuracy, and streaks with browser-local workout history
 - Captures browser-local answer telemetry so mastery can use accuracy, fluency, coverage, retention, and consistency signals
 - Shows operation mastery through a single cyclic selector (`Overview -> Addition -> Subtraction -> Multiplication -> Division`) with current and best-earned ranks
 - Shows a shared month-view workout tracker calendar across Results and Progress
 - Uses carousel-style Results and Progress screens to reduce scrolling
-- Supports swipe gestures and visible slide-position indicators on carousel screens
+- Supports swipe gestures and fixed-width carousel labels on Results and Progress
 - Applies soft min/max carousel height bounds to reduce layout jumps across different slides
 - Shows Positive Progress before weaker targets so the feedback loop starts with wins
 - Shows operation-aware fact tracking:

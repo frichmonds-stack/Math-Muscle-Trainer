@@ -104,6 +104,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 - 2026-05-12 UI direction implementation ran `node --check` on all root JS modules and a CSS brace sanity check successfully. `scripts/check-repo.ps1` reported expected snapshot drift because root app files differed from latest `docs/v14` until the next snapshot publish.
 - 2026-05-13 publish close ran `scripts/check-repo.ps1` after `docs/v15`; result: `All repo checks passed.`
 - 2026-05-13 publish close ran `node --check` for all root JS modules; all syntax checks passed.
+- GitHub Pages verified live for `v0.18.0` on 2026-05-13:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `docs/v15` as latest.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v15/index.html` returned HTTP 200.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v15/js/app-core.js` served `APP_VERSION = "v0.18.0"`.
 
 ## Working Tree Note
 

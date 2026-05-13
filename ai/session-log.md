@@ -100,3 +100,4 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Published `docs/v15` from the root app and updated `docs/index.html` to mark it latest.
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 - Ran `node --check` on all root JS modules; syntax checks passed.
+- Pushed `main` to GitHub and verified GitHub Pages serving `docs/v15` with `APP_VERSION = "v0.18.0"`.

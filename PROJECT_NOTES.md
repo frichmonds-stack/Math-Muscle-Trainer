@@ -52,7 +52,7 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
   - There is no overall daily start button yet. Each Daily Routine row launches its own operation routine.
   - Daily Routine has `5 Addition`, `5 Subtraction`, `5 Multiplication`, and `5 Division`; each ticks off after 5 correct answers for that operation today.
   - Quick Workout operation tiles start direct 20-rep workouts.
-  - Continue Learning routes to Learn/Techniques.
+  - Continue Learning opens the Make 10 lesson directly.
   - The snapshot strip shows day streak with a 7-day flame strip, total reps, accuracy, and average pace.
   - The bottom dock is `Home / Workout / Learn / Progress`, with Workout and Learn kept in the middle.
 - Strong Home modules to keep testing: app identity header, Today's Routine/Daily 3 card, primary routine CTA, Quick Workout, Continue Learning/Recommended Lesson, Next Focus, Training Snapshot, and a small Mastery Path preview.
@@ -88,6 +88,31 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
 - Use this operation mastery rank chain: `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
 - Keep current-rank and best-earned-rank separate so learners can see both present fluency and earned achievement.
 - Teacher-authored lesson wording is the source of truth; Codex should not invent pedagogy unless asked.
+
+## Home Screen And Training Dashboard Ideas
+
+These ideas came from reviewing patterns in motivational, health/training, and education apps such as Elevate-style skill setup, Fabulous-style routines, Duolingo-style progression paths, Nike Training Club-style programs/routines, Fitbod-style body heat maps, and Brilliant-style streak/momentum surfaces.
+
+- The initial screen should become a `Today` or `Today's Training` dashboard, not a full marketing landing page and not only the workout setup screen.
+- Home should quickly answer: what is this app, what should I do now, what else can I work on, and how am I improving?
+- Strong first-pass Home sections:
+  - App identity header with a compact math-strength mark/logo and short positioning line.
+  - `Today's Routine` card with roughly three daily actions.
+  - Primary CTA such as `Start Today's Training` or `Start Routine`.
+  - `Quick Workout` area for selecting one or more operations.
+  - `Continue Learning` / `Recommended Lesson` card.
+  - `Next Focus` card based on weak spots or missing data.
+  - `Training Snapshot` with streak, reps, rank, and recent progress.
+  - Small `Mastery Path` preview showing progression through arithmetic skills.
+- `Daily 5` concept: a short full-body arithmetic workout, likely five reps from each operation plus possible weak-spot reps. This can become the default warm-up or first routine action.
+- `Daily 3` / routine concept: each day surfaces about three actions, for example Warm Up (`Daily 5`), Focus Set (`weak spots`), and Technique (`continue lesson`).
+- Multi-operation workout setup should eventually allow choosing several operations at once, similar to selecting a training split rather than one isolated skill every time.
+- A Duolingo-like visual pathway could show arithmetic progression, but should be used as a mastery/path preview or Learn/Progression surface rather than making Home only a path.
+- A Fitbod-inspired operation heat map could show readiness/coverage by operation, fact family, or bucket. Example dimensions: Addition, Subtraction, Multiplication, Division; or multiplication facts `x1` through `x12`.
+- Workout-style rep tracking is a strong fit: track reps by operation, fact family, difficulty bucket, workout type, and lesson skill. Reps can provide visual feedback and feed mastery/expertise signals.
+- Graphs and progress trends should exist, but Home should surface only a simple, motivating snapshot; deeper analytics belong in Progress.
+- Eventual lesson formats may include video or audio lessons in addition to text, but this is a later idea and not required for the first Home redesign.
+- The app likely needs a simple icon/logo soon. Strong directions: rounded badge or weight plate containing `+ - x /`; dumbbell with math-symbol plates; or a shield/badge with one clear math cue. Avoid dumbbell-only, calculator-only, busy multi-symbol marks, and mascots unless explicitly chosen later.
 
 ## Idea Bank
 

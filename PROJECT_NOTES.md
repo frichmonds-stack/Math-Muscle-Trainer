@@ -30,6 +30,7 @@ This file is the project's broad working memory. Use it for durable context, des
 - Minimalism is part of the target feel: use restrained, clear, low-clutter UI that still feels tactile, friendly, and app-native. Minimal should not mean empty, cold, boxy, or adult-only.
 - A key visual upgrade is moving from mostly text-based surfaces toward app-like interactive surfaces with math-strength marks, status symbols, and simple pictorial cues, but buttons should remain mostly clean/text-first rather than gaining decorative icons everywhere.
 - Primary app navigation is moving toward a compact centered rounded training dock on iPad/tablet landscape. The dock should hug its content instead of stretching into a full-width phone-style bottom banner.
+- The initial Home experience should not be a generic marketing page or a bare launcher. It should feel like a `Today` training dashboard that identifies the app, gives one clear next action, and previews the main Train/Learn/Progress workflows.
 
 ## Product Priorities
 
@@ -37,11 +38,13 @@ This file is the project's broad working memory. Use it for durable context, des
 - Keep four-operation mastery visible across Addition, Subtraction, Multiplication, and Division.
 - Improve the first-time learner flow so new users can start usefully without understanding every app area.
 - Continue UI polish around the app-shell contract before starting another large redesign.
+- Design and implement a stronger initial Home / Today screen before treating Train-first startup as final.
 
 ## Near-Term Roadmap Shape
 
 - `v0.18.0` published the first UI direction implementation: shared control softening, Train-first startup, compact training dock, and restrained visual-anchor usage.
 - Next UI cleanup: Practice shell container, lesson-local Exit Lesson placement, Results/Progress kicker spacing, and static Tracker metric affordances.
+- Next Home/onboarding design batch: replace the too-bare Train-first landing with a `Today's Training` home surface that includes identity, a daily routine CTA, quick workout entry, learning recommendation, mastery/path preview, and progress snapshot.
 - `v0.19.0` lesson content foundation: fill/review Make 10 spec, convert one teacher-approved lesson into structured lesson data, and decide the first Addition progression path.
 - `v0.20.0` onboarding/mastery clarity: first-time learner starting path, current-rank versus best-earned-rank explanation, and Hearts/Stars reward clarity.
 - Process track: review the AI continuity system and define a written versioning policy before release activity becomes more frequent.
@@ -56,6 +59,31 @@ This file is the project's broad working memory. Use it for durable context, des
 - Use this operation mastery rank chain: `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
 - Keep current-rank and best-earned-rank separate so learners can see both present fluency and earned achievement.
 - Teacher-authored lesson wording is the source of truth; Codex should not invent pedagogy unless asked.
+
+## Home Screen And Training Dashboard Ideas
+
+These ideas came from reviewing patterns in motivational, health/training, and education apps such as Elevate-style skill setup, Fabulous-style routines, Duolingo-style progression paths, Nike Training Club-style programs/routines, Fitbod-style body heat maps, and Brilliant-style streak/momentum surfaces.
+
+- The initial screen should become a `Today` or `Today's Training` dashboard, not a full marketing landing page and not only the workout setup screen.
+- Home should quickly answer: what is this app, what should I do now, what else can I work on, and how am I improving?
+- Strong first-pass Home sections:
+  - App identity header with a compact math-strength mark/logo and short positioning line.
+  - `Today's Routine` card with roughly three daily actions.
+  - Primary CTA such as `Start Today's Training` or `Start Routine`.
+  - `Quick Workout` area for selecting one or more operations.
+  - `Continue Learning` / `Recommended Lesson` card.
+  - `Next Focus` card based on weak spots or missing data.
+  - `Training Snapshot` with streak, reps, rank, and recent progress.
+  - Small `Mastery Path` preview showing progression through arithmetic skills.
+- `Daily 5` concept: a short full-body arithmetic workout, likely five reps from each operation plus possible weak-spot reps. This can become the default warm-up or first routine action.
+- `Daily 3` / routine concept: each day surfaces about three actions, for example Warm Up (`Daily 5`), Focus Set (`weak spots`), and Technique (`continue lesson`).
+- Multi-operation workout setup should eventually allow choosing several operations at once, similar to selecting a training split rather than one isolated skill every time.
+- A Duolingo-like visual pathway could show arithmetic progression, but should be used as a mastery/path preview or Learn/Progression surface rather than making Home only a path.
+- A Fitbod-inspired operation heat map could show readiness/coverage by operation, fact family, or bucket. Example dimensions: Addition, Subtraction, Multiplication, Division; or multiplication facts `x1` through `x12`.
+- Workout-style rep tracking is a strong fit: track reps by operation, fact family, difficulty bucket, workout type, and lesson skill. Reps can provide visual feedback and feed mastery/expertise signals.
+- Graphs and progress trends should exist, but Home should surface only a simple, motivating snapshot; deeper analytics belong in Progress.
+- Eventual lesson formats may include video or audio lessons in addition to text, but this is a later idea and not required for the first Home redesign.
+- The app likely needs a simple icon/logo soon. Strong directions: rounded badge or weight plate containing `+ - x /`; dumbbell with math-symbol plates; or a shield/badge with one clear math cue. Avoid dumbbell-only, calculator-only, busy multi-symbol marks, and mascots unless explicitly chosen later.
 
 ## Idea Bank
 
@@ -98,6 +126,13 @@ These ideas are not committed roadmap items unless promoted by the user.
   - Automaticity Index.
 
 ## Recent Session Memory
+
+### 2026-05-13
+
+- Captured initial Home screen research and design direction after reviewing motivational, health/training, and education-app patterns.
+- Noted that Train-first startup is too bare as an initial landing experience because it gives little app identity or workflow guidance.
+- Proposed a `Today's Training` dashboard model with daily routine CTA, Quick Workout, Continue Learning, Next Focus, Mastery Path preview, Training Snapshot, streaks, reps, and future operation heat maps.
+- Added `Daily 5`, `Daily 3`, multi-operation workout selection, operation/fact-family rep tracking, and logo/icon exploration to durable project memory.
 
 ### 2026-05-12
 

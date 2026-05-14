@@ -1,18 +1,19 @@
 # Next Actions
 
-Last updated: 2026-05-13
+Last updated: 2026-05-14
 
 Use this file for concrete next work. Broader undecided questions belong in `ai/open-threads.md`; speculative ideas belong in `PROJECT_NOTES.md`.
 
 ## Best Next Batch
 
-1. Manually review the new root Home / Today's Training dashboard on desktop, iPad-landscape size, narrow/mobile widths, and light mode, especially no-scroll fit and dock clearance.
-2. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
-3. Confirm Quick Workout direct-start defaults should stay at 20 reps per operation.
-4. Decide the long-term learner-facing reward model now that Hearts/Stars are no longer visible tracker metrics.
-5. Remove or soften the large nested Practice panel background while preserving the problem card, input, HUD, progress bar, and keypad as distinct functional units.
-6. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
-7. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
+1. Manually review the polished Home dashboard on iPad landscape, desktop, mobile/narrow widths, and light mode, especially title spacing, Quick 5 row fit, snapshot graph fit, and dock clearance.
+2. Manually retest Practice with the built-in keypad on keyboardless student devices, especially iPad/tablet landscape and portrait, to confirm the compact keypad fits and the quieter surface still feels usable.
+3. Manually test hidden adaptive Home quick starts with new-user/no-data state and with existing progress data for each operation.
+4. Manually review Workout Tracker in Results and Progress to confirm the left summary column matches calendar height and static stats no longer look highlightable.
+5. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
+6. Decide the long-term learner-facing reward model now that Hearts/Stars are no longer visible tracker metrics.
+7. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
+8. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
 
 ## Lesson Content
 

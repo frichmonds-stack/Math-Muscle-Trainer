@@ -6,6 +6,24 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-05-14
+
+### Added
+- Added hidden adaptive Home quick-start settings so Quick 5 Warmup and 1 Minute Workout start easy for new users and quietly build from saved performance data.
+- Added a 7-day Total Reps line graph and a visual Accuracy meter to the Home training snapshot.
+
+### Changed
+- Refined Home copy and spacing: Daily Routine now presents `Quick 5 Warmup`, Quick Workout now presents `1 Minute Workout`, and the learning card now says `Keep Learning`, `Pick up a new technique.`, and `Learn`.
+- Italicized the Home daily thought and adjusted Home card spacing/icons for a calmer dashboard fit.
+- Changed Home snapshot metrics to remove Average Pace and show Workout Streak, Total Reps, and Accuracy with richer visuals.
+- Softened Practice visual containment so the problem/input remain primary while HUD and keypad controls read quieter.
+- Changed Workout Tracker summary stats from card-like panels to static metric rows and stretched the left column to match the calendar height.
+
+### Fixed
+- Fixed Practice layout on touch-keypad devices by making the built-in number pad a compact control cluster that fits the app frame more reliably.
+- Completed Quick 5 Warmup rows now show `Complete` and use a full-row completed state instead of only changing the tick icon.
+- Dismissible streak banners can now be dismissed by clicking or tapping the banner.
+
 ## [0.19.0] - 2026-05-13
 
 ### Added

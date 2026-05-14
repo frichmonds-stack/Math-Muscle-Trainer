@@ -1,12 +1,12 @@
 # Current State
 
-Last updated: 2026-05-13
+Last updated: 2026-05-14
 
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.18.0` on `main`.
-- Latest docs snapshot is `docs/v15`, marked latest in `docs/index.html`.
+- Root app is at `v0.20.0` on `main`.
+- Latest docs snapshot is `docs/v17`, marked latest in `docs/index.html`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
 - `ai/task-map.md` routes future AI sessions from work type to relevant files, pre-reads, docs, and risks.
@@ -64,6 +64,15 @@ Last updated: 2026-05-13
 - Practice HUD labels no longer carry decorative icons, display-only tracker stats no longer use hover affordances, and the bottom page-position indicator was removed now that the dock owns primary navigation.
 - Results/Progress red kicker-row carousel arrows have direct event bindings again.
 - The previous brand/launcher-style Home is archived by reference in `docs/design/home-screen-archive-v0.18.0.md`; the exact implementation remains in `docs/v15`.
+- Practice now uses a compact capped-width touch keypad and tighter coarse-pointer tablet spacing so keyboardless learners can reach the built-in number pad without changing the fixed app-frame model.
+- Home Daily Routine is now framed as `Quick 5 Warmup`, has no header icon, keeps routine labels on one line, and completed rows show `Complete` with a full-row completed state.
+- Home Quick Workout is now presented as `1 Minute Workout`; both Quick 5 Warmup and 1 Minute Workout use hidden adaptive settings based on saved local performance data, with easy defaults for new users.
+- Home Keep Learning now uses `Keep Learning`, `Pick up a new technique.`, a compact inline `Learn` button, no header icon, and no lesson-specific supporting sentence until lesson content is more complete.
+- Home daily thought is italicized.
+- Home snapshot now removes Average Pace and shows Workout Streak, Total Reps with a 7-day rectangular column graph, and Accuracy with a simplified horizontal fill meter.
+- Practice visual containment is softened so the outer panel, HUD cards, and keypad controls read quieter while the problem card and answer input remain the main focus.
+- Workout Tracker summary stats now use static metric rows instead of highlightable card-like panels, and the left summary column stretches to the calendar height.
+- Streak banners can be dismissed by clicking or tapping the banner.
 
 ## Product Direction
 
@@ -122,6 +131,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 - 2026-05-13 Home dashboard pass ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for root app files because no new docs snapshot was published.
 - 2026-05-13 Home execution batch reran `node --check` for all root JS modules; all syntax checks passed.
 - 2026-05-13 Home execution batch reran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for root app files because no new docs snapshot was published.
+- 2026-05-14 touch-keypad fix ran `node --check` for all root JS modules; all syntax checks passed.
+- 2026-05-14 touch-keypad fix ran a CSS brace sanity check; braces are balanced.
+- 2026-05-14 touch-keypad fix ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported because no new docs snapshot was published.
+- 2026-05-14 UI polish batch ran `node --check` for all root JS modules; all syntax checks passed.
+- 2026-05-14 UI polish batch ran a CSS brace sanity check; braces are balanced.
+- 2026-05-14 UI polish batch ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for `index.html`, `styles.css`, `js/app-core.js`, `js/app-init.js`, and `js/app-progress.js` because the user requested no publish.
+- 2026-05-14 UI polish batch could not use the in-app browser screenshot workflow because the required Node REPL browser tool was not exposed in this session; manual iPad/browser review remains needed.
+- 2026-05-14 publish close bumped runtime version to `v0.20.0`, moved UI polish notes into `CHANGELOG.md`, published `docs/v17`, updated README, and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 
 ## Working Tree Note
 

@@ -125,3 +125,37 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Published `docs/v16` as the `v0.19.0` Home dashboard snapshot.
 - Ran `node --check` on all root JS modules; syntax checks passed.
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+
+## 2026-05-14 - Touch Keypad Reachability Fix
+
+- Student testing found keyboardless devices could not use Practice when the built-in number pad extended below the fixed app frame and could not be scrolled into view.
+- Changed the touch keypad into a compact, capped-width control cluster instead of letting it dominate the Practice screen.
+- Added coarse-pointer tablet scaling for Practice spacing, problem card height, answer input height, and keypad button height so the keypad has a better chance of fitting inside the fixed app frame.
+- Updated `ai/current-state.md` to correct the actual latest root/docs state to `v0.19.0` and `docs/v16`.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported because no new docs snapshot was published.
+
+## 2026-05-14 - Home, Practice, And Tracker UI Polish
+
+- Updated Home card copy: `Quick 5 Warmup`, `1 Minute Workout`, and `Keep Learning` with `Pick up a new technique.` and a `Learn` button.
+- Added hidden adaptive Home quick-start settings based on local progress data. New users start easy; Quick 5 uses 5-correct routines and 1 Minute Workout starts timed one-minute operation workouts.
+- Reworked the Home snapshot into Workout Streak with a 7-day strip, Total Reps with a 7-day line graph, and Accuracy with an intensity-based visual. Average Pace was removed from Home.
+- Made Quick 5 completed rows show `Complete` with a full-row completed state, and made streak banners dismiss on click/tap.
+- Softened Practice containment by removing the outer practice panel surface and quieting HUD/keypad styling.
+- Reworked Workout Tracker summary stats into static metric rows and stretched the left summary column to the calendar height.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported because the user requested no publish.
+- Browser screenshot review was not run because the required in-app browser Node REPL tool was not exposed in this session.
+- Follow-up Home polish italicized the daily thought, changed the Quick 5 mark to a CSS-drawn sunrise, replaced the emoji lightbulb with a style-matched CSS mark, tightened the Quick 5 card gap, added breathing room to the 1 Minute Workout card header, and nudged Home content to use more vertical space above the dock.
+
+## 2026-05-14 - v0.20.0 UI Polish Publish Close
+
+- Removed Home card header icons after visual review; Keep Learning now places a compact `Learn` button inline beside `Pick up a new technique.`
+- Changed the Home snapshot Total Reps visual from a line graph to rectangular columns and changed Accuracy to a simpler horizontal fill meter.
+- Bumped `APP_VERSION` to `v0.20.0`, moved UI polish notes from `Unreleased` into the `0.20.0` changelog heading, and updated README feature/publish notes.
+- Published `docs/v17` as the `v0.20.0 UI polish snapshot`.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`

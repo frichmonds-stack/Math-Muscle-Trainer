@@ -4,7 +4,7 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 
 ## What it does
 
-- Uses a slimmer app-style shell with a Home / Today's Training dashboard, separate workout surfaces, and a persistent Home, Workout, Learn, Progress dock
+- Uses a slimmer app-style shell with a Home dashboard, Quick 5 Warmup, 1 Minute Workout quick starts, and a persistent Home, Workout, Learn, Progress dock
 - Adds a Learn / Techniques mode with linked multiplication lessons for `x1` through `x12` and a linked addition lesson set
 - Includes Learn / Techniques operation navigation for Addition, Multiplication, Subtraction, and Division (with visible placeholders where content is still in progress)
 - Supports operation-based training with Addition, Subtraction, Multiplication, and Division
@@ -15,8 +15,8 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 - Supports positive and negative integer multiplication while keeping the practice range magnitude-based
 - Keeps the practice screen minimal with a question timer, workout timer, countdown start, and quick right/wrong feedback
 - Adds a touch-first number pad for iPad/tablet-friendly answering without disabling keyboard input
-- Uses adaptive question weighting to bring back new or missed facts more often
-- Tracks daily workouts, reps, accuracy, and streaks with browser-local workout history
+- Uses adaptive question weighting to bring back new or missed facts more often, plus hidden adaptive Home quick starts that begin easy for new users
+- Tracks daily workouts, reps, accuracy, and streaks with browser-local workout history and a Home snapshot for Workout Streak, Total Reps, and Accuracy
 - Captures browser-local answer telemetry so mastery can use accuracy, fluency, coverage, retention, and consistency signals
 - Shows operation mastery through a single cyclic selector (`Overview -> Addition -> Subtraction -> Multiplication -> Division`) with current and best-earned ranks
 - Shows a shared month-view workout tracker calendar across Results and Progress
@@ -76,7 +76,7 @@ The latest hosted build is linked from `docs/index.html`.
 To publish a new static snapshot after updating the root app, run:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 14 -Label "v0.17.0 app viewport frame snapshot"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 17 -Label "v0.20.0 UI polish snapshot"
 ```
 
 ## Files

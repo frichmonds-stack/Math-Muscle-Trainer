@@ -50,10 +50,10 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
 - The first-pass dashboard restores Home as the startup surface and keeps the dock as persistent navigation.
 - Current first-pass behavior:
   - There is no overall daily start button yet. Each Daily Routine row launches its own operation routine.
-  - Daily Routine has `5 Addition`, `5 Subtraction`, `5 Multiplication`, and `5 Division`; each ticks off after 5 correct answers for that operation today.
-  - Quick Workout operation tiles start direct 20-rep workouts.
-  - Continue Learning opens the Make 10 lesson directly.
-  - The snapshot strip shows day streak with a 7-day flame strip, total reps, accuracy, and average pace.
+  - Daily Routine is framed as `Quick 5 Warmup` with `5 Addition`, `5 Subtraction`, `5 Multiplication`, and `5 Division`; each row shows `Complete` after 5 correct answers for that operation today.
+  - 1 Minute Workout operation tiles start direct timed workouts with hidden adaptive difficulty.
+  - Keep Learning opens the Make 10 lesson directly for now.
+  - The snapshot strip shows Workout Streak, Total Reps with a 7-day column graph, and Accuracy with a horizontal meter.
   - The bottom dock is `Home / Workout / Learn / Progress`, with Workout and Learn kept in the middle.
 - Strong Home modules to keep testing: app identity header, Today's Routine/Daily 3 card, primary routine CTA, Quick Workout, Continue Learning/Recommended Lesson, Next Focus, Training Snapshot, and a small Mastery Path preview.
 - Future dashboard decisions:
@@ -68,14 +68,19 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
 - The app likely needs a simple icon/logo soon. Strong directions: rounded badge or weight plate containing `+ - x /`, dumbbell with math-symbol plates, or a shield/badge with one clear math cue. Avoid dumbbell-only, calculator-only, busy multi-symbol marks, and mascots unless explicitly chosen later.
 - Eventual lesson formats may include video or audio lessons in addition to text, but this is a later idea and not required for the first Home redesign.
 - The previous brand/launcher-style Home is archived in `docs/design/home-screen-archive-v0.18.0.md` and exactly preserved in `docs/v15`.
+- Student testing on 2026-05-14 showed keyboardless devices could not use Practice when the touch keypad extended below the fixed app frame; Practice should keep the built-in keypad compact enough to fit the app frame on touch devices.
+- 2026-05-14 UI polish direction: Home quick starts should use hidden, data-driven difficulty selection with easy defaults for new users; Quick 5 Warmup stays 5 correct reps, while Quick Workout becomes a 1 Minute Workout. Avoid adding learner-facing training-level labels or extra choices without explicit approval.
+- 2026-05-14 UI polish direction: Home snapshot should emphasize Workout Streak, Total Reps with a 7-day column graph, and Accuracy with a simple visual meter. Average Pace is removed from Home for now.
+- 2026-05-14 UI polish direction: Practice and Workout Tracker should avoid nested/card-like surfaces for static information. Static stats should not look hoverable or clickable, and Practice should keep the problem/input as the main visual focus.
 
 ## Near-Term Roadmap Shape
 
 - `v0.18.0` published the first UI direction implementation: shared control softening, Train-first startup, compact training dock, and restrained visual-anchor usage.
 - Next UI cleanup: Practice shell container, lesson-local Exit Lesson placement, Results/Progress kicker spacing, and static Tracker metric affordances.
 - Next Home/onboarding design batch: review the new `Today's Training` home surface, then decide the daily routine default, quick workout behavior, learning recommendation, mastery/path preview, and progress snapshot density.
-- `v0.19.0` lesson content foundation: fill/review Make 10 spec, convert one teacher-approved lesson into structured lesson data, and decide the first Addition progression path.
-- `v0.20.0` onboarding/mastery clarity: first-time learner starting path, current-rank versus best-earned-rank explanation, and clearer metric/reward language.
+- `v0.20.0` published the Home/Practice/Tracker UI polish batch with hidden adaptive quick starts and `docs/v17`.
+- Next lesson content foundation: fill/review Make 10 spec, convert one teacher-approved lesson into structured lesson data, and decide the first Addition progression path.
+- Later onboarding/mastery clarity: first-time learner starting path, current-rank versus best-earned-rank explanation, and clearer metric/reward language.
 - Process track: review the AI continuity system and define a written versioning policy before release activity becomes more frequent.
 
 ## Durable Decisions

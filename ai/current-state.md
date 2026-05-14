@@ -149,6 +149,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 - `v0.20.1` live cleanup ran `node --check` for all root JS modules; syntax checks passed.
 - `v0.20.1` live cleanup ran a CSS brace sanity check; braces are balanced.
 - `v0.20.1` live cleanup ran `scripts/check-repo.ps1` after `docs/live`; result: `All repo checks passed.`
+- `v0.20.1` live cleanup pushed commit `98003d3` to `main` and verified GitHub Pages live:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.1 live cleanup`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.1"`.
 
 ## Working Tree Note
 

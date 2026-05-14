@@ -6,6 +6,19 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.1] - 2026-05-14
+
+### Added
+- Added a rolling `docs/live` publishing workflow for routine internet updates without creating a new numbered snapshot.
+
+### Changed
+- Changed repo checks to accept `docs/live` as the latest live build while keeping numbered `docs/v*` folders as preserved snapshots.
+- Refactored hidden Home quick-start tuning values into named constants for easier future adjustment.
+
+### Removed
+- Removed stale Home render paths and element hooks for old Home calendar/stat widgets that are no longer present.
+- Removed unused Home header icon CSS after the Home card icons were dropped.
+
 ## [0.20.0] - 2026-05-14
 
 ### Added

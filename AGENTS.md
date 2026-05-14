@@ -14,7 +14,7 @@ Project guidance for Codex and other AI coding sessions in this repo.
   - `js/app-progress.js` - progress analytics, trackers, records, carousel behavior.
   - `js/app-techniques.js` - Learn / Techniques lessons.
   - `js/app-init.js` - startup rendering and event binding.
-- Published static snapshots live under `docs/v*`; `docs/index.html` marks the latest snapshot.
+- The rolling live GitHub Pages build lives under `docs/live`; preserved static snapshots live under `docs/v*`; `docs/index.html` marks the current live build and lists preserved snapshots.
 - Project memory lives in `PROJECT_NOTES.md` and the `ai/` continuity files.
 - Current product name is `Math Muscle Trainer`; avoid reintroducing prior product branding except when discussing external/manual rename history.
 
@@ -41,7 +41,8 @@ Before finishing a coding session:
    - `README.md` for user-facing features, run/check/publish steps, or repo structure.
    - `CHANGELOG.md` and `APP_VERSION` for user-visible behavior or releases.
    - `PROJECT_NOTES.md` for broader project memory, testing feedback, or backlog shifts.
-   - `docs/index.html` and `docs/v*` via `scripts/publish-snapshot.ps1` when publishing a new GitHub Pages snapshot.
+   - `docs/index.html` and `docs/live` via `scripts/publish-live.ps1` for routine live updates.
+   - `docs/index.html` and `docs/v*` via `scripts/publish-snapshot.ps1` only for preserved numbered snapshots.
 3. Update AI continuity:
    - `ai/current-state.md` with the new implementation state.
    - `ai/session-log.md` with a dated entry.
@@ -49,7 +50,7 @@ Before finishing a coding session:
    - `ai/open-threads.md` if questions were answered or new ones appeared.
 4. If a lasting decision was made, add or update an ADR under `docs/decisions/`.
 5. For release/publish work, or when the user asks for changes to be live:
-   - Run `scripts/check-repo.ps1` after publishing the snapshot.
+   - Run `scripts/check-repo.ps1` after publishing `docs/live` or a numbered snapshot.
    - Check `git status --short` and `git remote -v`.
    - Commit and push only when the user requested or approved publishing.
    - Verify the GitHub Pages/live URL when network access and deployment timing allow.
@@ -77,7 +78,13 @@ python -m http.server 8000
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 ```
 
-- Publish a new docs snapshot after root app changes:
+- Publish the rolling live build after routine root app changes:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-live.ps1 -Label "v0.20.1 live cleanup"
+```
+
+- Publish a preserved numbered docs snapshot only for significant milestones or when explicitly requested:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 10 -Label "v0.13.0 feature snapshot"
@@ -93,7 +100,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 - Prefer small, focused functions and existing helpers over new abstractions.
 - Keep user-facing copy consistent with the workout/training language.
 - Use ASCII in source where practical; use escapes such as `\u00f7` for special symbols when centralizing display text.
-- Do not edit archived `docs/v*` snapshots manually except through the snapshot publishing flow or a targeted release fix.
+- Do not edit archived `docs/v*` snapshots manually except through the snapshot publishing flow or a targeted release fix. Routine live updates should overwrite `docs/live` through `scripts/publish-live.ps1`.
 
 ## Lesson Content Workflow
 

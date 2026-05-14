@@ -13,7 +13,8 @@ Use this file for concrete next work. Broader undecided questions belong in `ai/
 5. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
 6. Decide the long-term learner-facing reward model now that Hearts/Stars are no longer visible tracker metrics.
 7. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
-8. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
+8. Do a dedicated stale Home CSS prune for old launcher-era selectors (`home-launcher`, `home-menu-row`, `daily-widget`, and related legacy classes) after checking they are not used by any archived/current root UI paths.
+9. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
 
 ## Lesson Content
 
@@ -41,9 +42,11 @@ Use this file for concrete next work. Broader undecided questions belong in `ai/
 ## Process And Release
 
 1. Add a tiny browser smoke-test workflow for Home -> Setup -> Practice and Learn -> lesson -> focused workout.
-2. Review any remaining GitHub UI metadata and decide whether to add the live Pages URL to `README.md`.
-3. Review the AI continuity infrastructure for duplication, startup friction, and whether each file still has a clear job.
-4. Decide and document a versioning policy for pre-`1.0.0` releases, including when to bump minor versus patch.
-5. Audit current UI controls against `docs/design/component-system.md` before the first CSS alignment batch.
-6. Keep using `scripts/check-repo.ps1` before snapshot publishing.
-7. When publishing root app changes, use `scripts/publish-snapshot.ps1`, update `CHANGELOG.md`, bump `APP_VERSION`, run checks, then verify GitHub Pages before claiming the site is live.
+2. Plan snapshot pruning now that `docs/live` is the rolling current build. Keep meaningful milestones such as `v17`, lesson expansion, and major UI direction snapshots; remove low-value iterative snapshots only after confirming no shared links are needed.
+3. Review any remaining GitHub UI metadata and decide whether to add the live Pages URL to `README.md`.
+4. Review the AI continuity infrastructure for duplication, startup friction, and whether each file still has a clear job.
+5. Decide and document a versioning policy for pre-`1.0.0` releases, including when to bump minor versus patch.
+6. Audit current UI controls against `docs/design/component-system.md` before the first CSS alignment batch.
+7. Keep using `scripts/check-repo.ps1` before publishing.
+8. For routine live updates, bump patch version, update `CHANGELOG.md`, run `scripts/publish-live.ps1`, run checks, commit/push, then verify GitHub Pages `/live/` before claiming the site is live.
+9. For preserved milestone snapshots, use `scripts/publish-snapshot.ps1` only when a numbered archive is explicitly wanted.

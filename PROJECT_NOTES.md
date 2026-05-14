@@ -17,6 +17,7 @@ This file is the project's broad working memory. Use it for durable context, des
 - Project docs: `README.md`, `CHANGELOG.md`, `AGENTS.md`, `PROJECT_NOTES.md`, and `ai/`.
 - Stable UI direction lives in `docs/design/ui-direction.md`; reusable component roles live in `docs/design/component-system.md`; the current implemented button/control baseline lives in `docs/design/current-button-ui.md`.
 - Published snapshots live in `docs/v*`; `docs/index.html` marks the latest GitHub Pages snapshot.
+- Routine live GitHub Pages updates now use rolling `docs/live/`; preserved numbered `docs/v*` snapshots are for milestones or explicit archive requests.
 - Hosting is set up through GitHub Pages from `main`.
 
 ## Current Design Direction
@@ -79,6 +80,7 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
 - Next UI cleanup: Practice shell container, lesson-local Exit Lesson placement, Results/Progress kicker spacing, and static Tracker metric affordances.
 - Next Home/onboarding design batch: review the new `Today's Training` home surface, then decide the daily routine default, quick workout behavior, learning recommendation, mastery/path preview, and progress snapshot density.
 - `v0.20.0` published the Home/Practice/Tracker UI polish batch with hidden adaptive quick starts and `docs/v17`.
+- `v0.20.1` added the rolling `docs/live` publishing flow, documented ADR-0008, and published the post-release cleanup to live without creating `docs/v18`.
 - Next lesson content foundation: fill/review Make 10 spec, convert one teacher-approved lesson into structured lesson data, and decide the first Addition progression path.
 - Later onboarding/mastery clarity: first-time learner starting path, current-rank versus best-earned-rank explanation, and clearer metric/reward language.
 - Process track: review the AI continuity system and define a written versioning policy before release activity becomes more frequent.
@@ -93,6 +95,8 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
 - Use this operation mastery rank chain: `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
 - Keep current-rank and best-earned-rank separate so learners can see both present fluency and earned achievement.
 - Teacher-authored lesson wording is the source of truth; Codex should not invent pedagogy unless asked.
+- Routine "make it live" requests should update `docs/live` with a patch version. Create a numbered `docs/v*` snapshot only for significant milestones or when explicitly requested.
+- Future snapshot cleanup should prune low-value old `docs/v*` folders only after confirming which shared URLs or milestones still matter.
 
 ## Home Screen And Training Dashboard Ideas
 

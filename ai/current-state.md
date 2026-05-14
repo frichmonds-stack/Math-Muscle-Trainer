@@ -5,8 +5,9 @@ Last updated: 2026-05-14
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.20.0` on `main`.
-- Latest docs snapshot is `docs/v17`, marked latest in `docs/index.html`.
+- Root app is at `v0.20.1` on `main`.
+- Current live docs build is `docs/live`, marked latest in `docs/index.html`.
+- Latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
 - `ai/task-map.md` routes future AI sessions from work type to relevant files, pre-reads, docs, and risks.
@@ -22,7 +23,7 @@ Last updated: 2026-05-14
 - Division tracker cards now start divisor isolation workouts across the full quotient range.
 - Operation display symbols are centralized; division stores `/` in fact keys and displays `\u00f7`.
 - Version checks now compare `APP_VERSION` with the latest released `CHANGELOG.md` heading.
-- Repo-native release helpers exist in `scripts/`.
+- Repo-native release helpers exist in `scripts/`: `publish-live.ps1` updates rolling `docs/live`, while `publish-snapshot.ps1` creates preserved numbered `docs/v*` snapshots.
 - Browser-local progress now includes capped answer-level telemetry (`answerTelemetry`) with operation, fact key, skill bucket, difficulty band, correctness/skipped state, response time, timestamp/date, session id, session source, and session position.
 - Progress now has an Operation Mastery slide showing Addition, Subtraction, Multiplication, and Division ranks using `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
 - Initial mastery scoring combines accuracy, fluency, coverage, retention, consistency, and difficulty evidence.
@@ -73,6 +74,8 @@ Last updated: 2026-05-14
 - Practice visual containment is softened so the outer panel, HUD cards, and keypad controls read quieter while the problem card and answer input remain the main focus.
 - Workout Tracker summary stats now use static metric rows instead of highlightable card-like panels, and the left summary column stretches to the calendar height.
 - Streak banners can be dismissed by clicking or tapping the banner.
+- `v0.20.1` live cleanup removed stale Home element hooks/render paths for old Home calendar/stat widgets, pulled hidden Home adaptive thresholds/ranges into named constants, removed CSS for the discarded Home header icon marks, and published the rolling `docs/live` build.
+- ADR-0008 records the rolling live publishing channel decision: routine internet updates overwrite `docs/live` with patch versions; numbered `docs/v*` snapshots are for milestones or explicit archive requests.
 
 ## Product Direction
 
@@ -143,6 +146,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists Version 17 / `v0.20.0`.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v17/` returned HTTP 200.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v17/js/app-core.js` served `APP_VERSION = "v0.20.0"`.
+- `v0.20.1` live cleanup ran `node --check` for all root JS modules; syntax checks passed.
+- `v0.20.1` live cleanup ran a CSS brace sanity check; braces are balanced.
+- `v0.20.1` live cleanup ran `scripts/check-repo.ps1` after `docs/live`; result: `All repo checks passed.`
 
 ## Working Tree Note
 

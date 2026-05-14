@@ -59,7 +59,7 @@ Run the lightweight repo checks before publishing a snapshot:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 ```
 
-The check validates duplicate IDs, script references, release/version drift, stale `docs/` latest labels, and whether the latest docs snapshot matches the root app files.
+The check validates duplicate IDs, script references, release/version drift, stale `docs/` latest labels, and whether the latest live docs build matches the root app files.
 
 ## Publish on the internet
 
@@ -73,11 +73,19 @@ This repo is prepared for GitHub Pages using the `docs/` folder.
 
 The latest hosted build is linked from `docs/index.html`.
 
-To publish a new static snapshot after updating the root app, run:
+For routine internet updates, publish the current root app to the rolling live build:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-live.ps1 -Label "v0.20.1 live cleanup"
+```
+
+To preserve a milestone as a numbered static snapshot, run:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 17 -Label "v0.20.0 UI polish snapshot"
 ```
+
+Use `docs/live/` for normal "make it live" updates. Use `docs/v*` snapshots only for significant milestones or when a preserved archive is explicitly wanted.
 
 ## Files
 

@@ -160,3 +160,24 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran a CSS brace sanity check; braces are balanced.
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 - Pushed `main` to GitHub and verified GitHub Pages serving Version 17 / `v0.20.0`, including `v17/` and `v17/js/app-core.js`.
+
+## 2026-05-14 - Post-Release Optimization Pass
+
+- Removed stale Home element references and render branches for old Home calendar/stat widgets that no longer exist in `index.html`.
+- Pulled hidden Home adaptive quick-start thresholds, recent-answer limits, difficulty bands, and factor ranges into named constants in `js/app-init.js`.
+- Removed unused CSS for the discarded Home header icon mark classes.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported because the cleanup has not been published to a new `docs/v*` snapshot.
+
+## 2026-05-14 - v0.20.1 Rolling Live Publishing Flow
+
+- User chose a rolling live build workflow with patch versions for routine internet updates and preserved numbered `docs/v*` snapshots only for significant milestones or explicit archive requests.
+- Added ADR-0008 for the rolling `docs/live` publishing channel.
+- Added `scripts/publish-live.ps1` to copy root app files into `docs/live` and mark the live build latest in `docs/index.html`.
+- Updated `scripts/check-repo.ps1` so the latest marker can point to `docs/live`; when live is latest, checks compare root app files against `docs/live`.
+- Updated AGENTS, README, `PROJECT_NOTES.md`, `ai/task-map.md`, `ai/current-state.md`, and `ai/tasks/next-actions.md` for the new live-vs-snapshot release flow and logged future snapshot pruning.
+- Bumped runtime version to `v0.20.1`, released the cleanup notes in `CHANGELOG.md`, and published `docs/live` with label `v0.20.1 live cleanup`.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`

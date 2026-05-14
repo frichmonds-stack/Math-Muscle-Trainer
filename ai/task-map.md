@@ -186,22 +186,26 @@ Use this map to route future Codex/GPT sessions to the right files before editin
 
 1. Relevant source files
    - `scripts/check-repo.ps1` - repo consistency checks.
+   - `scripts/publish-live.ps1` - copies root app into rolling `docs/live` and updates `docs/index.html`.
    - `scripts/publish-snapshot.ps1` - copies root app into `docs/v*` and updates `docs/index.html`.
-   - `docs/index.html` - snapshot index and latest marker.
-   - `docs/v*` - published static snapshots.
+   - `docs/index.html` - live build link, preserved snapshot index, and latest marker.
+   - `docs/live` - current rolling live GitHub Pages build.
+   - `docs/v*` - preserved static snapshots.
    - `js/app-core.js` and `CHANGELOG.md` - version consistency.
 2. Related docs or ADRs
    - `README.md`
    - `CHANGELOG.md`
    - `docs/decisions/ADR-0002-project-rename-to-math-muscle-trainer.md`
+   - `docs/decisions/ADR-0008-live-publishing-channel.md`
 3. Read before editing
    - `README.md` publish/check instructions
-   - `Get-AppVersion` logic in both scripts
+   - `Get-AppVersion` logic in the publish scripts
    - Latest release heading in `CHANGELOG.md`
 4. Common risks or things not to break
    - `APP_VERSION` and latest released changelog heading must match.
    - Only one docs index entry should be marked latest.
-   - Latest docs snapshot should match root app files after publishing.
+   - If `docs/live` is marked latest, it should match root app files after publishing.
+   - Numbered `docs/v*` snapshots are preserved archives; do not create them for routine live updates unless explicitly requested.
    - Do not manually edit archived snapshots except for targeted release fixes.
 
 ## AI Continuity Files

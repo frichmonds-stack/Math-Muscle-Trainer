@@ -102,15 +102,31 @@ try {
     $versionDirs = Get-ChildItem -Path "docs" -Directory |
       Where-Object { $_.Name -match '^v(\d+)$' } |
       Sort-Object { [int]($_.Name.Substring(1)) }
+    $liveDir = Join-Path $RepoRoot "docs/live"
+    $latestLiveLink = [regex]::Match($docsIndex, '<a href="\./live/">[^<]*\(latest\)')
+    $latestVersionLink = [regex]::Match($docsIndex, '<a href="\./(v\d+)/">[^<]*\(latest\)')
+
     if ($versionDirs.Count) {
       $latestDir = $versionDirs | Select-Object -Last 1
-      $latestLink = [regex]::Match($docsIndex, '<a href="\./(v\d+)/">[^<]*\(latest\)')
-      if (!$latestLink.Success) {
-        Add-Failure "docs/index.html does not mark a version link as latest."
-      } elseif ($latestLink.Groups[1].Value -ne $latestDir.Name) {
-        Add-Failure "docs latest marker points to $($latestLink.Groups[1].Value), expected $($latestDir.Name)."
+      if ($latestVersionLink.Success -and $latestVersionLink.Groups[1].Value -ne $latestDir.Name) {
+        Add-Failure "docs latest version marker points to $($latestVersionLink.Groups[1].Value), expected $($latestDir.Name)."
       }
+    }
 
+    $latestDir = $null
+    if ($latestLiveLink.Success) {
+      if (!(Test-Path -LiteralPath $liveDir)) {
+        Add-Failure "docs/index.html marks live as latest but docs/live is missing."
+      } else {
+        $latestDir = Get-Item -LiteralPath $liveDir
+      }
+    } elseif ($latestVersionLink.Success -and $versionDirs.Count) {
+      $latestDir = $versionDirs | Where-Object { $_.Name -eq $latestVersionLink.Groups[1].Value } | Select-Object -First 1
+    } else {
+      Add-Failure "docs/index.html does not mark live or a version link as latest."
+    }
+
+    if ($latestDir) {
       $rootFiles = @(
         "index.html",
         "styles.css",

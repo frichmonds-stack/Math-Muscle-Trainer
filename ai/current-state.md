@@ -139,6 +139,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 - 2026-05-14 UI polish batch ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for `index.html`, `styles.css`, `js/app-core.js`, `js/app-init.js`, and `js/app-progress.js` because the user requested no publish.
 - 2026-05-14 UI polish batch could not use the in-app browser screenshot workflow because the required Node REPL browser tool was not exposed in this session; manual iPad/browser review remains needed.
 - 2026-05-14 publish close bumped runtime version to `v0.20.0`, moved UI polish notes into `CHANGELOG.md`, published `docs/v17`, updated README, and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+- 2026-05-14 publish close pushed commit `7013f01` to `main` and verified GitHub Pages live:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists Version 17 / `v0.20.0`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v17/` returned HTTP 200.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v17/js/app-core.js` served `APP_VERSION = "v0.20.0"`.
 
 ## Working Tree Note
 

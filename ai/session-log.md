@@ -159,3 +159,4 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran `node --check` on all root JS modules; syntax checks passed.
 - Ran a CSS brace sanity check; braces are balanced.
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+- Pushed `main` to GitHub and verified GitHub Pages serving Version 17 / `v0.20.0`, including `v17/` and `v17/js/app-core.js`.

@@ -2666,7 +2666,7 @@ function renderStreakPanel() {
   }
   if (elements.homeCurrentPracticeStreak) {
     elements.homeCurrentPracticeStreak.textContent =
-      `${weeklySummary.workoutDays} ${weeklySummary.workoutDays === 1 ? "day" : "days"}`;
+      `${streakSummary.current} ${streakSummary.current === 1 ? "day" : "days"}`;
   }
   if (elements.homeSnapshotRank) {
     const totalAccuracy = weeklySummary.attempted > 0

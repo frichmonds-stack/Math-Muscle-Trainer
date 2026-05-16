@@ -5,8 +5,8 @@ Last updated: 2026-05-16
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.20.2` on `main`.
-- Current live docs build is `docs/live`, marked latest in `docs/index.html`.
+- Root app is at `v0.20.3` on `main`.
+- Current live docs build is `docs/live`, marked latest in `docs/index.html` as `v0.20.3 Home QA polish`.
 - Latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
@@ -92,6 +92,9 @@ Last updated: 2026-05-16
 - Practice answer input text is larger, and the HUD-to-question gap is tighter after moving the recent-answer rail inside the question card.
 - Light-mode setup option rows, Learn lesson surfaces, Exit Lesson, and Operation Mastery cards now use softer shared surfaces instead of stark white blocks.
 - Learn stages with correct-rep gates now show cumulative in-card green-tick counters; wrong answers do not fill or reset the counter, and gated addition/Make 10 practice advances by cumulative correct reps.
+- Home's `Workout Streak` headline now shows the current consecutive-day streak, while the weekly strip underneath still shows the last-7-days activity pattern.
+- Home has a compact-height desktop spacing pass: utility buttons sit higher, the dashboard stack uses less vertical gap, and Weekly Reps labels sit above tall bars with more separation from `Last 7 days`.
+- `v0.20.3` is a rolling live Home QA polish release: it keeps `Workout Streak` as the consecutive-day headline, preserves the 7-day strip as recent activity context, tightens vertical Home spacing, and includes the `Create lessons` backlog item in AI continuity.
 
 ## Product Direction
 

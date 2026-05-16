@@ -217,3 +217,14 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
 - Pushed release commit `a3610c1` (`Release v0.20.2 UI polish`) to GitHub.
 - Verified GitHub Pages live: `/` lists `Live - v0.20.2 UI polish`, `/live/` returned HTTP 200, and `/live/js/app-core.js` served `APP_VERSION = "v0.20.2"`.
+
+## 2026-05-16 - Home QA Follow-Up
+
+- User QA confirmed desktop width resizing is good, but vertical resizing still needed polish.
+- Kept Home's `Workout Streak` label and changed its headline value to the current consecutive-day streak, while leaving the strip below as the last-7-days activity pattern.
+- Moved Home About/Settings utility buttons higher, reduced Home vertical gaps for shorter desktop windows, and adjusted Weekly Reps label layering/spacing so large bars do not obscure values.
+- Added `Create lessons` as an explicit Lesson Content backlog item.
+- Bumped runtime version to `v0.20.3`, moved the Home QA notes into the `0.20.3` changelog heading, and published `docs/live` with label `v0.20.3 Home QA polish`.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`

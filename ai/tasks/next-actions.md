@@ -19,13 +19,14 @@ Use this file for concrete next work. Broader undecided questions belong in `ai/
 
 ## Lesson Content
 
-1. Have the teacher fill `learn/specs/make-10.md` with the intended Make 10 pedagogy.
-2. Continue writing or refining addition lesson specs before expanding homepage/dashboard systems.
-3. Convert reviewed lesson specs into structured lesson JSON without changing teacher-authored wording.
-4. Decide when to migrate current hardcoded lesson text into structured lesson data.
-5. Design the Addition lesson progression/pathway system.
-6. Decide whether addition focused-workout handoffs need lesson-specific question pools.
-7. Decide whether multiplication lessons should eventually use the same atomic lesson-plan model as addition lessons.
+1. Create lessons: expand the Learn / Techniques content backlog into teacher-authored lesson specs before adding more app systems around it.
+2. Have the teacher fill `learn/specs/make-10.md` with the intended Make 10 pedagogy.
+3. Continue writing or refining addition lesson specs before expanding homepage/dashboard systems.
+4. Convert reviewed lesson specs into structured lesson JSON without changing teacher-authored wording.
+5. Decide when to migrate current hardcoded lesson text into structured lesson data.
+6. Design the Addition lesson progression/pathway system.
+7. Decide whether addition focused-workout handoffs need lesson-specific question pools.
+8. Decide whether multiplication lessons should eventually use the same atomic lesson-plan model as addition lessons.
 
 ## Manual QA
 

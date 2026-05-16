@@ -173,6 +173,12 @@ These ideas are not committed roadmap items unless promoted by the user.
 
 ## Recent Session Memory
 
+### 2026-05-16
+
+- Published the `v0.20.3` rolling live Home QA polish: Home `Workout Streak` now shows current consecutive-day streak while the strip remains a last-7-days activity pattern.
+- Tightened Home vertical spacing for shorter desktop windows, moved About/Settings higher, and adjusted Weekly Reps label layering/spacing so tall bars do not obscure values.
+- Added `Create lessons` as an explicit lesson-content backlog item.
+
 ### 2026-05-13
 
 - Captured initial Home screen research and design direction after reviewing motivational, health/training, and education-app patterns.

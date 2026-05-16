@@ -6,6 +6,12 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.3] - 2026-05-16
+
+### Changed
+- Changed Home's `Workout Streak` headline to show the current consecutive-day streak while the strip still shows the last-7-days activity pattern.
+- Tightened Home vertical spacing for shorter desktop windows, moved Home utility buttons higher, and improved Weekly Reps label layering/spacing so tall bars do not obscure values.
+
 ## [0.20.2] - 2026-05-16
 
 ### Added

@@ -6,6 +6,31 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.2] - 2026-05-16
+
+### Added
+- Added a partial Operation Mastery explainer dialog and clearer `score /100` context for mastery cards.
+- Added daily goal progress coloring to Workout Tracker calendar days using a first default goal of 50 reps per day.
+- Added a monthly reps-by-operation breakdown to Workout Tracker summary panels.
+- Added in-card cumulative correct-rep tick counters for Learn stages that require correct reps before moving on.
+
+### Changed
+- Changed Home snapshot `Total Reps` and `Accuracy` into weekly metrics based on the visible last-7-days window.
+- Changed Home layout spacing so the header has more breathing room and the dashboard stack sits more evenly above the dock.
+- Changed Home `Workout Streak` into a rolling last-7-days count, tightened Weekly Reps columns, and changed Weekly Accuracy into a per-day strip.
+- Changed Home's rotating daily thought to sit smaller and closer to the product title.
+- Changed Home Daily Routine copy to `Daily Warmup Routine` / `Quick 5`.
+- Changed Workout setup operation choices to keep all operations visible after selection and use the selected state as the highlight.
+- Changed light-mode setup option rows, Learn lesson panels, Exit Lesson, and Operation Mastery cards to use softer shared surfaces instead of stark white blocks.
+- Moved Practice recent-answer dots inside the question card and kept answer feedback icons inside the answer field.
+- Increased Practice answer input text size and tightened the gap between the Practice HUD and question card.
+- Removed raw rep counts from Workout Tracker calendar tiles.
+- Removed the visible Workout Tracker calendar legend and changed monthly reps by operation from a stacked bar into a simple sublist under the Reps stat.
+- Softened light-mode page indicators, contextual Results actions, calendar navigation, selectors, and tracker separators.
+- Removed `Best` and `Next` rank labels from Operation Mastery overview/detail surfaces for now, and changed the slide heading to avoid repeating the carousel title.
+- Changed Learn practice stages to advance from cumulative correct reps rather than attempts where a correct-rep minimum is shown.
+- Changed narrow tablet and iPad portrait widths to use the scroll-friendly responsive layout instead of the fixed landscape app frame.
+
 ## [0.20.1] - 2026-05-14
 
 ### Added

@@ -1,6 +1,6 @@
 # Current Button UI Reference
 
-Last updated: 2026-05-12
+Last updated: 2026-05-15
 
 This document describes the current implemented button/control direction after the early UI direction batches. Use it when comparing screenshots against the intended style.
 
@@ -35,6 +35,7 @@ The current UI uses:
 - softer card radii on action tiles and metrics,
 - switch-style toggles for binary setup options,
 - compact rounded icon utilities for Home/settings and carousel-style controls.
+- static metric panels that do not hover, lift, or use pointer-style affordances.
 
 The current implementation deliberately keeps the existing theme/color system:
 
@@ -187,13 +188,46 @@ Current examples:
 - top-right settings button,
 - top-right Home button on focused screens,
 - carousel arrows,
-- fact-range arrows.
+- fact-range arrows,
+- calendar month arrows,
+- help/explainer buttons.
 
 Compare screenshots for:
 
 - Does it feel like app chrome rather than content?
 - Is it compact but still easy to tap?
 - Are local controls kept out of the global rail?
+- Do repeated arrow controls share the same local icon-button treatment instead of falling back to native browser buttons?
+
+### Static Metrics
+
+Current classes:
+
+- `.stat-block`
+- `.hud-card`
+- tracker summary rows
+- mastery metric cells
+
+Intended look:
+
+- display-only,
+- calm borders/surfaces,
+- no hover lift,
+- no pointer cursor,
+- clearly different from action tiles.
+
+Current examples:
+
+- Results summary numbers,
+- Workout Log metrics,
+- Workout Tracker streak/month rows,
+- Home snapshot metrics.
+
+Compare screenshots for:
+
+- Does the metric read as information rather than a button?
+- Does it avoid competing with real controls nearby?
+- Are dividers visible enough in light mode without becoming table-heavy?
 
 ## Visual Anchors
 

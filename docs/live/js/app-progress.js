@@ -1,3 +1,5 @@
+const DAILY_REP_GOAL = 50;
+
 function getOperationFilterValue(selectElement, fallback = "all") {
   if (!(selectElement instanceof HTMLSelectElement)) {
     return fallback;
@@ -640,7 +642,7 @@ function getMasterySelectionLabel(selection) {
 
 function renderMasteryRankTrack(currentRankLabel) {
   return MASTERY_RANKS.map((rank) => `
-    <span class="mastery-rank-dot ${rank.label === currentRankLabel ? "is-current" : ""}"></span>
+    <span class="mastery-rank-dot ${rank.label === currentRankLabel ? "is-current" : ""}" title="${escapeHtml(rank.label)}"></span>
   `).join("");
 }
 
@@ -649,7 +651,6 @@ function renderMasteryMetric(label, value) {
 }
 
 function renderMasterySnapshotCard(summary) {
-  const nextRank = summary.nextRank.label === summary.rank.label ? "Max rank" : `Next: ${summary.nextRank.label}`;
   const coverageLabel = `${summary.coveredSkills.length}/${summary.skillUniverse.length}`;
 
   return `
@@ -659,7 +660,7 @@ function renderMasterySnapshotCard(summary) {
           <span class="section-kicker">${escapeHtml(summary.label)}</span>
           <strong>${escapeHtml(summary.rank.label)}</strong>
         </span>
-        <span class="mastery-score" aria-label="${summary.score} mastery score">${summary.score}</span>
+        <span class="mastery-score" aria-label="${summary.score} out of 100 mastery score"><strong>${summary.score}</strong><small>/100</small></span>
       </span>
       <span class="mastery-rank-track" aria-hidden="true">
         ${renderMasteryRankTrack(summary.rank.label)}
@@ -670,9 +671,8 @@ function renderMasterySnapshotCard(summary) {
       <span class="mastery-snapshot-metrics">
         ${renderMasteryMetric("Accuracy", formatPercent(summary.accuracy))}
         ${renderMasteryMetric("Coverage", coverageLabel)}
-        ${renderMasteryMetric("Best", summary.bestRank.rank)}
+        ${renderMasteryMetric("Attempts", String(summary.attempts))}
       </span>
-      <span class="mastery-card-next">${escapeHtml(nextRank)}</span>
     </article>
   `;
 }
@@ -690,13 +690,14 @@ function renderMasteryModeControls(selection) {
 }
 
 function renderMasteryDetailPanel(summary) {
-  const nextRank = summary.nextRank.label === summary.rank.label ? "Max rank" : `Next: ${summary.nextRank.label}`;
   const coverageLabel = `${summary.coveredSkills.length}/${summary.skillUniverse.length} areas`;
   const strongLabels = summary.strongSkills
     .slice(0, 4)
     .map(([skillKey]) => getLearningSkillLabel(summary.operation, skillKey))
     .join(", ");
-  const strengthCopy = strongLabels || "No strong areas yet";
+  const strengthCopy = strongLabels
+    ? `<p class="fact-meta">Strong areas: ${escapeHtml(strongLabels)}</p>`
+    : "";
 
   return `
     <article class="mastery-detail-panel">
@@ -705,7 +706,7 @@ function renderMasteryDetailPanel(summary) {
           <p class="section-kicker">${escapeHtml(summary.label)} detail</p>
           <h3>${escapeHtml(summary.rank.label)} current form</h3>
         </div>
-        <div class="mastery-score mastery-score-large" aria-label="${summary.score} mastery score">${summary.score}</div>
+        <div class="mastery-score mastery-score-large" aria-label="${summary.score} out of 100 mastery score"><strong>${summary.score}</strong><small>/100</small></div>
       </div>
 
       <div class="mastery-detail-grid">
@@ -728,16 +729,16 @@ function renderMasteryDetailPanel(summary) {
           </div>
           <div class="mastery-form-row">
             <span>Current form <strong>${escapeHtml(summary.rank.label)}</strong></span>
-            <span>Best earned <strong>${escapeHtml(summary.bestRank.rank)}</strong></span>
+            <span>Score <strong>${summary.score}/100</strong></span>
           </div>
           <div class="mastery-next">
-            <span>${escapeHtml(nextRank)}</span>
+            <span>Training focus</span>
             <p>${escapeHtml(summary.nextGoal)}</p>
           </div>
         </section>
       </div>
 
-      <p class="fact-meta">Strongest: ${escapeHtml(strengthCopy)}</p>
+      ${strengthCopy}
     </article>
   `;
 }
@@ -2351,6 +2352,8 @@ function buildCalendarMarkup(monthDate) {
     const dateKey = formatDateKey(date);
     const record = getDailyRecord(dateKey);
     const classes = ["calendar-day"];
+    const dailyReps = Number(record.attempted || 0);
+    const goalRatio = dailyReps / DAILY_REP_GOAL;
 
     if (dateKey === todayKey) {
       classes.push("today");
@@ -2358,18 +2361,22 @@ function buildCalendarMarkup(monthDate) {
     if (record.attempted || record.correct || record.sessionsCompleted) {
       classes.push("has-activity");
     }
-    if (record.correct > 0) {
-      classes.push("has-correct-reps");
+    if (goalRatio >= 1.5) {
+      classes.push("goal-extra");
+    } else if (goalRatio >= 1) {
+      classes.push("goal-met");
+    } else if (goalRatio >= 0.5) {
+      classes.push("goal-half");
+    } else if (goalRatio > 0) {
+      classes.push("goal-started");
     }
 
     cells.push(`
-      <div class="${classes.join(" ")}">
+      <div class="${classes.join(" ")}" aria-label="${day}: ${Math.round(goalRatio * 100)}% of daily goal">
         <div class="calendar-day-top">
           <span class="day-number">${day}</span>
         </div>
-        <div class="calendar-day-body">
-          <span class="day-reps" aria-label="${record.correct} correct reps">${record.correct || ""}</span>
-        </div>
+        <div class="calendar-day-body" aria-hidden="true"></div>
       </div>
     `);
   }
@@ -2482,16 +2489,33 @@ function getLastSevenDailyRecords() {
   });
 }
 
+function getLastSevenSummary() {
+  return getLastSevenDailyRecords().reduce(
+    (summary, day) => {
+      summary.attempted += day.record.attempted || 0;
+      summary.correct += day.record.correct || 0;
+      if (day.record.sessionsCompleted > 0) {
+        summary.workoutDays += 1;
+      }
+      return summary;
+    },
+    { attempted: 0, correct: 0, workoutDays: 0 },
+  );
+}
+
 function buildHomeRepsGraphMarkup() {
   const days = getLastSevenDailyRecords();
   const values = days.map((day) => day.record.attempted || 0);
   const maxValue = Math.max(...values, 1);
   const bars = values.map((value, index) => {
     const label = days[index].label;
-    return `<span class="home-reps-day" style="--rep-height: ${Math.max(4, Math.round((value / maxValue) * 100))}%"><span>${label}</span></span>`;
+    const ratio = value / maxValue;
+    const height = value > 0 ? Math.max(5, Math.round(Math.pow(ratio, 1.65) * 100)) : 3;
+    return `<span class="home-reps-day" style="--rep-height: ${height}%"><strong>${value}</strong><span>${label}</span></span>`;
   }).join("");
 
   return `
+    <span class="home-reps-scale">Last 7 days</span>
     <span class="home-reps-days" aria-hidden="true">${bars}</span>
   `;
 }
@@ -2511,6 +2535,21 @@ function renderHomeAccuracyVisual(accuracy) {
   elements.homeAccuracyVisual.style.setProperty("--accuracy-score", `${clampedAccuracy}%`);
   elements.homeAccuracyVisual.dataset.tier =
     clampedAccuracy >= 95 ? "peak" : clampedAccuracy >= 80 ? "strong" : clampedAccuracy >= 55 ? "steady" : "low";
+  elements.homeAccuracyVisual.innerHTML = getLastSevenDailyRecords()
+    .map((day) => {
+      const attempted = day.record.attempted || 0;
+      const correct = day.record.correct || 0;
+      const dayAccuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+      const fill = attempted > 0 ? Math.max(10, dayAccuracy) : 0;
+      const stateClass = attempted > 0 ? "has-data" : "is-empty";
+      return `
+        <span class="home-accuracy-day ${stateClass}" style="--accuracy-day-score: ${fill}%" title="${day.label}: ${dayAccuracy}%">
+          <i aria-hidden="true"></i>
+          <small>${day.label}</small>
+        </span>
+      `;
+    })
+    .join("");
 }
 
 function showHomeStreakBanner(streakDays) {
@@ -2550,6 +2589,45 @@ function getDisplayedMonthSummary() {
   );
 }
 
+function getDisplayedMonthOperationReps() {
+  ensureDisplayMonthKey();
+  const displayMonthDate = createMonthDateFromKey(state.displayMonthKey);
+  const monthKey = getMonthKey(displayMonthDate);
+  const totals = Object.fromEntries(OPERATION_OPTIONS.map((operation) => [operation, 0]));
+
+  state.progress.workoutHistory.forEach((record) => {
+    if (getMonthKey(parseDateKey(record.dateKey || getTodayDateKey())) !== monthKey) {
+      return;
+    }
+    const operation = OPERATION_OPTIONS.includes(record.operation)
+      ? record.operation
+      : "multiplication";
+    totals[operation] += Number(record.attempted || 0);
+  });
+
+  return totals;
+}
+
+function buildOperationRepsBreakdownMarkup(totals) {
+  const labels = OPERATION_OPTIONS.map((operation) =>
+    `<span><i class="${operation}"></i><strong>${getOperationLabel(operation)}</strong><em>${totals[operation] || 0}</em></span>`,
+  ).join("");
+
+  return `
+    <span class="operation-reps-labels">${labels}</span>
+  `;
+}
+
+function renderOperationRepsBreakdowns() {
+  const totals = getDisplayedMonthOperationReps();
+  const markup = buildOperationRepsBreakdownMarkup(totals);
+  [elements.progressOperationRepsBreakdown, elements.resultsOperationRepsBreakdown]
+    .filter(Boolean)
+    .forEach((element) => {
+      element.innerHTML = markup;
+    });
+}
+
 function shiftDisplayedMonth(direction) {
   const navState = getMonthNavigationState();
   if (
@@ -2579,20 +2657,20 @@ function renderStreakPanel() {
   elements.resultsMonthSessions.textContent = `${monthSummary.sessions}`;
   elements.resultsMonthReps.textContent = `${monthSummary.reps}`;
   elements.resultsMonthAccuracy.textContent = monthAccuracy;
-  if (elements.homeCurrentPracticeStreak) {
-    elements.homeCurrentPracticeStreak.textContent =
-      `${streakSummary.current} ${streakSummary.current === 1 ? "day" : "days"}`;
-  }
+  renderOperationRepsBreakdowns();
   renderHomeWeeklyStrip();
   renderHomeRepsGraph();
+  const weeklySummary = getLastSevenSummary();
   if (elements.homeSnapshotReps) {
-    elements.homeSnapshotReps.textContent = `${state.progress.totalAttempted || 0}`;
+    elements.homeSnapshotReps.textContent = `${weeklySummary.attempted}`;
+  }
+  if (elements.homeCurrentPracticeStreak) {
+    elements.homeCurrentPracticeStreak.textContent =
+      `${weeklySummary.workoutDays} ${weeklySummary.workoutDays === 1 ? "day" : "days"}`;
   }
   if (elements.homeSnapshotRank) {
-    const totalAttempted = state.progress.totalAttempted || 0;
-    const totalCorrect = state.progress.totalCorrect || 0;
-    const totalAccuracy = totalAttempted > 0
-      ? Math.round((totalCorrect / totalAttempted) * 100)
+    const totalAccuracy = weeklySummary.attempted > 0
+      ? Math.round((weeklySummary.correct / weeklySummary.attempted) * 100)
       : 0;
     elements.homeSnapshotRank.textContent = `${totalAccuracy}%`;
     renderHomeAccuracyVisual(totalAccuracy);

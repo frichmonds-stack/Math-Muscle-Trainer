@@ -182,3 +182,37 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran `node --check` on all root JS modules; syntax checks passed.
 - Ran a CSS brace sanity check; braces are balanced.
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+
+## 2026-05-15 - UI Clarity Polish Batch
+
+- Changed Home `Total Reps` and `Accuracy` into weekly metrics based on the same visible last-7-days window as the Home chart.
+- Changed Home routine copy to `Daily Warmup Routine` / `Quick 5`.
+- Kept all Workout setup operation choices visible after selection, centered operation choice text, and hid the old `Change` micro-button in preparation for future multi-operation selection.
+- Moved Practice answer feedback icons inside the answer field and moved the recent-answer dot rail inside the question card.
+- Removed raw rep counts from Workout Tracker calendar tiles and replaced them with daily goal progress tiers using an initial 50 reps/day internal goal plus a compact legend.
+- Added monthly reps-by-operation breakdowns to Results/Progress Workout Tracker summaries.
+- Added a partial Operation Mastery clarity pass: `?` explainer dialog, `/100` score context, no overview/detail `Best` or `Next` labels, and no empty `Strongest` line.
+- Softened light-mode page indicators, Results contextual action styling, tracker separators, and static metric hover affordances.
+- Investigated responsive screenshots with local headless Chrome. Changed the scroll-friendly layout breakpoint from `700px` to `900px` so iPad portrait and narrow tablet/resized windows no longer clip inside the fixed landscape frame; iPad landscape remains fixed-frame.
+- Session-close review logged follow-up changes for the next pass: calendar month nav should return to its previous position, the calendar legend should be removed, daily goal communication should move elsewhere, reps by operation should become a sublist instead of a bar graph, Operation Mastery should avoid duplicate title wording and improve selector arrow spacing, Home Workout Streak should become a rolling 7-day metric, Weekly Reps needs clearer scale/tighter columns, and Weekly Accuracy needs a better graphic.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+
+## 2026-05-16 - Home Rhythm And Tracker Follow-Up
+
+- Rebalanced Home dashboard vertical rhythm after screenshot review: the header has more breathing room, and the dashboard content stack sits more evenly above the dock without adding filler content.
+- Changed Home Workout Streak to a rolling last-7-days workout-day count, tightened Weekly Reps columns, and changed Weekly Accuracy from a single fill block to a per-day strip.
+- Removed visible Workout Tracker calendar legends while keeping daily-goal color tiers, and changed monthly reps by operation from a stacked bar into a simple sublist.
+- Changed Operation Mastery's slide heading to `Your operation ranks` so it no longer duplicates the carousel kicker, and gave the mastery selector arrows more spacing.
+- Follow-up execution tightened shared selector pills across Progress/Learn so arrows stay inside and labels remain centered in light mode.
+- Softened light-mode setup option rows, Learn panels, Exit Lesson, and Operation Mastery cards away from stark white blocks.
+- Increased Practice answer input text size and tightened the gap between the HUD and question card.
+- Added cumulative correct-only green-tick counters inside Learn question cards for correct-rep-gated stages; wrong answers do not fill or reset ticks.
+- Changed gated addition and Make 10 practice progression to advance by cumulative correct reps rather than attempts.
+- Ran `node --check` on all root JS modules; syntax checks passed.
+- Ran a CSS brace sanity check; braces are balanced.
+- Captured local Chrome screenshots for Home, Progress overview, Progress tracker/focus, Learn menu, Learn practice, and Workout setup in light mode.
+- Ran focused 390px mobile screenshots after the optimization pass and fixed the Progress page-dot overlap by making the carousel position indicator flow in the mobile layout.
+- Bumped runtime version to `v0.20.2`, moved the polish notes into the `0.20.2` changelog heading, and published `docs/live` with label `v0.20.2 UI polish`.
+- Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+- Prepared release commit `Release v0.20.2 UI polish` for GitHub sync.

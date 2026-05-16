@@ -15,7 +15,7 @@ const KEYPAD_PREFERENCE_STORAGE_KEY = `${PRODUCT_STORAGE_PREFIX}-keypad-preferen
 const LEGACY_KEYPAD_PREFERENCE_STORAGE_KEYS = [
   `${LEGACY_PRODUCT_STORAGE_PREFIX}-keypad-preference-v1`,
 ];
-const APP_VERSION = "v0.20.1";
+const APP_VERSION = "v0.20.2";
 const FACTOR_LIMIT = 12;
 const TABLE_FACTORS = Array.from({ length: FACTOR_LIMIT }, (_, index) => index + 1);
 const QUESTION_PRESETS = [10, 20, 30];
@@ -344,8 +344,6 @@ const SUBTRACTION_DIGIT_BUCKETS = {
     [3, 3],
   ],
 };
-let operationPruneTimerId = null;
-
 const elements = {
   appShell: document.querySelector(".app-shell"),
   pageShell: document.querySelector(".page-shell"),
@@ -358,8 +356,11 @@ const elements = {
   aboutButton: document.getElementById("aboutButton"),
   optionsDialog: document.getElementById("optionsDialog"),
   aboutDialog: document.getElementById("aboutDialog"),
+  masteryHelpDialog: document.getElementById("masteryHelpDialog"),
   optionsCloseButton: document.getElementById("optionsCloseButton"),
   aboutCloseButton: document.getElementById("aboutCloseButton"),
+  masteryHelpButton: document.getElementById("masteryHelpButton"),
+  masteryHelpCloseButton: document.getElementById("masteryHelpCloseButton"),
   appVersion: document.getElementById("appVersion"),
   heroMessage: document.getElementById("heroMessage"),
   setupOperationPanel: document.getElementById("setupOperationPanel"),
@@ -434,6 +435,7 @@ const elements = {
   resultsMonthSessions: document.getElementById("resultsMonthSessions"),
   resultsMonthReps: document.getElementById("resultsMonthReps"),
   resultsMonthAccuracy: document.getElementById("resultsMonthAccuracy"),
+  resultsOperationRepsBreakdown: document.getElementById("resultsOperationRepsBreakdown"),
   resultsCalendarGrid: document.getElementById("resultsCalendarGrid"),
   resultsMonthPrevButton: document.getElementById("resultsMonthPrevButton"),
   resultsMonthNextButton: document.getElementById("resultsMonthNextButton"),
@@ -489,6 +491,7 @@ const elements = {
   progressMonthSessions: document.getElementById("progressMonthSessions"),
   progressMonthReps: document.getElementById("progressMonthReps"),
   progressMonthAccuracy: document.getElementById("progressMonthAccuracy"),
+  progressOperationRepsBreakdown: document.getElementById("progressOperationRepsBreakdown"),
   currentMonthLabel: document.getElementById("currentMonthLabel"),
   calendarGrid: document.getElementById("calendarGrid"),
   progressMonthPrevButton: document.getElementById("progressMonthPrevButton"),
@@ -1927,10 +1930,6 @@ function toggleSetupFields() {
   let showWorkoutTypeStep = hasOperation && (!showDifficultyStep || difficultySelected);
   const supportsIsolation = operation === "multiplication" || operation === "division";
   const divisionMode = operation === "division";
-  const selectedOperation = hasOperation ? operation : "";
-  const previousPrunedOperation = elements.operationChoiceGrid?.dataset.prunedForOperation || "";
-  const shouldAnimateOperationPrune =
-    Boolean(selectedOperation) && previousPrunedOperation !== selectedOperation;
 
   if (!hasOperation) {
     setCheckedValue("sessionType", "");
@@ -1976,18 +1975,11 @@ function toggleSetupFields() {
     elements.setupOperationPanel.classList.toggle("has-operation-selection", hasOperation);
   }
   if (elements.operationChoiceGrid) {
-    elements.operationChoiceGrid.classList.toggle("is-pruned-view", hasOperation);
-    elements.operationChoiceGrid.classList.toggle(
-      "is-prune-transitioning",
-      hasOperation && shouldAnimateOperationPrune,
-    );
+    elements.operationChoiceGrid.classList.toggle("is-pruned-view", false);
+    elements.operationChoiceGrid.classList.toggle("is-prune-transitioning", false);
     if (!hasOperation) {
       elements.operationChoiceGrid.dataset.prunedForOperation = "";
     }
-  }
-  if (operationPruneTimerId) {
-    window.clearTimeout(operationPruneTimerId);
-    operationPruneTimerId = null;
   }
   elements.operationInputs.forEach((input, index) => {
     const option = input.closest(".operation-choice");
@@ -1998,38 +1990,18 @@ function toggleSetupFields() {
       option.dataset.defaultOrder = `${index}`;
     }
     const isSelectedOption = hasOperation && input.checked;
-    const shouldPrune = hasOperation && !isSelectedOption;
-    option.classList.toggle("is-fading", shouldPrune && shouldAnimateOperationPrune);
-    option.classList.toggle("is-pruned", shouldPrune && !shouldAnimateOperationPrune);
+    option.classList.toggle("is-fading", false);
+    option.classList.toggle("is-pruned", false);
     option.classList.toggle("is-selected", isSelectedOption);
-    option.style.order = hasOperation
-      ? isSelectedOption
-        ? "0"
-        : `${Number(option.dataset.defaultOrder || index) + 1}`
-      : option.dataset.defaultOrder || `${index}`;
+    option.style.order = option.dataset.defaultOrder || `${index}`;
     const changeButton = option.querySelector("[data-operation-reset]");
     if (changeButton instanceof HTMLButtonElement) {
-      changeButton.classList.toggle("is-hidden", !isSelectedOption);
-      changeButton.disabled = !isSelectedOption;
+      changeButton.classList.toggle("is-hidden", true);
+      changeButton.disabled = true;
     }
   });
-  if (hasOperation && shouldAnimateOperationPrune && elements.operationChoiceGrid) {
-    operationPruneTimerId = window.setTimeout(() => {
-      elements.operationInputs.forEach((input) => {
-        const option = input.closest(".operation-choice");
-        if (!option) {
-          return;
-        }
-        const isSelectedOption = input.checked;
-        option.classList.toggle("is-fading", false);
-        option.classList.toggle("is-pruned", !isSelectedOption);
-      });
-      elements.operationChoiceGrid?.classList.remove("is-prune-transitioning");
-      elements.operationChoiceGrid.dataset.prunedForOperation = selectedOperation;
-      operationPruneTimerId = null;
-    }, 180);
-  } else if (hasOperation && elements.operationChoiceGrid) {
-    elements.operationChoiceGrid.dataset.prunedForOperation = selectedOperation;
+  if (hasOperation && elements.operationChoiceGrid) {
+    elements.operationChoiceGrid.dataset.prunedForOperation = operation;
   }
 
   if (elements.additionDifficultyField) {

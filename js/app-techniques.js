@@ -367,6 +367,28 @@ function getTechniqueStatusIconMarkup(status, extraClass = "") {
   return `<span class="${classes.join(" ")}" aria-hidden="true"></span>`;
 }
 
+function getTechniqueCorrectCounterMarkup(correctCount, requiredCount, label = "Correct reps") {
+  const total = Math.max(0, Number(requiredCount) || 0);
+  if (total < 1) {
+    return "";
+  }
+  const filled = Math.max(0, Math.min(total, Number(correctCount) || 0));
+  const dots = Array.from({ length: total }, (_, index) => {
+    const isFilled = index < filled;
+    return `
+      <span class="technique-correct-dot ${isFilled ? "is-filled" : ""}" aria-hidden="true">
+        ${isFilled ? "\u2713" : ""}
+      </span>
+    `;
+  }).join("");
+
+  return `
+    <div class="technique-correct-counter" aria-label="${escapeHtml(label)}: ${filled} of ${total}">
+      ${dots}
+    </div>
+  `;
+}
+
 function getTechniquePatternRowClasses(row) {
   const classes = ["technique-pattern-row"];
   if (row.status === "correct") {
@@ -701,12 +723,12 @@ function renderTechniqueGuidedStage() {
 
   return `
     <form class="technique-lesson-card technique-question-shell technique-practice-shell" data-technique-form="guided" autocomplete="off">
-      <div class="technique-question-meta">
-        <span class="technique-progress-copy">Assisted rep ${
-          state.technique.guidedIndex + 1
-        } of ${state.technique.guidedQuestions.length}</span>
-      </div>
       <div class="problem-wrap technique-practice-problem">
+        ${getTechniqueCorrectCounterMarkup(
+          state.technique.guidedIndex + (state.technique.guidedSolved ? 1 : 0),
+          state.technique.guidedQuestions.length,
+          "Assisted correct reps",
+        )}
         <p class="technique-question">${formatTechniqueEquation(question)} = ?</p>
       </div>
       <div class="technique-input-row technique-practice-input-row">
@@ -774,12 +796,12 @@ function renderTechniqueQuickCheckStage() {
 
   return `
     <form class="technique-lesson-card technique-question-shell technique-practice-shell" data-technique-form="quick-check" autocomplete="off">
-      <div class="technique-question-meta">
-        <span class="technique-progress-copy">Correct answers: ${
-          state.technique.quickCheckCorrect
-        } / ${TECHNIQUE_COMPLETION_GOAL}</span>
-      </div>
       <div class="problem-wrap technique-practice-problem">
+        ${getTechniqueCorrectCounterMarkup(
+          state.technique.quickCheckCorrect,
+          TECHNIQUE_COMPLETION_GOAL,
+          "Solo correct reps",
+        )}
         <p class="technique-question">${formatTechniqueEquation(question)} = ?</p>
       </div>
       <div class="technique-input-row technique-practice-input-row">
@@ -1046,7 +1068,7 @@ function submitMake10Answer(rawAnswer) {
   }
 
   lessonState.questionIndex += 1;
-  const isComplete = lessonState.questionIndex >= MAKE10_PRACTICE_QUESTION_COUNT;
+  const isComplete = lessonState.correctCount >= MAKE10_PRACTICE_QUESTION_COUNT;
 
   if (isComplete) {
     lessonState.feedback = "";
@@ -1124,6 +1146,11 @@ function renderMake10NumericPractice() {
   return `
     <form class="technique-lesson-card technique-question-shell technique-practice-shell" data-technique-form="${stepId}" autocomplete="off">
       <div class="problem-wrap technique-practice-problem">
+        ${getTechniqueCorrectCounterMarkup(
+          lessonState.correctCount,
+          MAKE10_PRACTICE_QUESTION_COUNT,
+          "Correct reps",
+        )}
         <p class="technique-question">${prompt}</p>
       </div>
       <div class="technique-input-row technique-practice-input-row">
@@ -1163,6 +1190,11 @@ function renderMake10ComparePractice() {
   return `
     <section class="technique-lesson-card technique-question-shell technique-practice-shell">
       <div class="problem-wrap technique-practice-problem">
+        ${getTechniqueCorrectCounterMarkup(
+          lessonState.correctCount,
+          MAKE10_PRACTICE_QUESTION_COUNT,
+          "Correct reps",
+        )}
         <p class="technique-question technique-compare-question">
           <span>${prompt}</span>
           <span class="technique-compare-box" aria-hidden="true"></span>
@@ -2018,7 +2050,7 @@ function submitAdditionLessonAnswer(rawAnswer) {
   }
 
   lessonState.questionIndex += 1;
-  const isComplete = lessonState.questionIndex >= getAdditionPracticeGoal(step);
+  const isComplete = lessonState.correctCount >= getAdditionPracticeGoal(step);
   if (isComplete) {
     lessonState.lastPracticeScore = lessonState.correctCount;
     if (step.type === "final") {
@@ -2096,10 +2128,8 @@ function renderAdditionNumericPractice(step) {
 
   return `
     <form class="technique-lesson-card technique-question-shell technique-practice-shell" data-technique-form="addition-practice" autocomplete="off">
-      <div class="technique-question-meta">
-        <span class="technique-progress-copy">Rep ${Math.min(lessonState.questionIndex + 1, goal)} of ${goal}</span>
-      </div>
       <div class="problem-wrap technique-practice-problem">
+        ${getTechniqueCorrectCounterMarkup(lessonState.correctCount, goal, "Correct reps")}
         <p class="technique-question">${escapeHtml(question.prompt)}</p>
       </div>
       <div class="technique-input-row technique-practice-input-row">
@@ -2139,10 +2169,8 @@ function renderAdditionComparePractice(step) {
 
   return `
     <section class="technique-lesson-card technique-question-shell technique-practice-shell">
-      <div class="technique-question-meta">
-        <span class="technique-progress-copy">Rep ${Math.min(lessonState.questionIndex + 1, goal)} of ${goal}</span>
-      </div>
       <div class="problem-wrap technique-practice-problem">
+        ${getTechniqueCorrectCounterMarkup(lessonState.correctCount, goal, "Correct reps")}
         <p class="technique-question technique-compare-question">
           <span>${escapeHtml(question.prompt)}</span>
           <span class="technique-compare-box" aria-hidden="true"></span>

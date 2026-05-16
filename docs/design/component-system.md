@@ -213,6 +213,7 @@ Use for:
 Rules:
 
 - Static metrics do not hover, lift, or look tappable.
+- Static metrics should use `cursor: default` and should not inherit action-tile hover/focus treatments.
 - If a metric becomes clickable, change its role to action tile or add a clearly documented interactive variant.
 - Avoid dense admin-dashboard feel.
 

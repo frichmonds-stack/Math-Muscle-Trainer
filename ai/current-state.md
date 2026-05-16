@@ -1,11 +1,11 @@
 # Current State
 
-Last updated: 2026-05-14
+Last updated: 2026-05-16
 
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.20.1` on `main`.
+- Root app is at `v0.20.2` on `main`.
 - Current live docs build is `docs/live`, marked latest in `docs/index.html`.
 - Latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
@@ -76,6 +76,22 @@ Last updated: 2026-05-14
 - Streak banners can be dismissed by clicking or tapping the banner.
 - `v0.20.1` live cleanup removed stale Home element hooks/render paths for old Home calendar/stat widgets, pulled hidden Home adaptive thresholds/ranges into named constants, removed CSS for the discarded Home header icon marks, and published the rolling `docs/live` build.
 - ADR-0008 records the rolling live publishing channel decision: routine internet updates overwrite `docs/live` with patch versions; numbered `docs/v*` snapshots are for milestones or explicit archive requests.
+- 2026-05-15 polish batch changed Home snapshot metrics to weekly reps and weekly accuracy, with last-7-days bar values and matching headline totals.
+- Home Daily Routine copy now reads `Daily Warmup Routine` / `Quick 5`.
+- 2026-05-16 polish batch rebalanced Home vertical rhythm, tightened Progress selector pills and page indicators, softened light-mode surfaces, enlarged Practice answer input, moved Practice answer dots into the question card, and added correct-only green tick counters to gated Learn practice stages.
+- Workout setup operation choices now keep all operations visible after selection, highlight the selected operation, hide the old `Change` micro-button, and center choice text.
+- Practice answer feedback icons now sit inside the answer field, and the recent-answer dot rail sits inside the question card.
+- Workout Tracker calendars no longer show raw rep counts in day tiles. Calendar tiles now use daily-goal progress tiers based on a first internal default of 50 reps/day, with monthly reps-by-operation breakdowns in the side summary.
+- Operation Mastery has a partial clarity pass: a `?` explainer dialog, score context as `/100`, no `Best`/`Next` labels in cards/detail, and no empty `Strongest` line.
+- Light-mode polish softened carousel position indicators, Results contextual action buttons, calendar navigation, tracker separators, and static metric affordances.
+- Narrow tablet and iPad portrait widths now switch to the scroll-friendly responsive layout at `900px` and below instead of staying inside the fixed landscape app frame.
+- 2026-05-16 follow-up polish removed the visible Workout Tracker calendar legend, changed monthly reps by operation into a simple sublist, changed Operation Mastery's slide heading to `Your operation ranks`, and gave the mastery selector more arrow breathing room.
+- Home dashboard spacing now gives the header more top breathing room and centers the main Home stack more evenly above the dock without adding filler content.
+- Home Workout Streak now reports rolling last-7-days workout days, Weekly Reps columns are tighter with visible day values, and Weekly Accuracy is a per-day strip instead of a single fill block.
+- Shared Progress/Learn carousel selectors now reserve internal arrow space so labels stay centered inside the pill in light mode.
+- Practice answer input text is larger, and the HUD-to-question gap is tighter after moving the recent-answer rail inside the question card.
+- Light-mode setup option rows, Learn lesson surfaces, Exit Lesson, and Operation Mastery cards now use softer shared surfaces instead of stark white blocks.
+- Learn stages with correct-rep gates now show cumulative in-card green-tick counters; wrong answers do not fill or reset the counter, and gated addition/Make 10 practice advances by cumulative correct reps.
 
 ## Product Direction
 
@@ -153,6 +169,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.1 live cleanup`.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.1"`.
+- `v0.20.2` UI polish ran `node --check` for all root JS modules; syntax checks passed.
+- `v0.20.2` UI polish ran a CSS brace sanity check; braces are balanced.
+- `v0.20.2` UI polish captured focused mobile screenshots for Progress and Learn practice after the optimization pass, and published `docs/live` with label `v0.20.2 UI polish`.
+- `v0.20.2` UI polish ran `scripts/check-repo.ps1` after `docs/live`; result: `All repo checks passed.`
+- `v0.20.2` UI polish prepared the release commit for push to `main`.
 
 ## Working Tree Note
 

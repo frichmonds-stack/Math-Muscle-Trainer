@@ -1,20 +1,21 @@
 # Next Actions
 
-Last updated: 2026-05-14
+Last updated: 2026-05-16
 
 Use this file for concrete next work. Broader undecided questions belong in `ai/open-threads.md`; speculative ideas belong in `PROJECT_NOTES.md`.
 
 ## Best Next Batch
 
-1. Manually review the polished Home dashboard on iPad landscape, desktop, mobile/narrow widths, and light mode, especially title spacing, Quick 5 row fit, snapshot graph fit, and dock clearance.
-2. Manually retest Practice with the built-in keypad on keyboardless student devices, especially iPad/tablet landscape and portrait, to confirm the compact keypad fits and the quieter surface still feels usable.
+1. Manually review the published `v0.20.2` polish batch on iPad landscape, iPad portrait, narrow resized desktop windows, mobile widths, and light mode: Home header spacing, centered dashboard rhythm, rolling weekly metrics, Practice answer/status layout, Progress selectors, Operation Mastery help, Learn correct counters, Workout Tracker calendar goal colors, and setup operation choices.
+2. Manually retest Practice with the built-in keypad on keyboardless student devices, especially iPad/tablet landscape and portrait, to confirm the larger answer input, answer icon, and in-card dot rail do not crowd the keypad layout.
 3. Manually test hidden adaptive Home quick starts with new-user/no-data state and with existing progress data for each operation.
-4. Manually review Workout Tracker in Results and Progress to confirm the left summary column matches calendar height and static stats no longer look highlightable.
-5. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
-6. Decide the long-term learner-facing reward model now that Hearts/Stars are no longer visible tracker metrics.
-7. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
-8. Do a dedicated stale Home CSS prune for old launcher-era selectors (`home-launcher`, `home-menu-row`, `daily-widget`, and related legacy classes) after checking they are not used by any archived/current root UI paths.
-9. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
+4. Decide whether the 50 reps/day goal should stay fixed, become adaptive, or become a learner-facing training preference, and how it should be explained outside the calendar header.
+5. Plan the deeper Operation Mastery communication/IA pass, including whether Fact Tracker becomes the detail/evidence layer inside Operation Mastery.
+6. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
+7. Manually test Learn correct counters across Make 10, an addition final practice, multiplication assisted reps, and multiplication solo reps; confirm wrong answers do not fill ticks and correct reps advance as expected.
+8. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
+9. Do a dedicated stale Home CSS prune for old launcher-era selectors (`home-launcher`, `home-menu-row`, `daily-widget`, and related legacy classes) after checking they are not used by any archived/current root UI paths.
+10. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
 
 ## Lesson Content
 
@@ -31,8 +32,8 @@ Use this file for concrete next work. Broader undecided questions belong in `ai/
 1. Manually test addition lessons end-to-end: Make 10, Adding by 10s, Bridging Advanced, and Bridging Expert.
 2. Manually test addition lesson completion, completed menu state, restart, stage-pill jumping, keypad entry, and `Start Focused Workout`.
 3. Manually test multiplication lessons for `x1`, `x7`, `x10`, and `x12`, including unlocked stage-pill jumps, warm-up blanks, hints, solo reps, completion, and Practice More.
-4. Manually test Progress carousel previous/next controls in the top red label row.
-5. Manually test Operation Mastery after completing workouts in each operation and confirm current ranks, best-earned ranks, and next-goal copy feel fair.
+4. Manually test Progress carousel previous/next controls in the top red label row and local month/mastery selector arrows in light and dark mode.
+5. Manually test Operation Mastery after completing workouts in each operation and confirm the `?` explainer, `/100` score, signal labels, and training-focus copy are understandable enough for the temporary pass.
 6. Manually test the Operation Mastery selector cycle (`Overview -> Addition -> Subtraction -> Multiplication -> Division`) in dark and light mode.
 7. Manually test Practice micro feedback rail visibility and pace impact across timed, target reps, isolation, zen, and spar sessions.
 8. Manually test division tracker cards, especially `\u00f7 7`, and confirm they generate varied divisor facts.

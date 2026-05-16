@@ -164,12 +164,18 @@ async function initialise() {
   elements.aboutButton?.addEventListener("click", () => {
     elements.aboutDialog?.showModal();
   });
+  elements.masteryHelpButton?.addEventListener("click", () => {
+    elements.masteryHelpDialog?.showModal();
+  });
   elements.homeDashboard?.addEventListener("click", handleHomeDashboardClick);
   elements.optionsCloseButton.addEventListener("click", () => {
     elements.optionsDialog.close();
   });
   elements.aboutCloseButton?.addEventListener("click", () => {
     elements.aboutDialog?.close();
+  });
+  elements.masteryHelpCloseButton?.addEventListener("click", () => {
+    elements.masteryHelpDialog?.close();
   });
   elements.cancelExitTechniqueButton.addEventListener("click", cancelTechniqueExit);
   elements.confirmExitTechniqueButton.addEventListener("click", confirmTechniqueExit);
@@ -190,6 +196,7 @@ async function initialise() {
   });
   registerBackdropClose(elements.optionsDialog);
   registerBackdropClose(elements.aboutDialog);
+  registerBackdropClose(elements.masteryHelpDialog);
   registerBackdropClose(elements.endWorkoutDialog);
   registerBackdropClose(elements.exitTechniqueDialog);
   elements.endWorkoutDialog.addEventListener("close", () => {

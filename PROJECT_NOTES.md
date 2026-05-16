@@ -73,6 +73,11 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
 - 2026-05-14 UI polish direction: Home quick starts should use hidden, data-driven difficulty selection with easy defaults for new users; Quick 5 Warmup stays 5 correct reps, while Quick Workout becomes a 1 Minute Workout. Avoid adding learner-facing training-level labels or extra choices without explicit approval.
 - 2026-05-14 UI polish direction: Home snapshot should emphasize Workout Streak, Total Reps with a 7-day column graph, and Accuracy with a simple visual meter. Average Pace is removed from Home for now.
 - 2026-05-14 UI polish direction: Practice and Workout Tracker should avoid nested/card-like surfaces for static information. Static stats should not look hoverable or clickable, and Practice should keep the problem/input as the main visual focus.
+- 2026-05-15 polish direction: Home snapshot reps and accuracy should be weekly/last-7-days metrics so headline values match their small charts. Workout Tracker calendar should show daily goal progress visually using a first internal default of 50 reps/day, while exact rep counts move to dedicated Progress/Tracker graphs or breakdowns.
+- 2026-05-15 follow-up review: the calendar should not carry a visible legend, and reps by operation should be a simple sublist rather than a stacked bar graph. The daily goal system remains visually implied by calendar color tiers while the final learner-facing explanation is still unresolved.
+- 2026-05-15 follow-up review: Home should avoid adding filler content to solve empty lower space. Prefer better vertical rhythm: more header breathing room, a centered dashboard stack above the dock, rolling 7-day streak, tighter Weekly Reps columns, and a per-day Weekly Accuracy visual.
+- 2026-05-16 polish direction: shared Progress selectors need enough built-in arrow space so labels stay centered inside the pill across Workout Log, Mastery, Fact Tracker, Focus, Coach, and Records.
+- 2026-05-16 Learn direction: any Learn stage with a correct-rep requirement should show an in-question cumulative correct tick counter. Wrong answers do not fill or reset the counter; progression should follow cumulative correct reps when the counter is the gate.
 
 ## Near-Term Roadmap Shape
 
@@ -81,8 +86,11 @@ These ideas combine the GitHub-saved Home research notes from commit `4ef3917` w
 - Next Home/onboarding design batch: review the new `Today's Training` home surface, then decide the daily routine default, quick workout behavior, learning recommendation, mastery/path preview, and progress snapshot density.
 - `v0.20.0` published the Home/Practice/Tracker UI polish batch with hidden adaptive quick starts and `docs/v17`.
 - `v0.20.1` added the rolling `docs/live` publishing flow, documented ADR-0008, and published the post-release cleanup to live without creating `docs/v18`.
+- `v0.20.2` published the Home rhythm, Progress selector/tracker, Practice input, light-mode surface, and Learn correct-counter polish to `docs/live`.
 - Next lesson content foundation: fill/review Make 10 spec, convert one teacher-approved lesson into structured lesson data, and decide the first Addition progression path.
 - Later onboarding/mastery clarity: first-time learner starting path, current-rank versus best-earned-rank explanation, and clearer metric/reward language.
+- Operation Mastery needs a fuller communication pass. The short-term bridge is an optional `?` explainer and less noisy cards; longer term, Fact Tracker likely belongs inside Operation Mastery as the evidence/detail layer for coverage, weak facts, and operation-specific next work.
+- Operation Mastery follow-up review: the immediate duplicate-title and selector-spacing cleanup is done; revisit rank-path/metric communication beyond the temporary explainer.
 - Process track: review the AI continuity system and define a written versioning policy before release activity becomes more frequent.
 
 ## Durable Decisions

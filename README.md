@@ -76,7 +76,7 @@ The latest hosted build is linked from `docs/index.html`.
 For routine internet updates, publish the current root app to the rolling live build:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-live.ps1 -Label "v0.20.1 live cleanup"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-live.ps1 -Label "v0.20.2 UI polish"
 ```
 
 To preserve a milestone as a numbered static snapshot, run:

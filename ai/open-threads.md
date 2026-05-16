@@ -1,6 +1,6 @@
 # Open Threads
 
-Last updated: 2026-05-13
+Last updated: 2026-05-16
 
 These are unresolved questions. Keep this file decision-focused; put executable work in `ai/tasks/next-actions.md`.
 
@@ -18,11 +18,14 @@ These are unresolved questions. Keep this file decision-focused; put executable 
 - Which metrics should carry the most learner-facing weight: accuracy, fluency, consistency, coverage, retention, or difficulty evidence?
 - How should current rank versus best-earned rank be explained to learners?
 - What learner-facing rewards, if any, should sit alongside the stronger metric set of streaks, reps, accuracy, pace, and mastery?
+- Should Operation Mastery and Fact Tracker merge into one hierarchy where Fact Tracker becomes the operation-detail/evidence layer behind mastery coverage and next-focus guidance?
+- What is the final learner-facing explanation for mastery ranks, score, coverage, recent performance, fluency, stability, and rank path?
 
 ## Onboarding And Adaptation
 
 - What should the first-time onboarding or placement flow look like?
 - Should the new `Today's Training` dashboard stay a simple handoff surface, or grow into a real adaptive daily-routine engine?
+- Should the 50 reps/day daily goal remain a fixed internal default, become adaptive from recent history, or become a learner-facing training preference?
 - When multi-operation workouts exist, should Home add a `Do all` CTA that runs the whole Daily Routine checklist in one workout?
 - Which adaptive learning behaviors are explicit roadmap commitments versus idea-bank concepts?
 - How aggressive should difficulty adaptation be for different learner profiles?

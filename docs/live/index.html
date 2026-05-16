@@ -66,8 +66,8 @@
             <section class="today-training-card">
               <div class="home-card-header">
                 <div>
-                  <p class="home-card-kicker">Daily routine</p>
-                  <h2>Quick 5 Warmup</h2>
+                  <p class="home-card-kicker">Daily Warmup Routine</p>
+                  <h2>Quick 5</h2>
                 </div>
               </div>
               <div class="training-plan-list" aria-label="Today's routine">
@@ -143,14 +143,14 @@
               </div>
               <div class="home-snapshot-metric home-reps-metric">
                 <div class="home-snapshot-head">
-                  <span class="metric-label">Total Reps</span>
+                  <span class="metric-label">Weekly Reps</span>
                   <span class="metric-value" id="homeSnapshotReps">0</span>
                 </div>
                 <div class="home-reps-graph" id="homeRepsGraph" aria-label="Reps over the last 7 days"></div>
               </div>
               <div class="home-snapshot-metric home-accuracy-metric">
                 <div class="home-snapshot-head">
-                  <span class="metric-label">Accuracy</span>
+                  <span class="metric-label">Weekly Accuracy</span>
                   <span class="metric-value" id="homeSnapshotRank">0%</span>
                 </div>
                 <div class="home-accuracy-visual" id="homeAccuracyVisual" aria-hidden="true">
@@ -670,9 +670,8 @@
               <div class="combo-indicator" id="comboIndicator" aria-live="polite" aria-hidden="true">
                 COMBO x0
               </div>
-              <div class="practice-response-rail" id="practiceResponseRail" aria-hidden="true"></div>
-
               <div class="problem-wrap minimalist">
+                <div class="practice-response-rail" id="practiceResponseRail" aria-hidden="true"></div>
                 <div class="problem-text" id="problemText" aria-live="polite">Ready when you are.</div>
               </div>
 
@@ -794,7 +793,7 @@
                   </div>
 
                   <div class="results-top-actions">
-                    <button class="ghost-button" type="button" id="repeatSessionButton">
+                    <button class="ghost-button contextual-action-button" type="button" id="repeatSessionButton">
                       Repeat Workout
                     </button>
                   </div>
@@ -829,6 +828,7 @@
                           <div class="tracker-mini-card">
                             <span class="tracker-mini-value" id="resultsMonthReps">0</span>
                             <span class="tracker-mini-label">Reps</span>
+                            <div class="operation-reps-breakdown" id="resultsOperationRepsBreakdown" aria-label="Monthly reps by operation"></div>
                           </div>
                           <div class="tracker-mini-card">
                             <span class="tracker-mini-value" id="resultsMonthAccuracy">0%</span>
@@ -1005,9 +1005,9 @@
                 </section>
 
                 <section class="progress-slide" data-progress-slide="mastery" data-carousel-kicker="Operation Mastery">
-                  <div class="slide-heading">
+                  <div class="slide-heading mastery-slide-heading">
                     <div>
-                      <h2>Operation mastery</h2>
+                      <h2>Your operation ranks <button class="inline-help-button" type="button" id="masteryHelpButton" aria-label="Explain operation mastery">?</button></h2>
                     </div>
                   </div>
 
@@ -1046,6 +1046,7 @@
                           <div class="tracker-mini-card">
                             <span class="tracker-mini-value" id="progressMonthReps">0</span>
                             <span class="tracker-mini-label">Reps</span>
+                            <div class="operation-reps-breakdown" id="progressOperationRepsBreakdown" aria-label="Monthly reps by operation"></div>
                           </div>
                           <div class="tracker-mini-card">
                             <span class="tracker-mini-value" id="progressMonthAccuracy">0%</span>
@@ -1348,6 +1349,44 @@
             <p class="section-kicker">Roadmap</p>
             <p class="options-copy">
               Subtraction and division modes, richer lesson interactivity, stronger rewards clarity, and milestone celebrations are next on the roadmap.
+            </p>
+          </section>
+        </div>
+      </dialog>
+
+      <dialog class="options-dialog mastery-help-dialog" id="masteryHelpDialog">
+        <div class="options-dialog-head">
+          <div>
+            <p class="section-kicker">Operation Mastery</p>
+            <h2>How ranks work</h2>
+          </div>
+          <button class="carousel-button" type="button" id="masteryHelpCloseButton" aria-label="Close mastery help">
+            &#10005;
+          </button>
+        </div>
+
+        <div class="options-stack">
+          <section class="options-card">
+            <p class="options-copy">
+              Each operation rank summarizes the evidence the app has seen so far. The score is out of 100 and combines accuracy, recent performance, fluency, coverage, stability, and attempts.
+            </p>
+          </section>
+
+          <section class="options-card">
+            <p class="section-kicker">Signals</p>
+            <ul class="options-list">
+              <li><strong>Accuracy</strong> is correct answers across that operation.</li>
+              <li><strong>Recent</strong> weighs the latest practice more heavily.</li>
+              <li><strong>Fluency</strong> shows correct answers that are becoming quick recall.</li>
+              <li><strong>Coverage</strong> counts practiced skill areas or fact groups.</li>
+              <li><strong>Stability</strong> checks whether recent workout accuracy is steady.</li>
+            </ul>
+          </section>
+
+          <section class="options-card">
+            <p class="section-kicker">How to Improve</p>
+            <p class="options-copy">
+              Build weak or untouched areas, keep accuracy steady, and return across multiple days so the rank reflects broad skill instead of one strong workout.
             </p>
           </section>
         </div>

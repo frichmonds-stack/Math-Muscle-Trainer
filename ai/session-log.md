@@ -215,4 +215,5 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran focused 390px mobile screenshots after the optimization pass and fixed the Progress page-dot overlap by making the carousel position indicator flow in the mobile layout.
 - Bumped runtime version to `v0.20.2`, moved the polish notes into the `0.20.2` changelog heading, and published `docs/live` with label `v0.20.2 UI polish`.
 - Ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
-- Prepared release commit `Release v0.20.2 UI polish` for GitHub sync.
+- Pushed release commit `a3610c1` (`Release v0.20.2 UI polish`) to GitHub.
+- Verified GitHub Pages live: `/` lists `Live - v0.20.2 UI polish`, `/live/` returned HTTP 200, and `/live/js/app-core.js` served `APP_VERSION = "v0.20.2"`.

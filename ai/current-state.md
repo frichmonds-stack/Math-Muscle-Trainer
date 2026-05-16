@@ -173,7 +173,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 - `v0.20.2` UI polish ran a CSS brace sanity check; braces are balanced.
 - `v0.20.2` UI polish captured focused mobile screenshots for Progress and Learn practice after the optimization pass, and published `docs/live` with label `v0.20.2 UI polish`.
 - `v0.20.2` UI polish ran `scripts/check-repo.ps1` after `docs/live`; result: `All repo checks passed.`
-- `v0.20.2` UI polish prepared the release commit for push to `main`.
+- `v0.20.2` UI polish pushed release commit `a3610c1` to `main` and verified GitHub Pages live:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.2 UI polish`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.2"`.
 
 ## Working Tree Note
 

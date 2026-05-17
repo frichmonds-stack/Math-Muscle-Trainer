@@ -255,3 +255,5 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran a CSS brace sanity check; braces are balanced.
 - Ran headless Chrome `file://` smoke checks: normal `index.html` did not render the debug unlock dialog, while `index.html?debug=1` did.
 - Updated publish/check scripts to include `js/app-debug.js`, republished `docs/live`, and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+- Pushed release commit `f85795b` (`Release v0.20.4 debug and UI polish`) to GitHub.
+- Verified GitHub Pages live after deployment caught up: `/` lists `Live - v0.20.4 debug and UI polish`, `/live/` includes `app-debug.js`, `/live/js/app-core.js` serves `APP_VERSION = "v0.20.4"`, and `/live/js/app-debug.js` returned HTTP 200 with debug unlock markers present.

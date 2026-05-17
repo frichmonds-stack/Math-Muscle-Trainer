@@ -204,6 +204,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 - 2026-05-17 `v0.20.4` publish close ran a CSS brace sanity check; braces are balanced.
 - 2026-05-17 `v0.20.4` publish close ran headless Chrome `file://` smoke checks: normal `index.html` did not render the debug unlock dialog, while `index.html?debug=1` did.
 - 2026-05-17 `v0.20.4` publish close updated publish/check scripts to include `js/app-debug.js`, then ran `scripts/check-repo.ps1` after publishing `docs/live`; result: `All repo checks passed.`
+- 2026-05-17 `v0.20.4` release commit `f85795b` was pushed to `main` and GitHub Pages was verified live:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.4 debug and UI polish`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200 and includes `app-debug.js`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.4"`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-debug.js` returned HTTP 200 with debug unlock markers present.
 
 ## Working Tree Note
 

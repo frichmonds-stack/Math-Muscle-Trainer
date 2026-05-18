@@ -650,10 +650,10 @@
                 </div>
                 <span class="progress-text" id="progressText">0 answered</span>
               </div>
-              <div class="combo-indicator" id="comboIndicator" aria-live="polite" aria-hidden="true">
-                COMBO x0
-              </div>
               <div class="problem-wrap minimalist">
+                <div class="combo-indicator" id="comboIndicator" aria-live="polite" aria-hidden="true">
+                  COMBO x0
+                </div>
                 <div class="practice-response-rail" id="practiceResponseRail" aria-hidden="true"></div>
                 <div class="problem-text" id="problemText" aria-live="polite">Ready when you are.</div>
               </div>
@@ -1272,6 +1272,17 @@
             </div>
 
         <div class="options-stack">
+          <section class="options-card compact-about-card">
+            <div class="compact-about-head">
+              <p class="section-kicker">About</p>
+              <button class="ghost-button" type="button" id="giveFeedbackButton">Give Feedback</button>
+            </div>
+            <p class="options-copy"><strong id="appVersion">v0.12.0</strong></p>
+            <p class="options-copy">
+              A strength-themed arithmetic trainer for building clean, confident reps.
+            </p>
+          </section>
+
           <section class="options-card">
             <p class="section-kicker">Appearance</p>
             <label class="field">
@@ -1300,15 +1311,6 @@
                 <option value="always-off">Always off</option>
               </select>
             </label>
-          </section>
-
-          <section class="options-card compact-about-card">
-            <p class="section-kicker">About</p>
-            <p class="options-copy"><strong id="appVersion">v0.12.0</strong></p>
-            <p class="options-copy">
-              A strength-themed arithmetic trainer for building clean, confident reps.
-            </p>
-            <button class="ghost-button" type="button" id="giveFeedbackButton">Give Feedback</button>
           </section>
 
           <section class="options-card">

@@ -285,3 +285,11 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Ran `scripts/check-repo.ps1` after publishing `docs/live`; result: `All repo checks passed.`
 - Pushed release commit `c7c0a43` (`Release v0.20.5 app shell polish`) to GitHub.
 - Verified GitHub Pages live: `/` lists `Live - v0.20.5 app shell polish`, `/live/js/app-core.js` serves `APP_VERSION = "v0.20.5"`, and `/live/index.html` includes the dock Options and `Give Feedback` markers.
+
+## 2026-05-18 - v0.20.6 Visual Reference System Publish Close
+
+- Completed a quick UI QA polish pass: moved the Practice combo badge into the question card, removed Home Weekly Reps helper labels while keeping the goal line, styled the dock Options gear as a compact dock item without a separator, centered compact setup pill text, made the three standard Workout Type choices a peer row, moved About first in Options with Give Feedback in the About card header, and fixed the debug badge pseudo-element that caused a large light-mode dimming wash.
+- Started the larger visual design process. Phase 1 audited existing design docs and current UI roles; Phase 2 created the visual reference system under `docs/design/reference/`.
+- Added the canonical `button-ui-design-brief.jpg`, `reference/README.md`, `screenshot-audit-v0.20.5.md`, and Home dark/light baseline screenshots. Current process state: Button & Control reference and Home current-state screenshots are wired in; Setup, Practice, Learn, Progress, and Options screenshots still need to be captured; likely next briefs are Surface/Card UI, Learning Interaction UI, Progress/Evidence UI, and App Shell/Nav.
+- Updated design docs so future UI work must identify component roles, consult the visual references, and treat icons as role-based rather than decorative.
+- Bumped runtime version and changelog to `v0.20.6`, updated README, PROJECT_NOTES, and AI continuity for the new visual-reference process state.

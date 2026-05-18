@@ -6,6 +6,23 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.6] - 2026-05-18
+
+### Added
+- Added a visual reference system under `docs/design/reference/`, including a canonical button/control UI board and screenshot audit notes.
+- Added Home dark/light baseline screenshots as current-state design references.
+
+### Changed
+- Moved the Practice combo badge into the question card so it no longer takes a separate HUD row.
+- Removed `LAST 7 DAYS` and `GOAL` text from the Home Weekly Reps chart while keeping the goal line as a visual reference.
+- Restyled the dock Options gear as a compact dock item and removed its vertical separator.
+- Tightened Workout setup difficulty/duration text centering and changed the three visible Workout Type choices into one peer row.
+- Moved Options About content first and placed Give Feedback in the About card header.
+- Updated design docs so future UI work must check component roles and visual references, with icons treated as role-based rather than decorative.
+
+### Fixed
+- Fixed the debug-mode badge so it no longer inherits the full-screen background pseudo-element and creates a large dimming wash.
+
 ## [0.20.5] - 2026-05-17
 
 ### Added

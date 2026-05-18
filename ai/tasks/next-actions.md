@@ -1,32 +1,35 @@
 # Next Actions
 
-Last updated: 2026-05-17
+Last updated: 2026-05-18
 
 Use this file for concrete next work. Broader undecided questions belong in `ai/open-threads.md`; speculative ideas belong in `PROJECT_NOTES.md`.
 
 ## Priority Order
 
-1. Finish near-term manual QA for the current `v0.20.3` live polish so the active classroom build stays trustworthy.
-2. Create a Lesson Experience System design brief before major lesson expansion: reusable patterns for explanation blocks, worked examples, visual/diagram blocks, hints, guided practice, final practice, completion, locked stages, media controls, and lesson navigation.
-3. Prioritize the Learning Experience System, Learning Interaction System, Learning Feedback, zero states, and theme/visual system work because these affect pedagogy, usability, classroom experience, and eventual product positioning.
-4. Extend debug mode / developer review tools after the first slice: state saving/loading, import/export for reproducible bugs, lesson-lock bypass when normal locks return, richer persona controls, and direct lesson-stage jumps.
-5. Continue teacher-authored lesson content and addition progression planning using the Lesson Experience System as the visual/structural guide.
-6. Plan deeper Operation Mastery communication and Progress IA after the lesson direction is clearer.
+1. Finish near-term manual QA for the current rolling live build so the active classroom build stays trustworthy.
+2. Continue the visual reference system: capture Setup, Practice, Learn, Progress, and Options screenshots, then add notes to `docs/design/reference/screenshot-audit-v0.20.5.md`.
+3. Create a Lesson Experience System design brief before major lesson expansion: reusable patterns for explanation blocks, worked examples, visual/diagram blocks, hints, guided practice, final practice, completion, locked stages, media controls, and lesson navigation.
+4. Prioritize the Learning Experience System, Learning Interaction System, Learning Feedback, zero states, and theme/visual system work because these affect pedagogy, usability, classroom experience, and eventual product positioning.
+5. Extend debug mode / developer review tools after the first slice: state saving/loading, import/export for reproducible bugs, lesson-lock bypass when normal locks return, richer persona controls, and direct lesson-stage jumps.
+6. Continue teacher-authored lesson content and addition progression planning using the Lesson Experience System as the visual/structural guide.
+7. Plan deeper Operation Mastery communication and Progress IA after the lesson direction is clearer.
 
 ## Best Next Batch
 
-1. Manually review the published `v0.20.5` app-shell polish on iPad landscape, iPad portrait, narrow resized desktop windows, mobile widths, light mode, Jungle, and Solo Leveling: dock Options gear, no floating Home utility buttons, compact About/Give Feedback flow, Weekly Reps two-thirds goal line, setup density/centering, debug persona historical data, theme status badge contrast, and light-mode outline strength.
+1. Manually review the published `v0.20.6` visual reference/UI polish build on iPad landscape, iPad portrait, narrow resized desktop windows, mobile widths, light mode, Jungle, and Solo Leveling: dock Options gear, compact About/Give Feedback flow, Weekly Reps chart labels/line, setup density/centering, debug badge/dimming, combo placement, theme status badge contrast, and light-mode outline strength.
 2. Manually retest Practice with the built-in keypad on keyboardless student devices, especially iPad/tablet landscape and portrait, to confirm the larger answer input, answer icon, and in-card dot rail do not crowd the keypad layout.
-3. Draft the Lesson Experience System design brief so future lessons have consistent structure, visual roles, media placement, motion rules, and stage/progression behavior instead of one-off screen design.
-4. Manually test hidden adaptive Home quick starts with new-user/no-data state and with existing progress data for each operation.
-5. Decide whether the 50 reps/day goal should stay fixed, become adaptive, or become a learner-facing training preference, and how it should be explained outside the calendar header.
-6. Plan the deeper Operation Mastery communication/IA pass, including whether Fact Tracker becomes the detail/evidence layer inside Operation Mastery.
-7. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
-8. Manually test Learn correct counters and the new feedback delay/reveal across Make 10, an addition final practice, multiplication assisted reps, and multiplication solo reps.
-9. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
-10. Do a dedicated stale Home CSS prune for old launcher-era selectors (`home-launcher`, `home-menu-row`, `daily-widget`, and related legacy classes) after checking they are not used by any archived/current root UI paths.
-11. Add intentional zero-state displays for new-user/empty-data surfaces so Home, Progress, Mastery, Fact Tracker, Records, and Learn completion states do not feel blank or broken before evidence exists.
-12. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
+3. Add the remaining visual reference screenshots: Setup dark, Practice dark combo, Practice light, Learn menu/task state, Progress Fact Tracker light, Progress Operation Mastery, and Options light.
+4. Draft the next design briefs in this order unless product needs change: Surface/Card UI, Learning Interaction UI, Progress/Evidence UI, App Shell/Nav.
+5. Draft the Lesson Experience System design brief so future lessons have consistent structure, visual roles, media placement, motion rules, and stage/progression behavior instead of one-off screen design.
+6. Manually test hidden adaptive Home quick starts with new-user/no-data state and with existing progress data for each operation.
+7. Decide whether the 50 reps/day goal should stay fixed, become adaptive, or become a learner-facing training preference, and how it should be explained outside the calendar header.
+8. Plan the deeper Operation Mastery communication/IA pass, including whether Fact Tracker becomes the detail/evidence layer inside Operation Mastery.
+9. Confirm the Daily Routine checklist should stay as four separate 5-correct operation routines until multi-operation workouts exist.
+10. Manually test Learn correct counters and the new feedback delay/reveal across Make 10, an addition final practice, multiplication assisted reps, and multiplication solo reps.
+11. Move `Exit Lesson` out of the global top-right utility rail into the lesson-local header/content area.
+12. Do a dedicated stale Home CSS prune for old launcher-era selectors (`home-launcher`, `home-menu-row`, `daily-widget`, and related legacy classes) after checking they are not used by any archived/current root UI paths.
+13. Add intentional zero-state displays for new-user/empty-data surfaces so Home, Progress, Mastery, Fact Tracker, Records, and Learn completion states do not feel blank or broken before evidence exists.
+14. Audit text-heavy surfaces and add consistent math-strength/status visuals where they improve scanning, touchability, or app-like interaction without stuffing icons into every button.
 
 ## Design Systems
 

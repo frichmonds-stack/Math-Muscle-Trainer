@@ -4,6 +4,7 @@ This is the stable design direction for UI work. Use it before changing layout, 
 
 For reusable component roles and CSS-class expectations, also read `docs/design/component-system.md`.
 For the current implemented button/control baseline, read `docs/design/current-button-ui.md`.
+For visual references and screenshot audits, read `docs/design/reference/README.md` and `docs/design/reference/screenshot-audit-v0.20.5.md`.
 
 ## North Star
 
@@ -273,7 +274,9 @@ Examples:
 For UI changes:
 
 1. Identify the role of each element.
-2. State the intended structure before editing.
-3. Apply the smallest useful visual/system change.
-4. Check desktop and iPad-sized behavior.
-5. Preserve touch ergonomics and text fit.
+2. Check the relevant component roles and visual references.
+3. State the intended structure before editing.
+4. Apply the smallest useful visual/system change.
+5. Check desktop and iPad-sized behavior.
+6. Preserve touch ergonomics and text fit.
+7. In the final response, name which UI roles changed and whether any reference doc or screenshot needs updating.

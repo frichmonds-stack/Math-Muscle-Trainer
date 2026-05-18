@@ -2516,9 +2516,8 @@ function buildHomeRepsGraphMarkup() {
   }).join("");
 
   return `
-    <span class="home-reps-scale">Last 7 days</span>
     <span class="home-reps-days" style="--rep-goal-height: ${goalHeight}%" aria-hidden="true">
-      <span class="home-reps-goal-line"><span>Goal</span></span>
+      <span class="home-reps-goal-line"></span>
       ${bars}
     </span>
   `;

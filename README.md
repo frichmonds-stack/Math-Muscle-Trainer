@@ -87,7 +87,7 @@ The latest hosted build is linked from `docs/index.html`.
 For routine internet updates, publish the current root app to the rolling live build:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-live.ps1 -Label "v0.20.5 app shell polish"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-live.ps1 -Label "v0.20.6 visual reference system"
 ```
 
 To preserve a milestone as a numbered static snapshot, run:
@@ -108,6 +108,7 @@ Use `docs/live/` for normal "make it live" updates. Use `docs/v*` snapshots only
 - `js/app-progress.js` contains results/progress trackers, filters, and analytics rendering
 - `js/app-init.js` contains startup rendering and event wiring
 - `js/app-debug.js` contains opt-in teacher/developer debug tools
+- `docs/design/reference/` contains visual reference boards, screenshot audit notes, and curated app screenshots for UI design work
 
 ## Versioning
 

@@ -1183,15 +1183,11 @@ body[data-color-mode="light"] .app-dock-button {
 }
 
 body[data-color-mode="light"] .app-dock-utility-button {
-  background: rgba(24, 35, 52, 0.055);
-  border-color: rgba(24, 35, 52, 0.24);
-  color: rgba(27, 42, 64, 0.78);
+  color: rgba(27, 42, 64, 0.66);
 }
 
-body[data-color-mode="light"] .app-dock-utility-button::before {
-  background: rgba(24, 35, 52, 0.18);
-}
-
+body[data-color-mode="light"] .app-dock-utility-button:hover:not(:disabled),
+body[data-color-mode="light"] .app-dock-utility-button:focus-visible:not(:disabled),
 body[data-color-mode="light"] .app-dock-button:hover:not(:disabled),
 body[data-color-mode="light"] .app-dock-button:focus-visible:not(:disabled) {
   color: #1b2a40;
@@ -1765,8 +1761,8 @@ body[data-color-mode="light"] .nav-button-primary {
 .home-reps-graph {
   position: relative;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: 0.34rem;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
   align-items: end;
   min-height: 80px;
   justify-items: stretch;
@@ -1775,18 +1771,6 @@ body[data-color-mode="light"] .nav-button-primary {
 .home-reps-metric .home-snapshot-head {
   justify-self: center;
   width: min(100%, 25rem);
-}
-
-.home-reps-scale {
-  justify-self: center;
-  width: min(100%, 25rem);
-  text-align: right;
-  color: var(--muted);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  text-transform: uppercase;
 }
 
 .home-reps-days {
@@ -1804,23 +1788,9 @@ body[data-color-mode="light"] .nav-button-primary {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(1.05rem + var(--rep-goal-height));
+  bottom: calc(1.05rem + 38px);
   z-index: 2;
   border-top: 1px dashed rgba(var(--accent-rgb), 0.48);
-  color: color-mix(in srgb, var(--text) 70%, var(--muted) 30%);
-  font-size: 0.54rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.home-reps-goal-line span {
-  position: absolute;
-  right: 0;
-  top: -0.5rem;
-  padding-left: 0.22rem;
-  background: color-mix(in srgb, var(--panel) 82%, transparent);
 }
 
 .home-reps-day {
@@ -2595,20 +2565,17 @@ body[data-color-mode="light"] .primary-button .visual-anchor {
   min-width: 2.55rem;
   min-height: 2.55rem;
   padding: 0;
-  margin-left: 0.18rem;
+  margin-left: 0;
   border-radius: 999px;
-  border: 1px solid var(--control-border);
-  background: rgba(255, 255, 255, 0.055);
-  color: rgba(255, 255, 255, 0.74);
-}
-
-.app-dock-utility-button::before {
-  content: "";
-  position: absolute;
-  left: -0.18rem;
-  width: 1px;
-  height: 1.45rem;
-  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.68);
+  cursor: pointer;
+  transition:
+    background var(--interactive-duration) ease,
+    border-color var(--interactive-duration) ease,
+    box-shadow var(--interactive-duration) ease,
+    color var(--interactive-duration) ease;
 }
 
 .app-dock-utility-button svg {
@@ -2618,17 +2585,14 @@ body[data-color-mode="light"] .primary-button .visual-anchor {
 }
 
 .app-dock-utility-button:hover:not(:disabled),
-.app-dock-utility-button:focus-visible:not(:disabled) {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.09);
-}
-
+.app-dock-utility-button:focus-visible:not(:disabled),
 .app-dock-button:hover:not(:disabled),
 .app-dock-button:focus-visible:not(:disabled) {
   color: var(--text);
   background: rgba(255, 255, 255, 0.07);
 }
 
+.app-dock-utility-button:active:not(:disabled),
 .app-dock-button:active:not(:disabled) {
   background: rgba(255, 255, 255, 0.04);
 }
@@ -3119,6 +3083,17 @@ body[data-color-mode="light"] .primary-button .visual-anchor {
   padding: 0.44rem 0.7rem;
 }
 
+#setupScreen #additionDifficultyField .choice-pill > span,
+#setupScreen #subtractionDifficultyField .choice-pill > span,
+#setupScreen #timeField .choice-pill > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.62rem;
+  padding: 0.34rem 0.68rem;
+  line-height: 1.1;
+}
+
 #setupScreen .choice-pill-copy {
   gap: 0.12rem;
   min-height: 2.4rem;
@@ -3277,6 +3252,13 @@ body[data-color-mode="light"] .primary-button .visual-anchor {
 
   #setupScreen .choice-row-compact .choice-pill {
     min-width: 76px;
+  }
+
+  #setupScreen #additionDifficultyField .choice-pill > span,
+  #setupScreen #subtractionDifficultyField .choice-pill > span,
+  #setupScreen #timeField .choice-pill > span {
+    min-height: 2.36rem;
+    padding-block: 0.26rem;
   }
 }
 
@@ -3489,8 +3471,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .workout-type-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.52rem;
+}
+
+.workout-type-grid:has(#isolationSessionChoice:not(.is-hidden)) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .workout-type-grid .choice-pill,
@@ -4943,20 +4929,24 @@ body[data-color-mode="light"] .technique-correct-dot.is-filled {
 }
 
 .combo-indicator {
+  position: absolute;
+  top: 0.62rem;
+  left: 0.72rem;
+  z-index: 2;
   width: fit-content;
-  min-width: 124px;
-  margin: 0 0 0.42rem auto;
-  padding: 0.34rem 0.72rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0.26rem 0.58rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(26, 26, 26, 0.94);
   color: rgba(255, 255, 255, 0.82);
   text-align: center;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
   font-weight: 800;
   opacity: 0;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   transition:
     opacity 170ms ease,
     transform 170ms ease,
@@ -7343,9 +7333,22 @@ body[data-theme="solo-leveling"][data-color-mode="light"] .carousel-inline-kicke
   gap: 0.48rem;
 }
 
-.compact-about-card .ghost-button {
-  justify-self: start;
-  margin-top: 0.16rem;
+.compact-about-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.compact-about-head .section-kicker {
+  margin: 0;
+}
+
+.compact-about-head .ghost-button {
+  min-height: 2.28rem;
+  padding: 0.42rem 0.74rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
 }
 
 .options-copy {
@@ -7370,18 +7373,25 @@ body[data-theme="solo-leveling"][data-color-mode="light"] .carousel-inline-kicke
 .debug-mode::before {
   content: "DEBUG MODE";
   position: fixed;
+  inset: auto;
   top: 12px;
   left: 12px;
   z-index: 120;
+  width: auto;
+  height: auto;
   padding: 6px 10px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 999px;
   background: rgba(23, 22, 24, 0.82);
+  background-image: none;
   color: #ffe08a;
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  opacity: 1;
+  filter: none;
+  mask-image: none;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
   pointer-events: none;
 }
@@ -7551,7 +7561,7 @@ body[data-theme="solo-leveling"][data-color-mode="light"] .carousel-inline-kicke
 }
 
 .debug-lock-dialog::backdrop {
-  background: rgba(6, 6, 8, 0.24);
+  background: transparent;
   backdrop-filter: none;
 }
 
@@ -8044,6 +8054,7 @@ body[data-color-mode="light"] .debug-lock-card {
   .mastery-form-row,
   .streak-metrics,
   .setup-option-list,
+  .workout-type-grid,
   .preview-pair,
   .range-options-block,
   .mini-toggle-grid,
@@ -8063,6 +8074,10 @@ body[data-color-mode="light"] .debug-lock-card {
   #setupScreen .setup-option-list {
     grid-template-columns: 1fr;
     justify-content: stretch;
+  }
+
+  .workout-type-grid:has(#isolationSessionChoice:not(.is-hidden)) {
+    grid-template-columns: 1fr;
   }
 
   .mini-toggle-stack {

@@ -1,12 +1,12 @@
 # Current State
 
-Last updated: 2026-05-17
+Last updated: 2026-05-18
 
 ## Implementation
 
 - Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.20.4` locally.
-- Current live docs build is `docs/live`, marked latest in `docs/index.html` as `v0.20.5 app shell polish`.
+- Root app is at `v0.20.6` locally.
+- Current live docs build is `docs/live`, marked latest in `docs/index.html` as `v0.20.6 visual reference system`.
 - Latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
 - `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
@@ -102,6 +102,8 @@ Last updated: 2026-05-17
 - `v0.20.4` UI polish simplified the leave-workout CTA to `End Workout`, changed the Home About button from `?` to `i`, added the classroom feedback note to About, added a Home Weekly Reps goal line, polished Workout setup control alignment/density, added subtle Practice HUD grouping in light mode, improved Learn light-mode contrast, added stronger Learn feedback lockout/reveal states, and fixed Aang light-mode `Strong` Fact Tracker pill contrast.
 - Post-initialization collaboration now defaults to discussion/planning mode until the user explicitly authorizes local implementation, `Normal Close`, or `Publish Close`. `Normal Close` is local checks/docs/AI continuity only; `Publish Close` is release-style publish/check/commit/push/live verification when deployment timing allows.
 - `v0.20.5` app-shell polish moved Options into a dock gear, removed floating Home utility buttons, folded About into Options, added a temporary Give Feedback dialog, set Home Weekly Reps to a two-thirds daily-goal line, tightened setup difficulty/duration/workout-type controls, improved iPad landscape/portrait QA CSS, strengthened light-mode dark-neutral outlines, fixed Jungle light-mode status badge contrast, preserved Solo Leveling purple in non-semantic accents, reduced debug unlock dimming, and added historical debug persona data for calendar QA.
+- `v0.20.6` local UI/design pass moved the Practice combo badge into the question card, removed Home Weekly Reps helper labels while keeping the visual goal line, styled the dock gear as a compact dock item without a separator, centered compact setup pill text, made the three standard Workout Type choices a peer row, moved About first in Options with Give Feedback in the About header, and fixed the debug badge pseudo-element that caused a large light-mode dimming wash.
+- The visual reference system now exists under `docs/design/reference/`, with a canonical button/control board, a screenshot audit scaffold, and Home dark/light baseline screenshots. Current process state: button/reference board and Home screenshots are wired in; Setup, Practice, Learn, Progress, and Options screenshots are still pending; proposed next briefs are Surface/Card UI, Learning Interaction UI, Progress/Evidence UI, and App Shell/Nav.
 
 ## Product Direction
 

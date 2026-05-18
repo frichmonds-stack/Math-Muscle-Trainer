@@ -5,6 +5,7 @@ This document defines the reusable UI roles and class contract for future implem
 This is a planning contract until the CSS is fully aligned. When future UI work touches controls, prefer these roles/classes instead of inventing one-off styles.
 
 For the current implemented baseline and screenshot review checklist, see `docs/design/current-button-ui.md`.
+For visual references and screenshot audit notes, see `docs/design/reference/README.md`.
 
 ## Core Rule
 
@@ -15,6 +16,7 @@ Before styling, ask:
 - Is this a primary action, secondary action, ghost action, icon utility, toggle, segmented choice, metric, action tile, insight row, content header, or dialog action?
 - Does an existing role/class cover it?
 - If not, is there a truly new reusable role, or is this a one-off that should be simplified?
+- Which visual reference or screenshot audit entry applies?
 
 ## Button Classes
 
@@ -40,6 +42,7 @@ Rules:
 - Secondary buttons should not visually compete with primary buttons.
 - Ghost buttons should not look like boxed primary actions.
 - Important touch actions should meet a comfortable target size; prefer at least `44px` and often `48-56px`.
+- Text buttons do not need icons by default. Add an icon only when it carries meaning, improves scanning, or identifies an operation, status, or utility action.
 
 ## Icon Utility Buttons
 
@@ -115,6 +118,7 @@ Rules:
 - Visual anchors should help scanning, hierarchy, or interaction clarity.
 - Prefer putting visual anchors in screen context, cards, lesson content, progress/status modules, and app identity moments rather than inside every text button.
 - Do not replace important labels with icons alone for young learners.
+- Do not copy placeholder symbols from reference boards as canonical app icons.
 - Keep icon style consistent across the app.
 - Avoid busy illustrations or mascot-like visuals unless the user explicitly chooses that direction.
 

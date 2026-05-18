@@ -1,6 +1,6 @@
 # Open Threads
 
-Last updated: 2026-05-17
+Last updated: 2026-05-18
 
 These are unresolved questions. Keep this file decision-focused; put executable work in `ai/tasks/next-actions.md`.
 
@@ -46,6 +46,8 @@ These are unresolved questions. Keep this file decision-focused; put executable 
 - Which debug personas and direct lesson-stage jumps are most useful after classroom testing?
 - What exact visual language should define the Learning Interaction System and Learning Feedback across typed answers, comparison buttons, multiple choice, fill blanks, and future tap/drag inputs?
 - How should theme palettes map to semantic color roles so every palette keeps readable contrast across status chips, progress bars, selected states, and small text?
+- Which visual reference briefs should be created after the Button & Control UI board: Surface/Card UI, Learning Interaction UI, Progress/Evidence UI, App Shell/Nav, or another grouping?
+- Which current screenshots should become baseline references versus future-direction references so the app does not accidentally freeze around the current Home layout?
 
 ## Release And Process
 

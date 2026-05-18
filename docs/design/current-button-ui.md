@@ -1,10 +1,18 @@
 # Current Button UI Reference
 
-Last updated: 2026-05-15
+Last updated: 2026-05-18
 
 This document describes the current implemented button/control direction after the early UI direction batches. Use it when comparing screenshots against the intended style.
 
 It is not the final design system. It is the current working baseline.
+
+## Visual Reference
+
+![Current button UI reference](reference/button-ui-design-brief.jpg)
+
+Use `docs/design/reference/button-ui-design-brief.jpg` as the current visual reference for button/control shape, spacing, density, hierarchy, and states.
+
+Important: the symbols shown inside primary and secondary buttons are examples only. They are not canonical app icons and should not be copied by default. Text buttons do not need icons unless the icon carries real meaning, improves scanning, or identifies a specific operation, status, or utility action.
 
 ## Design Formula
 
@@ -36,6 +44,7 @@ The current UI uses:
 - switch-style toggles for binary setup options,
 - compact rounded icon utilities for Home/settings and carousel-style controls.
 - static metric panels that do not hover, lift, or use pointer-style affordances.
+- text-first primary and secondary buttons by default, with icons reserved for meaningful operation, status, or utility roles.
 
 The current implementation deliberately keeps the existing theme/color system:
 
@@ -68,6 +77,11 @@ Current examples:
 - Practice `Check`
 - Confirmation dialog confirm buttons
 
+Icon rule:
+
+- Do not add icons to primary buttons by default.
+- Use a primary-button icon only when it adds clear meaning, not decoration.
+
 Compare screenshots for:
 
 - Does the primary action clearly stand out?
@@ -99,6 +113,11 @@ Current examples:
 - Setup workout type choices
 - Lesson cards
 - Fact tracker cards
+
+Icon rule:
+
+- Operation choices can use `+`, `-`, `x`, and division symbols because the symbols carry direct meaning.
+- Most secondary text buttons, such as `Practice More`, `Repeat Workout`, and `Learn`, should remain text-only unless a visual anchor improves scanning.
 
 Compare screenshots for:
 
@@ -365,5 +384,5 @@ Use this when reviewing a screenshot:
 - The current classes are still historical (`primary-button`, `ghost-button`, `nav-button`) rather than the cleaner future contract (`.btn`, `.btn-primary`, `.action-tile`, etc.).
 - Setup workout type cards need another visual pass after the icon cleanup.
 - Progress and Learn have not fully received the visual-anchor/component-system treatment yet.
-- No visual reference screenshots are stored in the repo yet.
+- App screenshots are now scaffolded in `docs/design/reference/screenshot-audit-v0.20.5.md`, but the actual screenshot image set still needs to be captured.
 - The latest docs snapshot has not been republished after root UI changes.

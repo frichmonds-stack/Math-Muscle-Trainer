@@ -220,6 +220,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.5 app shell polish`.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.5"`.
   - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/index.html` included the dock Options and `Give Feedback` markers.
+- 2026-05-18 `v0.20.6` visual reference system ran `node --check` for all root JS modules; syntax checks passed.
+- 2026-05-18 `v0.20.6` visual reference system ran a CSS brace sanity check; braces are balanced.
+- 2026-05-18 `v0.20.6` visual reference system published `docs/live` and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
+- 2026-05-18 `v0.20.6` release commit `c63f524` was pushed to `main` and GitHub Pages was verified live:
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.6 visual reference system`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.6"`.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/index.html` included updated live UI markers.
+  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/design/reference/button-ui-design-brief.jpg`, `design/reference/screenshot-audit-v0.20.5.md`, and the Home dark/light screenshot references returned HTTP 200.
 
 ## Working Tree Note
 

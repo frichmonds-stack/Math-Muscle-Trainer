@@ -294,3 +294,16 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Updated design docs so future UI work must identify component roles, consult the visual references, and treat icons as role-based rather than decorative.
 - Bumped runtime version and changelog to `v0.20.6`, updated README, PROJECT_NOTES, and AI continuity for the new visual-reference process state.
 - Published `docs/live` with label `v0.20.6 visual reference system`, ran repo checks, pushed release commit `c63f524`, and verified GitHub Pages live: `/` lists `Live - v0.20.6 visual reference system`, `/live/js/app-core.js` serves `APP_VERSION = "v0.20.6"`, `/live/index.html` includes the updated live markers, and the design reference board plus Home dark/light screenshots return HTTP 200.
+
+## 2026-05-19 - Visual Design System Continuity Recovery
+
+- Recovered the broader design-audit thread into documentation so future sessions do not start from the button UI reference alone.
+- Added `docs/design/visual-design-system.md` with the app-wide north star, screen meanings, surface/control roles, typography/color rules, do/do-not rules, and Learning Interaction vocabulary (`Task`, `Prompt`, `Response`, `Feedback`, `Rep`, `Gate`, `Stage`, `Evidence`).
+- Wired the captured Setup and Practice dark/light screenshots into `docs/design/reference/screenshot-audit-v0.20.5.md` alongside the existing Home references.
+- Renamed `setup-lightv0.20.5.png` to `setup-light-v0.20.5.png` for naming consistency.
+- Updated design reference pointers and AI continuity notes to treat Home, Setup, and Practice as the first reference spine; Learn, Progress, and Options references are now later specialized-brief work.
+
+## 2026-05-19 - v0.20.7 Visual Design Brief Publish Close
+
+- Finished the broad visual design brief in `docs/design/visual-design-system.md`, adding role/size container rules, typography hierarchy, lean semantic color/theme rules, app-frame and responsive fit rules, screen patterns, recommendation/settings ownership, motion/accessibility guardrails, and a compact do/don't checklist.
+- Bumped runtime version and changelog to `v0.20.7` for the design documentation/reference release.

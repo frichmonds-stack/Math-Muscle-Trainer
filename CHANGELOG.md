@@ -6,6 +6,15 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.7] - 2026-05-19
+
+### Added
+- Added the app-wide visual design system brief covering surface roles, typography, color/theme semantics, app-frame rules, screen patterns, recommendations/settings ownership, and design guardrails.
+- Added Setup and Practice dark/light screenshots to the visual reference spine alongside the existing Home references.
+
+### Changed
+- Updated design reference notes and AI continuity so future sessions start from the full app-wide design brief rather than only the button/control reference.
+
 ## [0.20.6] - 2026-05-18
 
 ### Added

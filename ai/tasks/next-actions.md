@@ -1,13 +1,13 @@
 # Next Actions
 
-Last updated: 2026-05-18
+Last updated: 2026-05-19
 
 Use this file for concrete next work. Broader undecided questions belong in `ai/open-threads.md`; speculative ideas belong in `PROJECT_NOTES.md`.
 
 ## Priority Order
 
 1. Finish near-term manual QA for the current rolling live build so the active classroom build stays trustworthy.
-2. Continue the visual reference system: capture Setup, Practice, Learn, Progress, and Options screenshots, then add notes to `docs/design/reference/screenshot-audit-v0.20.5.md`.
+2. Use the completed app-wide visual design brief and the Home/Setup/Practice reference spine to guide near-term UI work.
 3. Create a Lesson Experience System design brief before major lesson expansion: reusable patterns for explanation blocks, worked examples, visual/diagram blocks, hints, guided practice, final practice, completion, locked stages, media controls, and lesson navigation.
 4. Prioritize the Learning Experience System, Learning Interaction System, Learning Feedback, zero states, and theme/visual system work because these affect pedagogy, usability, classroom experience, and eventual product positioning.
 5. Extend debug mode / developer review tools after the first slice: state saving/loading, import/export for reproducible bugs, lesson-lock bypass when normal locks return, richer persona controls, and direct lesson-stage jumps.
@@ -18,8 +18,8 @@ Use this file for concrete next work. Broader undecided questions belong in `ai/
 
 1. Manually review the published `v0.20.6` visual reference/UI polish build on iPad landscape, iPad portrait, narrow resized desktop windows, mobile widths, light mode, Jungle, and Solo Leveling: dock Options gear, compact About/Give Feedback flow, Weekly Reps chart labels/line, setup density/centering, debug badge/dimming, combo placement, theme status badge contrast, and light-mode outline strength.
 2. Manually retest Practice with the built-in keypad on keyboardless student devices, especially iPad/tablet landscape and portrait, to confirm the larger answer input, answer icon, and in-card dot rail do not crowd the keypad layout.
-3. Add the remaining visual reference screenshots: Setup dark, Practice dark combo, Practice light, Learn menu/task state, Progress Fact Tracker light, Progress Operation Mastery, and Options light.
-4. Draft the next design briefs in this order unless product needs change: Surface/Card UI, Learning Interaction UI, Progress/Evidence UI, App Shell/Nav.
+3. Draft the next design briefs in this order unless product needs change: Lesson Experience System, detailed Learning Interaction System, Progress/Evidence UI, App Shell/Nav.
+4. Add specialized visual references later as their briefs are drafted: Learn menu/task state, Progress Fact Tracker light, Progress Operation Mastery, and Options light.
 5. Draft the Lesson Experience System design brief so future lessons have consistent structure, visual roles, media placement, motion rules, and stage/progression behavior instead of one-off screen design.
 6. Manually test hidden adaptive Home quick starts with new-user/no-data state and with existing progress data for each operation.
 7. Decide whether the 50 reps/day goal should stay fixed, become adaptive, or become a learner-facing training preference, and how it should be explained outside the calendar header.
@@ -40,7 +40,7 @@ Use this file for concrete next work. Broader undecided questions belong in `ai/
 5. Home/Training System: define daily routine, quick workout, continue-learning, streak/momentum, and training snapshot roles so Home stays useful without becoming cluttered.
 6. Zero-State System: define reusable empty/new-user states for no progress, no workouts, no mastery evidence, no fact data, no records, and lessons not started.
 7. Theme Token / Color Role System: review palettes by semantic roles so each theme keeps readable contrast for surfaces, status chips, progress bars, selected states, and small text.
-8. Learning Interaction System: define the shared learner task loop for prompts, inputs, scaffolds, feedback, answer reveal, anti-spam lockout, retry/advance timing, and progress gates across Workout Practice and Learn.
+8. Learning Interaction System: first vocabulary pass is captured in `docs/design/visual-design-system.md`. Next define the detailed shared learner task loop for prompts, inputs, scaffolds, feedback, answer reveal, anti-spam lockout, retry/advance timing, and progress gates across Workout Practice and Learn.
 
 ## Lesson Content
 

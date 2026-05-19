@@ -18,7 +18,9 @@ Future screenshots should be stored in `screenshots/` with names like:
 - `home-dark-v0.20.5.png`
 - `home-light-v0.20.5.png`
 - `setup-dark-v0.20.5.png`
-- `practice-dark-combo-v0.20.5.png`
+- `setup-light-v0.20.5.png`
+- `practice-dark-v0.20.5.png`
+- `practice-light-v0.20.5.png`
 - `progress-light-fact-tracker-v0.20.5.png`
 - `options-light-v0.20.5.png`
 
@@ -126,7 +128,9 @@ Component roles visible:
 
 ## Setup - Dark
 
-Reference: pending screenshot.
+Reference: `screenshots/setup-dark-v0.20.5.png`
+
+Status: current baseline reference, not final target.
 
 Preserve:
 
@@ -146,6 +150,38 @@ Decide later:
 
 Component roles visible:
 
+- Workout preparation surface.
+- Operation choice.
+- Segmented choice.
+- Toggle.
+- Primary action.
+- Content header.
+
+## Setup - Light
+
+Reference: `screenshots/setup-light-v0.20.5.png`
+
+Status: current baseline reference, not final target.
+
+Preserve:
+
+- Same compact workout-preparation structure as dark mode.
+- Light-mode separation between choice groups without making the screen feel like a form.
+- Operation, difficulty, duration, and workout-type controls staying visually related as setup decisions.
+- Start action remaining clearly primary.
+
+Fix:
+
+- Keep checking selected/unselected contrast across themes and color modes.
+- Watch small-label legibility as more setup options are added.
+
+Decide later:
+
+- Whether setup needs a friendlier adaptive preference layer or should stay mostly automatic.
+
+Component roles visible:
+
+- Workout preparation surface.
 - Operation choice.
 - Segmented choice.
 - Toggle.
@@ -154,7 +190,9 @@ Component roles visible:
 
 ## Practice - Dark
 
-Reference: pending screenshot.
+Reference: `screenshots/practice-dark-v0.20.5.png`
+
+Status: current baseline reference, not final target.
 
 Preserve:
 
@@ -171,6 +209,38 @@ Fix:
 Decide later:
 
 - Whether the visible `Question` wording should stay in Workout while the internal design role becomes `Task`.
+
+Component roles visible:
+
+- Learning task card.
+- Prompt.
+- Response input.
+- Feedback/status indicator.
+- Static metric.
+- Ghost action.
+- Primary action.
+
+## Practice - Light
+
+Reference: `screenshots/practice-light-v0.20.5.png`
+
+Status: current baseline reference, not final target.
+
+Preserve:
+
+- Same question/task-first hierarchy as dark mode.
+- Large readable answer input and clear feedback icon placement.
+- Touch keypad remaining legible without becoming the whole screen.
+- Recent-answer dots staying inside the task card as pace feedback.
+
+Fix:
+
+- Keep checking the task card, input border, and keypad contrast in light mode across themes.
+- Watch for crowding on portrait tablets and mobile widths.
+
+Decide later:
+
+- Whether Workout keeps visible `Question` language while the design system uses `Task` internally.
 
 Component roles visible:
 

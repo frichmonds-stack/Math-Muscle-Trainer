@@ -2,6 +2,7 @@
 
 This is the stable design direction for UI work. Use it before changing layout, controls, navigation, visual hierarchy, or generated UI copy. It is intentionally practical: future Codex sessions should be able to apply it without needing the full chat history.
 
+For the app-wide design brief, visual roles, screen meaning, and interaction vocabulary, read `docs/design/visual-design-system.md` first.
 For reusable component roles and CSS-class expectations, also read `docs/design/component-system.md`.
 For the current implemented button/control baseline, read `docs/design/current-button-ui.md`.
 For visual references and screenshot audits, read `docs/design/reference/README.md` and `docs/design/reference/screenshot-audit-v0.20.5.md`.

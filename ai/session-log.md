@@ -307,3 +307,20 @@ This log records durable session milestones and active handoff notes. Keep detai
 
 - Finished the broad visual design brief in `docs/design/visual-design-system.md`, adding role/size container rules, typography hierarchy, lean semantic color/theme rules, app-frame and responsive fit rules, screen patterns, recommendation/settings ownership, motion/accessibility guardrails, and a compact do/don't checklist.
 - Bumped runtime version and changelog to `v0.20.7` for the design documentation/reference release.
+
+## 2026-05-19 - Efficiency And Continuity Cleanup
+
+- Removed stale launcher-era Home CSS selectors that no longer exist in root `index.html` or JavaScript.
+- Added `docs/design/README.md` so future sessions have a single map for design docs and references.
+- Added `docs/testing/smoke-checklist.md` as a lightweight manual smoke-test checklist for routine UI/release checks.
+- Clarified that screenshot filenames reflect the capture/baseline version, not necessarily the current app release.
+- Compressed `ai/current-state.md` into a shorter active handoff focused on current implementation, design/process state, product direction, and latest verification.
+
+## 2026-07-11 - AI Workflow And Design Docs Consolidation
+
+- Reworked `AGENTS.md` and ADR-0001 around layered startup, active-task usage, source-of-truth precedence, and conditional continuity maintenance so future sessions do not need to reread every continuity file by default.
+- Added `ai/active-task.md`, split `ai/task-map.md` into a small router plus `ai/routes/*.md`, and rewrote `ai/open-threads.md` and `ai/tasks/next-actions.md` into tighter decision and priority formats.
+- Added concise prompt templates for implementation, investigation, review, and closeout work under `ai/prompts/`.
+- Split mixed product memory out of `PROJECT_NOTES.md` into `docs/product/product-direction.md`, `docs/product/roadmap.md`, and `docs/product/idea-bank.md`, leaving `PROJECT_NOTES.md` as a short index.
+- Consolidated design-doc authority in `docs/design/README.md`, rewrote the canonical design system and supporting docs to match current repo behavior, and corrected stale statements around Home startup, dock ownership, Options placement, and the current screenshot/reference state.
+- Added ADR-0010 to record the durable hybrid UI component architecture decision without selecting or implementing an external library.

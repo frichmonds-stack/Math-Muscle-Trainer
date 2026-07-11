@@ -26,7 +26,7 @@
 - Keep explanations beginner-friendly and chunked.
 - Prefer small, safe changes over broad rewrites.
 - Preserve the app's current visual direction unless a redesign is requested.
-- Use `PROJECT_NOTES.md` and `ai/` files together: notes for broader memory, `ai/` for session continuity.
+- Use `docs/product/` for broader product memory and `ai/` for compact session continuity.
 - After session initialization, default to discussion/planning mode. Do not change repo state until the user explicitly authorizes local implementation, `Normal Close`, or `Publish Close`.
 - Treat `Normal Close` as local checks/docs/AI continuity only. Treat `Publish Close` as release-style closeout with docs publishing, checks, commit/push, and live verification when deployment timing allows.
 
@@ -34,6 +34,8 @@
 
 - `README.md`: project overview and run/check/publish instructions.
 - `CHANGELOG.md`: versioned release history.
-- `PROJECT_NOTES.md`: broader project memory, feedback, and backlog.
+- `docs/product/product-direction.md`: durable product positioning, principles, and constraints.
+- `docs/product/roadmap.md`: broad sequencing and future workstreams.
+- `docs/product/idea-bank.md`: speculative concepts that are not commitments.
 - `AGENTS.md`, `ai/`, and `docs/decisions/`: Codex-managed continuity and decision records.
 - The user should not need to edit the AI continuity files manually; future Codex sessions should maintain them.

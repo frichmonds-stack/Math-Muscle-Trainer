@@ -108,8 +108,11 @@ Use `docs/live/` for normal "make it live" updates. Use `docs/v*` snapshots only
 - `js/app-progress.js` contains results/progress trackers, filters, and analytics rendering
 - `js/app-init.js` contains startup rendering and event wiring
 - `js/app-debug.js` contains opt-in teacher/developer debug tools
+- `docs/design/README.md` maps the design documentation and reference workflow
 - `docs/design/visual-design-system.md` contains the app-wide visual design brief and vocabulary
 - `docs/design/reference/` contains visual reference boards, screenshot audit notes, and curated app screenshots for UI design work
+- `docs/product/` contains durable product direction, roadmap, and idea-bank docs
+- `docs/testing/smoke-checklist.md` contains the lightweight manual smoke-test checklist
 
 ## Versioning
 

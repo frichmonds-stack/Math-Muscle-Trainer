@@ -1,27 +1,31 @@
 # Session Close Prompt
 
-Use this before ending a future AI coding session:
+Use this before ending a future AI coding session.
 
-Closeout mode:
+## Closeout Mode
 
-- `Normal Close`: local checks, affected local docs, AI continuity updates, and final status reporting only. Do not publish `docs/live`, create snapshots, commit, push, or claim live verification.
-- `Publish Close`: release-style closeout. Publish the appropriate docs build, usually `docs/live` for routine updates, run repo checks after publish, check `git status --short` and `git remote -v`, commit and push, and verify GitHub Pages live when deployment timing allows.
+- `Normal Close`: local checks, affected local docs, conditional AI continuity updates, and final status reporting only
+- `Publish Close`: release-style closeout with publishing, post-publish checks, status/remotes review, commit/push when approved, and live verification when possible
+
+## Closeout Checklist
 
 1. Run the best available checks.
-2. Update all documentation affected by the work, including `README.md`, `CHANGELOG.md`, `PROJECT_NOTES.md`, `docs/index.html`, or `docs/v*` snapshots when relevant.
-3. Update `ai/current-state.md`.
-4. Append a dated entry to `ai/session-log.md`.
-5. Update `ai/tasks/next-actions.md`.
-6. Update `ai/open-threads.md`.
-7. Add or update an ADR in `docs/decisions/` for lasting decisions.
-8. For Publish Close or other release/publish work, run the appropriate publish flow, run repo checks, confirm `git status --short`, confirm `git remote -v`, push only when requested/approved, and verify the live GitHub Pages URL when possible.
-9. Maintain `AGENTS.md`, `ai/`, and `docs/decisions/` on the user's behalf; the user should not need to edit them manually.
-10. Summarize:
-   - files changed,
-   - docs updated,
-   - checks run,
-   - GitHub push status,
-   - live internet verification status,
-   - assumptions,
-   - manual review needed.
-11. Do not claim GitHub is updated or the site is live unless that was actually completed and verified.
+2. Update only the docs that the work actually changed.
+3. Update AI continuity only where the underlying state changed.
+4. Add or update an ADR only for durable decisions.
+5. For publish work, run the appropriate publish flow, rerun checks, inspect `git status --short`, inspect `git remote -v`, and verify live only if it was actually pushed and reachable.
+
+## Final Report
+
+Include:
+
+- files changed
+- docs updated
+- checks run
+- GitHub push status
+- live internet verification status
+- AI continuity updates, or `AI continuity: no update required`
+- assumptions
+- manual review still needed
+
+Do not claim GitHub is updated or the site is live unless that was completed and verified.

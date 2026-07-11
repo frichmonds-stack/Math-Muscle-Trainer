@@ -1,246 +1,26 @@
 # Project Notes
 
-This file is the project's broad working memory. Use it for durable context, design direction, and idea-bank material that should survive chat history. Use `ai/` files for concise session handoff, active open questions, and next actions.
+This file is now a short index, not the main storage location for mixed project memory.
 
-## Working Preferences
+## Use These Sources
 
-- Keep explanations beginner-friendly, scaffolded, and chunked.
-- Avoid large text dumps.
-- Prefer small steps with one clear action at a time when learning or setting things up.
-- Keep user-facing copy in the workout/training language unless a specific screen needs a quieter tone.
+- `docs/product/product-direction.md`
+  - durable product purpose, audience, pedagogy principles, constraints, accessibility intent, and commercial direction
+- `docs/product/roadmap.md`
+  - broad sequencing and future workstreams
+- `docs/product/idea-bank.md`
+  - speculative concepts that are not commitments
+- `ai/current-state.md`
+  - compact present-tense implementation and verification snapshot
+- `ai/open-threads.md`
+  - unresolved decisions
+- `ai/tasks/next-actions.md`
+  - small ready-work queue
+- `ai/session-log.md`
+  - meaningful historical milestones
 
-## Current Project Snapshot
+## Notes
 
-- Product name: `Math Muscle Trainer`.
-- Stack: plain `HTML`, `CSS`, and browser JavaScript.
-- Main source files: `index.html`, `styles.css`, `js/app-core.js`, `js/app-practice.js`, `js/app-progress.js`, `js/app-techniques.js`, and `js/app-init.js`.
-- Project docs: `README.md`, `CHANGELOG.md`, `AGENTS.md`, `PROJECT_NOTES.md`, and `ai/`.
-- Stable UI direction lives in `docs/design/ui-direction.md`; reusable component roles live in `docs/design/component-system.md`; the current implemented button/control baseline lives in `docs/design/current-button-ui.md`; visual reference boards and screenshot audit notes live in `docs/design/reference/`.
-- Published snapshots live in `docs/v*`; `docs/index.html` marks the latest GitHub Pages snapshot.
-- Routine live GitHub Pages updates now use rolling `docs/live/`; preserved numbered `docs/v*` snapshots are for milestones or explicit archive requests.
-- Hosting is set up through GitHub Pages from `main`.
-
-## Current Design Direction
-
-- Strength-training framing for arithmetic practice.
-- App-style shell rather than a webpage with a persistent site header.
-- Desktop/tablet-landscape layout preserves a centered iPad-landscape app frame; narrow/mobile layouts stay scroll-friendly.
-- iPad-first and eventual Apple App Store direction.
-- The app should work for primary students through adults, so the visual style should feel motivating without becoming age-locked or overly childish.
-- Regular usage should come from useful skill-building, learning habits, visible growth, and mastery rather than attention-hacking gamification.
-- Minimalism is part of the target feel: use restrained, clear, low-clutter UI that still feels tactile, friendly, and app-native. Minimal should not mean empty, cold, boxy, or adult-only.
-- A key visual upgrade is moving from mostly text-based surfaces toward app-like interactive surfaces with math-strength marks, status symbols, and simple pictorial cues, but buttons should remain mostly clean/text-first rather than gaining decorative icons everywhere.
-- Primary app navigation is moving toward a compact centered rounded training dock on iPad/tablet landscape. The dock should hug its content instead of stretching into a full-width phone-style bottom banner.
-- The initial Home experience should not be a generic marketing page or a bare launcher. It should feel like a `Today` training dashboard that identifies the app, gives one clear next action, and previews the main Train/Learn/Progress workflows.
-
-## Product Priorities
-
-- Finish teacher-authored lesson content, then build progression through lessons.
-- Keep four-operation mastery visible across Addition, Subtraction, Multiplication, and Division.
-- Improve the first-time learner flow so new users can start usefully without understanding every app area.
-- Continue UI polish around the app-shell contract before starting another large redesign.
-- Design and refine a stronger initial Home / Today screen before treating Train-first startup as final.
-- Likely future rollout model is subscription payment. Treat this as product-direction memory, not an implemented billing commitment yet; any account, payment, feedback, analytics, or student-data features should get a privacy/security pass before public release.
-
-## Home Screen And Training Dashboard Ideas
-
-These ideas combine the GitHub-saved Home research notes from commit `4ef3917` with the current local first-pass implementation.
-
-- Research references included motivational, health/training, and education-app patterns such as Elevate-style skill setup, Fabulous-style routines, Duolingo-style progression paths, Nike Training Club-style programs/routines, Fitbod-style body heat maps, and Brilliant-style streak/momentum surfaces.
-- Home should be a `Today's Training` dashboard, not a marketing page and not a generic launcher.
-- Home should quickly answer: what is this app, what should I do now, what else can I work on, and how am I improving?
-- The first-pass dashboard restores Home as the startup surface and keeps the dock as persistent navigation.
-- Current first-pass behavior:
-  - There is no overall daily start button yet. Each Daily Routine row launches its own operation routine.
-  - Daily Routine is framed as `Quick 5 Warmup` with `5 Addition`, `5 Subtraction`, `5 Multiplication`, and `5 Division`; each row shows `Complete` after 5 correct answers for that operation today.
-  - 1 Minute Workout operation tiles start direct timed workouts with hidden adaptive difficulty.
-  - Keep Learning opens the Make 10 lesson directly for now.
-  - The snapshot strip shows Workout Streak, Total Reps with a 7-day column graph, and Accuracy with a horizontal meter.
-  - The bottom dock is `Home / Workout / Learn / Progress`, with Workout and Learn kept in the middle.
-- Strong Home modules to keep testing: app identity header, Today's Routine/Daily 3 card, primary routine CTA, Quick Workout, Continue Learning/Recommended Lesson, Next Focus, Training Snapshot, and a small Mastery Path preview.
-- Future dashboard decisions:
-  - decide whether Daily Training should become a real adaptive routine engine,
-  - decide when to add a single `Do all` CTA once multi-operation workouts exist,
-  - decide whether `Daily 5` eventually means five correct per operation plus weak-spot reps,
-  - decide whether multi-operation workout setup should allow selecting several operations at once,
-  - decide whether a Duolingo-like arithmetic progression path belongs on Home, Learn, or Progress,
-  - decide whether a Fitbod-inspired operation/fact-family heat map should show readiness or coverage,
-  - decide how much Progress/Mastery detail belongs on Home versus the Progress screen.
-- Workout-style rep tracking remains a strong fit: track reps by operation, fact family, difficulty bucket, workout type, and lesson skill so reps can feed mastery/expertise signals.
-- The app likely needs a simple icon/logo soon. Strong directions: rounded badge or weight plate containing `+ - x /`, dumbbell with math-symbol plates, or a shield/badge with one clear math cue. Avoid dumbbell-only, calculator-only, busy multi-symbol marks, and mascots unless explicitly chosen later.
-- Eventual lesson formats may include video or audio lessons in addition to text, but this is a later idea and not required for the first Home redesign.
-- The previous brand/launcher-style Home is archived in `docs/design/home-screen-archive-v0.18.0.md` and exactly preserved in `docs/v15`.
-- Student testing on 2026-05-14 showed keyboardless devices could not use Practice when the touch keypad extended below the fixed app frame; Practice should keep the built-in keypad compact enough to fit the app frame on touch devices.
-- 2026-05-14 UI polish direction: Home quick starts should use hidden, data-driven difficulty selection with easy defaults for new users; Quick 5 Warmup stays 5 correct reps, while Quick Workout becomes a 1 Minute Workout. Avoid adding learner-facing training-level labels or extra choices without explicit approval.
-- 2026-05-14 UI polish direction: Home snapshot should emphasize Workout Streak, Total Reps with a 7-day column graph, and Accuracy with a simple visual meter. Average Pace is removed from Home for now.
-- 2026-05-14 UI polish direction: Practice and Workout Tracker should avoid nested/card-like surfaces for static information. Static stats should not look hoverable or clickable, and Practice should keep the problem/input as the main visual focus.
-- 2026-05-15 polish direction: Home snapshot reps and accuracy should be weekly/last-7-days metrics so headline values match their small charts. Workout Tracker calendar should show daily goal progress visually using a first internal default of 50 reps/day, while exact rep counts move to dedicated Progress/Tracker graphs or breakdowns.
-- 2026-05-15 follow-up review: the calendar should not carry a visible legend, and reps by operation should be a simple sublist rather than a stacked bar graph. The daily goal system remains visually implied by calendar color tiers while the final learner-facing explanation is still unresolved.
-- 2026-05-15 follow-up review: Home should avoid adding filler content to solve empty lower space. Prefer better vertical rhythm: more header breathing room, a centered dashboard stack above the dock, rolling 7-day streak, tighter Weekly Reps columns, and a per-day Weekly Accuracy visual.
-- 2026-05-16 polish direction: shared Progress selectors need enough built-in arrow space so labels stay centered inside the pill across Workout Log, Mastery, Fact Tracker, Focus, Coach, and Records.
-- 2026-05-16 Learn direction: any Learn stage with a correct-rep requirement should show an in-question cumulative correct tick counter. Wrong answers do not fill or reset the counter; progression should follow cumulative correct reps when the counter is the gate.
-- 2026-05-17 debug direction: teacher/developer debug mode is opt-in by double-clicking the Home arm mark or through `?debug=1` / `#debug`, with the classroom password `N0v4r3`. This is a client-side classroom gate, not real security. Debug tools can seed personas, jump screens, start quick test workouts, show the temporary classroom feedback message, and clear local progress.
-- 2026-05-17 design direction: add intentional zero-state displays for empty/new-user views, especially Home, Progress, Operation Mastery, Fact Tracker, Records, and Learn completion/progress surfaces.
-- 2026-05-17 data/content direction: negative-number data needs a dedicated decision pass before expanding it further, especially fact-key formats, storage normalization, answer telemetry, progress buckets, mastery scoring, reports, migrations, and whether negative integer addition/subtraction belongs in lessons, advanced practice, or a later extension.
-- 2026-05-17 architecture direction: explicitly explore long-term app data shape/structure for native-readiness, including progress, lessons, telemetry, debug personas/states, accounts, sync, reports, migrations, and versioning.
-- 2026-05-17 Workout setup polish notes: operation buttons may need label-centered alignment rather than centering the sign+label group; workout type buttons should have centered text and less oversized button proportions; Workout Options toggles should be compact, same-height as nearby controls, and likely sit side-by-side instead of full-width rows.
-- 2026-05-17 responsive direction: primary target remains iPad/tablet classroom use, especially landscape. Phones should be usable but not optimized as the main product target. Use responsive density to avoid unnecessary scroll on large enough app-frame screens, while allowing comfortable scroll-first layouts on small portrait/mobile screens.
-- 2026-05-17 release direction: learning design and visual design work should be prioritized because the Learning Experience System, Learning Interaction System, Learning Feedback, zero states, and theme/visual system directly affect pedagogy, usability, classroom experience, and eventual product positioning.
-- 2026-05-17 `v0.20.4` implementation: first-pass debug mode and UI polish shipped locally before publish close, including debug appearance controls/Exit Debug, setup control alignment/density, Practice HUD light-mode grouping, Learn feedback reveal/lockout, Home Weekly Reps goal line, About `i`/feedback note, and Aang Fact Tracker status contrast.
-- 2026-05-17 `v0.20.5` polish: moved About/Options into a dock gear, added a temporary Give Feedback dialog, refined Weekly Reps goal-line scaling, improved iPad layout polish, strengthened light-mode outlines, preserved non-semantic Solo Leveling purple accents, fixed Jungle status badge contrast, and added historical debug persona data for calendar QA.
-- 2026-05-18 `v0.20.6` visual reference system: added `docs/design/reference/` with a canonical button/control board, Home dark/light baseline screenshots, and a screenshot audit scaffold. 2026-05-19 `v0.20.7` follow-up wired in Setup and Practice dark/light screenshots and finished `docs/design/visual-design-system.md` for app-wide visual roles, screen meaning, surface/container sizing, typography, color/theme semantics, app-frame rules, screen patterns, recommendations/settings ownership, and Learning Interaction vocabulary. Learn, Progress, and Options references can wait for their specialized briefs.
-- 2026-05-17 learning system direction: use `Learning Interaction System` as the umbrella term for reusable prompt, input, scaffold, feedback, answer reveal, anti-spam lockout, retry/advance timing, and progress-gate patterns across Workout Practice and Learn. `Learning Feedback` is the correct/incorrect/reveal/timing sub-system.
-- 2026-05-17 learning theory direction: cross-reference learning systems with modern learning theory and instructional design, including Cognitive Load Theory, worked examples, retrieval practice, spaced review, interleaving, feedback timing, mastery learning, desirable difficulties, multimedia learning, and Universal Design for Learning.
-- 2026-05-17 marketing/product direction: the minimalist design should be framed as a cognitive-load strategy, not only visual taste. Minimalism should reduce extraneous load so attention stays on arithmetic; visuals and motion should clarify the task rather than decorate it.
-- 2026-05-17 future Progress idea: explore a Progress-wide side rail/drawer only as a consistent system across all Progress views, not a one-off Records fix. It could later support journey/mastery progression and move local controls out of busy headers.
-- 2026-05-17 future calendar idea: explore operation-mix calendar visuals where operation colors, intensity, and possibly a special all-four-operations state communicate daily training balance. This is not part of the `v0.20.4` patch.
-
-## Near-Term Roadmap Shape
-
-- `v0.18.0` published the first UI direction implementation: shared control softening, Train-first startup, compact training dock, and restrained visual-anchor usage.
-- Next UI cleanup: Practice shell container, lesson-local Exit Lesson placement, Results/Progress kicker spacing, and static Tracker metric affordances.
-- Next Home/onboarding design batch: review the new `Today's Training` home surface, then decide the daily routine default, quick workout behavior, learning recommendation, mastery/path preview, and progress snapshot density.
-- `v0.20.0` published the Home/Practice/Tracker UI polish batch with hidden adaptive quick starts and `docs/v17`.
-- `v0.20.1` added the rolling `docs/live` publishing flow, documented ADR-0008, and published the post-release cleanup to live without creating `docs/v18`.
-- `v0.20.2` published the Home rhythm, Progress selector/tracker, Practice input, light-mode surface, and Learn correct-counter polish to `docs/live`.
-- Next lesson content foundation: fill/review Make 10 spec, convert one teacher-approved lesson into structured lesson data, and decide the first Addition progression path.
-- Later onboarding/mastery clarity: first-time learner starting path, current-rank versus best-earned-rank explanation, and clearer metric/reward language.
-- Operation Mastery needs a fuller communication pass. The short-term bridge is an optional `?` explainer and less noisy cards; longer term, Fact Tracker likely belongs inside Operation Mastery as the evidence/detail layer for coverage, weak facts, and operation-specific next work.
-- Operation Mastery follow-up review: the immediate duplicate-title and selector-spacing cleanup is done; revisit rank-path/metric communication beyond the temporary explainer.
-- Process track: review the AI continuity system and define a written versioning policy before release activity becomes more frequent.
-
-## Durable Decisions
-
-- Treat `README.md` as the current project overview.
-- Treat `CHANGELOG.md` as version history.
-- Treat `PROJECT_NOTES.md` as broader project memory, not the active task list.
-- Treat `AGENTS.md`, `ai/`, and `docs/decisions/` as Codex-managed continuity files.
-- Prefer `workout` as the main user-facing term instead of mixing `session` and `workout`.
-- Use this operation mastery rank chain: `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
-- Keep current-rank and best-earned-rank separate so learners can see both present fluency and earned achievement.
-- Teacher-authored lesson wording is the source of truth; Codex should not invent pedagogy unless asked.
-- Routine "make it live" requests should update `docs/live` with a patch version. Create a numbered `docs/v*` snapshot only for significant milestones or when explicitly requested.
-- Future snapshot cleanup should prune low-value old `docs/v*` folders only after confirming which shared URLs or milestones still matter.
-- A subscription payment model is the likely future commercial rollout direction, pending later pricing, platform, privacy, security, and account-model decisions.
-- Debug mode is teacher/developer tooling only. Its client-side password gate is not real security and must not protect secrets, accounts, billing, or shared data.
-
-## Home Screen And Training Dashboard Ideas
-
-These ideas came from reviewing patterns in motivational, health/training, and education apps such as Elevate-style skill setup, Fabulous-style routines, Duolingo-style progression paths, Nike Training Club-style programs/routines, Fitbod-style body heat maps, and Brilliant-style streak/momentum surfaces.
-
-- The initial screen should become a `Today` or `Today's Training` dashboard, not a full marketing landing page and not only the workout setup screen.
-- Home should quickly answer: what is this app, what should I do now, what else can I work on, and how am I improving?
-- Strong first-pass Home sections:
-  - App identity header with a compact math-strength mark/logo and short positioning line.
-  - `Today's Routine` card with roughly three daily actions.
-  - Primary CTA such as `Start Today's Training` or `Start Routine`.
-  - `Quick Workout` area for selecting one or more operations.
-  - `Continue Learning` / `Recommended Lesson` card.
-  - `Next Focus` card based on weak spots or missing data.
-  - `Training Snapshot` with streak, reps, rank, and recent progress.
-  - Small `Mastery Path` preview showing progression through arithmetic skills.
-- `Daily 5` concept: a short full-body arithmetic workout, likely five reps from each operation plus possible weak-spot reps. This can become the default warm-up or first routine action.
-- `Daily 3` / routine concept: each day surfaces about three actions, for example Warm Up (`Daily 5`), Focus Set (`weak spots`), and Technique (`continue lesson`).
-- Multi-operation workout setup should eventually allow choosing several operations at once, similar to selecting a training split rather than one isolated skill every time.
-- A Duolingo-like visual pathway could show arithmetic progression, but should be used as a mastery/path preview or Learn/Progression surface rather than making Home only a path.
-- A Fitbod-inspired operation heat map could show readiness/coverage by operation, fact family, or bucket. Example dimensions: Addition, Subtraction, Multiplication, Division; or multiplication facts `x1` through `x12`.
-- Workout-style rep tracking is a strong fit: track reps by operation, fact family, difficulty bucket, workout type, and lesson skill. Reps can provide visual feedback and feed mastery/expertise signals.
-- Graphs and progress trends should exist, but Home should surface only a simple, motivating snapshot; deeper analytics belong in Progress.
-- Eventual lesson formats may include video or audio lessons in addition to text, but this is a later idea and not required for the first Home redesign.
-- The app likely needs a simple icon/logo soon. Strong directions: rounded badge or weight plate containing `+ - x /`; dumbbell with math-symbol plates; or a shield/badge with one clear math cue. Avoid dumbbell-only, calculator-only, busy multi-symbol marks, and mascots unless explicitly chosen later.
-
-## Idea Bank
-
-These ideas are not committed roadmap items unless promoted by the user.
-
-- Optional sound feedback: answer cues, milestone chimes, and a mute toggle.
-- Toggle/control candidates for future settings and setup design:
-  - Settings toggles: sound on/off, reduce motion on/off, keypad always visible on/off, hints on/off, and a possible Day/Night theme switch.
-  - Workout setup toggles: negatives on/off, practice missed facts only on/off, show hints during workout on/off, and auto-advance on/off only if learners or teachers need control.
-  - Avoid an `Adaptive on/off` setting. Adaptive behavior should be app intelligence by default, exposed through friendly training preferences such as Gentle/Balanced/Challenge, session length, focus mode, hints, or mistake review.
-- Competitive `Flex` mode:
-  - points-based scoring,
-  - pressure timer that resets after each correct answer,
-  - run ends when the timer expires,
-  - emphasis on speed, streaks, and competitive chaining.
-- Dedicated motion pass for screen transitions, lesson-step transitions, carousel movement, and subtle reveal/feedback animations.
-- More visual style options beyond the dark red gym theme.
-- Dedicated metric-language pass so learner-facing rewards do not compete with accuracy, pace, reps, streaks, and mastery.
-- Post-session reflection or journaling, deferred until there is a reliable data collection and review path.
-- Motivation quote candidate: `Attitudes determine your actions. Actions determine your destiny.`
-
-## Adaptive Learning Ideas
-
-- Infer a learner developmental profile from reading speed, response latency, accuracy stability, session duration, and interaction patterns.
-- Adapt difficulty quietly in the background based on profile.
-- Younger-learner direction: shorter sessions, more immediate rewards, gentler ramps, fewer consecutive failures, and slower demotions.
-- Older-learner direction: longer practice blocks, more direct feedback, faster progression, higher challenge ceilings, and richer statistics.
-- Candidate arithmetic-learning metrics:
-  - accuracy by operation, fact family, and error pattern,
-  - speed and fluency,
-  - retention and relearning speed,
-  - reliable difficulty ceiling,
-  - consistency and fatigue resistance,
-  - strategy use and self-correction,
-  - learning efficiency and improvement slope.
-- Candidate composite metrics:
-  - Arithmetic Fluency Score,
-  - Mastery Confidence,
-  - Cognitive Load Indicator,
-  - Automaticity Index.
-
-## Recent Session Memory
-
-### 2026-05-16
-
-- Published the `v0.20.3` rolling live Home QA polish: Home `Workout Streak` now shows current consecutive-day streak while the strip remains a last-7-days activity pattern.
-- Tightened Home vertical spacing for shorter desktop windows, moved About/Settings higher, and adjusted Weekly Reps label layering/spacing so tall bars do not obscure values.
-- Added `Create lessons` as an explicit lesson-content backlog item.
-
-### 2026-05-13
-
-- Captured initial Home screen research and design direction after reviewing motivational, health/training, and education-app patterns.
-- Noted that Train-first startup is too bare as an initial landing experience because it gives little app identity or workflow guidance.
-- Proposed and began implementing a `Today's Training` dashboard model with daily routine CTA, Quick Workout, Continue Learning, Next Focus, Training Snapshot, streaks, reps, and future operation heat maps.
-- Added `Daily 5`, `Daily 3`, multi-operation workout selection, operation/fact-family rep tracking, and logo/icon exploration to durable project memory.
-
-### 2026-05-12
-
-- Pruned and reorganized project memory so `PROJECT_NOTES.md` holds durable context and the `ai/` files hold active handoff items.
-- Added a near-term roadmap shape for `v0.18.0` through `v0.20.0`, plus process review items for AI continuity and versioning.
-- Captured the visual north star as minimalist, friendly native iPad controls for all ages: clear enough for young learners and polished enough for adults.
-- Added `docs/design/ui-direction.md` as the stable design direction document for future AI/UI work.
-- Added `docs/design/component-system.md` to define the reusable button/control/content roles before CSS alignment begins.
-- Captured visual anchors/icons as a priority for making the app feel more interactive and less text-only, with the later clarification that these belong mainly at the app/screen/card/lesson/progress level rather than inside every button.
-- Added `docs/design/current-button-ui.md` so current screenshots can be compared against the implemented button/control baseline.
-- Implemented a first compact training dock for `Train`, `Learn`, and `Progress`; the app now opens directly to `Train`/setup instead of the brand home launcher.
-- Published the UI direction implementation as `v0.18.0` in `docs/v15`.
-
-### 2026-05-11
-
-- Published `v0.17.0` in `docs/v14` to preserve a centered `1194 x 834` iPad-landscape app canvas on desktop/tablet-landscape viewports, while retaining scroll-friendly rules for narrow/mobile screens.
-- Established the shared app-shell UI contract in ADR-0007: global utilities stay in the top-right rail, local selectors live with content headers, carousel/kicker labels use fixed title space, and static metrics do not hover.
-- Published the UI system batch as `v0.16.0` in `docs/v13`.
-
-### 2026-05-10
-
-- Added separate current rank and best-earned rank concepts for Operation Mastery.
-- Revised Operation Mastery toward an overview-to-detail structure.
-- Hardened Progress dynamic markup by escaping labels before HTML injection.
-
-### 2026-05-09
-
-- Started the learning telemetry and operation mastery work.
-- Added browser-local answer telemetry as the evidence base for future ranks and adaptive behavior.
-
-### 2026-05-08
-
-- Initialized the lesson content workflow under `learn/`.
-- Added workflow rules that preserve teacher-authored lesson wording.
-
-### Earlier Memory
-
-- `v0.10.0` introduced the single-shell navigation model.
-- `v0.11.0` added repo-native checks and snapshot publishing helpers.
-- Addition and multiplication lessons were expanded, with addition using a reusable atomic runner and multiplication using selectable `x1` through `x12` table lessons.
-- iPad-first answer flow includes an on-screen number pad to reduce virtual keyboard friction.
+- Keep durable product direction out of `ai/` so session-start files stay compact.
+- Keep speculative concepts out of `ai/open-threads.md` unless they have become a concrete decision question.
+- Add new long-lived architecture, release, workflow, design, or data decisions to `docs/decisions/` as ADRs when appropriate.

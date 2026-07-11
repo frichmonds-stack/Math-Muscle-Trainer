@@ -1,234 +1,48 @@
 # Current State
 
-Last updated: 2026-05-19
+Last updated: 2026-07-11
 
-## Implementation
+## Version And Publication
 
-- Project/product naming is standardized as `Math Muscle Trainer`.
-- Root app is at `v0.20.7` locally.
-- Current live docs build is `docs/live`, marked latest in `docs/index.html` as `v0.20.7 visual design brief`.
-- Latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
-- Current publish-close batch pushed the lesson expansion, `docs/v10`, lesson content workflow, docs, ADRs, and AI continuity updates to GitHub.
-- `AGENTS.md`, `ai/`, and `docs/decisions/` are now explicitly Codex-managed continuity files.
-- `ai/task-map.md` routes future AI sessions from work type to relevant files, pre-reads, docs, and risks.
-- Session close protocol now requires affected docs, GitHub push status, and live internet verification status to be addressed explicitly.
-- Browser storage now uses `math-muscle-trainer-*` keys with fallback reads for legacy saved progress and preferences.
-- Make 10's `Start Focused Workout` action now routes through `applySettingsSnapshot`.
-- Addition Techniques now has a reusable atomic lesson runner and linked lessons for Make 10, adding by 1s/10s/100s/1000s, Counting On Easy/Medium, and Bridging Easy/Medium/Advanced/Expert.
-- Addition lesson completion uses `addition:<lesson-id>` technique progress keys and complete screens route to addition focused workout setup using available difficulty presets.
-- Multiplication Techniques now has selectable `x1` through `x12` lessons with table-specific strategy copy, examples, hints, warm-ups, assisted reps, solo reps, and completion states.
-- Multiplication and addition lesson stage pills are unlocked so learners can jump directly to any section.
-- The Progress screen's top red carousel label has inline previous/next controls again after being aligned with the header buttons.
-- Lesson content workflow scaffolding exists under `learn/` for teacher specs, structured lesson data, scaffolds, mental models, and review notes. This workflow is documentation/content-only and does not change visible lesson behavior by itself.
-- Division tracker cards now start divisor isolation workouts across the full quotient range.
-- Operation display symbols are centralized; division stores `/` in fact keys and displays `\u00f7`.
-- Version checks now compare `APP_VERSION` with the latest released `CHANGELOG.md` heading.
-- Repo-native release helpers exist in `scripts/`: `publish-live.ps1` updates rolling `docs/live`, while `publish-snapshot.ps1` creates preserved numbered `docs/v*` snapshots.
-- Browser-local progress now includes capped answer-level telemetry (`answerTelemetry`) with operation, fact key, skill bucket, difficulty band, correctness/skipped state, response time, timestamp/date, session id, session source, and session position.
-- Progress now has an Operation Mastery slide showing Addition, Subtraction, Multiplication, and Division ranks using `Rookie -> Novice -> Adept -> Expert -> Elite -> Master -> Legend`.
-- Initial mastery scoring combines accuracy, fluency, coverage, retention, consistency, and difficulty evidence.
-- Current mastery ranks are derived from recent/lifetime evidence and can move up or down; best-earned ranks are stored in `operationBestRanks` and only rise.
-- Operation Mastery now uses an overview-to-detail layout: compact cards compare all four operations, and the selected operation opens a deeper evidence panel.
-- Operation Mastery now uses an explicit mode selector (`Overview` / `Operation Detail`) so the first state is snapshot-only, and detail view is opt-in.
-- Progress header kicker rows are centered consistently across slides while utility buttons remain right-aligned.
-- Progress layouts include an iPad polish pass for selector width/spacing and focus-column density in the `768-1366px` range.
-- Progress dynamic renderers now escape dynamic labels before inserting HTML in priority, growth, positive-progress, and coach-tip views.
-- Operation Mastery now uses a single cyclic selector (`Overview -> Addition -> Subtraction -> Multiplication -> Division`) instead of separate mode and operation selectors.
-- Operation Mastery overview cards are now a larger 2x2 grid to emphasize snapshot readability before detail drill-down.
-- Records mode selector labels now use compact naming (`H.I.T`, `Target Reps`, `Isolation`, `Zen Mode`, `Spar Mode`) to fit controls more cleanly.
-- Practice now uses speed-first micro feedback: persistent `Correct.` text was removed, answer status still flashes on the field/icon, and a rolling 5-answer dot rail shows recent correctness without slowing question advance.
-- Practice top-left status pill now shows operation/mode/negatives context as a non-primary status label (not a CTA-style button).
-- Learn/Techniques now includes subtraction and division operation slots with visible `Coming Soon` placeholders.
-- Light-mode polish pass includes stronger tooltip/info-icon default contrast and a non-purple active bottom-nav indicator to keep solo-leveling light mode consistent.
-- Progress/Techniques header kicker alignment now anchors to the same left content track instead of appearing centered off-grid.
-- ADR-0006 records the learning telemetry and operation mastery decision.
-- 2026-05-10 execution batch moved Results actions to top header, renamed `Adjust Workout` to `New Workout`, renamed lesson workout CTA to `Start Workout`, removed lesson-stage Back buttons, removed lesson-complete restart/back actions, added top-nav lesson exit visibility, changed Results/Progress month labels to month-only with year side labels, and upgraded practice response feedback badges/glow while hiding bottom feedback text.
-- 2026-05-11 UI system patch added ADR-0007 for the app-shell UI contract, converted Home primary navigation into compact app-style modules, moved Results actions into the summary content header, fixed Progress/Results carousel kicker labels to a stable width, moved local selectors into content headers, removed hover affordances from static metric panels, aligned tracker calendar headings/weekdays, removed Learn's nested background panel, and made multiplication Practice More auto-advance after correct answers.
-- 2026-05-11 publish close bumped runtime version to `v0.16.0`, added `CHANGELOG.md` release notes, published `docs/v13`, and updated README publish instructions.
-- 2026-05-11 app viewport frame release bumped runtime version to `v0.17.0`, updated ADR-0007, and published `docs/v14`.
-- Desktop/tablet-landscape rendering now fits the app into a centered `1194 x 834` iPad-landscape canvas instead of stretching to arbitrary browser dimensions; narrow/mobile layouts still switch to scroll-friendly responsive rules.
-- 2026-05-12 project memory cleanup pruned `PROJECT_NOTES.md` into durable context/idea-bank material, reorganized `ai/open-threads.md` into decision categories, and grouped `ai/tasks/next-actions.md` into concrete next batches.
-- 2026-05-12 follow-up compressed `ai/session-log.md` into milestone entries plus active handoff notes, added near-term roadmap shape (`v0.18.0` UI cleanup, `v0.19.0` lesson content foundation, `v0.20.0` onboarding/mastery clarity), and queued AI continuity/versioning reviews.
-- `docs/design/ui-direction.md` now holds the stable UI direction for future design work, including the all-ages minimalist iPad-app north star, button/control roles, toggle rules, content-role rules, and icon/brand guidance.
-- `docs/design/component-system.md` now defines the reusable UI role/class contract for future CSS alignment: buttons, icon utilities, toggles, segmented controls, content headers, metrics, action tiles, insight boards, dialogs, and carousel/kicker controls.
-- `docs/design/current-button-ui.md` now documents the current implemented button/control baseline and screenshot-review checklist.
-- First CSS alignment pass softened existing shared controls toward the chosen direction: Concept 3 tactile control feel governed by Concept 1 hierarchy, while preserving existing theme/color variables.
-- Root app now opens to the Train/setup surface by default and includes a compact centered rounded training dock for `Train`, `Learn`, and `Progress` instead of relying on a launcher-style home menu as the main navigation.
-- Visual anchors were pulled back from destination/workout buttons; operation symbols and Practice status/HUD cues remain where they carry math/status meaning, while future visual richness should happen at the app, lesson, progress/status, and math-context level.
-- 2026-05-13 publish close bumped runtime version to `v0.18.0`, moved the UI direction notes from `Unreleased` into `CHANGELOG.md`, published `docs/v15`, and prepared the branch for GitHub sync.
-- Root app now has a first-pass Home / Today's Training dashboard and startup lands on Home again. The dashboard has app identity with the standalone strong-arm mark and `Novare Co. presents`, a clickable Daily Routine checklist, direct-start Quick Workout operation tiles, Learn handoff, and a static training snapshot strip.
-- Daily Routine checklist items start 5-correct operation routines and tick off after 5 correct answers for that operation today. Quick Workout operation tiles start direct 20-rep workouts.
-- The bottom dock now reads `Home`, `Workout`, `Learn`, `Progress`; focused-screen top Home/settings buttons are hidden so navigation lives in the dock and Home owns About/Settings.
-- The Home `Next Focus` card was removed. The snapshot now shows day streak with a 7-day animated flame strip, total reps, accuracy, and average pace.
-- Home banner copy now rotates through daily thoughts, including `Grow your brain & begin your reign.`, and Continue Learning opens the Make 10 lesson directly.
-- Results/Progress Workout Tracker month summaries now show workouts, reps, and accuracy; the older Hearts/Stars calendar reward icons were removed from the visible UI.
-- Practice HUD labels no longer carry decorative icons, display-only tracker stats no longer use hover affordances, and the bottom page-position indicator was removed now that the dock owns primary navigation.
-- Results/Progress red kicker-row carousel arrows have direct event bindings again.
-- The previous brand/launcher-style Home is archived by reference in `docs/design/home-screen-archive-v0.18.0.md`; the exact implementation remains in `docs/v15`.
-- Practice now uses a compact capped-width touch keypad and tighter coarse-pointer tablet spacing so keyboardless learners can reach the built-in number pad without changing the fixed app-frame model.
-- Home Daily Routine is now framed as `Quick 5 Warmup`, has no header icon, keeps routine labels on one line, and completed rows show `Complete` with a full-row completed state.
-- Home Quick Workout is now presented as `1 Minute Workout`; both Quick 5 Warmup and 1 Minute Workout use hidden adaptive settings based on saved local performance data, with easy defaults for new users.
-- Home Keep Learning now uses `Keep Learning`, `Pick up a new technique.`, a compact inline `Learn` button, no header icon, and no lesson-specific supporting sentence until lesson content is more complete.
-- Home daily thought is italicized.
-- Home snapshot now removes Average Pace and shows Workout Streak, Total Reps with a 7-day rectangular column graph, and Accuracy with a simplified horizontal fill meter.
-- Practice visual containment is softened so the outer panel, HUD cards, and keypad controls read quieter while the problem card and answer input remain the main focus.
-- Workout Tracker summary stats now use static metric rows instead of highlightable card-like panels, and the left summary column stretches to the calendar height.
-- Streak banners can be dismissed by clicking or tapping the banner.
-- `v0.20.1` live cleanup removed stale Home element hooks/render paths for old Home calendar/stat widgets, pulled hidden Home adaptive thresholds/ranges into named constants, removed CSS for the discarded Home header icon marks, and published the rolling `docs/live` build.
-- ADR-0008 records the rolling live publishing channel decision: routine internet updates overwrite `docs/live` with patch versions; numbered `docs/v*` snapshots are for milestones or explicit archive requests.
-- 2026-05-15 polish batch changed Home snapshot metrics to weekly reps and weekly accuracy, with last-7-days bar values and matching headline totals.
-- Home Daily Routine copy now reads `Daily Warmup Routine` / `Quick 5`.
-- 2026-05-16 polish batch rebalanced Home vertical rhythm, tightened Progress selector pills and page indicators, softened light-mode surfaces, enlarged Practice answer input, moved Practice answer dots into the question card, and added correct-only green tick counters to gated Learn practice stages.
-- Workout setup operation choices now keep all operations visible after selection, highlight the selected operation, hide the old `Change` micro-button, and center choice text.
-- Practice answer feedback icons now sit inside the answer field, and the recent-answer dot rail sits inside the question card.
-- Workout Tracker calendars no longer show raw rep counts in day tiles. Calendar tiles now use daily-goal progress tiers based on a first internal default of 50 reps/day, with monthly reps-by-operation breakdowns in the side summary.
-- Operation Mastery has a partial clarity pass: a `?` explainer dialog, score context as `/100`, no `Best`/`Next` labels in cards/detail, and no empty `Strongest` line.
-- Light-mode polish softened carousel position indicators, Results contextual action buttons, calendar navigation, tracker separators, and static metric affordances.
-- Narrow tablet and iPad portrait widths now switch to the scroll-friendly responsive layout at `900px` and below instead of staying inside the fixed landscape app frame.
-- 2026-05-16 follow-up polish removed the visible Workout Tracker calendar legend, changed monthly reps by operation into a simple sublist, changed Operation Mastery's slide heading to `Your operation ranks`, and gave the mastery selector more arrow breathing room.
-- Home dashboard spacing now gives the header more top breathing room and centers the main Home stack more evenly above the dock without adding filler content.
-- Home Workout Streak now reports rolling last-7-days workout days, Weekly Reps columns are tighter with visible day values, and Weekly Accuracy is a per-day strip instead of a single fill block.
-- Shared Progress/Learn carousel selectors now reserve internal arrow space so labels stay centered inside the pill in light mode.
-- Practice answer input text is larger, and the HUD-to-question gap is tighter after moving the recent-answer rail inside the question card.
-- Light-mode setup option rows, Learn lesson surfaces, Exit Lesson, and Operation Mastery cards now use softer shared surfaces instead of stark white blocks.
-- Learn stages with correct-rep gates now show cumulative in-card green-tick counters; wrong answers do not fill or reset the counter, and gated addition/Make 10 practice advances by cumulative correct reps.
-- Home's `Workout Streak` headline now shows the current consecutive-day streak, while the weekly strip underneath still shows the last-7-days activity pattern.
-- Home has a compact-height desktop spacing pass: utility buttons sit higher, the dashboard stack uses less vertical gap, and Weekly Reps labels sit above tall bars with more separation from `Last 7 days`.
-- `v0.20.3` is a rolling live Home QA polish release: it keeps `Workout Streak` as the consecutive-day headline, preserves the 7-day strip as recent activity context, tightens vertical Home spacing, and includes the `Create lessons` backlog item in AI continuity.
-- `v0.20.3` was pushed to `main` and verified on GitHub Pages after deployment caught up.
-- Root app now has an opt-in teacher/developer debug mode in `js/app-debug.js`, activated by double-clicking the Home arm mark or opening with `?debug=1` / `#debug`, then unlocked with the classroom password `N0v4r3`.
-- Debug mode is a client-side classroom gate, not real security. It adds a visible debug badge/panel, screen jumps, canned learner personas, quick debug workouts, appearance controls, `Exit Debug`, the temporary classroom feedback message (`Put up your hand and tell Mr Foo`), and local progress clearing.
-- ADR-0009 records the debug-mode decision and security boundary.
-- `v0.20.4` UI polish simplified the leave-workout CTA to `End Workout`, changed the Home About button from `?` to `i`, added the classroom feedback note to About, added a Home Weekly Reps goal line, polished Workout setup control alignment/density, added subtle Practice HUD grouping in light mode, improved Learn light-mode contrast, added stronger Learn feedback lockout/reveal states, and fixed Aang light-mode `Strong` Fact Tracker pill contrast.
-- Post-initialization collaboration now defaults to discussion/planning mode until the user explicitly authorizes local implementation, `Normal Close`, or `Publish Close`. `Normal Close` is local checks/docs/AI continuity only; `Publish Close` is release-style publish/check/commit/push/live verification when deployment timing allows.
-- `v0.20.5` app-shell polish moved Options into a dock gear, removed floating Home utility buttons, folded About into Options, added a temporary Give Feedback dialog, set Home Weekly Reps to a two-thirds daily-goal line, tightened setup difficulty/duration/workout-type controls, improved iPad landscape/portrait QA CSS, strengthened light-mode dark-neutral outlines, fixed Jungle light-mode status badge contrast, preserved Solo Leveling purple in non-semantic accents, reduced debug unlock dimming, and added historical debug persona data for calendar QA.
-- `v0.20.6` local UI/design pass moved the Practice combo badge into the question card, removed Home Weekly Reps helper labels while keeping the visual goal line, styled the dock gear as a compact dock item without a separator, centered compact setup pill text, made the three standard Workout Type choices a peer row, moved About first in Options with Give Feedback in the About header, and fixed the debug badge pseudo-element that caused a large light-mode dimming wash.
-- The visual reference system now exists under `docs/design/reference/`, with a canonical button/control board, a screenshot audit scaffold, and Home, Setup, and Practice dark/light baseline screenshots wired in. `docs/design/visual-design-system.md` now captures the app-wide visual design brief: visual roles, screen meaning, container size/role rules, typography, color/theme semantics, app-frame/responsive rules, recommendations/settings ownership, do/don't guardrails, and Learning Interaction vocabulary. Learn, Progress, and Options references can be added later as specialized briefs; proposed next briefs are Lesson Experience System, Progress/Evidence UI, App Shell/Nav, and detailed Learning Interaction System.
+- Local root app version is `v0.20.7`.
+- The current rolling live build is `docs/live`, and `docs/index.html` marks it as `v0.20.7 visual design brief`.
+- The latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
+- The latest recorded pushed release commit is `b6429d0` (`Release v0.20.7 visual design brief`).
 
-## Product Direction
+## Architecture
 
-- Highest priority is to finish the lesson content, then build a progression system through the lessons.
-- Four-operation mastery visibility is a high-priority product direction so learners can see progress toward full arithmetic mastery across Addition, Subtraction, Multiplication, and Division.
-- Mastery indicators should motivate improvement through meaningful metrics such as speed, precision, consistency, coverage, and lesson progress.
-- A stronger new-user flow is high priority so first-time learners are guided into a useful starting path instead of needing to understand the full app immediately.
-- Product philosophy is iPad-first and eventual Apple App Store oriented.
-- Likely future rollout model is subscription payment, pending later decisions about pricing, account model, platform, privacy, and security.
-- Debug mode must stay free of secrets and server/admin assumptions; a real security/privacy pass is needed before accounts, payments, cloud sync, analytics, networked feedback, student identifiers, or public support exports.
-- Gamification is not a goal by itself. Regular usage should come from useful skill-building, good learning habits, visible growth, and mastery rather than attention-hacking loops.
-- The app should be usable from primary students through adults; the theme should stay universal around mental/arithmetic strength.
-- Branding can remain strength-oriented, but mastery should not feel age-locked, overly childish, or narrowly targeted.
-- Speculative feature suggestions should be treated as an idea bank unless the user explicitly promotes them to roadmap.
-- Adaptive learning should not be exposed as a simple learner-facing on/off setting. Future adaptive controls should be framed as friendly training preferences such as Gentle/Balanced/Challenge, session length, focus mode, hints, or mistake review.
-- Visual direction should preserve a minimalist thread: restrained, clear, low-clutter, tactile iPad-app UI for all ages. Avoid both over-decorated game styling and cold/boxy admin-dashboard styling.
-- Visual direction should also move the app away from mostly text-only surfaces by adding consistent math-strength marks, status symbols, and simple pictorial cues where they improve scanning and interaction clarity, but not by putting icons inside every button.
+- The app is a static `index.html` + `styles.css` + `js/app-*.js` browser app with no bundler or package manager.
+- Source-of-truth runtime files live at the repo root; `docs/live` is the rolling published copy and `docs/v*` holds preserved archives.
+- Browser-local storage uses `math-muscle-trainer-*` keys with legacy fallback reads for older saved progress and preferences.
+- Product-specific UI remains internal; design/system docs now define a future hybrid component architecture without selecting or installing an external library.
 
-## Verification
+## Implemented Capabilities
 
-- Latest known check before this feature branch:
+- Home is the startup surface and acts as the learner's daily training dashboard.
+- Workout setup and practice support addition, subtraction, multiplication, and division.
+- Learn includes multiplication `x1` through `x12`, addition lesson flows, and subtraction/division placeholders.
+- Progress includes workout records, streaks, fact tracking, operation mastery, and related evidence views.
+- Debug mode is opt-in via Home arm-mark double-click or `?debug=1` / `#debug`, then the classroom password `N0v4r3`.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
-```
+## Active Workstream
 
-- Result on 2026-05-08: `All repo checks passed.`
-- GitHub Pages verified live on 2026-05-08:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/`
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/index.html`
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v10/js/app-core.js` served `APP_VERSION = "v0.13.0"`.
-- 2026-05-09 session changed AI continuity docs only. No app checks, push, or live verification were run from this chat environment.
-- 2026-05-10 feature branch work refreshed `docs/v12` and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
-- 2026-05-10 follow-up execution batch changed root app files and reran `scripts/check-repo.ps1`; expected failures reported until a new docs snapshot is published.
-- 2026-05-11 UI system patch reran `scripts/check-repo.ps1`; expected snapshot-drift failures remain for root app files until a new docs snapshot is published.
-- 2026-05-11 UI system patch ran `node --check` for all root JS modules; all syntax checks passed.
-- 2026-05-11 publish close ran `scripts/check-repo.ps1` after `docs/v13`; result: `All repo checks passed.`
-- GitHub Pages verified live on 2026-05-11:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `docs/v13` as latest.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/index.html` returned HTTP 200.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v13/js/app-core.js` served `APP_VERSION = "v0.16.0"`.
-- 2026-05-11 app viewport frame release ran `scripts/check-repo.ps1` after `docs/v14`; result: `All repo checks passed.`
-- 2026-05-11 app viewport frame release ran `node --check` for all root JS modules; all syntax checks passed.
-- GitHub Pages verified live for `v0.17.0` on 2026-05-11:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `docs/v14` as latest.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v14/index.html` returned HTTP 200.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v14/js/app-core.js` served `APP_VERSION = "v0.17.0"`.
-- 2026-05-12 project memory cleanup changed documentation/continuity only; `scripts/check-repo.ps1` passed afterward. No push or live verification was run.
-- 2026-05-12 UI direction implementation ran `node --check` on all root JS modules and a CSS brace sanity check successfully. `scripts/check-repo.ps1` reported expected snapshot drift because root app files differed from latest `docs/v14` until the next snapshot publish.
-- 2026-05-13 publish close ran `scripts/check-repo.ps1` after `docs/v15`; result: `All repo checks passed.`
-- 2026-05-13 publish close ran `node --check` for all root JS modules; all syntax checks passed.
-- GitHub Pages verified live for `v0.18.0` on 2026-05-13:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `docs/v15` as latest.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v15/index.html` returned HTTP 200.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v15/js/app-core.js` served `APP_VERSION = "v0.18.0"`.
-- 2026-05-13 Home dashboard pass ran `node --check` for all root JS modules; all syntax checks passed.
-- 2026-05-13 Home dashboard pass ran a CSS brace sanity check; braces are balanced.
-- 2026-05-13 Home dashboard pass ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for root app files because no new docs snapshot was published.
-- 2026-05-13 Home execution batch reran `node --check` for all root JS modules; all syntax checks passed.
-- 2026-05-13 Home execution batch reran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for root app files because no new docs snapshot was published.
-- 2026-05-14 touch-keypad fix ran `node --check` for all root JS modules; all syntax checks passed.
-- 2026-05-14 touch-keypad fix ran a CSS brace sanity check; braces are balanced.
-- 2026-05-14 touch-keypad fix ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported because no new docs snapshot was published.
-- 2026-05-14 UI polish batch ran `node --check` for all root JS modules; all syntax checks passed.
-- 2026-05-14 UI polish batch ran a CSS brace sanity check; braces are balanced.
-- 2026-05-14 UI polish batch ran `scripts/check-repo.ps1`; expected snapshot-drift failures reported for `index.html`, `styles.css`, `js/app-core.js`, `js/app-init.js`, and `js/app-progress.js` because the user requested no publish.
-- 2026-05-14 UI polish batch could not use the in-app browser screenshot workflow because the required Node REPL browser tool was not exposed in this session; manual iPad/browser review remains needed.
-- 2026-05-14 publish close bumped runtime version to `v0.20.0`, moved UI polish notes into `CHANGELOG.md`, published `docs/v17`, updated README, and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
-- 2026-05-14 publish close pushed commit `7013f01` to `main` and verified GitHub Pages live:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists Version 17 / `v0.20.0`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v17/` returned HTTP 200.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/v17/js/app-core.js` served `APP_VERSION = "v0.20.0"`.
-- `v0.20.1` live cleanup ran `node --check` for all root JS modules; syntax checks passed.
-- `v0.20.1` live cleanup ran a CSS brace sanity check; braces are balanced.
-- `v0.20.1` live cleanup ran `scripts/check-repo.ps1` after `docs/live`; result: `All repo checks passed.`
-- `v0.20.1` live cleanup pushed commit `98003d3` to `main` and verified GitHub Pages live:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.1 live cleanup`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.1"`.
-- `v0.20.2` UI polish ran `node --check` for all root JS modules; syntax checks passed.
-- `v0.20.2` UI polish ran a CSS brace sanity check; braces are balanced.
-- `v0.20.2` UI polish captured focused mobile screenshots for Progress and Learn practice after the optimization pass, and published `docs/live` with label `v0.20.2 UI polish`.
-- `v0.20.2` UI polish ran `scripts/check-repo.ps1` after `docs/live`; result: `All repo checks passed.`
-- `v0.20.2` UI polish pushed release commit `a3610c1` to `main` and verified GitHub Pages live:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.2 UI polish`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.2"`.
-- `v0.20.3` Home QA polish ran `node --check` for all root JS modules; syntax checks passed.
-- `v0.20.3` Home QA polish ran a CSS brace sanity check; braces are balanced.
-- `v0.20.3` Home QA polish ran `scripts/check-repo.ps1` after `docs/live`; result: `All repo checks passed.`
-- `v0.20.3` Home QA polish pushed release commit `c2362d3` to `main`; a follow-up continuity verification commit was pushed after live deployment caught up.
-- GitHub Pages verified live for `v0.20.3` on 2026-05-16:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.3 Home QA polish`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200 and included `Workout Streak`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.3"`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-progress.js` served the Home streak value from `streakSummary.current`.
-- 2026-05-17 debug-mode implementation ran `node --check` for all root JS modules; syntax checks passed.
-- 2026-05-17 debug-mode implementation ran a CSS brace sanity check; braces are balanced.
-- 2026-05-17 debug-mode implementation ran headless Chrome `file://` smoke checks: normal `index.html` did not render the debug unlock dialog, while `index.html?debug=1` did.
-- 2026-05-17 debug-mode implementation ran `scripts/check-repo.ps1`; expected live-build drift failures reported for `index.html` and `styles.css` because `docs/live` was not published.
-- 2026-05-17 `v0.20.4` publish close ran `node --check` for all root JS modules; syntax checks passed.
-- 2026-05-17 `v0.20.4` publish close ran a CSS brace sanity check; braces are balanced.
-- 2026-05-17 `v0.20.4` publish close ran headless Chrome `file://` smoke checks: normal `index.html` did not render the debug unlock dialog, while `index.html?debug=1` did.
-- 2026-05-17 `v0.20.4` publish close updated publish/check scripts to include `js/app-debug.js`, then ran `scripts/check-repo.ps1` after publishing `docs/live`; result: `All repo checks passed.`
-- 2026-05-17 `v0.20.4` release commit `f85795b` was pushed to `main` and GitHub Pages was verified live:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.4 debug and UI polish`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/` returned HTTP 200 and includes `app-debug.js`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.4"`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-debug.js` returned HTTP 200 with debug unlock markers present.
-- 2026-05-17 `v0.20.5` app-shell polish ran `node --check` for all root JS modules; syntax checks passed.
-- 2026-05-17 `v0.20.5` app-shell polish ran a CSS brace sanity check; braces are balanced.
-- 2026-05-17 `v0.20.5` app-shell polish published `docs/live` and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
-- 2026-05-17 `v0.20.5` release commit `c7c0a43` was pushed to `main` and GitHub Pages was verified live:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.5 app shell polish`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.5"`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/index.html` included the dock Options and `Give Feedback` markers.
-- 2026-05-18 `v0.20.6` visual reference system ran `node --check` for all root JS modules; syntax checks passed.
-- 2026-05-18 `v0.20.6` visual reference system ran a CSS brace sanity check; braces are balanced.
-- 2026-05-18 `v0.20.6` visual reference system published `docs/live` and ran `scripts/check-repo.ps1`; result: `All repo checks passed.`
-- 2026-05-18 `v0.20.6` release commit `c63f524` was pushed to `main` and GitHub Pages was verified live:
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/` lists `Live - v0.20.6 visual reference system`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/js/app-core.js` served `APP_VERSION = "v0.20.6"`.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/live/index.html` included updated live UI markers.
-  - `https://frichmonds-stack.github.io/Math-Muscle-Trainer/design/reference/button-ui-design-brief.jpg`, `design/reference/screenshot-audit-v0.20.5.md`, and the Home dark/light screenshot references returned HTTP 200.
+- Current documentation workstream: AI workflow consolidation, product-memory split, design-doc authority cleanup, and hybrid UI component architecture documentation.
+- Highest product implementation priorities remain lesson-system direction, lesson content expansion, zero states, and clearer progress/evidence communication.
 
-## Working Tree Note
+## Known Risks Or Defects
 
-- Always inspect `git status --short` before editing. Publish-close sessions should also confirm `git remote -v` and live GitHub Pages status when pushing.
+- Learn, Progress, and Options still need fuller dedicated visual reference coverage.
+- Several long-term product decisions remain open around lesson progression, onboarding, mastery communication, negative-number handling, and future account/subscription/privacy work.
+- Touch/iPad QA remains important for Practice keypad fit, portrait behavior, and light-mode contrast.
+
+## Latest Verified Checks
+
+- 2026-05-19 publish close ran `node --check` on all root JS modules, `git diff --check`, `scripts/publish-live.ps1 -Label "v0.20.7 visual design brief"`, and `scripts/check-repo.ps1`.
+- Result: `All repo checks passed.`
+- GitHub Pages was last verified on 2026-05-19 for `/`, `/live/js/app-core.js`, `/design/visual-design-system.md`, and `/design/reference/screenshots/setup-light-v0.20.5.png`.
+
+## Immediate Handoff
+
+- Read `AGENTS.md`, `ai/context.md`, `ai/current-state.md`, and `ai/active-task.md` first.
+- Use `ai/task-map.md` only to choose the right route doc, then read the matching `ai/routes/*.md`.
+- Inspect `git status --short` before editing because local documentation work may be in progress.

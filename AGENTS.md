@@ -176,3 +176,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 - `ai/prompts/` holds reusable task and closeout templates.
 - Keep entries concise. Link to code/docs by path when useful.
 - Do not duplicate the whole README, changelog, or product docs; summarize and point to them.
+
+## Session closeout (AI Efficiency)
+
+Before ending every working session, submit one compact closeout record:
+
+```text
+ai-efficiency closeout --project-root . --harness <active-harness> --file record.json
+```
+
+Report only directly observed values. Never invent token counts; unknown
+measurements stay null. The outcome reflects the owner's response, not the
+agent's self-assessment. Include a session ID only when the active harness
+exposes one. The central CLI captures project and Git context itself.

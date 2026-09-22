@@ -21,3 +21,5 @@ Before changing UI, identify the relevant role and check the matching references
 After changing UI, report which visual roles changed and whether any reference needs to be updated.
 
 Screenshots should be paired with notes. Images alone are not enough because the important guidance is what to preserve, what to fix, and what remains undecided.
+
+Screenshot filenames keep the capture/baseline version in the name. They do not need to match the current app version unless the screenshot itself is recaptured.

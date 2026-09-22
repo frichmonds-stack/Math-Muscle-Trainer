@@ -24,6 +24,8 @@ Future screenshots should be stored in `screenshots/` with names like:
 - `progress-light-fact-tracker-v0.20.5.png`
 - `options-light-v0.20.5.png`
 
+The version in a screenshot filename is the capture/baseline version, not necessarily the current app release.
+
 ## Button UI Reference Board
 
 Reference: `button-ui-design-brief.jpg`

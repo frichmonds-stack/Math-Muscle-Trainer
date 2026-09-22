@@ -1,82 +1,75 @@
 # Active Task
 
-Task ID: DOC-2026-07-11-A
-Task Name: AI workflow and design-system consolidation
+Task ID: DEPLOY-2026-09-23-A
+Task Name: Cloudflare Workers static-assets deployment configuration
 Status: complete
 
 ## Reason
 
-Reduce startup duplication, make source-of-truth rules explicit, split mixed product memory into cleaner documents, and record the intended hybrid UI component architecture without changing runtime code.
+Add a minimal, optional Cloudflare Workers deployment path for the existing `docs/live/` static site.
 
 ## Owner Decisions Already Made
 
-- This batch is documentation-only.
-- Do not change application HTML, CSS, JavaScript, publishing scripts, tests, dependencies, or runtime behavior.
-- Do not commit, push, publish `docs/live`, create a numbered snapshot, or claim live verification.
-- The durable architecture decision for this batch is the hybrid internal-plus-external UI component model, not selection of a specific library.
+- The Cloudflare project name is `math-muscle-trainer`.
+- Deploy only `docs/live/` through Workers Static Assets.
+- Do not add Worker logic, Cloudflare service bindings, secrets, credentials, or package infrastructure.
+- Do not deploy, commit, push, or alter the GitHub Pages publishing workflow.
 
 ## Scope
 
-- AI workflow consolidation
-- Active-task model
-- Source-of-truth precedence
-- Conditional continuity maintenance rules
-- Prompt template cleanup
-- Product-memory split under `docs/product/`
-- AI route split under `ai/routes/`
-- Design authority cleanup
-- Hybrid component architecture ADR and design-doc updates
+- Add a root `wrangler.jsonc`.
+- Verify current Wrangler assets-only syntax against official Cloudflare documentation.
+- Run local, non-deploying validation.
+- Record the durable deployment decision.
 
 ## Explicit Exclusions
 
-- No runtime implementation changes
-- No dependency or framework changes
-- No CI/GitHub Actions changes
-- No publish, commit, or push
-- No external component library proof of concept
+- No app HTML, CSS, or JavaScript changes
+- No edits to `docs/live/`
+- No Cloudflare deployment or dashboard mutation
+- No GitHub Pages workflow changes
+- No npm manifest, lockfile, or local Wrangler dependency
 
 ## Files Likely Affected
 
-- `AGENTS.md`
-- `ai/`
-- `docs/product/`
-- `docs/design/`
-- `docs/decisions/`
-- `PROJECT_NOTES.md`
+- `wrangler.jsonc`
+- `docs/decisions/ADR-0011-cloudflare-workers-static-assets-deployment.md`
+- AI continuity files required by the repository closeout protocol
 
 ## Risks
 
-- Documentation drift if multiple files restate the same rule
-- Accidentally overwriting unrelated local doc edits
-- Creating route/product files that are too verbose to be useful at session start
+- A future `docs/live/` publish changes the content that the next Wrangler deployment will upload.
+- Cloudflare account authentication and domain routing remain user-managed deployment steps.
 
 ## Acceptance Criteria
 
-- Startup docs support layered reading instead of loading every continuity file every session.
-- Source-of-truth precedence is explicit and consistent across workflow docs.
-- `PROJECT_NOTES.md` is reduced to an index or removed safely.
-- `ai/current-state.md`, `ai/open-threads.md`, `ai/tasks/next-actions.md`, and `ai/task-map.md` each have a narrow job.
-- Design docs show one canonical authority order and no obvious contradictions with the current repo state.
-- A durable ADR records the hybrid UI component architecture.
+- Wrangler recognizes the repository as an assets-only Worker named `math-muscle-trainer`.
+- The asset directory resolves to `docs/live/`.
+- No Worker entry point, binding, package manifest, or Cloudflare service configuration is added.
+- Existing app and GitHub Pages files remain unchanged by this task.
 
 ## Required Checks
 
-- Verify all added internal paths exist.
-- Verify source-of-truth statements align across AI docs.
-- Verify design-doc statements match current source behavior.
+- Parse `wrangler.jsonc` as JSONC-compatible JSON.
+- Run Wrangler dry-run validation without deploying.
 - Run `git diff --check`.
-- Run `scripts/check-repo.ps1` if still meaningful for documentation-only changes.
 - Inspect `git status --short`.
 
 ## Documentation Impact
 
-- High. This batch mainly restructures and consolidates repository documentation.
+- Low. One deployment config and a concise durable decision record are added; the app is unchanged.
 
 ## Publication Authorization
 
-- Not authorized for this batch.
+- Cloudflare deployment is not authorized.
+- GitHub Pages publication, commit, and push are authorized through Publish Close.
 
 ## Latest Verified State
 
-- Local source still shows Home startup, dock destinations `Home / Workout / Learn / Progress`, an Options gear in the dock, and local/live baseline `v0.20.7`.
-- This task's durable outcomes were moved into `AGENTS.md`, `ai/`, `docs/product/`, `docs/design/`, and `docs/decisions/ADR-0010-hybrid-ui-component-architecture.md`.
+- Added `wrangler.jsonc` with `name`, current `compatibility_date`, and `assets.directory` only.
+- Official Cloudflare documentation confirms `main` is optional and an assets binding should be omitted for assets-only Workers.
+- Wrangler 4.136.3 `deploy --dry-run` read the `docs/live/` asset set, reported no bindings, and exited without deployment.
+- `git diff --check` passed.
+- `scripts/check-repo.ps1` reported only the pre-existing unpublished root/live `styles.css` difference.
+- Publish Close refreshed `docs/live/` and updated the latest `docs/index.html` label to `v0.20.7 Cloudflare deployment configuration and visual reference refresh`.
+- After publishing, `scripts/check-repo.ps1` and `git diff --check` passed. GitHub push and live verification are pending.

@@ -1,13 +1,14 @@
 # Current State
 
-Last updated: 2026-07-11
+Last updated: 2026-09-23
 
 ## Version And Publication
 
 - Local root app version is `v0.20.7`.
-- The current rolling live build is `docs/live`, and `docs/index.html` marks it as `v0.20.7 visual design brief`.
+- The current rolling live build is `docs/live`, and `docs/index.html` marks it as `v0.20.7 Cloudflare deployment configuration and visual reference refresh`.
 - The latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - The latest recorded pushed release commit is `b6429d0` (`Release v0.20.7 visual design brief`).
+- `wrangler.jsonc` provides an optional assets-only Cloudflare Workers deployment of `docs/live/` as `math-muscle-trainer`; no Worker script or package infrastructure is present.
 
 ## Architecture
 
@@ -15,6 +16,7 @@ Last updated: 2026-07-11
 - Source-of-truth runtime files live at the repo root; `docs/live` is the rolling published copy and `docs/v*` holds preserved archives.
 - Browser-local storage uses `math-muscle-trainer-*` keys with legacy fallback reads for older saved progress and preferences.
 - Product-specific UI remains internal; design/system docs now define a future hybrid component architecture without selecting or installing an external library.
+- GitHub Pages publishing remains unchanged; Cloudflare Workers is an additional manual deployment target documented in ADR-0011.
 
 ## Implemented Capabilities
 
@@ -26,7 +28,7 @@ Last updated: 2026-07-11
 
 ## Active Workstream
 
-- Current documentation workstream: AI workflow consolidation, product-memory split, design-doc authority cleanup, and hybrid UI component architecture documentation.
+- The Cloudflare Workers static-assets deployment configuration is complete locally and has not been deployed.
 - Highest product implementation priorities remain lesson-system direction, lesson content expansion, zero states, and clearer progress/evidence communication.
 
 ## Known Risks Or Defects
@@ -40,6 +42,8 @@ Last updated: 2026-07-11
 - 2026-05-19 publish close ran `node --check` on all root JS modules, `git diff --check`, `scripts/publish-live.ps1 -Label "v0.20.7 visual design brief"`, and `scripts/check-repo.ps1`.
 - Result: `All repo checks passed.`
 - GitHub Pages was last verified on 2026-05-19 for `/`, `/live/js/app-core.js`, `/design/visual-design-system.md`, and `/design/reference/screenshots/setup-light-v0.20.5.png`.
+- 2026-09-23 Cloudflare configuration validation passed with Wrangler 4.136.3 using `deploy --dry-run`; Wrangler read the `docs/live/` assets, found no bindings, and did not deploy.
+- 2026-09-23 Publish Close refreshed `docs/live/`; `scripts/check-repo.ps1` and `git diff --check` passed before commit/push.
 
 ## Immediate Handoff
 

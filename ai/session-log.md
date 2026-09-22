@@ -2,6 +2,16 @@
 
 This log records durable session milestones and active handoff notes. Keep detailed release history in `CHANGELOG.md`, implementation state in `ai/current-state.md`, active questions in `ai/open-threads.md`, and executable next work in `ai/tasks/next-actions.md`.
 
+## 2026-09-23 - Cloudflare Workers Static Assets Configuration
+
+- Added a minimal root `wrangler.jsonc` that deploys `docs/live/` as the assets-only Worker `math-muscle-trainer`.
+- Kept the app, package-free architecture, `docs/live/`, and GitHub Pages publishing flow unchanged.
+- Recorded ADR-0011 for the optional Cloudflare deployment target.
+- Validated with Wrangler 4.136.3 `deploy --dry-run`; it read the static assets, found no bindings, and did not deploy.
+- Publish Close refreshed `docs/live/` and updated `docs/index.html` with the label `v0.20.7 Cloudflare deployment configuration and visual reference refresh`.
+- `git diff --check` and the repo-native check passed after publication.
+- Cloudflare deployment remains out of scope; commit, GitHub push, and Pages verification are pending.
+
 ## 2026-05-07 - AI Continuity And Rename Foundation
 
 - Added repo-native AI continuity under `ai/`, root `AGENTS.md`, session start/close prompts, and ADR-0001.

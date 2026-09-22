@@ -10,7 +10,8 @@ This log records durable session milestones and active handoff notes. Keep detai
 - Validated with Wrangler 4.136.3 `deploy --dry-run`; it read the static assets, found no bindings, and did not deploy.
 - Publish Close refreshed `docs/live/` and updated `docs/index.html` with the label `v0.20.7 Cloudflare deployment configuration and visual reference refresh`.
 - `git diff --check` and the repo-native check passed after publication.
-- Cloudflare deployment remains out of scope; commit, GitHub push, and Pages verification are pending.
+- Cloudflare deployment remains out of scope. Commit `7009aea` was pushed to `origin/main`.
+- The owner confirmed GitHub Pages is intentionally shut down, so no GitHub Pages live verification is expected.
 
 ## 2026-05-07 - AI Continuity And Rename Foundation
 

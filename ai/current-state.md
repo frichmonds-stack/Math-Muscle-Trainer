@@ -44,6 +44,7 @@ Last updated: 2026-09-23
 - GitHub Pages was last verified on 2026-05-19 for `/`, `/live/js/app-core.js`, `/design/visual-design-system.md`, and `/design/reference/screenshots/setup-light-v0.20.5.png`.
 - 2026-09-23 Cloudflare configuration validation passed with Wrangler 4.136.3 using `deploy --dry-run`; Wrangler read the `docs/live/` assets, found no bindings, and did not deploy.
 - 2026-09-23 Publish Close refreshed `docs/live/`; `scripts/check-repo.ps1` and `git diff --check` passed before commit/push.
+- Commit `7009aea` was pushed to `origin/main`. The owner confirmed GitHub Pages is intentionally shut down, so no GitHub Pages live verification is expected.
 
 ## Immediate Handoff
 

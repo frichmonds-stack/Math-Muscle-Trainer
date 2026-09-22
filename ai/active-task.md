@@ -72,4 +72,5 @@ Add a minimal, optional Cloudflare Workers deployment path for the existing `doc
 - `git diff --check` passed.
 - `scripts/check-repo.ps1` reported only the pre-existing unpublished root/live `styles.css` difference.
 - Publish Close refreshed `docs/live/` and updated the latest `docs/index.html` label to `v0.20.7 Cloudflare deployment configuration and visual reference refresh`.
-- After publishing, `scripts/check-repo.ps1` and `git diff --check` passed. GitHub push and live verification are pending.
+- After publishing, `scripts/check-repo.ps1` and `git diff --check` passed. Commit `7009aea` was pushed to `origin/main`.
+- The owner confirmed GitHub Pages is intentionally shut down; no GitHub Pages live verification is expected.

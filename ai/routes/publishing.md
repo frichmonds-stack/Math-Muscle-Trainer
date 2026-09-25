@@ -10,12 +10,15 @@
 - `docs/v*`
 - `CHANGELOG.md`
 - `js/app-core.js`
+- `wrangler.jsonc`
+- `ai/procedures/closeout.md`
 
 ## Required Pre-Reading
 
 - `AGENTS.md`
 - `ai/current-state.md`
 - `docs/decisions/ADR-0008-live-publishing-channel.md`
+- `docs/decisions/ADR-0011-cloudflare-workers-static-assets-deployment.md`
 
 ## Source Of Truth
 
@@ -29,6 +32,7 @@
 - marking the wrong docs entry as latest
 - editing archived snapshots manually
 - claiming live status without push and verification
+- treating the local `docs/live` copy or GitHub push as a verified Cloudflare deployment
 
 ## Owner Decisions That May Be Required
 
@@ -47,7 +51,7 @@
 
 ## Minimum Manual QA
 
-- published page loads
+- deployed page loads, only when a deployment was explicitly requested and completed
 - expected markers/version strings after publish
 
 ## Documentation Impact
@@ -55,7 +59,7 @@
 - `README.md`
 - `CHANGELOG.md`
 - `ai/current-state.md`
-- `ai/session-log.md`
+- `ai/portfolio-identities.md` only for a curated closeout item
 
 ## ADR Trigger
 

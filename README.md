@@ -72,19 +72,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-repo.ps1
 
 The check validates duplicate IDs, script references, release/version drift, stale `docs/` latest labels, and whether the latest live docs build matches the root app files.
 
-## Publish on the internet
+## Prepare a publishable build
 
-This repo is prepared for GitHub Pages using the `docs/` folder.
-
-1. Push the branch to GitHub.
-2. In repository settings, open `Pages`.
-3. Set Source to `Deploy from a branch`.
-4. Select branch `main` (or your release branch) and folder `/docs`.
-5. Save and wait for Pages to publish.
-
-The latest hosted build is linked from `docs/index.html`.
-
-For routine internet updates, publish the current root app to the rolling live build:
+GitHub Pages is intentionally shut down. The root app is the development source, and `docs/live/` is the rolling copy prepared for hosting. Copy routine app changes there with:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-live.ps1 -Label "v0.20.7 visual design brief"
@@ -96,7 +86,9 @@ To preserve a milestone as a numbered static snapshot, run:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.ps1 -SnapshotNumber 17 -Label "v0.20.0 UI polish snapshot"
 ```
 
-Use `docs/live/` for normal "make it live" updates. Use `docs/v*` snapshots only for significant milestones or when a preserved archive is explicitly wanted.
+Use `docs/v*` snapshots only for significant milestones or when a preserved archive is explicitly wanted. Run `scripts/check-repo.ps1` after either publish script.
+
+`wrangler.jsonc` configures an assets-only Cloudflare Workers deployment of `docs/live/`. Deployment is a separate manual step (`npx wrangler deploy`) that requires Cloudflare access and explicit authorization. Copying files into `docs/live/` or pushing GitHub does not by itself verify a live site.
 
 ## Files
 
@@ -113,6 +105,7 @@ Use `docs/live/` for normal "make it live" updates. Use `docs/v*` snapshots only
 - `docs/design/reference/` contains visual reference boards, screenshot audit notes, and curated app screenshots for UI design work
 - `docs/product/` contains durable product direction, roadmap, and idea-bank docs
 - `docs/testing/smoke-checklist.md` contains the lightweight manual smoke-test checklist
+- `AGENTS.md` and `ai/INDEX.md` route AI-assisted work; `ai/procedures/closeout.md` defines Publish Close and the approved AI Project Manager/Notion closeout
 
 ## Versioning
 

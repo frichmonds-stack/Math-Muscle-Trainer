@@ -27,10 +27,9 @@ Use this file to choose the smallest relevant route before editing. Do not read 
 
 ## Read First Rules
 
-- Always start with `AGENTS.md`, `ai/context.md`, `ai/current-state.md`, and `git status --short`.
-- Read `ai/active-task.md` when an active task exists.
-- Read `ai/open-threads.md` only when the work may require an owner decision.
-- Read `ai/session-log.md` only when historical context is actually needed.
+- Start with `AGENTS.md`, `git status --short`, and the first relevant route in `ai/INDEX.md`.
+- Read `ai/active-task.md` only when a batch is active; read `ai/current-state.md` or `ai/context.md` only when the task needs them.
+- Read `ai/open-threads.md` for owner decisions. `ai/session-log.md` is frozen history, not startup context.
 
 ## Source-Of-Truth Reminder
 

@@ -3,6 +3,8 @@
 Date: 2026-09-23
 Status: Accepted
 
+The assets-only Cloudflare decision remains active. Its references below to retaining GitHub Pages hosting were superseded by ADR-0013 after the owner shut Pages down.
+
 ## Context
 
 The public site is the dependency-free static app published in `docs/live/`. The repository also needs an optional Cloudflare Workers deployment path without replacing or changing the existing GitHub Pages publishing flow.

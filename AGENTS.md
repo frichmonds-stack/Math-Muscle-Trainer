@@ -15,39 +15,33 @@ Project guidance for Codex and other AI coding sessions in this repo.
   - `js/app-techniques.js` - Learn / Techniques lessons.
   - `js/app-init.js` - startup rendering and event binding.
   - `js/app-debug.js` - opt-in teacher/developer debug mode, loaded only through `?debug=1` / `#debug` behavior.
-- The rolling live GitHub Pages build lives under `docs/live`; preserved static snapshots live under `docs/v*`; `docs/index.html` marks the current live build and lists preserved snapshots.
+- The rolling publishable build lives under `docs/live`; preserved static snapshots live under `docs/v*`. GitHub Pages is shut down. Cloudflare Workers is configured for `docs/live` but has not been deployed.
 - Project memory is split across `docs/product/`, `AGENTS.md`, `ai/`, and `docs/decisions/`.
 - Current product name is `Math Muscle Trainer`; avoid reintroducing prior product branding except when discussing external/manual rename history.
 
 ## Session Start Protocol
 
-1. Read this file first.
-2. Always read:
-   - `ai/context.md`
-   - `ai/current-state.md`
-   - `ai/active-task.md`, when it contains an active task
-3. Inspect `git status --short` before editing.
-4. Read only what the task needs:
-   - `ai/task-map.md` when routing unfamiliar work
-   - `ai/open-threads.md` for planning or owner decisions
-   - `ai/tasks/next-actions.md` when selecting future work
-   - `ai/session-log.md` only when historical context is required
-   - relevant ADRs, route docs, lesson files, specs, design docs, or product docs chosen by the task
-5. Summarize the current repo state and the intended change before changing code.
-6. For work affecting product direction, architecture, release flow, storage shape, design systems, or long-lived conventions, create or update an ADR in `docs/decisions/`.
+1. Read this file first, then run `git status --short` and confirm the repository root before editing.
+2. Read the first relevant route in `ai/INDEX.md`; follow `ai/task-map.md` for an app area. Read current state, a task, an ADR, or a spec only when the task implicates it. `ai/session-log.md` is frozen history, never startup context.
+3. State the intended change and whether edit authorization exists before changing files.
+4. For lasting product, architecture, release, storage, design-system, or workflow decisions, add or update an ADR in `docs/decisions/`.
+
+## Context Tiers
+
+`ai/INDEX.md` labels AI-facing documents: **Hot** routing and operational rules, **Warm** task-relevant state and design, and **Cold** history. Load the narrowest relevant route first. A document's importance does not make it a startup read.
 
 ## Source-Of-Truth Order
 
 When repo information conflicts, use this order:
 
 1. Current local code, tests, diffs, and working-tree evidence
-2. The active authorized task in `ai/active-task.md`
+2. The active authorized task in `ai/active-task.md`, when one exists
 3. Accepted ADRs in `docs/decisions/`
 4. `ai/current-state.md`
 5. Task-specific specs, lesson files, design docs, and route docs
 6. `ai/open-threads.md` and `ai/tasks/next-actions.md`
 7. Product-direction, roadmap, and idea-bank docs
-8. `ai/session-log.md` and `CHANGELOG.md` as historical records
+8. Git, the frozen `ai/session-log.md`, and `CHANGELOG.md` as historical records
 
 GitHub is the remote published state, but newer local evidence wins when the working tree or user-provided context proves it is newer.
 
@@ -61,10 +55,14 @@ Changing repo state includes editing files, updating AI continuity docs, running
 
 Implementation and release scope must follow the user's explicit wording:
 
-- `execute now`, `go ahead`, `make the changes`, `implement this`, `fix it`, or `update the files` authorizes local file changes only.
-- `Normal Close` or `Run the session close protocol from AGENTS.md and update the AI continuity files` authorizes local session-close work: best available checks, affected local docs, conditional AI continuity updates, and final status reporting. It does not authorize publishing `docs/live`, creating snapshots, committing, pushing, or claiming live verification.
-- `Publish Close` authorizes release-style closeout: version/changelog updates when needed, publishing the appropriate docs build, usually `docs/live` for routine updates, running repo checks after publish, checking status/remotes, committing, pushing, and verifying the live GitHub Pages build when deployment timing allows.
-- `publish`, `commit`, and `push` authorize only those named release steps when paired with an implementation or closeout request.
+| Command | Scope |
+|---|---|
+| `execute now` (or an equally explicit edit request) | Implement the agreed local batch, run relevant checks, and update affected docs. Follow `ai/procedures/execute-now.md`. No commit, push, or deployment. |
+| `Chunk Plan` | Split a proposed batch into owner-selectable chunks; follow `ai/procedures/chunk-plan.md`. No edits. |
+| `Build Prompt` | Prepare a scoped prompt for another agent; follow `ai/procedures/build-prompt.md`. No edits. |
+| `Publish Close` | Follow `ai/procedures/closeout.md`: verify, publish the appropriate local `docs/` build when needed, commit and push, then submit the AI Project Manager return and authorized Notion closeout. Cloudflare deployment requires an explicit deployment request. |
+
+An explicit request to `publish`, `commit`, or `push` authorizes only the named step. A local implementation request does not imply one of those steps.
 
 Vague approval such as `sounds good` should be treated as continued discussion unless the user clearly asks for action.
 
@@ -73,40 +71,14 @@ Vague approval such as `sounds good` should be treated as continued discussion u
 - `ai/active-task.md` is the operational record for the one implementation or investigation batch that is currently live.
 - Normally only one task should be active at a time.
 - Use statuses: `proposed`, `authorized`, `implementing`, `review`, `complete`.
-- Keep active-task content focused on the current batch: reason, decisions made, scope, exclusions, likely files, risks, checks, publication authorization, and latest verified state.
+- Keep active-task content focused on the current batch: scope, exclusions, decisions, checks, and latest verified state.
 - When a task is complete, move durable information to the right long-lived destination instead of letting `ai/active-task.md` become a permanent scrapbook.
 
-## Session Close Protocol
+## Documentation And Closeout
 
-Before finishing a coding session:
-
-1. Run the best available checks for the change.
-2. Update documentation affected by the work:
-   - `README.md` for user-facing features, run/check/publish steps, or repo structure
-   - `CHANGELOG.md` and `APP_VERSION` for user-visible behavior or releases
-   - `docs/index.html` and `docs/live` via `scripts/publish-live.ps1` for routine live updates
-   - `docs/index.html` and `docs/v*` via `scripts/publish-snapshot.ps1` only for preserved numbered snapshots
-   - product, design, lesson, or process docs that materially changed
-3. Update AI continuity only when the content actually changed:
-   - `ai/current-state.md` only when implementation or verified project state changed
-   - `ai/tasks/next-actions.md` only when priorities or readiness changed
-   - `ai/open-threads.md` only when a decision appears, changes, becomes blocked, or closes
-   - `ai/session-log.md` only for meaningful implementation, investigation, decision, release, or handoff milestones
-4. Create or update an ADR only for a durable architecture, product, data, design, release, security, or workflow decision.
-5. It is acceptable to report `AI continuity: no update required` when nothing material changed.
-6. For release/publish work, or when the user asks for changes to be live:
-   - Run `scripts/check-repo.ps1` after publishing `docs/live` or a numbered snapshot
-   - Check `git status --short` and `git remote -v`
-   - Commit and push only when the user requested or approved publishing
-   - Verify the GitHub Pages/live URL when network access and deployment timing allow
-7. In the final response, explicitly state:
-   - files changed
-   - docs updated
-   - checks run
-   - GitHub push status
-   - live internet verification status
-   - assumptions and manual review still needed
-8. Do not claim GitHub is updated or the site is live unless it was actually pushed and verified. If not done, say exactly what remains.
+- During `execute now`, run the relevant checks and update docs for what actually landed. Use `ai/procedures/documentation-write.md`: replace superseded text at its canonical home, prune finished tasks, and avoid new session summaries.
+- `Publish Close` verifies the completed batch, handles version and `docs/` publishing when relevant, checks the repository, commits and pushes, and reports what was actually verified. Follow `ai/procedures/closeout.md`.
+- `.ai-efficiency.toml` opts into connector-based Notion Work Queue closeout after its configuration is committed. The repository remains authoritative; Notion receives only a curated portfolio summary. Use stable keys in `ai/portfolio-identities.md` and the procedure above. Do not submit or claim Notion delivery during an ordinary local implementation turn.
 
 ## Testing And Build Instructions
 
@@ -172,20 +144,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 - `ai/task-map.md` routes work to `ai/routes/*.md`.
 - `ai/open-threads.md` holds unresolved decisions, not executable tasks.
 - `ai/tasks/next-actions.md` holds a small priority queue of concrete next work.
-- `ai/session-log.md` records meaningful milestones and may later archive old entries into yearly files.
-- `ai/prompts/` holds reusable task and closeout templates.
+- `ai/session-log.md` is frozen historical context; Git owns new chronology.
+- `ai/portfolio-identities.md` records only stable Notion Sync Keys for curated items.
+- `ai/procedures/` holds command and documentation workflows; `ai/prompts/` holds optional reusable prompts.
 - Keep entries concise. Link to code/docs by path when useful.
 - Do not duplicate the whole README, changelog, or product docs; summarize and point to them.
-
-## Session closeout (AI Efficiency)
-
-Before ending every working session, submit one compact closeout record:
-
-```text
-ai-efficiency closeout --project-root . --harness <active-harness> --file record.json
-```
-
-Report only directly observed values. Never invent token counts; unknown
-measurements stay null. The outcome reflects the owner's response, not the
-agent's self-assessment. Include a session ID only when the active harness
-exposes one. The central CLI captures project and Git context itself.

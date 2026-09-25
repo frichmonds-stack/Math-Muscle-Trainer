@@ -14,7 +14,7 @@
 
 - No build step or package manager is required.
 - Root app files are the source of truth for active development.
-- `docs/v*` contains static snapshots for GitHub Pages style publishing.
+- `docs/live` is the rolling publishable build; `docs/v*` contains preserved static snapshots. GitHub Pages is shut down.
 - `CHANGELOG.md` is version history.
 - `APP_VERSION` in `js/app-core.js` is the local runtime fallback.
 - `scripts/check-repo.ps1` validates repo consistency.
@@ -27,8 +27,7 @@
 - Prefer small, safe changes over broad rewrites.
 - Preserve the app's current visual direction unless a redesign is requested.
 - Use `docs/product/` for broader product memory and `ai/` for compact session continuity.
-- After session initialization, default to discussion/planning mode. Do not change repo state until the user explicitly authorizes local implementation, `Normal Close`, or `Publish Close`.
-- Treat `Normal Close` as local checks/docs/AI continuity only. Treat `Publish Close` as release-style closeout with docs publishing, checks, commit/push, and live verification when deployment timing allows.
+- After session initialization, default to discussion/planning mode. `execute now` authorizes the agreed local batch; `Publish Close` authorizes release closeout. Command details live in `AGENTS.md` and `ai/procedures/`.
 
 ## Documentation Ownership
 

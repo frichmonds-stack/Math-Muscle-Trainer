@@ -6,6 +6,8 @@ Date: 2026-05-07
 
 Accepted
 
+Superseded in part by ADR-0012 for context loading, session chronology, and command closeout. This ADR remains the historical basis for repo-local continuity ownership.
+
 ## Context
 
 This project is developed through repeated AI-assisted sessions. Chat history is not a reliable source of project memory, and the app has accumulated product decisions, release workflow details, and implementation conventions that future sessions need quickly.

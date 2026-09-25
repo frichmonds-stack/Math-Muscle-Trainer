@@ -1,2 +1,4 @@
 project_id = "math-muscle-trainer"
 project_name = "Math Muscle Trainer"
+notion_sync = true
+notion_delivery = "connector"

@@ -1,5 +1,7 @@
 # Session Log
 
+Frozen historical milestones. Git owns chronology after 2026-09-25; do not append new session summaries here.
+
 This log records durable session milestones and active handoff notes. Keep detailed release history in `CHANGELOG.md`, implementation state in `ai/current-state.md`, active questions in `ai/open-threads.md`, and executable next work in `ai/tasks/next-actions.md`.
 
 ## 2026-09-23 - Cloudflare Workers Static Assets Configuration

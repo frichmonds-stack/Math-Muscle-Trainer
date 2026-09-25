@@ -6,6 +6,8 @@ Date: 2026-05-14
 
 Accepted
 
+The rolling-copy policy remains active; GitHub Pages hosting references below were superseded by ADR-0013 after the owner shut Pages down.
+
 ## Context
 
 The project has accumulated many numbered `docs/v*` snapshots because routine "make it live" updates used the same flow as milestone archival releases. The user often wants the latest app available on GitHub Pages without preserving every polish pass as a new permanent snapshot.

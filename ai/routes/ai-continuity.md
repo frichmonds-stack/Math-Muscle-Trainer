@@ -3,6 +3,7 @@
 ## Relevant Files
 
 - `AGENTS.md`
+- `ai/INDEX.md`
 - `ai/context.md`
 - `ai/current-state.md`
 - `ai/active-task.md`
@@ -11,15 +12,16 @@
 - `ai/open-threads.md`
 - `ai/tasks/next-actions.md`
 - `ai/session-log.md`
+- `ai/portfolio-identities.md`
+- `ai/procedures/`
 - `ai/prompts/`
-- `docs/decisions/ADR-0001-ai-continuity-system.md`
+- `docs/decisions/ADR-0012-ai-workflow-and-portfolio-closeout.md`
 
 ## Required Pre-Reading
 
 - `AGENTS.md`
-- `ai/context.md`
-- `ai/current-state.md`
-- `docs/decisions/ADR-0001-ai-continuity-system.md`
+- `ai/INDEX.md`
+- the procedure or current-state document implicated by the task
 
 ## Source Of Truth
 
@@ -34,6 +36,8 @@
 - treating historical notes as current state
 - updating continuity files automatically when nothing material changed
 - letting `ai/active-task.md` become a permanent backlog
+- appending chronology to the frozen `ai/session-log.md`
+- delivering Notion items without stable Sync Key reconciliation or committed opt-in
 
 ## Owner Decisions That May Be Required
 
@@ -54,6 +58,7 @@
 
 - confirm startup docs point to real files
 - confirm closeout docs do not require churn unnecessarily
+- confirm `Normal Close` is not offered as a current command
 
 ## Documentation Impact
 

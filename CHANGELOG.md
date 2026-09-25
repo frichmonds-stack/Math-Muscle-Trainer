@@ -6,6 +6,9 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+### Changed
+- Updated the AI workflow to route context by task, retire Normal Close and session-log updates, and prepare connector-based Notion portfolio closeout for a future Publish Close.
+
 ## [0.20.7] - 2026-05-19
 
 ### Added

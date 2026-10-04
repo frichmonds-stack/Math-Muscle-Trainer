@@ -7,4 +7,5 @@ Use when the owner explicitly authorizes local implementation of the agreed batc
 3. Implement only this batch. An `execute now` authorization includes local file edits, relevant checks, and matching documentation updates. It does not authorize publishing `docs/live`, committing, pushing, Cloudflare deployment, or a further batch.
 4. Run the checks implicated by the change. The reliable repo-wide check is `scripts/check-repo.ps1`; use narrower syntax or manual UI checks when appropriate. Say what could not be verified.
 5. Update docs for what landed using `documentation-write.md`: current state only if implementation or verified state changed, task and decision queues only when their content changed, an ADR for a lasting decision, and user docs or changelog when relevant. Do not append to `../session-log.md`.
-6. Report files changed, docs updated, checks and results, GitHub push and live verification status, assumptions, and manual review needed. Return to planning mode after the batch.
+6. After the implementation, checks, and docs succeed, stop owner time using `owner-time.md`'s Execute Now completion hook. Partial, failed, or interrupted work preserves timer state.
+7. Report files changed, docs updated, checks and results, GitHub push and live verification status, assumptions, and manual review needed. Return to planning mode after the batch.

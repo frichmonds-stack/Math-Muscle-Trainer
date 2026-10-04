@@ -25,6 +25,7 @@ Use this folder for AI workflow, current implementation state, and next work. Pr
 | `Chunk Plan` | `procedures/chunk-plan.md` | Hot |
 | `Build Prompt` | `procedures/build-prompt.md` | Hot |
 | `Publish Close` and Notion closeout | `procedures/closeout.md` | Hot |
+| Owner-time activity, `time out`, and workflow completion hooks | `procedures/owner-time.md` | Hot |
 | Place, update, or retire documentation | `procedures/documentation-write.md` | Warm |
 
 Global authorization, source-of-truth, coding, and lesson-content rules stay in `../AGENTS.md`.

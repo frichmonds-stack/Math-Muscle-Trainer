@@ -25,6 +25,7 @@ Project guidance for Codex and other AI coding sessions in this repo.
 2. Read the first relevant route in `ai/INDEX.md`; follow `ai/task-map.md` for an app area. Read current state, a task, an ADR, or a spec only when the task implicates it. `ai/session-log.md` is frozen history, never startup context.
 3. State the intended change and whether edit authorization exists before changing files.
 4. For lasting product, architecture, release, storage, design-system, or workflow decisions, add or update an ADR in `docs/decisions/`.
+5. Before substantive work on each meaningful owner-linked turn, follow `ai/procedures/owner-time.md` to automatically begin local project timing. Skip subagents, timer-only queries, and `time out` itself. Timing is permitted during planning and grants no repository edit authority.
 
 ## Context Tiers
 
@@ -60,6 +61,7 @@ Implementation and release scope must follow the user's explicit wording:
 | `execute now` (or an equally explicit edit request) | Implement the agreed local batch, run relevant checks, and update affected docs. Follow `ai/procedures/execute-now.md`. No commit, push, or deployment. |
 | `Chunk Plan` | Split a proposed batch into owner-selectable chunks; follow `ai/procedures/chunk-plan.md`. No edits. |
 | `Build Prompt` | Prepare a scoped prompt for another agent; follow `ai/procedures/build-prompt.md`. No edits. |
+| `time out` | Follow `ai/procedures/owner-time.md`. Stops timing only; no closeout or work-item change. |
 | `Publish Close` | Follow `ai/procedures/closeout.md`: verify, publish the appropriate local `docs/` build when needed, commit and push, then submit the AI Project Manager return and authorized Notion closeout. Cloudflare deployment requires an explicit deployment request. |
 
 An explicit request to `publish`, `commit`, or `push` authorizes only the named step. A local implementation request does not imply one of those steps.

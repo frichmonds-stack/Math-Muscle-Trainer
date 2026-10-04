@@ -33,6 +33,8 @@ The owner approved Notion Work Queue closeout. `.ai-efficiency.toml` selects con
 
 Notion receives a narrow portfolio summary only. Do not send file paths, commands, source content, prompts, credentials, secrets, learner data, or detailed technical evidence. Repository documents remain authoritative.
 
+After every required Publish Close step succeeds, including commit, push, and portfolio delivery and acknowledgement, stop owner time using `owner-time.md`'s Publish Close completion hook. An incomplete push or delivery preserves timer state.
+
 ## 6. Final Report
 
 State files and docs changed, checks and limits, commit and push status, live verification status, assumptions, and manual review needed. Include a **Notion Closeout** section with the current item's state and Sync Key, curated Queued/Proposed items, and delivery state: delivered, pending with reason, superseded with reason, disabled, or not requested. A local return or a properties-only page is not completed Notion delivery.

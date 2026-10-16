@@ -1,6 +1,6 @@
 # Current State
 
-Last updated: 2026-09-25
+Last updated: 2026-10-16
 
 ## Version And Publication
 
@@ -15,7 +15,7 @@ Last updated: 2026-09-25
 - Source-of-truth runtime files live at the repo root; `docs/live` is the rolling publishable copy and `docs/v*` holds preserved archives.
 - Browser-local storage uses `math-muscle-trainer-*` keys with legacy fallback reads for older saved progress and preferences.
 - Product-specific UI remains internal; design/system docs now define a future hybrid component architecture without selecting or installing an external library.
-- GitHub Pages is intentionally shut down. `docs/live` remains the rolling build copied by the publish script; Cloudflare Workers is configured as an additional manual deployment target but has not been deployed.
+- GitHub Pages is disabled (no Pages site since 2026-10-16). `docs/live` remains the rolling build copied by the publish script. Cloudflare Workers Builds uploads an inactive version on each push to `main` (deploy command `npx wrangler versions upload`); the owner deploys a chosen version from the Cloudflare dashboard (ADR-0013).
 
 ## Implemented Capabilities
 
@@ -27,7 +27,7 @@ Last updated: 2026-09-25
 
 ## Active Workstream
 
-- The Cloudflare Workers static-assets deployment configuration is complete locally and has not been deployed.
+- Cloudflare is the only live channel. Version `cbbac604` (commit `7f5bf00`, app `v0.20.7`) was deployed by the owner from the dashboard on 2026-10-16.
 - AI workflow documentation uses routed context and command procedures. `Normal Close` is retired; `execute now` owns local implementation and matching docs, and `Publish Close` owns release checks, Git delivery, and the approved AI Project Manager/Notion closeout. Notion delivery requires the opt-in configuration in committed HEAD.
 - Highest product implementation priorities remain lesson-system direction, lesson content expansion, zero states, and clearer progress/evidence communication.
 
@@ -41,7 +41,7 @@ Last updated: 2026-09-25
 
 - The AI workflow documentation update passed `scripts/check-repo.ps1` and `git diff --check` locally on 2026-09-25.
 - The last app publish ran `scripts/check-repo.ps1` and `git diff --check` successfully on 2026-09-23.
-- Cloudflare configuration passed a non-deploying Wrangler dry run on 2026-09-23. No Cloudflare deployment or current live-site verification has been recorded.
+- 2026-10-16: the Cloudflare workers.dev site served `APP_VERSION = "v0.20.7"`; GitHub reported no Pages site and the github.io address returned 404.
 
 ## Immediate Handoff
 

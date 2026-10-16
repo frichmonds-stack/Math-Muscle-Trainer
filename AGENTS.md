@@ -32,7 +32,7 @@ Project guidance for Codex and other AI coding sessions in this repo.
   - `js/app-techniques.js` - Learn / Techniques lessons.
   - `js/app-init.js` - startup rendering and event binding.
   - `js/app-debug.js` - opt-in teacher/developer debug mode, loaded only through `?debug=1` / `#debug` behavior.
-- The rolling publishable build lives under `docs/live`; preserved static snapshots live under `docs/v*`. GitHub Pages is shut down. Cloudflare Workers is configured for `docs/live` but has not been deployed.
+- The rolling publishable build lives under `docs/live`; preserved static snapshots live under `docs/v*`. GitHub Pages is disabled. Cloudflare Workers Builds is connected to `main` and only uploads an inactive version of `docs/live`; the owner makes a version live in the Cloudflare dashboard (ADR-0013).
 - Project memory is split across `docs/product/`, `AGENTS.md`, `ai/`, and `docs/decisions/`.
 - Current product name is `Math Muscle Trainer`; avoid reintroducing prior product branding except when discussing external/manual rename history.
 

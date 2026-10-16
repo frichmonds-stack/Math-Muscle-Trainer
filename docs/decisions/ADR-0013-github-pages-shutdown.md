@@ -18,3 +18,11 @@ The owner confirmed on 2026-09-23 that GitHub Pages was intentionally shut down.
 
 - Release closeout reports GitHub push and live internet verification as separate facts.
 - ADR-0008's rolling-copy decision and ADR-0011's assets-only Cloudflare design remain; their references to active GitHub Pages publishing are superseded by this decision.
+
+## Amendment 2026-10-16
+
+GitHub Pages had remained enabled and republished `/docs` on pushes to `main` until the owner
+disabled it on 2026-10-16. Cloudflare Workers Builds is connected to `main` with the deploy command
+`npx wrangler versions upload`: each push uploads an inactive version and nothing goes live. The
+owner makes a version live by deploying it from the Cloudflare dashboard (Deployments). A push is
+therefore Git publication only; going live remains a separate, explicit step.

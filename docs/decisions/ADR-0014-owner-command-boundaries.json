@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "ADR-0014",
+  "title": "Adopt exact owner command boundaries",
+  "date": "2026-10-15",
+  "status": "accepted",
+  "supersedes_aspects": {
+    "ADR-0012": "command matching and separate deployment authority",
+    "ADR-0013": "deployment authorization wording"
+  },
+  "decision_ref": "C:\\Users\\Rawr\\Desktop\\Codex Projects\\AI Project Manager\\docs\\decisions\\ADR-0014-owner-command-boundaries.json",
+  "contract_ref": "C:\\Users\\Rawr\\Desktop\\Codex Projects\\AI Project Manager\\ai\\procedures\\commands.json",
+  "profile_ref": "ai/command-profile.json",
+  "decision": [
+    "Default to read-only planning; only exact execute now authorizes the agreed implementation batch.",
+    "publish close scopes completed-batch publication; stop before any push or merge that deploys or has unknown deployment triggers.",
+    "deploy now separately binds the reviewed artifact/ref, target and necessary actions; no new implementation.",
+    "Ordinary development does not enroll a prototype run.",
+    "Preserve committed-HEAD Notion opt-in and existing narrow closeout grant."
+  ]
+}

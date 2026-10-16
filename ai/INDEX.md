@@ -1,5 +1,7 @@
 # AI Index
 
+Command authority: `command-profile.json` (Hot), including the shared machine-readable contract.
+
 Use this folder for AI workflow, current implementation state, and next work. Product direction lives in `../docs/product/`; lasting decisions live in `../docs/decisions/`. Git owns new chronology.
 
 **Hot** files are routing or operational rules, **Warm** files are read when the task implicates them, and **Cold** files are history retrieved only when needed. Read the first relevant route rather than every file here.
@@ -13,6 +15,7 @@ Use this folder for AI workflow, current implementation state, and next work. Pr
 | One currently authorized batch, if any | `active-task.md` | Warm |
 | Concrete selectable work | `tasks/next-actions.md` | Hot |
 | Unresolved owner decisions | `open-threads.md` | Hot |
+| Exact owner command adoption decision | `../docs/decisions/ADR-0014-owner-command-boundaries.json` | Warm |
 | Permanent Notion Work Queue identities | `portfolio-identities.md` | Hot |
 | Historical session milestones, frozen | `session-log.md` | Cold |
 | Reusable task and session prompts | `prompts/` | Warm |
@@ -24,7 +27,8 @@ Use this folder for AI workflow, current implementation state, and next work. Pr
 | `execute now` | `procedures/execute-now.md` | Hot |
 | `Chunk Plan` | `procedures/chunk-plan.md` | Hot |
 | `Build Prompt` | `procedures/build-prompt.md` | Hot |
-| `Publish Close` and Notion closeout | `procedures/closeout.md` | Hot |
+| `publish close` and Notion closeout | `procedures/closeout.md` | Hot |
+| `deploy now` | `procedures/deploy.md` | Hot |
 | Owner-time activity, `time out`, and workflow completion hooks | `procedures/owner-time.md` | Hot |
 | Place, update, or retire documentation | `procedures/documentation-write.md` | Warm |
 

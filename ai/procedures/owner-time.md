@@ -3,6 +3,9 @@
 Run every command below from the Math Muscle Trainer repository root. AI Project Manager owns timing
 logic and persistence. Its canonical contract is
 `C:\Users\Rawr\Desktop\Codex Projects\AI Project Manager\docs\design\owner-time.md`.
+If `ai-project-manager` is unavailable, the source-CLI commands below are the canonical fallback.
+Use the stable Python executable in `../command-profile.json`, set PYTHONPATH only for the command,
+and restore its previous value afterwards. Always pass the shared `--db-path` explicitly.
 Both Codex and Claude follow this procedure; no timer implementation lives in this repo.
 
 After confirming the Math Muscle Trainer boundary and before substantive work on each meaningful
@@ -10,7 +13,7 @@ owner-linked turn (including planning and resumed sessions), run:
 
 ```powershell
 $env:PYTHONPATH = 'C:\Users\Rawr\Desktop\Codex Projects\AI Project Manager\src'
-& 'C:\Users\Rawr\Desktop\Codex Projects\Budget Tool\.venv\Scripts\python.exe' -m ai_efficiency.cli time-activity --project-root . --harness <codex-or-claude-code> --db-path 'C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3'
+& 'C:/Users/Rawr/AppData/Local/Python/pythoncore-3.14-64/python.exe' -m ai_efficiency.cli time-activity --project-root . --harness <codex-or-claude-code> --db-path 'C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3'
 ```
 
 Replace the harness placeholder. The command reads `.ai-efficiency.toml`; no session ID is
@@ -24,14 +27,14 @@ Owner `time out` runs only:
 
 ```powershell
 $env:PYTHONPATH = 'C:\Users\Rawr\Desktop\Codex Projects\AI Project Manager\src'
-& 'C:\Users\Rawr\Desktop\Codex Projects\Budget Tool\.venv\Scripts\python.exe' -m ai_efficiency.cli time-out --project-root . --db-path 'C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3'
+& 'C:/Users/Rawr/AppData/Local/Python/pythoncore-3.14-64/python.exe' -m ai_efficiency.cli time-out --project-root . --db-path 'C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3'
 ```
 
 After successful Execute Now completion (including checks and documentation), run:
 
 ```powershell
 $env:PYTHONPATH = 'C:\Users\Rawr\Desktop\Codex Projects\AI Project Manager\src'
-& 'C:\Users\Rawr\Desktop\Codex Projects\Budget Tool\.venv\Scripts\python.exe' -m ai_efficiency.cli time-complete --project-root . --workflow execute-now --outcome completed --db-path 'C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3'
+& 'C:/Users/Rawr/AppData/Local/Python/pythoncore-3.14-64/python.exe' -m ai_efficiency.cli time-complete --project-root . --workflow execute-now --outcome completed --db-path 'C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3'
 ```
 
 After successful Publish Close (including push and required portfolio delivery/acknowledgement),

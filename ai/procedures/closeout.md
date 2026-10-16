@@ -1,6 +1,14 @@
 # Publish Close Procedure
 
-Use only when the owner says `Publish Close`. The batch's local implementation, checks, and matching documentation should already be complete under `execute-now.md`. `Publish Close` verifies and releases that batch; it does not start another one.
+Load `../command-profile.json` and its central contract. Only exact owner `publish close`
+authorizes this procedure's completed-batch documentation and scoped commit/tag/push actions to
+the agreed target; it authorizes no new implementation or deployment. Plain closeout requests are
+read-only planning. Before any push/merge, verify deployment triggers; if they would deploy or are
+unknown, stop until separate `deploy now` covers the exact ref, target and necessary Git actions.
+Preserve all unrelated staged/unstaged work; never blanket-stage it. Notion delivery requires the
+matching committed-HEAD opt-in and approved narrow Work Queue grant; pending delivery stays pending.
+
+Use only when the owner says `publish close`. The batch's local implementation, checks, and matching documentation should already be complete under `execute-now.md`. `publish close` verifies and releases that batch; it does not start another one.
 
 ## 1. Confirm Scope And Repository
 
@@ -19,7 +27,7 @@ Before committing, select the current work item and any actionable Queued or dec
 
 ## 4. Commit And Push
 
-Review the final diff, run the applicable checks again after publishing, and confirm the files to include. Commit the approved batch and push it. Report the commit, push result, and any live URL actually verified. A GitHub push alone does not establish that a site is live.
+Review the final diff, run the applicable checks again after publishing, and confirm the files to include. Verify the agreed branch, upstream and remote; stage only the approved batch, preserving unrelated staged files and ahead commits. Verify deployment triggers before pushing: stop if deploying or unknown until separate `deploy now` covers the exact action/ref/target. Commit the approved batch and push only that scope. Report the commit, push result, and any live URL actually verified. A GitHub push alone does not establish that a site is live.
 
 ## 5. AI Project Manager And Notion Closeout
 
@@ -27,7 +35,7 @@ The owner approved Notion Work Queue closeout. `.ai-efficiency.toml` selects con
 
 1. Use the curated items and committed Sync Keys from step 3. Work underway stays `Active`, including blocked work with its blocker. Use `Completed` only for finished, resolved, or deliberately declined work.
 2. Prepare a temporary work-return JSON with the CLI's required fields: Sync Key, Work Item, Description, Completion Criteria, Latest Closeout, outcome, observed evidence, unverified work, decisions needed, next action, state, testing requirement, blocker, curated next actions and open threads, and session ID only if exposed. Optional priority, model, and effort may be null. Use only observed facts. For `Completed`, set `next_action` to `none`.
-3. Run `ai-project-manager status --project-root . --db-path <existing-db>` and confirm the database is the populated AI Project Manager database. Then submit `ai-project-manager work-closeout --project-root . --harness <active-harness> --db-path <same-db> --file <temporary-return.json>`. The console command is not on PATH on this machine; the verified fallback is `C:\Users\Rawr\Desktop\Codex Projects\Budget Tool\.venv\Scripts\python.exe -m ai_efficiency.cli`, with `PYTHONPATH` set to `C:\Users\Rawr\Desktop\Codex Projects\AI Project Manager\src`. The observed database is `C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3`; recheck it with `status` rather than assuming a different Windows profile resolves to the same file. Remove the temporary JSON after submission.
+3. Run `ai-project-manager status --project-root . --db-path <existing-db>` and confirm the database is the populated AI Project Manager database. Then submit `ai-project-manager work-closeout --project-root . --harness <active-harness> --db-path <same-db> --file <temporary-return.json>`. The console command is not on PATH on this machine; the verified fallback is `C:/Users/Rawr/AppData/Local/Python/pythoncore-3.14-64/python.exe -m ai_efficiency.cli`, with `PYTHONPATH` set to `C:\Users\Rawr\Desktop\Codex Projects\AI Project Manager\src`. The observed database is `C:\Users\Rawr\AppData\Local\AI Efficiency\telemetry.sqlite3`; recheck it with `status` rather than assuming a different Windows profile resolves to the same file. Remove the temporary JSON after submission.
 4. Connector mode leaves a local outbox pending until an authenticated Notion connector upserts every non-superseded manifest row by exact `Project + Sync Key`, including Description, Completion Criteria, and Latest Closeout. Use `ai-project-manager notion-manifest --work-return-id <id> --db-path <same-db>` for the approved payload. Read existing pages before updating and preserve human-authored content. Do not fall back to REST when the connector is unavailable.
 5. After all rows are delivered, run `ai-project-manager notion-ack --work-return-id <id> --db-path <same-db> --item <sync-key>=<notion-page-id>` with one `--item` per delivered row. Report pending delivery if the connector or acknowledgement cannot complete. Do not change the Work Queue schema or views as part of closeout.
 

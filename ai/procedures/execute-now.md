@@ -1,6 +1,6 @@
 # Execute Now Procedure
 
-Use when the owner explicitly authorizes local implementation of the agreed batch.
+Use only when the owner says exact `execute now`; load `../command-profile.json` and its central contract.
 
 1. State the batch scope and exclusions. Confirm the repository root and inspect `git status --short`; preserve unrelated work.
 2. Read the relevant `../task-map.md` route, source, and narrowly relevant state or spec. For teacher-authored lesson material, obey `../../AGENTS.md`'s Lesson Content Workflow.

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "contract_ref": "C:\\Users\\Rawr\\Desktop\\Codex Projects\\AI Project Manager\\ai\\procedures\\commands.json",
+  "project_id": "math-muscle-trainer",
+  "project_root": "C:/Users/Rawr/Desktop/Codex Projects/Math Muscle Trainer",
+  "default_mode": "plan",
+  "execution_trigger": "execute now",
+  "publication_trigger": "publish close",
+  "deployment_trigger": "deploy now",
+  "prototype_default": false,
+  "publication": {
+    "deployment_trigger_state": "verify_before_push_or_merge",
+    "unknown_trigger_action": "stop",
+    "preserve_unrelated_staged_and_unstaged_work": true,
+    "tag_requires_agreed_scope": true,
+    "new_implementation_allowed": false
+  },
+  "notion": {
+    "committed_head_opt_in_required": true,
+    "identity_match_required": true,
+    "delivery_in_this_batch": false
+  },
+  "telemetry": {
+    "python_executable": "C:/Users/Rawr/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+    "source_path": "C:/Users/Rawr/Desktop/Codex Projects/AI Project Manager/src",
+    "db_path": "C:/Users/Rawr/AppData/Local/AI Efficiency/telemetry.sqlite3",
+    "subagents_run_hooks": false,
+    "restore_previous_pythonpath": true
+  }
+}

@@ -1,5 +1,22 @@
 # AGENTS.md
 
+## Command authority
+
+Load `ai/command-profile.json` and its canonical `contract_ref` before interpreting commands.
+Default to read-only planning. Only the owner's exact, unquoted `execute now` authorizes the
+agreed local implementation batch, checks and continuity; generic requests, `yes`, `go ahead`,
+quoted commands and examples grant no implementation authority. `publish close` authorizes only
+completed-batch checks, documentation and scoped Git publication to the agreed target.
+`deploy now` separately authorizes deployment of a specific reviewed artifact/ref to an agreed
+target, including only the necessary agreed deployment actions. No new implementation is included.
+Before any publication push or merge, verify whether it triggers deployment; stop if deployment
+would occur or the trigger state is unknown until separate `deploy now` authority covers it.
+No startup fetch/pull or other Git mutation. Local owner-time hooks are the documented operational
+exception in planning and grant no edit authority. Ordinary work requires no prototype run;
+prototype execution requires explicit opt-in to a named experiment and automation scope.
+These are repository instructions, not installed app slash commands. Shared decision: AI Project
+Manager `docs/decisions/ADR-0014-owner-command-boundaries.json`.
+
 Project guidance for Codex and other AI coding sessions in this repo.
 
 ## Repo Overview
@@ -50,7 +67,7 @@ Historical records must not silently override current code or accepted decisions
 
 ## Post-Initialization Collaboration Rule
 
-After completing the Session Start Protocol, default to discussion/planning mode. Codex may inspect files, run read-only discovery commands, and propose plans, but must not change repo state until the user explicitly authorizes implementation.
+After completing the Session Start Protocol, default to discussion/planning mode. Codex may inspect files, run read-only discovery commands, and propose plans, but must not change repo state until the owner says `execute now` for the agreed batch.
 
 Changing repo state includes editing files, updating AI continuity docs, running publish scripts, creating generated build outputs, installing dependencies, changing saved app data, committing, or pushing.
 
@@ -58,15 +75,16 @@ Implementation and release scope must follow the user's explicit wording:
 
 | Command | Scope |
 |---|---|
-| `execute now` (or an equally explicit edit request) | Implement the agreed local batch, run relevant checks, and update affected docs. Follow `ai/procedures/execute-now.md`. No commit, push, or deployment. |
+| `execute now` | Implement the agreed local batch, run relevant checks, and update affected docs. Follow `ai/procedures/execute-now.md`. No commit, push, or deployment. |
+| `deploy now` | Follow `ai/procedures/deploy.md`; reviewed artifact/ref and agreed target only. |
 | `Chunk Plan` | Split a proposed batch into owner-selectable chunks; follow `ai/procedures/chunk-plan.md`. No edits. |
 | `Build Prompt` | Prepare a scoped prompt for another agent; follow `ai/procedures/build-prompt.md`. No edits. |
 | `time out` | Follow `ai/procedures/owner-time.md`. Stops timing only; no closeout or work-item change. |
-| `Publish Close` | Follow `ai/procedures/closeout.md`: verify, publish the appropriate local `docs/` build when needed, commit and push, then submit the AI Project Manager return and authorized Notion closeout. Cloudflare deployment requires an explicit deployment request. |
+| `publish close` | Follow `ai/procedures/closeout.md`: verify, publish the appropriate local `docs/` build when needed, commit and push, then submit the AI Project Manager return and authorized Notion closeout. Cloudflare deployment requires separate `deploy now` authority. |
 
-An explicit request to `publish`, `commit`, or `push` authorizes only the named step. A local implementation request does not imply one of those steps.
+Only `publish close` authorizes scoped publication; `publish`, `commit`, `push` and generic requests are not command aliases. Deployment requires `deploy now`.
 
-Vague approval such as `sounds good` should be treated as continued discussion unless the user clearly asks for action.
+Vague approval and generic action requests remain planning; only the exact command grants the corresponding authority.
 
 ## Active Task Record
 
@@ -79,7 +97,7 @@ Vague approval such as `sounds good` should be treated as continued discussion u
 ## Documentation And Closeout
 
 - During `execute now`, run the relevant checks and update docs for what actually landed. Use `ai/procedures/documentation-write.md`: replace superseded text at its canonical home, prune finished tasks, and avoid new session summaries.
-- `Publish Close` verifies the completed batch, handles version and `docs/` publishing when relevant, checks the repository, commits and pushes, and reports what was actually verified. Follow `ai/procedures/closeout.md`.
+- `publish close` verifies the completed batch, handles version and `docs/` publishing when relevant, checks the repository, commits and pushes, and reports what was actually verified. Follow `ai/procedures/closeout.md`.
 - `.ai-efficiency.toml` opts into connector-based Notion Work Queue closeout after its configuration is committed. The repository remains authoritative; Notion receives only a curated portfolio summary. Use stable keys in `ai/portfolio-identities.md` and the procedure above. Do not submit or claim Notion delivery during an ordinary local implementation turn.
 
 ## Testing And Build Instructions

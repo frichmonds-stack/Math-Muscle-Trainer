@@ -6,6 +6,15 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.9] - 2026-10-18
+
+### Added
+- Added a dependency-free Node unit-test suite under `tests/` (211 characterisation tests for question pools, fact keys, dates and streaks, saved-data loading and normalisation, and mastery scoring); run `node --test tests/`.
+- Added dev-only screenshot comparison and click-through smoke tooling under `tools/visual-check/` (ADR-0016).
+
+### Changed
+- Split `js/app-progress.js` and `js/app-techniques.js` into 15 smaller area files (`js/app-progress-*.js`, `js/app-techniques-*.js`) loaded in the same order, and removed two never-called progress helpers; no behaviour change.
+
 ## [0.20.8] - 2026-10-18
 
 ### Changed

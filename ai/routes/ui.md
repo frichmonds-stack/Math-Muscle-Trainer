@@ -3,8 +3,9 @@
 ## Relevant Files
 
 - `css/*.css` (name order is cascade order; see ADR-0015)
+- `tools/visual-check/` for screenshot comparison and smoke checks (ADR-0016)
 - `index.html`
-- generated markup in `js/app-progress.js` and `js/app-techniques.js`
+- generated markup in `js/app-progress-*.js` and `js/app-techniques-*.js`
 - `docs/design/visual-design-system.md`
 - `docs/design/component-system.md`
 - `docs/design/ui-direction.md`

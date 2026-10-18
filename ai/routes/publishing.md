@@ -2,7 +2,9 @@
 
 ## Relevant Files
 
-- `scripts/check-repo.ps1`
+- `scripts/check-repo.ps1` (Node port: `scripts/check-repo.mjs`)
+- `tools/visual-check/` screenshot and smoke checks (ADR-0016)
+- `tests/` unit tests (`node --test tests/`)
 - `scripts/publish-live.ps1`
 - `scripts/publish-snapshot.ps1`
 - `docs/index.html`

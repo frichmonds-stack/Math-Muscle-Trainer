@@ -2,7 +2,7 @@
 
 ## Relevant Files
 
-- `js/app-techniques.js`
+- `js/app-techniques-*.js`
 - `js/app-core.js`
 - `index.html`
 - `css/07-learn.css`

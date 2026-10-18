@@ -4,7 +4,7 @@
 
 - `js/app-core.js`
 - `js/app-practice.js`
-- `js/app-progress.js`
+- `js/app-progress-*.js`
 
 ## Required Pre-Reading
 

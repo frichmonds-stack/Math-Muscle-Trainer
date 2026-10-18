@@ -1,0 +1,17 @@
+{
+  "name": "visual-check",
+  "version": "1.0.0",
+  "description": "Screenshot regression + smoke checks for Math Muscle Trainer",
+  "scripts": {
+    "capture": "node capture.js",
+    "compare": "node compare.js",
+    "smoke": "node smoke.js",
+    "fixture": "node make-fixture.js"
+  },
+  "dependencies": {
+    "pixelmatch": "5.3.0",
+    "playwright-core": "1.56.1",
+    "pngjs": "7.0.0"
+  },
+  "private": true
+}

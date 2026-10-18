@@ -6,7 +6,9 @@ Use this file as a small priority queue. Broader unresolved decisions belong in 
 
 ## Now
 
-- `TASK-ENG-001` Engineering batches (cloud): E2/E3 tests (Node test runner vs browser page still to decide), then E6 JS split. Guarded by the scratchpad visual/smoke tool.
+- `TASK-BUG-004` Focus-area trends for subtraction and division list the 7 addition buckets: `getBucketTrendItems` (`js/app-progress-focus.js`) falls through to addition for any non-multiplication operation.
+- `TASK-BUG-005` Review possible bugs pinned by `CURRENT BEHAVIOUR (possible bug)` comments in `tests/`: sums of exactly 10 counted as non-regrouping (may be intended "make 10"), division difficulty band taken from the dividend, exact 0.08 trend deltas missed through floating-point, `parseBucketDailyKey` reading subtraction rows as multiplication, unchecked top-level progress fields and a JSON-string progress value loading as an object. Fix individually with the owner; update the pinned tests when behaviour changes.
+- `TASK-CONTENT-002` `renderMake10LessonScreen` (`js/app-techniques-make10.js`) and its helpers are never called but hold teacher-authored Make 10 lesson text; owner to decide whether to wire it up, archive the text to `learn/`, or delete.
 - `TASK-DESIGN-001` Draft the Lesson Experience System brief so future lessons share one structure for explanations, examples, hints, guided practice, final practice, completion, and navigation.
 - `TASK-LEARN-001` Define the detailed Learning Interaction System task loop across Workout and Learn: prompts, inputs, scaffolds, feedback, answer reveal, lockout, retry timing, and progress gates.
 - `TASK-QA-001` Continue manual iPad/tablet QA for Practice keypad fit, portrait behavior, light-mode contrast, and key Learn/Progress touch interactions.

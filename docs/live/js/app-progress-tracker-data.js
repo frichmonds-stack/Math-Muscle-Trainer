@@ -141,6 +141,7 @@ function getDigitBucket(value) {
 
 function hasAdditionRegrouping(left, right) {
   const sum = left + right;
+  // Sums of exactly 10 are the Make 10 skill, taught before regrouping, so they count as no-regrouping.
   if (sum === 10) {
     return false;
   }

@@ -576,9 +576,9 @@ test("getPositiveProgressItems: thresholds on total, recent attempts and delta",
     { name: "total exactly 6", last: [3, 3], previous: [2, 3], positive: true },
     { name: "no previous data counts as 0% previous", last: [6, 6], previous: null, positive: true },
     { name: "delta 0.92 - 0.84 (fp 0.08000000000000007)", last: [23, 25], previous: [21, 25], positive: true },
-    // CURRENT BEHAVIOUR (possible bug): a nominal delta of exactly 0.08 (100% vs 92%) is
-    // 0.07999999999999996 in floating point, so it misses the >= 0.08 threshold.
-    { name: "delta 1.00 - 0.92 (fp 0.07999999999999996)", last: [25, 25], previous: [23, 25], positive: false },
+    // A nominal delta of exactly 0.08 (100% vs 92%) is 0.07999999999999996 in floating point;
+    // the threshold check tolerates that rounding error.
+    { name: "delta 1.00 - 0.92 (fp 0.07999999999999996)", last: [25, 25], previous: [23, 25], positive: true },
     { name: "flat", last: [8, 10], previous: [8, 10], positive: false },
   ];
   for (const { name, last, previous, positive } of cases) {
@@ -594,8 +594,8 @@ test("getGrowthOpportunityItems: drop of >= 0.08 or recent accuracy below 0.7", 
     { name: "low recent accuracy, flat", last: [6, 10], previous: [6, 10], growth: true },
     { name: "recent accuracy exactly 0.7, flat", last: [7, 10], previous: [7, 10], growth: false },
     { name: "drop 0.84 vs 0.92 (fp -0.08000000000000007)", last: [21, 25], previous: [23, 25], growth: true },
-    // CURRENT BEHAVIOUR (possible bug): nominal -0.08 (92% vs 100%) is -0.07999999999999996 in fp.
-    { name: "drop 0.92 vs 1.00 (fp -0.07999999999999996)", last: [23, 25], previous: [25, 25], growth: false },
+    // Nominal -0.08 (92% vs 100%) is -0.07999999999999996 in fp; still counts as a drop.
+    { name: "drop 0.92 vs 1.00 (fp -0.07999999999999996)", last: [23, 25], previous: [25, 25], growth: true },
     { name: "low accuracy but only 2 recent attempts", last: [0, 2], previous: [4, 4], growth: false },
     { name: "low accuracy but total 5", last: [0, 3], previous: [2, 2], growth: false },
   ];
@@ -636,34 +636,27 @@ test("getBucketTrendItems: operation coverage per filter", () => {
   assert.deepStrictEqual(summarise("all"), { count: 19, operations: ["multiplication", "addition"] });
   assert.deepStrictEqual(summarise("multiplication"), { count: 12, operations: ["multiplication"] });
   assert.deepStrictEqual(summarise("addition"), { count: 7, operations: ["addition"] });
-  // CURRENT BEHAVIOUR (possible bug): any other filter falls into the addition branch, so the
-  // subtraction / division focus views list ADDITION buckets.
-  assert.deepStrictEqual(summarise("subtraction"), { count: 7, operations: ["addition"] });
-  assert.deepStrictEqual(summarise("division"), { count: 7, operations: ["addition"] });
+  // Subtraction and division record no bucketDaily rows, so their focus views have no trend items.
+  assert.deepStrictEqual(summarise("subtraction"), { count: 0, operations: [] });
+  assert.deepStrictEqual(summarise("division"), { count: 0, operations: [] });
 });
 
-test("parseBucketDailyKey (progress) maps every non-addition operation to multiplication", () => {
+test("parseBucketDailyStorageKey reports the stored operation; junk defaults to multiplication", () => {
   const app = loadApp();
   const cases = [
     ["2026-01-15|addition|1-1", { dateKey: "2026-01-15", operation: "addition", bucketKey: "1-1" }],
     ["2026-01-15|multiplication|x3", { dateKey: "2026-01-15", operation: "multiplication", bucketKey: "x3" }],
-    // CURRENT BEHAVIOUR (possible bug): unlike parseBucketDailyStorageKey in app-core.js, subtraction
-    // and division keys are reported as multiplication, so such rows would be counted in x-buckets.
-    ["2026-01-15|subtraction|x3", { dateKey: "2026-01-15", operation: "multiplication", bucketKey: "x3" }],
-    ["2026-01-15|division|a|b", { dateKey: "2026-01-15", operation: "multiplication", bucketKey: "a|b" }],
+    ["2026-01-15|subtraction|x3", { dateKey: "2026-01-15", operation: "subtraction", bucketKey: "x3" }],
+    ["2026-01-15|division|a|b", { dateKey: "2026-01-15", operation: "division", bucketKey: "a|b" }],
+    ["2026-01-15|bogus|x3", { dateKey: "2026-01-15", operation: "multiplication", bucketKey: "x3" }],
     ["junk", { dateKey: "junk", operation: "multiplication", bucketKey: "" }],
   ];
   for (const [key, expected] of cases) {
-    assert.deepStrictEqual(app.harness.plain(app.parseBucketDailyKey(key)), expected, key);
+    assert.deepStrictEqual(app.harness.plain(app.parseBucketDailyStorageKey(key)), expected, key);
   }
-  assert.deepStrictEqual(
-    app.harness.plain(app.parseBucketDailyStorageKey("2026-01-15|subtraction|x3")),
-    { dateKey: "2026-01-15", operation: "subtraction", bucketKey: "x3" },
-  );
-
-  // Effect on trends: a subtraction row with an x-bucket name is counted as multiplication.
+  // Effect on trends: a subtraction row with an x-bucket name is not counted as multiplication.
   const trend = trendApp("subtraction", "x3", [5, 5], null);
-  assert.equal(trend.buildBucketTrendItem("multiplication", "x3").totalAttempted, 5);
+  assert.equal(trend.buildBucketTrendItem("multiplication", "x3").totalAttempted, 0);
 });
 
 test("trend items for the populated fixture are all empty (fixture has no bucketDaily)", () => {

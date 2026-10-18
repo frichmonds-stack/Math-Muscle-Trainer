@@ -15,7 +15,7 @@ const KEYPAD_PREFERENCE_STORAGE_KEY = `${PRODUCT_STORAGE_PREFIX}-keypad-preferen
 const LEGACY_KEYPAD_PREFERENCE_STORAGE_KEYS = [
   `${LEGACY_PRODUCT_STORAGE_PREFIX}-keypad-preference-v1`,
 ];
-const APP_VERSION = "v0.20.9";
+const APP_VERSION = "v0.20.10";
 const FACTOR_LIMIT = 12;
 const TABLE_FACTORS = Array.from({ length: FACTOR_LIMIT }, (_, index) => index + 1);
 const QUESTION_PRESETS = [10, 20, 30];
@@ -706,7 +706,6 @@ function createTechniqueState(table = TECHNIQUE_TABLE, mode = "menu") {
     practiceFeedback: { message: "", tone: "" },
     practiceSolved: false,
     additionLesson: null,
-    make10Lesson: null,
     focusFieldName: "",
   };
 }
@@ -962,6 +961,7 @@ function parseFactKeyCore(key) {
 
 function hasAdditionRegroupingCore(left, right) {
   const sum = left + right;
+  // Sums of exactly 10 are the Make 10 skill, taught before regrouping, so they count as no-regrouping.
   if (sum === 10) {
     return false;
   }
@@ -1452,6 +1452,15 @@ function getLocalStorageItemWithFallback(primaryKey, fallbackKeys = []) {
   return null;
 }
 
+function normaliseFastestAverageMs(value) {
+  // null means no timed workout has been recorded yet.
+  if (value === null || value === undefined) {
+    return null;
+  }
+
+  return clampNumber(Number(value), 0, Number.MAX_SAFE_INTEGER, null);
+}
+
 function loadProgress() {
   try {
     const raw = getLocalStorageItemWithFallback(STORAGE_KEY, LEGACY_STORAGE_KEYS);
@@ -1459,7 +1468,9 @@ function loadProgress() {
       return defaultProgress();
     }
 
-    const parsed = JSON.parse(raw);
+    const stored = JSON.parse(raw);
+    const parsed =
+      stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
     const dailyRecords = Object.fromEntries(
       Object.entries(parsed.dailyRecords || {}).map(([key, record]) => [
         key,
@@ -1501,6 +1512,10 @@ function loadProgress() {
       ),
       totalSignCorrect: clampNumber(Number(parsed.totalSignCorrect), 0, 999999, 0),
       totalSignErrors: clampNumber(Number(parsed.totalSignErrors), 0, 999999, 0),
+      bestStreak: clampNumber(Number(parsed.bestStreak), 0, 999999, 0),
+      bestAccuracy: clampNumber(Number(parsed.bestAccuracy), 0, 1, 0),
+      sessionsCompleted: clampNumber(Number(parsed.sessionsCompleted), 0, 999999, 0),
+      fastestAverageMs: normaliseFastestAverageMs(parsed.fastestAverageMs),
       facts: compactFactProgressMap(parsed.facts),
       dailyRecords,
       bucketDaily,

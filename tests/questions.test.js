@@ -219,8 +219,8 @@ describe("addition pools", () => {
       additionRegrouping: false,
     });
     const keys = app.harness.plain(app.buildPool(settings)).map((f) => f.key);
-    // CURRENT BEHAVIOUR (possible bug): hasAdditionRegroupingCore treats any sum of 10 as
-    // non-regrouping, so "no regrouping" easy pools include 1+9 .. 5+5 even though 5+5 carries.
+    // Intended: sums of exactly 10 are the Make 10 skill (a pre-regrouping skill), so
+    // "no regrouping" easy pools deliberately include 1+9 .. 5+5.
     for (const key of ["addition:1+9", "addition:2+8", "addition:3+7", "addition:4+6", "addition:5+5"]) {
       assert.ok(keys.includes(key), key);
     }
@@ -342,8 +342,8 @@ describe("addition / subtraction skill helpers", () => {
       [120, 305, false],
       [190, 10, true],
       [-5, -7, true], // magnitudes are used column-wise
-      // CURRENT BEHAVIOUR (possible bug): any pair summing to exactly 10 reports no regrouping,
-      // although 5+5, 3+7 and 1+9 do carry into the tens column.
+      // Intended: pairs summing to exactly 10 are the Make 10 skill (see "make-10"), a
+      // pre-regrouping skill, so they deliberately report no regrouping.
       [5, 5, false],
       [3, 7, false],
       [1, 9, false],
@@ -391,8 +391,8 @@ describe("addition / subtraction skill helpers", () => {
       [345, 23, "3-2"],
       [345, 123, "3-3"],
       [1000, 5, "3-3"],
-      // CURRENT BEHAVIOUR (possible bug): a smaller-digit minuend ("1-2") is not a known bucket
-      // and is lumped into "3-3". Pools never generate this (left >= right), so it is latent.
+      // Latent only: a smaller-digit minuend ("1-2") is not a known bucket and falls into "3-3".
+      // Pools never generate this (left >= right).
       [7, 45, "3-3"],
     ];
     for (const [left, right, expected] of cases) {
@@ -439,8 +439,9 @@ describe("getDifficultyBandForQuestion", () => {
 
   test("division bands by max(dividend, divisor)", () => {
     const app = loadApp();
-    // CURRENT BEHAVIOUR (possible bug): for division `a` is the dividend, so the band is driven
-    // by the dividend rather than the divisor/quotient. 12 / 2 (a 2-times-table fact) is "hard".
+    // Known limitation (kept for now): for division `a` is the dividend, so the band is driven by
+    // the dividend, e.g. 12 / 2 is "hard". This only affects the stored telemetry difficultyBand,
+    // not ranks.
     assert.equal(app.getDifficultyBandForQuestion({ operation: "division", a: 4, b: 2 }), "easy");
     assert.equal(app.getDifficultyBandForQuestion({ operation: "division", a: 10, b: 2 }), "medium");
     assert.equal(app.getDifficultyBandForQuestion({ operation: "division", a: 12, b: 2 }), "hard");

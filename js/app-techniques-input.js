@@ -290,11 +290,6 @@ function handleTechniqueLessonSubmit(event) {
     renderTechniqueScreen();
     return;
   }
-
-  if (form.dataset.techniqueForm === "practice-1" || form.dataset.techniqueForm === "practice-2") {
-    submitMake10Answer(state.technique.make10Lesson?.answer || "");
-    renderTechniqueScreen();
-  }
 }
 
 function handleTechniqueInput(event) {
@@ -319,12 +314,6 @@ function handleTechniqueInput(event) {
       input.value = nextValue;
       ensureAdditionLessonState().answer = nextValue;
       return;
-    }
-
-    if (input.name === "make10Answer") {
-      const nextValue = sanitiseTechniqueEntry(input.value);
-      input.value = nextValue;
-      ensureMake10LessonState().answer = nextValue;
     }
     return;
   }
@@ -502,58 +491,6 @@ function handleTechniqueAction(action) {
     return;
   }
 
-  if (action === "make10-next") {
-    moveMake10Flow(1);
-    renderTechniqueScreen();
-    return;
-  }
-
-  if (action === "make10-back") {
-    moveMake10Flow(-1);
-    renderTechniqueScreen();
-    return;
-  }
-
-  if (action === "make10-restart") {
-    state.technique.make10Lesson = createMake10LessonState();
-    renderTechniqueScreen();
-    return;
-  }
-
-  if (action === "start-make10-workout") {
-    const snapshot = defaultSettingsSnapshot();
-    applySettingsSnapshot(
-      sanitiseSettingsSnapshot({
-        ...snapshot,
-        operation: "addition",
-        sessionType: "question-goal",
-        questionPreset: "custom",
-        questionTarget: 20,
-      }),
-    );
-    toggleSetupFields();
-    resetTechniqueState(state.technique.selectedTable, "menu", state.technique.selectedOperation);
-    renderTechniqueScreen();
-    showView("setup");
-    return;
-  }
-
-  if (
-    action === "make10-symbol-less" ||
-    action === "make10-symbol-equal" ||
-    action === "make10-symbol-greater"
-  ) {
-    const symbol =
-      action === "make10-symbol-less"
-        ? "<"
-        : action === "make10-symbol-greater"
-          ? ">"
-          : "=";
-    submitMake10Answer(symbol);
-    renderTechniqueScreen();
-    return;
-  }
-
   if (action === "back-to-setup") {
     resetTechniqueState(state.technique.selectedTable, "menu");
     renderTechniqueScreen();
@@ -570,7 +507,7 @@ function handleTechniqueLessonClick(event) {
   const keypadButton = event.target.closest(".technique-keypad [data-keypad-key]");
   if (keypadButton instanceof HTMLButtonElement) {
     const input = elements.techniqueScreenShell?.querySelector(
-      'input[name="techniqueAnswer"]:not([disabled]), input[name="additionLessonAnswer"]:not([disabled]), input[name="make10Answer"]:not([disabled])',
+      'input[name="techniqueAnswer"]:not([disabled]), input[name="additionLessonAnswer"]:not([disabled])',
     );
     if (!(input instanceof HTMLInputElement)) {
       return;
@@ -678,7 +615,6 @@ function handleTechniqueTableClick(event) {
   state.technique.additionLessonId = lesson.id;
   state.technique.mode = "addition-lesson";
   state.technique.additionLesson = createAdditionLessonState(lesson.id);
-  state.technique.make10Lesson = null;
   renderTechniqueScreen();
 }
 

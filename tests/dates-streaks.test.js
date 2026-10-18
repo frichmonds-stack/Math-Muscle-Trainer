@@ -125,8 +125,8 @@ describe("calculateBestPracticeStreak", () => {
     { name: "across leap day", keys: ["2028-02-28", "2028-02-29", "2028-03-01"], best: 3 },
     { name: "non-leap Feb 28 -> Mar 1", keys: ["2027-02-28", "2027-03-01"], best: 2 },
     { name: "duplicate inside a run start", keys: ["2026-01-01", "2026-01-01", "2026-01-02"], best: 2 },
-    // CURRENT BEHAVIOUR (possible bug): the function assumes sorted, de-duplicated keys.
-    // getWorkoutDayKeys() supplies that (object keys + sort()), so these are latent only.
+    // Assumes sorted, de-duplicated keys, which getWorkoutDayKeys() guarantees (object keys +
+    // sort()), so these unsorted/duplicate cases are latent only.
     { name: "duplicate mid-run splits the run", keys: ["2026-01-01", "2026-01-02", "2026-01-02", "2026-01-03"], best: 2 },
     { name: "descending order", keys: ["2026-01-03", "2026-01-02", "2026-01-01"], best: 1 },
     { name: "shuffled order", keys: ["2026-01-03", "2026-01-01", "2026-01-02"], best: 2 },

@@ -6,6 +6,19 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.10] - 2026-10-18
+
+### Changed
+- Recorded the Cloudflare deployment trigger decision (ADR-0018): pushes to `main` should only upload an inactive version and the owner promotes it from the dashboard; until the dashboard fix is verified, a push or merge to `main` counts as a deployment.
+
+### Fixed
+- Fixed the Progress focus areas for Subtraction and Division, which listed addition buckets; they now show the empty state.
+- Fixed exact 8-point accuracy changes (for example 92% to 100%) being missed by Progress wins and growth trends through floating-point rounding.
+- Hardened saved-progress loading: a corrupt non-object value loads as empty progress, and best streak, best accuracy, sessions completed and fastest average are range-checked.
+
+### Removed
+- Removed the never-shown legacy Make 10 lesson screen (`js/app-techniques-make10.js`) and its handlers; the live Make 10 lesson is unchanged.
+
 ## [0.20.9] - 2026-10-18
 
 ### Added

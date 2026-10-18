@@ -93,15 +93,6 @@ function createBucketDailyKey(dateKey, operation, bucketKey) {
   return `${dateKey}|${operation}|${bucketKey}`;
 }
 
-function parseBucketDailyKey(key) {
-  const [dateKey = "", operation = "multiplication", ...rest] = String(key).split("|");
-  return {
-    dateKey,
-    operation: operation === "addition" ? "addition" : "multiplication",
-    bucketKey: rest.join("|"),
-  };
-}
-
 function getBucketsForQuestion(question) {
   if (!question) {
     return [];
@@ -187,7 +178,7 @@ function buildBucketTrendItem(operation, bucketKey) {
   const total = { attempted: 0, correct: 0 };
 
   Object.entries(state.progress.bucketDaily || {}).forEach(([storageKey, record]) => {
-    const parsed = parseBucketDailyKey(storageKey);
+    const parsed = parseBucketDailyStorageKey(storageKey);
     if (parsed.operation !== operation || parsed.bucketKey !== bucketKey) {
       return;
     }
@@ -254,12 +245,20 @@ function getBucketTrendItems(filterValue = "all") {
       return;
     }
 
-    ADDITION_TRACKER_BUCKETS.forEach((bucket) => {
-      items.push(buildBucketTrendItem("addition", bucket.key));
-    });
+    if (operation === "addition") {
+      ADDITION_TRACKER_BUCKETS.forEach((bucket) => {
+        items.push(buildBucketTrendItem("addition", bucket.key));
+      });
+    }
+    // Subtraction and division do not record bucketDaily rows, so they have no trend items.
   });
 
   return items;
+}
+
+function isBucketTrendDeltaAtLeast(delta, threshold) {
+  // Small tolerance so a nominal 8-point change (e.g. 100% vs 92%) is not lost to float error.
+  return delta >= threshold - 1e-9;
 }
 
 function getPositiveProgressItems(limit = 3, filterValue = "all") {
@@ -268,7 +267,7 @@ function getPositiveProgressItems(limit = 3, filterValue = "all") {
       (item) =>
         item.totalAttempted >= BUCKET_TREND_MIN_TOTAL_ATTEMPTS &&
         item.lastAttempted >= BUCKET_TREND_MIN_RECENT_ATTEMPTS &&
-        item.delta >= BUCKET_TREND_DELTA_THRESHOLD,
+        isBucketTrendDeltaAtLeast(item.delta, BUCKET_TREND_DELTA_THRESHOLD),
     )
     .sort(
       (left, right) =>
@@ -285,7 +284,8 @@ function getGrowthOpportunityItems(limit = 4, filterValue = "all") {
       (item) =>
         item.totalAttempted >= BUCKET_TREND_MIN_TOTAL_ATTEMPTS &&
         item.lastAttempted >= BUCKET_TREND_MIN_RECENT_ATTEMPTS &&
-        (item.delta <= -BUCKET_TREND_DELTA_THRESHOLD || item.lastAccuracy < 0.7),
+        (isBucketTrendDeltaAtLeast(-item.delta, BUCKET_TREND_DELTA_THRESHOLD) ||
+          item.lastAccuracy < 0.7),
     )
     .sort(
       (left, right) =>

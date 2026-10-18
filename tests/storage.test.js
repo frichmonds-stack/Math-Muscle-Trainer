@@ -731,8 +731,8 @@ test("pruneProgressForRollingWindow: keeps ROLLING_WINDOW_DAYS from the fixed no
   const result = plain(app, app.pruneProgressForRollingWindow(progress));
   assert.deepStrictEqual(Object.keys(result.dailyRecords), ["2026-01-15", "2025-12-15"]);
   assert.deepStrictEqual(Object.keys(result.bucketDaily), ["2025-12-15|addition|1-1"]);
-  // CURRENT BEHAVIOUR (possible bug): a null workout record has no dateKey and a recordedAt of
-  // Number(undefined) = NaN, so it falls through to `return true` and is kept (not normalised here).
+  // Latent only: a null workout record has no dateKey and a NaN recordedAt, so it is kept (not
+  // normalised here); loadProgress normalises workoutHistory records before pruning.
   assert.deepStrictEqual(result.workoutHistory.map((record) => record?.id ?? null), ["keep-date", "keep-ts", "keep-undatable", null]);
   assert.deepStrictEqual(result.answerTelemetry.map((entry) => entry.id), ["t-ts", "t-keep"]);
   assert.deepStrictEqual(result.operationBestRanks, ALL_ROOKIE);
@@ -781,9 +781,9 @@ test("loadProgress: nothing stored returns defaultProgress()", () => {
   assert.deepStrictEqual(plain(app, app.loadProgress()), expected);
 });
 
-test("loadProgress: unparseable or null-ish storage returns defaultProgress()", () => {
+test("loadProgress: empty or unparseable storage returns defaultProgress()", () => {
   // These short-circuit (empty string) or throw inside the try and hit the catch.
-  for (const raw of ["", "{not json", "undefined", "null", "{\"facts\":"]) {
+  for (const raw of ["", "{not json", "undefined", "{\"facts\":"]) {
     const app = loadApp({ localStorage: { [KEY]: raw } });
     assert.deepStrictEqual(plain(app, app.state.progress), plain(app, app.defaultProgress()), JSON.stringify(raw));
   }
@@ -795,18 +795,14 @@ test("loadProgress: non-object JSON is normalised (not defaulted) to an empty pr
     additionBucketExamples: EMPTY_BUCKET_EXAMPLES,
     operationBestRanks: ALL_ROOKIE,
   });
-  for (const raw of ["[]", "5", "true", "{}"]) {
+  // Non-object JSON values (null, strings, arrays) are treated as an empty stored object.
+  for (const raw of ["null", "[]", "[1,2]", "5", "true", "{}", "\"ab\""]) {
     const app = loadApp({ localStorage: { [KEY]: raw } });
     assert.deepStrictEqual(plain(app, app.state.progress), normalisedEmpty(app), raw);
   }
-
-  // CURRENT BEHAVIOUR (possible bug): a JSON string is spread character-by-character into the
-  // progress object, adding numeric keys "0", "1", ... alongside the normal fields.
-  const app = loadApp({ localStorage: { [KEY]: "\"ab\"" } });
-  assert.deepStrictEqual(plain(app, app.state.progress), { 0: "a", 1: "b", ...normalisedEmpty(app) });
 });
 
-test("loadProgress: wrong-typed collections are replaced; unknown fields and scalar types pass through", () => {
+test("loadProgress: wrong-typed collections are replaced; personal-best scalars are clamped; unknown fields pass through", () => {
   const app = loadApp({
     localStorage: {
       [KEY]: {
@@ -840,13 +836,19 @@ test("loadProgress: wrong-typed collections are replaced; unknown fields and sca
     },
     { facts: {}, dailyRecords: {}, bucketDaily: {}, workoutHistory: [], answerTelemetry: [], operationBestRanks: ALL_ROOKIE, techniques: {}, totalCorrect: 12 },
   );
-  // CURRENT BEHAVIOUR (possible bug): top-level scalars not in the explicit list are spread from the
-  // stored object without any type checks or clamping.
-  assert.equal(progress.bestStreak, "17");
-  assert.equal(progress.bestAccuracy, "high");
-  assert.equal(progress.sessionsCompleted, -3);
-  assert.equal(progress.fastestAverageMs, "fast");
+  // Personal-best scalars are coerced and clamped like the totals; unknown fields pass through.
+  assert.equal(progress.bestStreak, 17);
+  assert.equal(progress.bestAccuracy, 0);
+  assert.equal(progress.sessionsCompleted, 0);
+  assert.equal(progress.fastestAverageMs, null);
   assert.equal(progress.extra, 1);
+
+  const valid = { bestStreak: 23, bestAccuracy: 0.95, sessionsCompleted: 41, fastestAverageMs: 1834.5 };
+  const validApp = loadApp({ localStorage: { [KEY]: valid } });
+  const validProgress = plain(validApp, validApp.state.progress);
+  for (const [field, value] of Object.entries(valid)) {
+    assert.equal(validProgress[field], value, field);
+  }
 });
 
 test("loadProgress: partially missing fields are filled from defaults", () => {

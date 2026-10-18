@@ -21,6 +21,7 @@
 - `ai/current-state.md`
 - `docs/decisions/ADR-0008-live-publishing-channel.md`
 - `docs/decisions/ADR-0011-cloudflare-workers-static-assets-deployment.md`
+- `docs/decisions/ADR-0018-cloudflare-deployment-trigger.md`
 
 ## Source Of Truth
 
@@ -35,6 +36,7 @@
 - editing archived snapshots manually
 - claiming live status without push and verification
 - treating the local `docs/live` copy or GitHub push as a verified Cloudflare deployment
+- assuming a push or merge to `main` cannot go live before ADR-0018's dashboard fix is verified
 
 ## Owner Decisions That May Be Required
 

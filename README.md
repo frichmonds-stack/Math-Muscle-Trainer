@@ -88,7 +88,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 
 Use `docs/v*` snapshots only for significant milestones or when a preserved archive is explicitly wanted. Run `scripts/check-repo.ps1` after either publish script.
 
-`wrangler.jsonc` configures an assets-only Cloudflare Workers deployment of `docs/live/`. Deployment is a separate manual step (`npx wrangler deploy`) that requires Cloudflare access and explicit authorization. Copying files into `docs/live/` or pushing GitHub does not by itself verify a live site.
+`wrangler.jsonc` configures an assets-only Cloudflare Workers deployment of `docs/live/`. Pushes to `main` upload an inactive version through Cloudflare Workers Builds; going live means promoting a version in the Cloudflare dashboard (Deployments) or with `npx wrangler versions deploy`, which requires Cloudflare access and explicit authorization. See ADR-0018. Copying files into `docs/live/` or pushing GitHub does not by itself verify a live site.
 
 ## Files
 

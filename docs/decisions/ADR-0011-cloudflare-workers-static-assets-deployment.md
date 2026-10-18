@@ -14,7 +14,7 @@ The public site is the dependency-free static app published in `docs/live/`. The
 - Configure Wrangler in the repository root with `wrangler.jsonc`.
 - Deploy `docs/live/` through Workers Static Assets under the project name `math-muscle-trainer`.
 - Keep the deployment assets-only: do not add a Worker entry point, assets binding, server-side logic, package manifest, or Cloudflare service bindings.
-- Use `npx wrangler deploy` from the repository root, allowing `npx` to obtain Wrangler without making it a local project dependency.
+- Use `npx wrangler deploy` from the repository root, allowing `npx` to obtain Wrangler without making it a local project dependency. *(Superseded by ADR-0018: builds on `main` upload inactive versions and the owner promotes one; `npx wrangler deploy` also promotes and is no longer the instruction.)*
 - Retain the existing `docs/live/` publishing workflow and GitHub Pages setup unchanged.
 
 ## Consequences

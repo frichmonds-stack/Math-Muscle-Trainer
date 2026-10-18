@@ -2,7 +2,7 @@
 
 ## Relevant Files
 
-- `js/app-progress.js`
+- `js/app-progress-*.js`
 - `js/app-practice.js`
 - `js/app-core.js`
 - `index.html`

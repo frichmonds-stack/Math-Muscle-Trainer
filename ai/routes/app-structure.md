@@ -5,7 +5,7 @@
 - `index.html`
 - `js/app-init.js`
 - `js/app-core.js`
-- `js/app-techniques.js`
+- `js/app-techniques-*.js`
 - `js/app-debug.js`
 
 ## Required Pre-Reading

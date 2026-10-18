@@ -25,6 +25,9 @@ authority.
   Git commit history on the cloud branch is the record of cloud work.
 - **Repo checks:** run `node scripts/check-repo.mjs` in place of `scripts/check-repo.ps1`. It runs
   the same checks. Also run `git diff --check`. Keep the two scripts in step if checks change.
+- **Unit tests:** run `node --test tests/` for any JS change.
+- **UI checks:** for changes that touch markup, CSS or JS, run `tools/visual-check` (`npm ci` once,
+  then `run-all.sh --baseline` before and `run-all.sh <appDir> out/baseline` after).
 - **Live build:** `scripts/publish-live.ps1` cannot run. When a batch needs `docs/live` updated,
   copy `index.html`, `css/*.css` (clearing old `docs/live/css/*.css` first), and `js/*.js` into
   `docs/live/`, update the live line in `docs/index.html` exactly as the script would, then run
@@ -36,7 +39,7 @@ authority.
   (AI Project Manager and Notion); add the batch to "Deferred To Local" instead and report Notion
   delivery as pending.
 - **Deployment:** never push or merge to `main` from the cloud. Cloudflare Workers Builds runs on
-  pushes to `main` (ADR-0013), so that requires `deploy now` and the owner's review.
+  pushes to `main` and has auto-promoted (ADR-0018), so that requires `deploy now` and the owner's review.
 
 ## Deferred To Local
 
@@ -44,3 +47,5 @@ Batches published from the cloud that still need portfolio identities, the AI Pr
 work-closeout, and Notion delivery when back on the local machine:
 
 - 2026-10-18 `v0.20.8` cloud setup, bug fixes, CSS cleanup and stylesheet split (branch `claude/ecstatic-planck-n6rbuz`).
+- 2026-10-18 `v0.20.9` dev tools in repo, unit tests, JS split (branch `claude/ecstatic-planck-n6rbuz`).
+- 2026-10-18 `v0.20.10` focus-trend and saved-progress fixes, Make 10 dead-code removal, ADR-0018 deploy docs (branch `claude/hopeful-pasteur-vxziav`).

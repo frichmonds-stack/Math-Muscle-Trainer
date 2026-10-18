@@ -4,8 +4,8 @@
 
 - `js/app-practice.js`
 - `js/app-core.js`
-- `js/app-progress.js`
-- `js/app-techniques.js`
+- `js/app-progress-*.js`
+- `js/app-techniques-*.js`
 - `index.html`
 
 ## Required Pre-Reading

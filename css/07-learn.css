@@ -271,12 +271,6 @@
   gap: 0.35rem;
 }
 
-.make10-idea-card .technique-helper,
-.make10-idea-card .technique-equation,
-.make10-idea-card .technique-example-card {
-  text-align: center;
-}
-
 .addition-idea-card .technique-helper,
 .addition-idea-card .technique-example-card {
   text-align: center;

@@ -14,7 +14,7 @@
 
 - No build step or package manager is required.
 - Root app files are the source of truth for active development.
-- `docs/live` is the rolling publishable build; `docs/v*` contains preserved static snapshots. GitHub Pages is disabled; Cloudflare publishing follows ADR-0013.
+- `docs/live` is the rolling publishable build; `docs/v*` contains preserved static snapshots. GitHub Pages is disabled; Cloudflare deployment is manual promotion of uploaded versions (ADR-0018).
 - `CHANGELOG.md` is version history.
 - `APP_VERSION` in `js/app-core.js` is the local runtime fallback.
 - `scripts/check-repo.ps1` validates repo consistency.

@@ -26,3 +26,6 @@ disabled it on 2026-10-16. Cloudflare Workers Builds is connected to `main` with
 `npx wrangler versions upload`: each push uploads an inactive version and nothing goes live. The
 owner makes a version live by deploying it from the Cloudflare dashboard (Deployments). A push is
 therefore Git publication only; going live remains a separate, explicit step.
+
+*Superseded by ADR-0018:* "nothing goes live" was unverified; a merge to `main` promoted `v0.20.8`
+automatically on 2026-10-18. ADR-0018 holds the current trigger state and interim rule.

@@ -28,11 +28,11 @@ Project guidance for Codex and other AI coding sessions in this repo.
   - `css/NN-area.css` - visual design and responsive layout, split in cascade order; name order is load order (ADR-0015).
   - `js/app-core.js` - constants, state, storage normalization, setup helpers.
   - `js/app-practice.js` - question pools, workout flow, answer handling.
-  - `js/app-progress.js` - progress analytics, trackers, records, carousel behavior.
-  - `js/app-techniques.js` - Learn / Techniques lessons.
+  - `js/app-progress-*.js` - progress analytics, trackers, records, calendar, carousel behavior (split by area; script order in `index.html`).
+  - `js/app-techniques-*.js` - Learn / Techniques lessons; lesson data in `js/app-techniques-content.js`.
   - `js/app-init.js` - startup rendering and event binding.
   - `js/app-debug.js` - opt-in teacher/developer debug mode, loaded only through `?debug=1` / `#debug` behavior.
-- The rolling publishable build lives under `docs/live`; preserved static snapshots live under `docs/v*`. GitHub Pages is disabled. Cloudflare Workers Builds is connected to `main` and only uploads an inactive version of `docs/live`; the owner makes a version live in the Cloudflare dashboard (ADR-0013).
+- The rolling publishable build lives under `docs/live`; preserved static snapshots live under `docs/v*`. GitHub Pages is disabled. Cloudflare Workers Builds is connected to `main` and is intended to upload only an inactive version of `docs/live`, which the owner promotes in the Cloudflare dashboard; a merge to `main` auto-promoted on 2026-10-18, so until the owner's dashboard fix is verified, treat any push or merge to `main` as a deployment (ADR-0018).
 - Project memory is split across `docs/product/`, `AGENTS.md`, `ai/`, and `docs/decisions/`.
 - Current product name is `Math Muscle Trainer`; avoid reintroducing prior product branding except when discussing external/manual rename history.
 
@@ -128,6 +128,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 ```
 
 - Node and Python may not be installed in every local environment. Use the PowerShell checks as the reliable repo-native guard.
+- Where Node is available, run unit tests with `node --test tests/` (see `tests/README.md`).
+- Where Node is available, `tools/visual-check/` (dev-only, ADR-0016) captures deterministic screenshots, compares them, and runs a click-through smoke check; see its README.
 
 ## Coding Conventions
 

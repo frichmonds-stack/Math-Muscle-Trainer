@@ -19,7 +19,7 @@ Confirm the repository root is `C:\Users\Rawr\Desktop\Codex Projects\Math Muscle
 1. Run the best checks for the changed files. Run `scripts/check-repo.ps1` after any `docs/live` or snapshot publish, plus `git diff --check`. For changed JavaScript, run available syntax checks; report device and browser checks that were not run.
 2. Verify documentation with `documentation-write.md`: finished work is removed from operational files, current claims agree, new routes are indexed, lasting decisions have ADRs, and user-visible changes are reflected in `README.md` and `CHANGELOG.md` as needed. Do not append a session summary.
 3. For app changes that should become the next publishable build, use `scripts/publish-live.ps1`. Use `scripts/publish-snapshot.ps1` only for a requested or significant preserved milestone. A docs-only workflow batch does not need an app version bump or a `docs/live` copy.
-4. Check `APP_VERSION`, changelog, and `docs/index.html` labels for any versioned app release. GitHub Pages is shut down, so do not claim GitHub Pages live verification. Cloudflare Workers remains a separate manual deployment and requires an explicit deployment request.
+4. Check `APP_VERSION`, changelog, and `docs/index.html` labels for any versioned app release. GitHub Pages is shut down, so do not claim GitHub Pages live verification. Going live on Cloudflare means promoting a version (dashboard Deployments or `npx wrangler versions deploy`) and needs `deploy now`. A push to `main` should only upload a version, but until ADR-0018's verification passes it counts as a deployment.
 
 ## 3. Curate Portfolio Identities
 

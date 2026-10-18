@@ -88,16 +88,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 
 Use `docs/v*` snapshots only for significant milestones or when a preserved archive is explicitly wanted. Run `scripts/check-repo.ps1` after either publish script.
 
-`wrangler.jsonc` configures an assets-only Cloudflare Workers deployment of `docs/live/`. Deployment is a separate manual step (`npx wrangler deploy`) that requires Cloudflare access and explicit authorization. Copying files into `docs/live/` or pushing GitHub does not by itself verify a live site.
+`wrangler.jsonc` configures an assets-only Cloudflare Workers deployment of `docs/live/`. Pushes to `main` upload an inactive version through Cloudflare Workers Builds; going live means promoting a version in the Cloudflare dashboard (Deployments) or with `npx wrangler versions deploy`, which requires Cloudflare access and explicit authorization. See ADR-0018. Copying files into `docs/live/` or pushing GitHub does not by itself verify a live site.
 
 ## Files
 
 - `index.html` contains the app structure
 - `css/` contains the visual design and responsive layout, split into files loaded in name order
 - `js/app-core.js` contains shared constants, state setup, sanitising, and setup helpers
-- `js/app-techniques.js` contains Learn / Techniques screen logic
+- `js/app-techniques-*.js` contain Learn / Techniques lesson data, flows, and screen logic
 - `js/app-practice.js` contains question generation, session flow, and answer handling
-- `js/app-progress.js` contains results/progress trackers, filters, and analytics rendering
+- `js/app-progress-*.js` contain results/progress filters, records, mastery, focus areas, trackers, calendar, and carousel rendering
 - `js/app-init.js` contains startup rendering and event wiring
 - `js/app-debug.js` contains opt-in teacher/developer debug tools
 - `docs/design/README.md` maps the design documentation and reference workflow

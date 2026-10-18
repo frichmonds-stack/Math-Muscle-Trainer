@@ -6,7 +6,6 @@ Use this file as a small priority queue. Broader unresolved decisions belong in 
 
 ## Now
 
-- `TASK-ENG-001` Engineering batches (cloud): E2/E3 tests (Node test runner vs browser page still to decide), then E6 JS split. Guarded by the scratchpad visual/smoke tool.
 - `TASK-DESIGN-001` Draft the Lesson Experience System brief so future lessons share one structure for explanations, examples, hints, guided practice, final practice, completion, and navigation.
 - `TASK-LEARN-001` Define the detailed Learning Interaction System task loop across Workout and Learn: prompts, inputs, scaffolds, feedback, answer reveal, lockout, retry timing, and progress gates.
 - `TASK-QA-001` Continue manual iPad/tablet QA for Practice keypad fit, portrait behavior, light-mode contrast, and key Learn/Progress touch interactions.
@@ -21,6 +20,7 @@ Use this file as a small priority queue. Broader unresolved decisions belong in 
 
 ## Blocked / Awaiting Owner Decision
 
+- `TASK-DEPLOY-001` Owner: set the Cloudflare production Deploy command to `npx wrangler versions upload` (Worker > Settings > Build) and verify with a test push that nothing goes live (ADR-0018); then record the date in `ai/current-state.md` and lift the interim rule.
 - `TASK-DATA-001` Expand negative-number support only after `THREAD-DATA-001` defines the data model and learner-facing scope.
 - `TASK-HOME-001` Rework Home's daily routine and adaptive behavior only after `THREAD-HOME-001` decides how ambitious the dashboard should become.
 - `TASK-PROGRESS-002` Deep mastery communication changes depend on `THREAD-PROGRESS-001`.

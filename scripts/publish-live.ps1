@@ -37,18 +37,23 @@ $target = Join-Path $RepoRoot $targetRelative
 if (!(Test-Path -LiteralPath $target)) {
   New-Item -ItemType Directory -Path $target | Out-Null
 }
-if (!(Test-Path -LiteralPath (Join-Path $target "js"))) {
-  New-Item -ItemType Directory -Path (Join-Path $target "js") | Out-Null
+$appFiles = @("index.html") +
+  @(Get-ChildItem -Path (Join-Path $RepoRoot "css") -Filter "*.css" -File | Sort-Object Name | ForEach-Object { "css/$($_.Name)" }) +
+  @(Get-ChildItem -Path (Join-Path $RepoRoot "js") -Filter "*.js" -File | Sort-Object Name | ForEach-Object { "js/$($_.Name)" })
+foreach ($folder in @("css", "js")) {
+  $targetFolder = Join-Path $target $folder
+  if (!(Test-Path -LiteralPath $targetFolder)) {
+    New-Item -ItemType Directory -Path $targetFolder | Out-Null
+  }
 }
-
-Copy-Item -LiteralPath (Join-Path $RepoRoot "index.html") -Destination (Join-Path $target "index.html") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "styles.css") -Destination (Join-Path $target "styles.css") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "js/app-core.js") -Destination (Join-Path $target "js/app-core.js") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "js/app-init.js") -Destination (Join-Path $target "js/app-init.js") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "js/app-practice.js") -Destination (Join-Path $target "js/app-practice.js") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "js/app-progress.js") -Destination (Join-Path $target "js/app-progress.js") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "js/app-techniques.js") -Destination (Join-Path $target "js/app-techniques.js") -Force
-Copy-Item -LiteralPath (Join-Path $RepoRoot "js/app-debug.js") -Destination (Join-Path $target "js/app-debug.js") -Force
+Get-ChildItem -Path (Join-Path $target "css") -Filter "*.css" -File | Remove-Item
+$legacyStyles = Join-Path $target "styles.css"
+if (Test-Path -LiteralPath $legacyStyles) {
+  Remove-Item -LiteralPath $legacyStyles
+}
+foreach ($relativePath in $appFiles) {
+  Copy-Item -LiteralPath (Join-Path $RepoRoot $relativePath) -Destination (Join-Path $target $relativePath) -Force
+}
 
 $docsIndex = Read-Utf8Text "docs/index.html"
 $existingLabels = @{}

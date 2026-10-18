@@ -6,8 +6,20 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.8] - 2026-10-18
+
 ### Changed
 - Updated the AI workflow to route context by task, retire Normal Close and session-log updates, and prepare connector-based Notion portfolio closeout for a future Publish Close.
+- Removed about 1,070 lines of dead and unused CSS and split the stylesheet into `css/` files loaded in cascade order, with no visual change (ADR-0015).
+
+### Fixed
+- Fixed the Progress carousel arrows advancing two slides per click; they were bound twice.
+- Fixed the answer field's input pattern, which current Chrome rejected as an invalid regular expression and logged a console error.
+- Fixed sideways page overflow at phone width caused by the decorative background glow.
+- Stopped the app requesting `CHANGELOG.md` on every load to work out its version label; the label now reads `APP_VERSION` directly (the hosted build never included the changelog, so the request always failed).
+
+### Removed
+- Removed an empty `docs/Testing/localStorage-backup-2026-04-26.json` placeholder.
 
 ## [0.20.7] - 2026-05-19
 

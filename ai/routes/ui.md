@@ -2,7 +2,7 @@
 
 ## Relevant Files
 
-- `styles.css`
+- `css/*.css` (name order is cascade order; see ADR-0015)
 - `index.html`
 - generated markup in `js/app-progress.js` and `js/app-techniques.js`
 - `docs/design/visual-design-system.md`

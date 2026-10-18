@@ -25,7 +25,7 @@ Project guidance for Codex and other AI coding sessions in this repo.
 - Stack: plain `HTML`, `CSS`, and browser JavaScript. There is no bundler or package manager.
 - Main app files:
   - `index.html` - app markup and screen structure.
-  - `styles.css` - visual design and responsive layout.
+  - `css/NN-area.css` - visual design and responsive layout, split in cascade order; name order is load order (ADR-0015).
   - `js/app-core.js` - constants, state, storage normalization, setup helpers.
   - `js/app-practice.js` - question pools, workout flow, answer handling.
   - `js/app-progress.js` - progress analytics, trackers, records, carousel behavior.

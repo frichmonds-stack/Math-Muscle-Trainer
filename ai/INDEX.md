@@ -30,6 +30,7 @@ Use this folder for AI workflow, current implementation state, and next work. Pr
 | `publish close` and Notion closeout | `procedures/closeout.md` | Hot |
 | `deploy now` | `procedures/deploy.md` | Hot |
 | Owner-time activity, `time out`, and workflow completion hooks | `procedures/owner-time.md` | Hot |
+| Temporary cloud-session alterations (auto-loaded in cloud only) | `cloud-interim.md` | Hot |
 | Place, update, or retire documentation | `procedures/documentation-write.md` | Warm |
 
 Global authorization, source-of-truth, coding, and lesson-content rules stay in `../AGENTS.md`.

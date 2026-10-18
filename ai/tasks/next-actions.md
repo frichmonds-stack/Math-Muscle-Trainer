@@ -1,11 +1,12 @@
 # Next Actions
 
-Last updated: 2026-07-11
+Last updated: 2026-10-18
 
 Use this file as a small priority queue. Broader unresolved decisions belong in `ai/open-threads.md`. Long-range concepts belong in `docs/product/roadmap.md` or `docs/product/idea-bank.md`.
 
 ## Now
 
+- `TASK-ENG-001` Engineering batches (cloud): E2/E3 tests (Node test runner vs browser page still to decide), then E6 JS split. Guarded by the scratchpad visual/smoke tool.
 - `TASK-DESIGN-001` Draft the Lesson Experience System brief so future lessons share one structure for explanations, examples, hints, guided practice, final practice, completion, and navigation.
 - `TASK-LEARN-001` Define the detailed Learning Interaction System task loop across Workout and Learn: prompts, inputs, scaffolds, feedback, answer reveal, lockout, retry timing, and progress gates.
 - `TASK-QA-001` Continue manual iPad/tablet QA for Practice keypad fit, portrait behavior, light-mode contrast, and key Learn/Progress touch interactions.

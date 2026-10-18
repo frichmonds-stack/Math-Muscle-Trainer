@@ -1,0 +1,791 @@
+.techniques-screen-panel {
+  min-height: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0.2rem 0 0;
+}
+
+.technique-menu-shell,
+.technique-celebration-shell {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  animation: rise-in 260ms ease both;
+}
+
+.technique-lesson-wrap {
+  display: grid;
+  gap: 0.42rem;
+  align-content: start;
+  min-height: 0;
+}
+
+.technique-menu-shell {
+  min-height: 0;
+}
+
+.technique-menu-head,
+.technique-lesson-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.72rem;
+}
+
+.technique-menu-head-compact {
+  align-items: flex-start;
+}
+
+.technique-menu-title-block {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.technique-selector-row {
+  --facts-selector-width: 18ch;
+  margin-top: 0.25rem;
+}
+
+.techniques-copy {
+  margin: 0;
+  max-width: none;
+  color: var(--muted);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.technique-empty-state {
+  min-height: 98px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.technique-coming-soon-card {
+  max-width: 520px;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background:
+    radial-gradient(circle at top right, rgba(var(--accent-rgb), 0.09), transparent 48%),
+    rgba(22, 22, 22, 0.94);
+  text-align: left;
+}
+
+.technique-coming-soon-card h3 {
+  margin: 0 0 0.3rem;
+}
+
+.technique-coming-soon-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.technique-table-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.68rem;
+}
+
+.technique-card {
+  display: grid;
+  gap: 0.24rem;
+  align-content: start;
+  min-height: 84px;
+  width: 100%;
+  padding: 0.72rem 0.8rem;
+  border-radius: 24px;
+  border: 1px solid var(--control-border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
+    rgba(22, 22, 22, 0.92);
+  color: var(--text);
+  text-align: left;
+}
+
+.technique-card strong {
+  font-size: 0.96rem;
+}
+
+.technique-card-note {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.18;
+  max-width: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.technique-card-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.28rem 0.58rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.technique-card.is-active {
+  border-color: rgba(232, 190, 79, 0.3);
+  background:
+    radial-gradient(circle at top right, rgba(232, 190, 79, 0.12), transparent 34%),
+    rgba(22, 22, 22, 0.98);
+  box-shadow: inset 0 0 0 1px rgba(232, 190, 79, 0.12);
+}
+
+.technique-card.is-active .technique-card-pill {
+  background: rgba(232, 190, 79, 0.16);
+  color: var(--gold);
+}
+
+.technique-card.is-building {
+  border-color: rgba(232, 190, 79, 0.22);
+  background:
+    radial-gradient(circle at top right, rgba(232, 190, 79, 0.08), transparent 36%),
+    rgba(22, 22, 22, 0.98);
+}
+
+.technique-card.is-building .technique-card-pill {
+  background: rgba(232, 190, 79, 0.16);
+  color: var(--gold);
+}
+
+.technique-card.is-completed {
+  border-color: rgba(124, 225, 166, 0.24);
+  background:
+    radial-gradient(circle at top right, rgba(124, 225, 166, 0.12), transparent 34%),
+    rgba(22, 22, 22, 0.98);
+  box-shadow: inset 0 0 0 1px rgba(124, 225, 166, 0.1);
+}
+
+.technique-card.is-completed .technique-card-pill {
+  background: rgba(124, 225, 166, 0.16);
+  color: var(--success);
+}
+
+.technique-card:disabled {
+  opacity: 0.92;
+  cursor: not-allowed;
+  border-color: rgba(127, 146, 170, 0.34);
+  background:
+    radial-gradient(circle at top right, rgba(127, 146, 170, 0.12), transparent 34%),
+    rgba(24, 24, 24, 0.97);
+}
+
+.technique-card:disabled:hover {
+  transform: none;
+}
+
+.technique-stage-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.technique-stage-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+   gap: 0.35rem;
+  padding: 0.38rem 0.68rem;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: rgba(28, 28, 28, 0.92);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.technique-stage-pill.is-active {
+  border-color: rgba(var(--accent-rgb), 0.28);
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--text);
+}
+
+.technique-stage-pill.is-unlocked {
+  border-color: rgba(var(--accent-rgb), 0.22);
+  background: rgba(var(--accent-rgb), 0.08);
+  color: var(--text);
+}
+
+.technique-stage-pill.is-locked {
+  opacity: 1;
+  border-color: rgba(127, 146, 170, 0.34);
+  background: rgba(57, 67, 82, 0.42);
+  color: #c6d0de;
+}
+
+.technique-stage-pill[data-technique-stage-jump]:focus-visible {
+  outline: none;
+  border-color: rgba(var(--accent-rgb), 0.54);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.16);
+}
+
+.technique-lesson-card {
+  display: grid;
+  gap: 0.52rem;
+  padding: 0.72rem;
+  border-radius: 24px;
+  border: 1px solid var(--stroke);
+  background: rgba(20, 20, 20, 0.96);
+}
+
+.technique-lesson-card.technique-question-shell {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.technique-rule-grid,
+.technique-switch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.technique-example-card,
+.technique-switch-card,
+.technique-hint {
+  padding: 0.9rem 0.95rem;
+  border-radius: 20px;
+  border: 1px solid var(--stroke);
+  background: rgba(24, 24, 24, 0.96);
+}
+
+.technique-example-card,
+.technique-switch-card {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.make10-idea-card .technique-helper,
+.make10-idea-card .technique-equation,
+.make10-idea-card .technique-example-card {
+  text-align: center;
+}
+
+.addition-idea-card .technique-helper,
+.addition-idea-card .technique-example-card {
+  text-align: center;
+}
+
+.technique-step-title {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.addition-example-equation {
+  font-size: clamp(1rem, 2vw, 1.34rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.addition-practice-hint {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.technique-equation {
+  margin: 0;
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.08;
+}
+
+.technique-caption,
+.technique-helper,
+.technique-progress-copy {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.technique-zero {
+  color: var(--technique-zero-color);
+}
+
+.technique-factor {
+  color: var(--technique-factor-color);
+}
+
+.technique-pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.58rem;
+}
+
+.technique-pattern-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  flex-wrap: wrap;
+  min-height: 82px;
+  padding: 0.82rem 0.86rem;
+  border-radius: 18px;
+  border: 1px solid var(--stroke);
+  background: rgba(24, 24, 24, 0.96);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.technique-pattern-signal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  min-height: 1.6rem;
+  flex: 0 0 1.6rem;
+}
+
+.technique-status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: transparent;
+  background: transparent;
+  opacity: 0;
+  transition:
+    opacity 120ms ease,
+    border-color 120ms ease,
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.technique-status-icon svg {
+  width: 0.86rem;
+  height: 0.86rem;
+  display: block;
+}
+
+.technique-status-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.technique-status-icon.is-correct {
+  opacity: 1;
+  border-color: rgba(124, 225, 166, 0.55);
+  background: rgba(124, 225, 166, 0.16);
+  color: var(--success);
+}
+
+.technique-status-icon.is-error {
+  opacity: 1;
+  border-color: rgba(255, 106, 106, 0.56);
+  background: rgba(255, 106, 106, 0.14);
+  color: var(--danger);
+}
+
+.technique-pattern-row.is-correct {
+  border-color: rgba(124, 225, 166, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(124, 225, 166, 0.08);
+}
+
+.technique-pattern-row.is-error {
+  border-color: rgba(255, 106, 106, 0.24);
+}
+
+.technique-inline-input {
+  width: 4.8rem;
+  padding: 0.5rem 0.62rem;
+  border-radius: 14px;
+  border: 1px solid var(--stroke);
+  background: var(--surface-strong);
+  color: var(--text);
+  text-align: center;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.technique-inline-input:focus {
+  border-color: rgba(var(--accent-rgb), 0.7);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.12);
+}
+
+.technique-inline-input.is-error {
+  border-color: rgba(255, 106, 106, 0.7);
+  box-shadow: 0 0 0 3px rgba(255, 106, 106, 0.1);
+}
+
+.technique-inline-input.is-wide {
+  width: 5.8rem;
+}
+
+.technique-inline-input.is-correct {
+  border-color: rgba(124, 225, 166, 0.68);
+  box-shadow: 0 0 0 3px rgba(124, 225, 166, 0.1);
+}
+
+.technique-inline-input,
+.technique-answer-wrap .answer-field input {
+  font-variant-numeric: tabular-nums;
+}
+
+.is-technique-colored {
+  color: var(--text);
+  -webkit-text-fill-color: currentColor;
+  caret-color: var(--text);
+  background-image: linear-gradient(
+    90deg,
+    var(--technique-factor-color) 0%,
+    var(--technique-factor-color) var(--technique-factor-stop, 100%),
+    var(--technique-zero-color) var(--technique-factor-stop, 100%),
+    var(--technique-zero-color) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.technique-answer-wrap .answer-field input.is-technique-colored {
+  background-image: none;
+  color: var(--text);
+  -webkit-text-fill-color: currentColor;
+  caret-color: var(--text);
+}
+
+.technique-inline-input.is-technique-colored:focus,
+.technique-answer-wrap .answer-field input.is-technique-colored:focus {
+  color: var(--text);
+  -webkit-text-fill-color: currentColor;
+  background-image: none;
+  caret-color: var(--text);
+}
+
+.technique-question-shell {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.technique-practice-shell {
+  gap: 0;
+}
+
+.technique-question-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.42rem;
+  flex-wrap: wrap;
+}
+
+.technique-question {
+  margin: 0;
+  font-size: clamp(2rem, 5.2vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.technique-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.technique-practice-problem {
+  margin: 0;
+  min-height: 62px;
+}
+
+.technique-practice-problem .technique-question {
+  font-size: clamp(2.3rem, 6.2vw, 3.6rem);
+}
+
+.technique-correct-counter {
+  position: absolute;
+  top: 0.72rem;
+  right: 0.82rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.technique-correct-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 0.92rem;
+  height: 0.92rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.technique-correct-dot.is-filled {
+  background: #0f8a53;
+  border-color: #0c6940;
+  box-shadow: 0 0 10px rgba(15, 138, 83, 0.24);
+}
+
+body[data-color-mode="light"] .technique-correct-dot {
+  border-color: rgba(38, 56, 84, 0.18);
+  background: rgba(224, 232, 244, 0.76);
+  color: #fff;
+}
+
+body[data-color-mode="light"] .technique-correct-dot.is-filled {
+  background: #0f8a53;
+  border-color: #0c6940;
+}
+
+.technique-keypad {
+  gap: 0.28rem;
+  margin-top: 0.08rem;
+}
+
+.technique-keypad .ghost-button {
+  min-height: 40px;
+  font-size: 1rem;
+  padding: 0.35rem;
+}
+
+.technique-practice-input-row .primary-button {
+  min-height: 46px;
+  padding-inline: 1rem;
+}
+
+.technique-answer-wrap {
+  position: relative;
+}
+
+.technique-answer-wrap .answer-field {
+  margin: 0;
+}
+
+.technique-input-row .answer-field input {
+  min-height: 46px;
+}
+
+.technique-answer-wrap .answer-field input {
+  padding-right: 3.1rem;
+}
+
+.technique-answer-wrap.is-correct .answer-field input {
+  border-color: rgba(124, 225, 166, 0.7);
+  box-shadow: 0 0 0 3px rgba(124, 225, 166, 0.1);
+}
+
+.technique-answer-wrap.is-error .answer-field input {
+  border-color: rgba(255, 106, 106, 0.68);
+  box-shadow: 0 0 0 3px rgba(255, 106, 106, 0.1);
+}
+
+.technique-answer-signal {
+  position: absolute;
+  top: 50%;
+  right: 0.82rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.technique-status-icon-inline {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.technique-hint {
+  border-color: rgba(232, 190, 79, 0.16);
+  background: rgba(232, 190, 79, 0.08);
+}
+
+.technique-feedback {
+  min-height: 1.1rem;
+  margin: 0.12rem 0 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+}
+
+.technique-feedback:empty {
+  display: none;
+}
+
+.technique-feedback.success {
+  color: var(--success);
+}
+
+.technique-feedback.error {
+  color: var(--danger);
+}
+
+.technique-answer-reveal {
+  margin: 0.45rem 0 0;
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.technique-answer-reveal.success {
+  color: var(--success);
+}
+
+.technique-answer-reveal.error {
+  color: var(--danger);
+}
+
+.technique-compare-question {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.technique-compare-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.95em;
+  height: 0.95em;
+  border: 2px solid currentColor;
+  border-radius: 0.14em;
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+.technique-compare-box.is-success {
+  border-color: rgba(19, 140, 83, 0.65);
+  background: rgba(19, 140, 83, 0.12);
+  color: var(--success);
+}
+
+.technique-compare-box.is-error {
+  border-color: rgba(190, 45, 45, 0.66);
+  background: rgba(190, 45, 45, 0.1);
+  color: var(--danger);
+}
+
+.technique-operator-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  padding-top: 0.4rem;
+}
+
+.technique-operator-button {
+  min-width: 132px;
+  min-height: 88px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.18rem;
+  border-radius: 18px;
+}
+
+.technique-operator-button.is-correct {
+  border-color: rgba(19, 140, 83, 0.58);
+  background: rgba(19, 140, 83, 0.13);
+  color: var(--success);
+  box-shadow: 0 0 0 3px rgba(19, 140, 83, 0.1);
+}
+
+.technique-operator-button.is-error {
+  border-color: rgba(190, 45, 45, 0.58);
+  background: rgba(190, 45, 45, 0.12);
+  color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(190, 45, 45, 0.1);
+}
+
+.technique-operator-symbol {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.technique-operator-label {
+  font-size: 0.78rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.technique-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 0.35rem;
+}
+
+.technique-action-row-end {
+  padding-top: 0.7rem;
+}
+
+.technique-action-row-end {
+  justify-content: flex-end;
+}
+
+.technique-side-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-left: 0;
+}
+
+.technique-completion-card {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.2rem;
+  border-radius: 24px;
+  border: 1px solid rgba(232, 190, 79, 0.16);
+  background:
+    radial-gradient(circle at top right, rgba(232, 190, 79, 0.12), transparent 34%),
+    rgba(20, 20, 20, 0.96);
+}
+
+.technique-completion-card h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.technique-completion-copy {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.technique-completion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}

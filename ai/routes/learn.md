@@ -5,7 +5,7 @@
 - `js/app-techniques.js`
 - `js/app-core.js`
 - `index.html`
-- `styles.css`
+- `css/07-learn.css`
 
 ## Required Pre-Reading
 

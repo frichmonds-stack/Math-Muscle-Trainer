@@ -54,6 +54,17 @@ try {
     }
   }
 
+  $styleRefs = @(Select-String -Path "index.html" -Pattern '<link rel="stylesheet" href="(css/[^"]+)"' -AllMatches |
+    ForEach-Object {
+      foreach ($match in $_.Matches) {
+        $match.Groups[1].Value
+      }
+    })
+  $cssFiles = @(Get-ChildItem -Path "css" -Filter "*.css" -File | Sort-Object Name | ForEach-Object { "css/$($_.Name)" })
+  if (($styleRefs -join "|") -cne ($cssFiles -join "|")) {
+    Add-Failure "index.html stylesheet links must list every css/*.css file in name order."
+  }
+
   $removedHelpers = @("applySettingsToForm")
   foreach ($helper in $removedHelpers) {
     $hits = Select-String -Path "js/*.js" -Pattern "\b$helper\s*\("
@@ -127,16 +138,9 @@ try {
     }
 
     if ($latestDir) {
-      $rootFiles = @(
-        "index.html",
-        "styles.css",
-        "js/app-core.js",
-        "js/app-init.js",
-        "js/app-practice.js",
-        "js/app-progress.js",
-        "js/app-techniques.js",
-        "js/app-debug.js"
-      )
+      $rootFiles = @("index.html") +
+        @(Get-ChildItem -Path "css" -Filter "*.css" -File | Sort-Object Name | ForEach-Object { "css/$($_.Name)" }) +
+        @(Get-ChildItem -Path "js" -Filter "*.js" -File | Sort-Object Name | ForEach-Object { "js/$($_.Name)" })
       foreach ($relativePath in $rootFiles) {
         $rootFile = Join-Path $RepoRoot $relativePath
         $docsFile = Join-Path $latestDir.FullName $relativePath

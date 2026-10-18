@@ -1,55 +1,3 @@
-async function resolveDisplayVersion() {
-  function normaliseVersion(value) {
-    return String(value || "")
-      .trim()
-      .replace(/^v/i, "");
-  }
-
-  function compareSemver(left, right) {
-    const leftParts = normaliseVersion(left)
-      .split(".")
-      .map((part) => Number(part) || 0);
-    const rightParts = normaliseVersion(right)
-      .split(".")
-      .map((part) => Number(part) || 0);
-    const maxLength = Math.max(leftParts.length, rightParts.length);
-    for (let index = 0; index < maxLength; index += 1) {
-      const leftValue = leftParts[index] || 0;
-      const rightValue = rightParts[index] || 0;
-      if (leftValue !== rightValue) {
-        return leftValue - rightValue;
-      }
-    }
-    return 0;
-  }
-
-  try {
-    const response = await fetch("CHANGELOG.md", { cache: "no-store" });
-    if (!response.ok) {
-      return APP_VERSION;
-    }
-    const changelog = await response.text();
-    const releaseMatches = Array.from(changelog.matchAll(/^## \[(\d+\.\d+\.\d+)\](?:\s+-\s+.+)?$/gm)).map(
-      (match) => match[1],
-    );
-    if (!releaseMatches.length) {
-      return APP_VERSION;
-    }
-    const latestChangelogVersion = releaseMatches.sort(compareSemver).at(-1);
-    const fallbackVersion = normaliseVersion(APP_VERSION);
-    if (!latestChangelogVersion) {
-      return APP_VERSION;
-    }
-    const displayVersion =
-      compareSemver(fallbackVersion, latestChangelogVersion) >= 0
-        ? fallbackVersion
-        : latestChangelogVersion;
-    return `v${displayVersion}`;
-  } catch (error) {
-    return APP_VERSION;
-  }
-}
-
 function openOptionsDialog() {
   if (!elements.optionsDialog || elements.optionsDialog.open) {
     return;
@@ -66,7 +14,7 @@ function showFeedbackDialog() {
 
 async function initialise() {
   if (elements.appVersion) {
-    elements.appVersion.textContent = await resolveDisplayVersion();
+    elements.appVersion.textContent = APP_VERSION;
   }
   applyTheme(state.theme);
   applyColorMode(state.colorMode);
@@ -255,8 +203,6 @@ async function initialise() {
   elements.resultsMonthNextButton.addEventListener("click", () => shiftDisplayedMonth(1));
   elements.resultsPrevButton?.addEventListener("click", () => shiftResultsCarousel(-1));
   elements.resultsNextButton?.addEventListener("click", () => shiftResultsCarousel(1));
-  elements.progressPrevButton?.addEventListener("click", () => shiftProgressCarousel(-1));
-  elements.progressNextButton?.addEventListener("click", () => shiftProgressCarousel(1));
   document.querySelectorAll(".carousel-inline-nav-button[data-carousel-target][data-carousel-shift]").forEach((button) => {
     button.addEventListener("click", () => {
       const direction = Number(button.dataset.carouselShift || 0);

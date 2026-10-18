@@ -1,0 +1,594 @@
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  button {
+    transition: none !important;
+  }
+
+  button:hover:not(:disabled),
+  button:active:not(:disabled) {
+    transform: none !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+
+  .card,
+  .panel,
+  .table-card,
+  .focus-card,
+  .technique-card,
+  .nav-button,
+  .utility-button,
+  .primary-button,
+  .ghost-button,
+  .carousel-button,
+  .calendar-nav-button,
+  .progress-fill,
+  .bar-fill {
+    transition: none !important;
+  }
+
+  .screen.is-active,
+  .results-slide.is-active,
+  .progress-slide.is-active,
+  .technique-menu-shell,
+  .technique-lesson-wrap,
+  .technique-celebration-shell,
+  .countdown-pop,
+  .progress-track::after,
+  .problem-wrap::before {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  body {
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .page-header {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "banner"
+      "dashboard";
+  }
+
+  .home-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    white-space: normal;
+  }
+
+  .section-note {
+    text-align: left;
+  }
+
+  .mastery-overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mastery-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-layout,
+  .focus-split,
+  .focus-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-selector-row {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(calc(var(--facts-selector-width) + 2.2rem), calc(var(--facts-selector-width) + 2.2rem))
+    );
+  }
+
+  .tracker-left-column {
+    padding-right: 0;
+    padding-bottom: 0.95rem;
+    border-right: none;
+    border-bottom: 1px solid var(--stroke);
+  }
+
+  .tracker-calendar-wrap {
+    padding-left: 0;
+    padding-top: 0.95rem;
+    border-top: 1px solid var(--stroke);
+  }
+
+  .focus-column,
+  .focus-panel + .focus-panel {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .focus-column + .focus-column,
+  .focus-panel + .focus-panel {
+    padding-left: 0;
+    padding-top: 0.8rem;
+    border-left: none;
+    border-top: 1px solid var(--stroke);
+  }
+
+  .techniques-screen-panel {
+    min-height: 0;
+  }
+}
+
+@media (pointer: coarse) and (min-width: 700px) {
+  #practiceScreen .practice-panel.has-touch-keypad {
+    gap: clamp(0.24rem, 0.8dvh, 0.42rem);
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .session-badge,
+  #practiceScreen .practice-panel.has-touch-keypad .subtle-button {
+    padding-block: clamp(0.42rem, 0.9dvh, 0.56rem);
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .hud-card {
+    padding: clamp(0.46rem, 0.95dvh, 0.72rem);
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .problem-wrap {
+    min-height: clamp(106px, 16dvh, 142px);
+    margin-block: clamp(0.12rem, 0.7dvh, 0.28rem);
+    padding: clamp(0.58rem, 1.1dvh, 0.82rem);
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .problem-text {
+    font-size: clamp(2.45rem, 7dvh, 4.15rem);
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .answer-field input {
+    min-height: clamp(50px, 7dvh, 58px);
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .practice-keypad {
+    justify-self: center;
+    width: min(100%, 244px);
+    gap: clamp(0.2rem, 0.58dvh, 0.32rem);
+    margin-top: 0.08rem;
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .practice-keypad .ghost-button,
+  #practiceScreen .practice-panel.has-touch-keypad .practice-keypad .primary-button {
+    min-height: clamp(36px, 5.1dvh, 40px);
+    padding: 0.36rem 0.48rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .setup-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1180px) {
+  body {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .screen-stage {
+    overflow: visible;
+  }
+
+  .screen.is-active {
+    height: auto;
+    overflow: visible;
+    display: block;
+  }
+
+  #resultsScreen.screen.is-active,
+  #progressScreen.screen.is-active {
+    display: block;
+    overflow-y: visible;
+  }
+
+  #resultsScreen .results-screen-panel,
+  #progressScreen .progress-screen-panel {
+    margin-top: 0;
+  }
+
+  .page-shell {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    aspect-ratio: auto;
+    padding-top: 0;
+  }
+
+  .page-shell.is-home-shell .page-header {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
+
+  .app-shell {
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .practice-panel {
+    height: auto;
+    overflow: visible;
+    padding-bottom: 0.8rem;
+  }
+
+  #practiceScreen .practice-keypad {
+    margin-bottom: 0.75rem;
+  }
+
+  .home-dashboard {
+    min-height: 0;
+    padding-bottom: calc(var(--app-dock-space) + 1rem);
+  }
+
+  .home-dashboard-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-identity {
+    align-items: flex-start;
+  }
+
+  .home-dashboard h1 {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .hud-row,
+  .results-stats,
+  .stats-grid,
+  .mastery-grid,
+  .mastery-overview-grid,
+  .mastery-detail-grid,
+  .mastery-form-row,
+  .streak-metrics,
+  .setup-option-list,
+  .workout-type-grid,
+  .tracker-mini-grid,
+  .focus-card-grid,
+  .technique-rule-grid,
+  .technique-switch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-operation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #setupScreen .setup-option-list {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+
+  .workout-type-grid:has(#isolationSessionChoice:not(.is-hidden)) {
+    grid-template-columns: 1fr;
+  }
+
+  .mastery-snapshot-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .mastery-signal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-pill,
+  .choice-pill.compact,
+  .session-choice {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .carousel-panel {
+    padding-inline: 1rem;
+  }
+
+  .carousel-actions-floating {
+    position: static;
+    transform: none;
+    justify-content: space-between;
+    inset: auto;
+    pointer-events: auto;
+    margin-bottom: 0.65rem;
+  }
+
+  .carousel-actions-floating .carousel-button {
+    position: static;
+    transform: none;
+  }
+
+  .carousel-position-indicator {
+    position: static;
+    transform: none;
+    margin-inline: auto;
+  }
+
+  .tooltip-dot::after {
+    left: 0;
+    top: calc(100% + 0.55rem);
+    transform: none;
+    max-width: 240px;
+  }
+
+  .slide-heading-with-filter,
+  .carousel-shell-head,
+  .records-panel-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .technique-menu-head-compact {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #techniquesScreen .focused-view-head {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: 0.7rem;
+  }
+
+  #techniquesScreen .focused-view-head .technique-exit-nav {
+    justify-self: start;
+    max-width: calc(100vw - 1.4rem);
+  }
+
+  .technique-lesson-wrap,
+  .technique-lesson-card,
+  .technique-stage-pills {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .technique-stage-pills {
+    overflow-x: auto;
+    padding-bottom: 0.15rem;
+  }
+
+  .calendar-nav {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .progress-filter select,
+  .facts-filter select,
+  .records-filter select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .table-grid.addition-table-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .technique-pattern-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .technique-table-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .facts-selector-row {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(calc(var(--facts-selector-width) + 2.2rem), calc(var(--facts-selector-width) + 2.2rem))
+    );
+  }
+
+  .technique-correct-counter {
+    right: 0.62rem;
+    gap: 0.18rem;
+  }
+
+  .technique-correct-dot {
+    width: 0.78rem;
+    height: 0.78rem;
+    font-size: 0.54rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+  }
+
+  .home-dashboard h1 {
+    font-size: clamp(2.05rem, 8.6vw, 2.72rem);
+    white-space: normal;
+  }
+
+  .home-dashboard .eyebrow {
+    letter-spacing: 0.16em;
+  }
+
+  .home-operation-grid,
+  .home-snapshot-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .app-shell {
+    padding: 0.7rem;
+  }
+
+  .home-dashboard {
+    width: min(100%, calc(100vw - 1.4rem));
+  }
+
+  .today-training-card,
+  .home-card,
+  .home-snapshot-metric {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .continue-learning-card .home-card-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.62rem;
+    align-items: start;
+  }
+
+  .continue-learning-card .home-card-button {
+    justify-self: start;
+  }
+
+  .panel {
+    padding: 0.9rem;
+  }
+
+  .practice-topbar,
+  .practice-progress-row,
+  .section-heading,
+  .carousel-shell-head,
+  .slide-heading-with-filter,
+  .slide-heading,
+  .tracker-slide-head,
+  .table-card-top,
+  .table-card-stats {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .calendar-nav {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .results-screen-panel,
+  .progress-screen-panel {
+    min-height: 0;
+  }
+
+  .answer-form {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-text {
+    min-width: 0;
+    text-align: left;
+  }
+
+  .calendar-day {
+    min-height: 66px;
+  }
+
+  .table-grid.addition-table-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-tagline {
+    white-space: normal;
+  }
+
+  .nav-button {
+    min-height: 54px;
+  }
+
+  .utility-button {
+    width: 76px;
+    height: 54px;
+  }
+
+  .technique-pattern-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .technique-table-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .technique-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .technique-question-meta,
+  .technique-action-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 901px) and (max-width: 1180px) {
+  .screen.is-active {
+    width: min(960px, 100%);
+  }
+
+  .page-shell {
+    padding-inline: clamp(0.8rem, 2vw, 1.25rem);
+  }
+
+  .focus-columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .focus-column {
+    padding-inline: 0.62rem;
+  }
+
+  .focus-column:first-child {
+    padding-left: 0;
+  }
+
+  .focus-column:last-child {
+    padding-right: 0;
+  }
+
+  .focus-column + .focus-column {
+    padding-top: 0;
+    padding-left: 0.9rem;
+    border-top: 0;
+    border-left: 1px solid var(--stroke);
+  }
+
+  .single-column-grid .focus-card,
+  .focus-card {
+    min-height: 76px;
+    padding: 0.58rem 0.62rem;
+  }
+
+  .focus-card .fact-name,
+  .focus-metric,
+  .focus-meta-row {
+    font-size: 0.86rem;
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad {
+    padding-bottom: calc(var(--app-dock-space) + 0.75rem);
+  }
+
+  #practiceScreen .practice-panel.has-touch-keypad .practice-keypad {
+    width: min(100%, 292px);
+  }
+}
+
+@media (max-width: 520px) {
+  .technique-table-grid {
+    grid-template-columns: 1fr;
+  }
+}

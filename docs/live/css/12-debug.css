@@ -1,0 +1,236 @@
+.debug-mode::before {
+  content: "DEBUG MODE";
+  position: fixed;
+  inset: auto;
+  top: 12px;
+  left: 12px;
+  z-index: 120;
+  width: auto;
+  height: auto;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(23, 22, 24, 0.82);
+  background-image: none;
+  color: #ffe08a;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 1;
+  filter: none;
+  mask-image: none;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+.debug-toggle {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 122;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: #171618;
+  color: #ffe08a;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
+  cursor: pointer;
+}
+
+.debug-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 123;
+  width: min(380px, calc(100vw - 28px));
+  padding: 20px;
+  overflow-y: auto;
+  transform: translateX(105%);
+  transition: transform 180ms ease;
+  background: #171618;
+  color: #f8efe1;
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: -22px 0 56px rgba(0, 0, 0, 0.44);
+}
+
+.debug-panel-open .debug-panel {
+  transform: translateX(0);
+}
+
+.debug-panel-head,
+.debug-lock-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.debug-panel h2,
+.debug-lock-dialog h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: 0;
+}
+
+.debug-kicker {
+  margin: 0 0 4px;
+  color: #ffe08a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.debug-note,
+.debug-status {
+  margin: 12px 0 0;
+  color: rgba(248, 239, 225, 0.72);
+  line-height: 1.45;
+}
+
+.debug-icon-button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8efe1;
+  cursor: pointer;
+}
+
+.debug-section {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.debug-section h3 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.debug-button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.debug-select-grid {
+  display: grid;
+  gap: 9px;
+}
+
+.debug-select-grid label {
+  display: grid;
+  gap: 5px;
+  color: rgba(248, 239, 225, 0.76);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.debug-select-grid select {
+  min-height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 10px;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8efe1;
+  font: inherit;
+  text-transform: none;
+}
+
+.debug-appearance-actions {
+  margin-top: 8px;
+}
+
+.debug-button-grid button {
+  min-height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8efe1;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.debug-button-grid button:hover,
+.debug-button-grid button:focus-visible,
+.debug-toggle:hover,
+.debug-toggle:focus-visible,
+.debug-icon-button:hover,
+.debug-icon-button:focus-visible {
+  border-color: rgba(255, 224, 138, 0.72);
+  outline: none;
+}
+
+.debug-status {
+  min-height: 1.4em;
+  color: #ffe08a;
+  font-weight: 700;
+}
+
+.debug-lock-dialog {
+  width: min(420px, calc(100vw - 32px));
+  border: 0;
+  border-radius: 24px;
+  padding: 0;
+  background: transparent;
+  color: #f8efe1;
+}
+
+.debug-lock-dialog::backdrop {
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.debug-lock-card {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  background: #171618;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+}
+
+.debug-lock-field {
+  display: grid;
+  gap: 7px;
+  color: rgba(248, 239, 225, 0.78);
+  font-weight: 700;
+}
+
+.debug-lock-field input {
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8efe1;
+  font: inherit;
+}
+
+.debug-lock-error {
+  min-height: 1.3em;
+  margin: 0;
+  color: #ffb4a8;
+  font-weight: 700;
+}
+
+body[data-color-mode="light"].debug-mode::before,
+body[data-color-mode="light"] .debug-toggle,
+body[data-color-mode="light"] .debug-panel,
+body[data-color-mode="light"] .debug-lock-card {
+  background: #242125;
+  color: #fff8e9;
+}

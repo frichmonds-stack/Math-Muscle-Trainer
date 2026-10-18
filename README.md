@@ -93,7 +93,7 @@ Use `docs/v*` snapshots only for significant milestones or when a preserved arch
 ## Files
 
 - `index.html` contains the app structure
-- `styles.css` contains the visual design and responsive layout
+- `css/` contains the visual design and responsive layout, split into files loaded in name order
 - `js/app-core.js` contains shared constants, state setup, sanitising, and setup helpers
 - `js/app-techniques.js` contains Learn / Techniques screen logic
 - `js/app-practice.js` contains question generation, session flow, and answer handling

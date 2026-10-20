@@ -25,6 +25,40 @@
   display: none;
 }
 
+/* New-user zero states: renderZeroStates() toggles .is-zero-state on [data-zero-state] sections. */
+.zero-state-card {
+  display: none;
+}
+
+[data-zero-state].is-zero-state .zero-state-card {
+  display: grid;
+  grid-template-rows: none;
+  gap: 0.42rem;
+  align-content: start;
+  align-self: start;
+  justify-items: start;
+}
+
+[data-zero-state].is-zero-state [data-zero-hide] {
+  display: none;
+}
+
+.zero-state-title {
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.zero-state-card .fact-meta {
+  margin: 0;
+  max-width: 56ch;
+}
+
+.zero-state-button {
+  width: auto;
+  margin-top: 0.3rem;
+  padding-inline: 1.4rem;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

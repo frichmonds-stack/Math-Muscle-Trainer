@@ -230,6 +230,11 @@ function renderMasteryMetric(label, value) {
   return `<div><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`;
 }
 
+// An untrained operation shows "-" rather than a 0% that reads like a failed score.
+function formatMasteryPercent(summary, value) {
+  return summary.attempts > 0 ? formatPercent(value) : "-";
+}
+
 function renderMasterySnapshotCard(summary) {
   const coverageLabel = `${summary.coveredSkills.length}/${summary.skillUniverse.length}`;
 
@@ -249,7 +254,7 @@ function renderMasterySnapshotCard(summary) {
         <span style="width: ${summary.score}%"></span>
       </span>
       <span class="mastery-snapshot-metrics">
-        ${renderMasteryMetric("Accuracy", formatPercent(summary.accuracy))}
+        ${renderMasteryMetric("Accuracy", formatMasteryPercent(summary, summary.accuracy))}
         ${renderMasteryMetric("Coverage", coverageLabel)}
         ${renderMasteryMetric("Attempts", String(summary.attempts))}
       </span>
@@ -293,9 +298,9 @@ function renderMasteryDetailPanel(summary) {
         <section>
           <h4>Snapshot</h4>
           <div class="mastery-signal-grid">
-            ${renderMasteryMetric("Accuracy", formatPercent(summary.accuracy))}
-            ${renderMasteryMetric("Recent", formatPercent(summary.recentAccuracy))}
-            ${renderMasteryMetric("Fluency", formatPercent(summary.fluency))}
+            ${renderMasteryMetric("Accuracy", formatMasteryPercent(summary, summary.accuracy))}
+            ${renderMasteryMetric("Recent", formatMasteryPercent(summary, summary.recentAccuracy))}
+            ${renderMasteryMetric("Fluency", formatMasteryPercent(summary, summary.fluency))}
             ${renderMasteryMetric("Coverage", coverageLabel)}
             ${renderMasteryMetric("Stability", getMasterySignalScore(summary.consistency))}
             ${renderMasteryMetric("Attempts", String(summary.attempts))}

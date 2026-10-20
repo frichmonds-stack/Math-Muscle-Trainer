@@ -311,6 +311,12 @@
   gap: clamp(0.7rem, 1.3vw, 0.92rem);
 }
 
+@media (min-width: 981px) {
+  .home-snapshot-empty {
+    grid-column: span 2;
+  }
+}
+
 .home-snapshot-metric {
   min-width: 0;
   padding: 0.58rem 0.68rem;

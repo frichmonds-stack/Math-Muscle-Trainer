@@ -344,6 +344,13 @@ function shiftDisplayedMonth(direction) {
   renderCalendars();
 }
 
+function renderZeroStates() {
+  const isZeroState = !hasTrainingHistory();
+  document.querySelectorAll("[data-zero-state]").forEach((section) => {
+    section.classList.toggle("is-zero-state", isZeroState);
+  });
+}
+
 function renderStreakPanel() {
   const streakSummary = getPracticeStreakSummary();
   const monthSummary = getDisplayedMonthSummary();
@@ -397,4 +404,5 @@ function renderStreakPanel() {
       checkElement.closest(".training-plan-step")?.classList.toggle("is-complete", complete);
     }
   });
+  renderZeroStates();
 }

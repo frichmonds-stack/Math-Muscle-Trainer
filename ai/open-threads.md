@@ -1,6 +1,6 @@
 # Open Threads
 
-Last updated: 2026-07-11
+Last updated: 2026-10-20
 
 Keep this file decision-focused. Executable work belongs in `ai/tasks/next-actions.md`. Speculative concepts belong in `docs/product/idea-bank.md`.
 

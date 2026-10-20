@@ -1,6 +1,6 @@
 # Idea Bank
 
-Last updated: 2026-07-11
+Last updated: 2026-10-20
 
 These are speculative concepts, not commitments.
 
@@ -15,7 +15,9 @@ These are speculative concepts, not commitments.
 
 - optional sound feedback with a mute control
 - future reward/milestone language that supports mastery without distracting from core metrics
-- possible challenge or `Flex` mode for competitive practice
+- possible challenge or `Flex` mode for competitive practice: a score-chasing, leaderboard-style mode that rewards speed, consistency and streak-building rather than instruction. Variants:
+  - points-based scoring, chasing the highest score
+  - a pressure timer with a very short countdown that resets after each correct answer; the run ends when it runs out, so the challenge is the longest streak of correct answers under pressure
 
 ## Progress And Evidence Ideas
 

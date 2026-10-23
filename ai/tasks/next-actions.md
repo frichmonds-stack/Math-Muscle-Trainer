@@ -1,6 +1,6 @@
 # Next Actions
 
-Last updated: 2026-10-18
+Last updated: 2026-10-20
 
 Use this file as a small priority queue. Broader unresolved decisions belong in `ai/open-threads.md`. Long-range concepts belong in `docs/product/roadmap.md` or `docs/product/idea-bank.md`.
 
@@ -13,7 +13,6 @@ Use this file as a small priority queue. Broader unresolved decisions belong in 
 ## Next
 
 - `TASK-PROGRESS-001` Plan the next Progress/Evidence UI pass after lesson direction is clearer, especially mastery explanation and evidence hierarchy.
-- `TASK-UI-001` Add intentional zero states for new-user and empty-data Home, Progress, Mastery, Fact Tracker, Records, and Learn surfaces.
 - `TASK-LEARN-002` Move `Exit Lesson` into lesson-local UI instead of global utility space.
 - `TASK-CONTENT-001` Continue teacher-authored addition lesson specs and decide the first full addition progression pathway.
 - `TASK-PROCESS-001` Use and refine `docs/testing/smoke-checklist.md` during routine publish closes and UI validation passes.

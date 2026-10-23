@@ -15,7 +15,7 @@ const KEYPAD_PREFERENCE_STORAGE_KEY = `${PRODUCT_STORAGE_PREFIX}-keypad-preferen
 const LEGACY_KEYPAD_PREFERENCE_STORAGE_KEYS = [
   `${LEGACY_PRODUCT_STORAGE_PREFIX}-keypad-preference-v1`,
 ];
-const APP_VERSION = "v0.20.10";
+const APP_VERSION = "v0.20.11";
 const FACTOR_LIMIT = 12;
 const TABLE_FACTORS = Array.from({ length: FACTOR_LIMIT }, (_, index) => index + 1);
 const QUESTION_PRESETS = [10, 20, 30];
@@ -743,6 +743,12 @@ function defaultProgress() {
     workoutHistory: [],
     techniques: {},
   };
+}
+
+// True once the learner has any saved workout or answered fact; drives the new-user zero states.
+function hasTrainingHistory(progress = state.progress) {
+  return progress.workoutHistory.length > 0 ||
+    Object.values(progress.facts).some((entry) => Number(entry?.attempts || 0) > 0);
 }
 
 function defaultSettingsSnapshot() {

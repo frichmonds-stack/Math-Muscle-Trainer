@@ -13,15 +13,18 @@ function getTroubleFacts(limit = 5, filterValue = "all") {
     .slice(0, limit);
 }
 
-function renderPriorityList(target, troubleFacts) {
+function renderPriorityList(target, troubleFacts, hasAttempts = true) {
   if (!target) {
     return;
   }
 
   if (!troubleFacts.length) {
+    const emptyCopy = hasAttempts
+      ? "No priority targets yet. Your recent facts are holding together well."
+      : "No priority targets yet. Answer a few facts and the ones that need reps will show up here.";
     target.innerHTML = `
       <div class="focus-card empty-state">
-        <div class="fact-meta">No priority targets yet. Your recent facts are holding together well.</div>
+        <div class="fact-meta">${emptyCopy}</div>
       </div>
     `;
     return;
@@ -373,7 +376,8 @@ function renderProgressFocusAreas() {
 
   renderPositiveProgressList(elements.progressWinsList, positiveItems);
   renderGrowthList(elements.progressGrowthList, growthItems);
-  renderPriorityList(elements.progressPriorityList, troubleFacts);
+  const hasAttempts = getFactEntriesByOperation(filterValue).some((entry) => entry.attempts > 0);
+  renderPriorityList(elements.progressPriorityList, troubleFacts, hasAttempts);
 }
 
 function renderResultsFocusAreas() {
@@ -384,7 +388,8 @@ function renderResultsFocusAreas() {
 
   renderPositiveProgressList(elements.resultsWinsList, positiveItems);
   renderGrowthList(elements.resultsGrowthList, growthItems);
-  renderPriorityList(elements.resultsPriorityList, troubleFacts);
+  const hasAttempts = getFactEntriesByOperation(filterValue).some((entry) => entry.attempts > 0);
+  renderPriorityList(elements.resultsPriorityList, troubleFacts, hasAttempts);
 }
 
 function renderFocusAreas() {

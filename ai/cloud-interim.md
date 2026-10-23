@@ -49,3 +49,4 @@ work-closeout, and Notion delivery when back on the local machine:
 - 2026-10-18 `v0.20.8` cloud setup, bug fixes, CSS cleanup and stylesheet split (branch `claude/ecstatic-planck-n6rbuz`).
 - 2026-10-18 `v0.20.9` dev tools in repo, unit tests, JS split (branch `claude/ecstatic-planck-n6rbuz`).
 - 2026-10-18 `v0.20.10` focus-trend and saved-progress fixes, Make 10 dead-code removal, ADR-0018 deploy docs (branch `claude/hopeful-pasteur-vxziav`).
+- 2026-10-20 `v0.20.11` new-user zero states (TASK-UI-001) and project-memory refresh (branch `claude/vigilant-ritchie-listcm`).

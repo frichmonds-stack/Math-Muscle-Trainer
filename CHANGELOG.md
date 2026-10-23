@@ -6,6 +6,20 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.11] - 2026-10-20
+
+### Added
+- Added new-user zero states (TASK-UI-001): before the first workout, Home, Workout Log, Operation Mastery, Workout Tracker and Records show a short message, and the Progress cards include a Start a workout button, instead of grids of zeros.
+
+### Changed
+- Operation Mastery shows `-` instead of `0%` for operations that have no attempts yet.
+
+### Fixed
+- Next Focus no longer says "Your recent facts are holding together well" when no facts have been answered.
+
+### Removed
+- Removed the leftover `PROJECT_NOTES.main-backup.md`; its Flex mode notes now live in `docs/product/idea-bank.md`.
+
 ## [0.20.10] - 2026-10-18
 
 ### Changed

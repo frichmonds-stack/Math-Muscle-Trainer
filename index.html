@@ -129,7 +129,7 @@
               </div>
             </section>
 
-            <section class="home-snapshot-strip" aria-label="Training snapshot">
+            <section class="home-snapshot-strip" aria-label="Training snapshot" data-zero-state>
               <div class="home-snapshot-metric home-streak-metric">
                 <div class="home-snapshot-head">
                   <span class="metric-label">Workout Streak</span>
@@ -137,14 +137,14 @@
                 </div>
                 <div class="home-weekly-strip" id="homeWeeklyStrip" aria-label="Last 7 days"></div>
               </div>
-              <div class="home-snapshot-metric home-reps-metric">
+              <div class="home-snapshot-metric home-reps-metric" data-zero-hide>
                 <div class="home-snapshot-head">
                   <span class="metric-label">Weekly Reps</span>
                   <span class="metric-value" id="homeSnapshotReps">0</span>
                 </div>
                 <div class="home-reps-graph" id="homeRepsGraph" aria-label="Reps over the last 7 days"></div>
               </div>
-              <div class="home-snapshot-metric home-accuracy-metric">
+              <div class="home-snapshot-metric home-accuracy-metric" data-zero-hide>
                 <div class="home-snapshot-head">
                   <span class="metric-label">Weekly Accuracy</span>
                   <span class="metric-value" id="homeSnapshotRank">0%</span>
@@ -156,6 +156,11 @@
                   <span></span>
                   <span></span>
                 </div>
+              </div>
+              <div class="home-snapshot-metric zero-state-card home-snapshot-empty">
+                <span class="metric-label">Weekly Training</span>
+                <strong class="zero-state-title">Rep one starts the log.</strong>
+                <p class="fact-meta">Finish the Quick 5 warmup or a 1 minute workout and your weekly reps and accuracy show up here.</p>
               </div>
             </section>
           </div>
@@ -945,12 +950,12 @@
               </div>
 
               <div class="progress-carousel">
-                <section class="progress-slide is-active" data-progress-slide="overview" data-carousel-kicker="Workout Log">
+                <section class="progress-slide is-active" data-progress-slide="overview" data-carousel-kicker="Workout Log" data-zero-state>
                   <div class="slide-heading slide-heading-with-filter">
                     <div>
                       <h2>Your progress so far</h2>
                     </div>
-                    <div class="fact-carousel-selector progress-inline-selector" aria-label="Workout log operation">
+                    <div class="fact-carousel-selector progress-inline-selector" aria-label="Workout log operation" data-zero-hide>
                       <button class="fact-range-button" id="overviewOperationPrevButton" type="button" aria-label="Previous workout log operation">&#8249;</button>
                       <span class="fact-carousel-label" id="overviewOperationLabel">All Operations</span>
                       <button class="fact-range-button" id="overviewOperationNextButton" type="button" aria-label="Next workout log operation">&#8250;</button>
@@ -967,7 +972,7 @@
                     </label>
                   </div>
 
-                  <div class="stats-grid">
+                  <div class="stats-grid" data-zero-hide>
                     <div class="stat-block">
                       <span class="stat-value" id="overallAnswered">0</span>
                       <span class="stat-label">Facts Attempted</span>
@@ -998,19 +1003,31 @@
                       <span class="stat-label">Most Attempts in a Day</span>
                     </div>
                   </div>
+
+                  <div class="coach-card zero-state-card">
+                    <strong class="zero-state-title">No reps logged yet.</strong>
+                    <p class="fact-meta">Finish your first workout to start the log. Facts attempted, accuracy and best streaks build up here.</p>
+                    <button class="nav-button zero-state-button" type="button" data-view-target="setup">Start a workout</button>
+                  </div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="mastery" data-carousel-kicker="Operation Mastery">
+                <section class="progress-slide" data-progress-slide="mastery" data-carousel-kicker="Operation Mastery" data-zero-state>
                   <div class="slide-heading mastery-slide-heading">
                     <div>
                       <h2>Your operation ranks <button class="inline-help-button" type="button" id="masteryHelpButton" aria-label="Explain operation mastery">?</button></h2>
                     </div>
                   </div>
 
+                  <div class="coach-card zero-state-card">
+                    <strong class="zero-state-title">Every operation starts at Rookie.</strong>
+                    <p class="fact-meta">Train an operation and its rank, accuracy and coverage start to climb.</p>
+                    <button class="nav-button zero-state-button" type="button" data-view-target="setup">Start a workout</button>
+                  </div>
+
                   <div class="mastery-grid" id="masteryGrid"></div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="tracker" data-carousel-kicker="Workout Tracker">
+                <section class="progress-slide" data-progress-slide="tracker" data-carousel-kicker="Workout Tracker" data-zero-state>
                   <div class="tracker-layout">
                     <div class="tracker-left-column">
                       <div class="tracker-slide-head tracker-title-block">
@@ -1021,7 +1038,12 @@
                         </h2>
                       </div>
 
-                      <aside class="tracker-side-panel">
+                      <div class="coach-card zero-state-card">
+                        <strong class="zero-state-title">Your first workout lights up the calendar.</strong>
+                        <p class="fact-meta">Train on any day to start a streak. Workouts, reps and accuracy for the month show up here.</p>
+                        <button class="nav-button zero-state-button" type="button" data-view-target="setup">Start a workout</button>
+                      </div>
+                      <aside class="tracker-side-panel" data-zero-hide>
                         <div class="tracker-stat-grid">
                           <div class="stat-block compact-stat">
                             <span class="stat-value" id="currentPracticeStreak">0</span>
@@ -1195,12 +1217,12 @@
                   <div class="coach-card" id="coachTip"></div>
                 </section>
 
-                <section class="progress-slide" data-progress-slide="records" data-carousel-kicker="Workout Records">
+                <section class="progress-slide" data-progress-slide="records" data-carousel-kicker="Workout Records" data-zero-state>
                   <div class="slide-heading slide-heading-with-filter">
                     <div>
                       <h2>Workout history at a glance</h2>
                     </div>
-                    <div class="facts-selector-row records-selector-row" id="recordsSelectorRow">
+                    <div class="facts-selector-row records-selector-row" id="recordsSelectorRow" data-zero-hide>
                       <div class="fact-carousel-selector progress-inline-selector" aria-label="Records operation">
                         <button class="fact-range-button" id="recordsOperationPrevButton" type="button" aria-label="Previous records operation">&#8249;</button>
                         <span class="fact-carousel-label" id="recordsOperationLabel">All Operations</span>
@@ -1228,7 +1250,13 @@
                     </div>
                   </div>
 
-                  <div class="focus-split records-split">
+                  <div class="coach-card zero-state-card">
+                    <strong class="zero-state-title">No records to beat yet.</strong>
+                    <p class="fact-meta">Finish a workout to set your first personal best. Your recent workouts will be listed here too.</p>
+                    <button class="nav-button zero-state-button" type="button" data-view-target="setup">Start a workout</button>
+                  </div>
+
+                  <div class="focus-split records-split" data-zero-hide>
                     <section class="focus-panel">
                       <div class="records-panel-head">
                         <h3 class="focus-panel-title">Personal Bests</h3>

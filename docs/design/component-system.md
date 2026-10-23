@@ -112,6 +112,7 @@ Theme palettes may change atmosphere, but semantic meaning and contrast must sta
 | Lesson interaction | internal |
 | Action tile | internal |
 | Metric panel | internal |
+| Zero-state card (`.zero-state-card`; shown when a `[data-zero-state]` section has no training history) | internal |
 | Button | internal |
 | Dialog | external candidate |
 | Tooltip | external candidate |

@@ -1,6 +1,6 @@
 # Roadmap
 
-Last updated: 2026-07-11
+Last updated: 2026-10-20
 
 This is a broad sequencing document, not an executable backlog.
 
@@ -9,15 +9,16 @@ This is a broad sequencing document, not an executable backlog.
 - Lesson-system direction: Lesson Experience System and Learning Interaction System briefs
 - Teacher-authored lesson expansion, especially addition pathways
 - Progress and mastery communication refinement
-- Zero-state and onboarding clarity
+- Onboarding clarity beyond the first-run zero states (landed in `v0.20.11`)
 - Continued iPad/touch QA and visual system refinement
+- Release safety: Cloudflare manual promotion (ADR-0018), backed by the unit tests and visual checks added in October 2026
 
 ## Likely Near-Term Sequence
 
 1. Define lesson structure and shared interaction patterns.
 2. Expand/refine lesson content using those patterns.
 3. Clarify Progress/Evidence IA and mastery explanation.
-4. Improve zero states and new-user onboarding.
+4. Extend new-user onboarding beyond the first-run zero states.
 5. Revisit Home's adaptive daily-training role once lesson and evidence systems are clearer.
 
 ## Medium-Term Themes

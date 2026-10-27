@@ -1,7 +1,7 @@
+// Touch screens of every size use the on-screen keypad (ADR-0019), so the phone keyboard never
+// covers the fixed Practice layout.
 function prefersTouchKeypad() {
-  const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
-  const maxSide = Math.max(window.innerWidth, window.innerHeight);
-  return coarsePointer && maxSide >= 768;
+  return window.matchMedia("(pointer: coarse)").matches;
 }
 
 function shouldUseTouchKeypad() {
@@ -20,7 +20,6 @@ function updatePracticeInputMode() {
     elements.practiceKeypad.classList.toggle("is-hidden", !state.useTouchKeypad);
   }
   if (elements.answerInput instanceof HTMLInputElement) {
-    elements.answerInput.readOnly = false;
     elements.answerInput.setAttribute("inputmode", state.useTouchKeypad ? "none" : "numeric");
   }
   if (elements.practicePanel) {

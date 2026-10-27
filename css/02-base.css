@@ -3,6 +3,9 @@
 }
 
 html {
+  /* ADR-0019: 16px at the 1194x834 iPad-landscape design size; grows only when the window is
+     larger in both directions, so rem-based layout scales up on big screens and still fits. */
+  font-size: clamp(1rem, min(calc(100vw / 74.625), calc(100dvh / 52.125)), 1.5rem);
   scroll-behavior: smooth;
   overflow-x: clip;
 }

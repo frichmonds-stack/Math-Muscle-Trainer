@@ -33,7 +33,7 @@
 - creating new one-off component styles
 - contradicting screen ownership rules
 - making static metrics look tappable
-- crowding the iPad frame or shrinking controls too far
+- crowding a screen past what fits at the seven reference sizes, or shrinking controls too far (check the fit report)
 
 ## Owner Decisions That May Be Required
 

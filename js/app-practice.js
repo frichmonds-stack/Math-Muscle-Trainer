@@ -715,6 +715,7 @@ function askNextQuestion() {
   elements.problemText.textContent = `${state.currentQuestion.left} ${state.currentQuestion.symbol} ${state.currentQuestion.right}`;
   elements.answerInput.value = "";
   elements.answerInput.disabled = false;
+  elements.answerInput.readOnly = false;
   elements.checkButton.disabled = false;
   elements.skipButton.disabled = isSparMode(state.settings);
   elements.answerInput.focus();
@@ -1145,7 +1146,9 @@ function registerAnswer(evaluation, answerValue, options = {}) {
   renderDailyProgress();
   renderPracticeProgress();
 
-  elements.answerInput.disabled = true;
+  // Lock the answer read-only rather than disabling it: a disabled field loses focus, which made a
+  // phone's own keyboard drop and rise again between questions.
+  elements.answerInput.readOnly = true;
   elements.checkButton.disabled = true;
   elements.skipButton.disabled = true;
   syncKeypadSignToggleState();
@@ -1178,7 +1181,7 @@ function queueNextQuestion(delay) {
 function handleSubmit(event) {
   event.preventDefault();
 
-  if (!state.active || state.countingDown || !state.currentQuestion) {
+  if (!state.active || state.countingDown || !state.currentQuestion || elements.answerInput.readOnly) {
     return;
   }
 

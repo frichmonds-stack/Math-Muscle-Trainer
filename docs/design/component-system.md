@@ -28,7 +28,7 @@ This document does not select or install a library.
 
 Internal components should continue to own:
 
-- app shell and iPad frame
+- app shell (fills the window at every size, ADR-0019)
 - training dock
 - Home training modules
 - custom operation choices where product behavior matters

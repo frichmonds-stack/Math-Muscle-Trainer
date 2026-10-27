@@ -410,7 +410,6 @@
 @media (max-width: 640px) {
   .page-shell {
     width: 100%;
-    padding: 0 0.5rem;
   }
 
   h1 {
@@ -538,10 +537,6 @@
     width: min(960px, 100%);
   }
 
-  .page-shell {
-    padding-inline: clamp(0.8rem, 2vw, 1.25rem);
-  }
-
   .focus-columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
@@ -590,5 +585,287 @@
 @media (max-width: 520px) {
   .technique-table-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Fit-to-screen layout (ADR-0019, TASK-UI-002) =====
+   Views listed in FIT_SCREEN_VIEWS (js/app-techniques-screen.js) stay fixed to the window, without
+   page scrolling, inside the older scrolling rules above. Remove this layer and those scrolling
+   rules once every view has moved. */
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1180px) {
+  body:has(.page-shell.is-fit-shell) {
+    display: grid;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .page-shell.is-fit-shell {
+    height: 100dvh;
+    min-height: 0;
+  }
+
+  .page-shell.is-fit-shell .app-shell {
+    height: 100%;
+    min-height: 0;
+    overflow: clip;
+  }
+
+  .page-shell.is-fit-shell.is-home-shell .page-header {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .page-shell.is-fit-shell .home-dashboard {
+    padding-bottom: 0;
+  }
+
+  .page-shell.is-fit-shell .screen-stage,
+  .page-shell.is-fit-shell .screen.is-active,
+  .page-shell.is-fit-shell .practice-panel {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #practiceScreen.is-active .hud-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Phones, portrait and landscape: Home becomes swipe pages and Practice compacts to one screen. */
+@media (max-width: 600px), (max-height: 500px) {
+  [data-page-swiper] [data-swiper-page]:not(.is-current-page) {
+    display: none !important;
+  }
+
+  .app-dock {
+    bottom: calc(clamp(0.5rem, 1.6dvh, 0.85rem) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .page-shell.is-fit-shell.is-home-shell .page-header {
+    padding-top: 0.5rem;
+    padding-bottom: calc(var(--app-dock-space) + 2.2rem);
+    align-content: center;
+  }
+
+  .page-shell.is-home-shell .home-dashboard {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    align-content: center;
+    gap: 0.85rem;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .home-dashboard-grid {
+    display: contents;
+  }
+
+  .today-training-card,
+  .quick-workout-card,
+  .continue-learning-card,
+  .home-snapshot-strip {
+    grid-area: auto;
+  }
+
+  .page-swiper-dots {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--app-dock-space) - 0.2rem);
+  }
+
+  .home-dashboard-top {
+    margin-bottom: 0;
+  }
+
+  .home-identity {
+    align-items: center;
+  }
+
+  .home-brand-mark {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+
+  .home-dashboard .eyebrow {
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+  }
+
+  .home-dashboard h1 {
+    font-size: clamp(1.9rem, 8.4vw, 2.5rem);
+    white-space: normal;
+  }
+
+  .home-dashboard .hero-tagline {
+    font-size: 0.98rem;
+    white-space: normal;
+  }
+
+  .countdown-panel {
+    min-height: 0;
+    height: 100%;
+    gap: 0.3rem;
+  }
+
+  .countdown-copy {
+    font-size: clamp(1.2rem, 6.5dvh, 2.2rem);
+  }
+
+  .countdown-number {
+    font-size: clamp(3.4rem, 22dvh, 8.4rem);
+  }
+
+  #practiceScreen.is-active .practice-panel {
+    align-content: start;
+    gap: 0.45rem;
+    padding: 0.35rem 0.1rem 0.2rem;
+  }
+
+  #practiceScreen.is-active .practice-topbar,
+  #practiceScreen.is-active .practice-progress-row {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #practiceScreen.is-active .session-badge {
+    min-width: 0;
+    padding: 0.42rem 0.62rem;
+    font-size: 0.88rem;
+  }
+
+  #practiceScreen.is-active .subtle-button {
+    flex: 0 0 auto;
+    padding: 0.55rem 0.8rem;
+  }
+
+  #practiceScreen.is-active .hud-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.3rem;
+    padding: 0.25rem;
+  }
+
+  #practiceScreen.is-active .practice-panel .hud-card {
+    padding: 0.35rem 0.2rem;
+  }
+
+  #practiceScreen.is-active .hud-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  #practiceScreen.is-active .hud-value {
+    font-size: 1.3rem;
+  }
+
+  #practiceScreen.is-active .practice-progress-row {
+    margin: 0;
+    padding: 0 0.2rem;
+  }
+
+  #practiceScreen.is-active .progress-text {
+    min-width: 0;
+    font-size: 0.9rem;
+  }
+
+  #practiceScreen.is-active .practice-panel .problem-wrap {
+    min-height: clamp(84px, 15dvh, 130px);
+    margin: 0;
+    padding: 0.9rem 0.6rem 0.6rem;
+  }
+
+  #practiceScreen.is-active .practice-panel .problem-text {
+    font-size: clamp(2.3rem, 11vw, 3.4rem);
+  }
+
+  #practiceScreen.is-active .answer-form {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.4rem;
+  }
+
+  #practiceScreen.is-active .practice-panel .answer-field input {
+    min-height: 48px;
+    padding-right: 2.4rem;
+  }
+
+  #practiceScreen.is-active .practice-panel .answer-field input::placeholder {
+    font-size: 0.9rem;
+  }
+
+  #practiceScreen.is-active .practice-panel .practice-keypad {
+    justify-self: center;
+    width: min(100%, 20rem);
+    gap: 0.3rem;
+    margin: 0;
+  }
+
+  #practiceScreen.is-active .practice-panel .practice-keypad .ghost-button {
+    min-height: clamp(40px, 6.2dvh, 52px);
+    padding: 0.3rem;
+  }
+}
+
+/* Phone landscape: pair Home cards side by side and split Practice into two columns. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .page-shell.is-home-shell .home-dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .home-snapshot-strip {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .home-brand-mark {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  #practiceScreen.is-active .practice-panel {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    grid-template-areas:
+      "top form"
+      "hud keypad"
+      "progress keypad"
+      "problem keypad";
+    column-gap: 1rem;
+    row-gap: 0.4rem;
+  }
+
+  #practiceScreen.is-active .practice-topbar {
+    grid-area: top;
+  }
+
+  #practiceScreen.is-active .hud-row {
+    grid-area: hud;
+  }
+
+  #practiceScreen.is-active .practice-progress-row {
+    grid-area: progress;
+  }
+
+  #practiceScreen.is-active .practice-panel .problem-wrap {
+    grid-area: problem;
+    min-height: 0;
+  }
+
+  #practiceScreen.is-active .answer-form {
+    grid-area: form;
+  }
+
+  #practiceScreen.is-active .practice-panel .practice-keypad {
+    grid-area: keypad;
+    align-self: start;
+  }
+
+  #practiceScreen.is-active .practice-panel .practice-keypad .ghost-button {
+    min-height: clamp(34px, 9dvh, 44px);
   }
 }

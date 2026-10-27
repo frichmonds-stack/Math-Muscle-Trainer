@@ -52,3 +52,4 @@ work-closeout, and Notion delivery when back on the local machine:
 - 2026-10-18 `v0.20.10` focus-trend and saved-progress fixes, Make 10 dead-code removal, ADR-0018 deploy docs (branch `claude/hopeful-pasteur-vxziav`).
 - 2026-10-20 `v0.20.11` new-user zero states (TASK-UI-001) and project-memory refresh (branch `claude/vigilant-ritchie-listcm`).
 - 2026-10-27 `v0.20.12` screen-size tools: debug Screen size preview, fit checker, review sheet (TASK-UI-002 Batch 0; branch `claude/magical-tesla-xwpqeh`).
+- 2026-10-27 `v0.20.13` fit-to-screen shell, Home, Countdown and Practice; ADR-0019 (TASK-UI-002 Batch 1; branch `claude/magical-tesla-xwpqeh`).

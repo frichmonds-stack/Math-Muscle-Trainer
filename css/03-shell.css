@@ -1,11 +1,10 @@
 .page-shell {
   position: relative;
   z-index: 1;
-  width: min(100vw, calc(100dvh * (var(--app-frame-target-width) / var(--app-frame-target-height))), var(--app-frame-max-width));
-  height: min(100dvh, calc(100vw * (var(--app-frame-target-height) / var(--app-frame-target-width))), 834px);
-  aspect-ratio: var(--app-frame-aspect-ratio);
+  width: 100%;
+  height: 100dvh;
   margin: 0 auto;
-  padding: 0 clamp(0.7rem, 1.6vw, 1.1rem);
+  padding: 0;
   display: grid;
   touch-action: manipulation;
 }

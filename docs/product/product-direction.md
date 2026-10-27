@@ -38,10 +38,10 @@ The app should make regular arithmetic practice feel purposeful and motivating w
 
 ## Experience Direction
 
-- iPad-first, especially landscape classroom use
+- iPad-first, especially landscape classroom use, with phones (portrait and landscape) and desktops also supported: every screen fits the window without scrolling (ADR-0019)
 - all-ages visual tone: strong, calm, tactile, and readable
 - minimalism as a learning strategy, not just a style preference
-- responsive support for portrait/mobile, but not phone-first product planning
+- phone layouts split content-heavy screens into swipeable pages rather than long scrolling pages
 
 ## Accessibility Intent
 

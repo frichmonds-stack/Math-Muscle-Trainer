@@ -29,6 +29,7 @@ Project guidance for Codex and other AI coding sessions in this repo.
   - `js/app-core.js` - constants, state, storage normalization, setup helpers.
   - `js/app-practice.js` - question pools, workout flow, answer handling.
   - `js/app-progress-*.js` - progress analytics, trackers, records, calendar, carousel behavior (split by area; script order in `index.html`).
+  - `js/app-page-swiper.js` - phone page swiping for fit-to-screen layouts (ADR-0019).
   - `js/app-techniques-*.js` - Learn / Techniques lessons; lesson data in `js/app-techniques-content.js`.
   - `js/app-init.js` - startup rendering and event binding.
   - `js/app-debug.js` - opt-in teacher/developer debug mode, loaded only through `?debug=1` / `#debug` behavior.

@@ -77,6 +77,16 @@ async function walkScreens(page, shot) {
   const go = async (view) => { await page.evaluate((v) => requestView(v), view); await settle(page); };
 
   await shot("01-home");
+  // Phone layouts split Home into swipe pages (js/app-page-swiper.js); visit each one.
+  const homePages = await page.evaluate(() => {
+    const swiper = document.querySelector('[data-page-swiper="home"]');
+    return swiper && typeof isPageSwiperPaged === "function" && isPageSwiperPaged(swiper) ? getPageSwiperCount(swiper) : 1;
+  });
+  for (let i = 1; i < homePages; i += 1) {
+    await page.evaluate((index) => setPageSwiperIndex(document.querySelector('[data-page-swiper="home"]'), index), i);
+    await shot(`01-home-page-${i + 1}`);
+  }
+  if (homePages > 1) await page.evaluate(() => setPageSwiperIndex(document.querySelector('[data-page-swiper="home"]'), 0));
   await go("setup");
   await shot("02-setup");
 

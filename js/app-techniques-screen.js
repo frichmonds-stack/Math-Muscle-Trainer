@@ -229,6 +229,10 @@ function viewMatchesButton(view, buttonTarget) {
   return buttonTarget === view;
 }
 
+// Views that use the fit-to-screen layout (ADR-0019). Screens join as they are reworked; once
+// every view is listed, the older scrolling rules in css/14-responsive.css can go.
+const FIT_SCREEN_VIEWS = ["home", "countdown", "practice"];
+
 function showView(view) {
   state.view = view;
   const isHomeView = view === "home";
@@ -240,6 +244,7 @@ function showView(view) {
   });
 
   elements.pageShell?.classList.toggle("is-home-shell", isHomeView);
+  elements.pageShell?.classList.toggle("is-fit-shell", FIT_SCREEN_VIEWS.includes(view));
   document.body.classList.toggle("is-focused-view", !isHomeView);
 
   elements.navButtons.forEach((button) => {

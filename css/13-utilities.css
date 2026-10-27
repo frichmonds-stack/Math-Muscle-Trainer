@@ -148,3 +148,53 @@
     filter: saturate(1.05);
   }
 }
+
+/* Page swiper dots (js/app-page-swiper.js). Hidden unless a phone layout pages the screen. */
+.page-swiper-dots {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+}
+
+.page-swiper-dot {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page-swiper-dot::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.32);
+  transition:
+    width var(--interactive-duration) ease,
+    background var(--interactive-duration) ease;
+}
+
+.page-swiper-dot.is-active::before {
+  width: 1.25rem;
+  background: rgba(var(--accent-rgb), 0.96);
+}
+
+.page-swiper-dot:focus-visible {
+  outline: 2px solid rgba(var(--accent-rgb), 0.7);
+  outline-offset: -2px;
+  border-radius: 999px;
+}
+
+body[data-color-mode="light"] .page-swiper-dot::before {
+  background: rgba(54, 75, 106, 0.28);
+}
+
+body[data-color-mode="light"] .page-swiper-dot.is-active::before {
+  background: var(--accent);
+}

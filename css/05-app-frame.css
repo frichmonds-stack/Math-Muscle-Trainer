@@ -131,7 +131,7 @@
 
 .screen.is-active {
   display: block;
-  width: min(980px, 100%);
+  width: min(var(--app-content-max-width), 100%);
   margin: 0 auto;
   height: 100%;
   overflow-y: auto;

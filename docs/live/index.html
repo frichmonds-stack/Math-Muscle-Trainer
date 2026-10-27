@@ -40,8 +40,8 @@
         <p class="streak-banner-copy">You showed up again today.</p>
       </div>
       <header class="page-header">
-        <section class="home-dashboard" id="homeDashboard" aria-label="Today's training dashboard">
-          <div class="home-dashboard-top">
+        <section class="home-dashboard" id="homeDashboard" aria-label="Today's training dashboard" data-page-swiper="home">
+          <div class="home-dashboard-top" data-swiper-page="1">
             <div class="home-identity">
               <span class="home-brand-mark" aria-hidden="true">
                 <svg viewBox="0 0 660 660" role="presentation">
@@ -59,7 +59,7 @@
           </div>
 
           <div class="home-dashboard-grid">
-            <section class="today-training-card">
+            <section class="today-training-card" data-swiper-page="1">
               <div class="home-card-header">
                 <div>
                   <p class="home-card-kicker">Daily Warmup Routine</p>
@@ -90,7 +90,7 @@
               </div>
             </section>
 
-            <section class="home-card quick-workout-card">
+            <section class="home-card quick-workout-card" data-swiper-page="2">
               <div class="home-card-header compact">
                 <div>
                   <p class="home-card-kicker">1 Minute Workout</p>
@@ -117,7 +117,7 @@
               </div>
             </section>
 
-            <section class="home-card continue-learning-card">
+            <section class="home-card continue-learning-card" data-swiper-page="2">
               <div class="home-card-header compact">
                 <div>
                   <p class="home-card-kicker">Keep Learning</p>
@@ -129,7 +129,7 @@
               </div>
             </section>
 
-            <section class="home-snapshot-strip" aria-label="Training snapshot" data-zero-state>
+            <section class="home-snapshot-strip" aria-label="Training snapshot" data-zero-state data-swiper-page="3">
               <div class="home-snapshot-metric home-streak-metric">
                 <div class="home-snapshot-head">
                   <span class="metric-label">Workout Streak</span>
@@ -164,6 +164,7 @@
               </div>
             </section>
           </div>
+          <nav class="page-swiper-dots" data-swiper-dots aria-label="Home pages"></nav>
         </section>
       </header>
         <main class="screen-stage">
@@ -1481,6 +1482,7 @@
     <script src="js/app-progress-trackers.js"></script>
     <script src="js/app-progress-calendar.js"></script>
     <script src="js/app-progress-carousel.js"></script>
+    <script src="js/app-page-swiper.js"></script>
     <script src="js/app-progress-settings.js"></script>
     <script src="js/app-init.js"></script>
     <script src="js/app-debug.js"></script>

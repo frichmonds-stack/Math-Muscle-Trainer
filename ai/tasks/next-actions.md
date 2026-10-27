@@ -6,7 +6,7 @@ Use this file as a small priority queue. Broader unresolved decisions belong in 
 
 ## Now
 
-- `TASK-UI-002` Responsive layout: fill any screen without scrolling, swipeable pages on phones. Batch 0 (tools) is done; Batches 1-4 are in `ai/active-task.md`.
+- `TASK-UI-002` Responsive layout: fill any screen without scrolling, swipeable pages on phones. Batches 0-1 are done; Batches 2-4 are in `ai/active-task.md`.
 - `TASK-DESIGN-001` Draft the Lesson Experience System brief so future lessons share one structure for explanations, examples, hints, guided practice, final practice, completion, and navigation.
 - `TASK-LEARN-001` Define the detailed Learning Interaction System task loop across Workout and Learn: prompts, inputs, scaffolds, feedback, answer reveal, lockout, retry timing, and progress gates.
 - `TASK-QA-001` Continue manual iPad/tablet QA for Practice keypad fit, portrait behavior, light-mode contrast, and key Learn/Progress touch interactions (the debug Screen size preview covers other devices from a desktop).

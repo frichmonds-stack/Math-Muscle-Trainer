@@ -44,7 +44,7 @@ The icons shown inside that board are examples only, not canonical product icons
 ### Dock
 
 - current examples: `Home`, `Workout`, `Learn`, `Progress`, dock Options gear
-- current watch item: keep the dock compact, centered, and readable on the iPad frame
+- current watch item: keep the dock compact, centered, and readable at every screen size, clear of the phone home bar
 
 ### Ghost
 

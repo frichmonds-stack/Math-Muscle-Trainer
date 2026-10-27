@@ -173,6 +173,59 @@
   outline: none;
 }
 
+.debug-button-grid button[aria-pressed="true"] {
+  border-color: rgba(255, 224, 138, 0.72);
+  background: rgba(255, 224, 138, 0.18);
+  color: #ffe08a;
+}
+
+.debug-button-grid button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.debug-preview-active {
+  overflow: hidden;
+}
+
+.debug-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 121;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
+  align-items: start;
+  gap: 8px;
+  padding: 12px 16px 28px;
+  background: #2a282c;
+}
+
+.debug-preview-label {
+  margin: 0;
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: #171618;
+  color: #ffe08a;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.debug-preview-device {
+  position: relative;
+  overflow: hidden;
+  outline: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.debug-preview-device iframe {
+  display: block;
+  border: 0;
+  background: #050505;
+  transform-origin: top left;
+}
+
 .debug-status {
   min-height: 1.4em;
   color: #ffe08a;

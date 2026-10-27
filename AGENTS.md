@@ -129,7 +129,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 
 - Node and Python may not be installed in every local environment. Use the PowerShell checks as the reliable repo-native guard.
 - Where Node is available, run unit tests with `node --test tests/` (see `tests/README.md`).
-- Where Node is available, `tools/visual-check/` (dev-only, ADR-0016) captures deterministic screenshots, compares them, and runs a click-through smoke check; see its README.
+- Where Node is available, `tools/visual-check/` (dev-only, ADR-0016) captures deterministic screenshots, compares them, checks that screens fit at seven device sizes, builds a review sheet, and runs a click-through smoke check; see its README.
 
 ## Coding Conventions
 

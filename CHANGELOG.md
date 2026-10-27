@@ -6,6 +6,15 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.12] - 2026-10-27
+
+### Added
+- Debug mode Screen size preview: shows the app at small phone, phone, phone landscape, iPad portrait, iPad landscape, laptop or desktop size, with optional touch emulation, and runs debug actions inside the preview.
+- Dev tooling (`tools/visual-check/`): a screen-fit checker (scrolling, off-screen or cut-off content, touch-target and text sizes), an HTML review sheet, and four more capture sizes (small phone, phone landscape, laptop, desktop).
+
+### Fixed
+- `tools/visual-check` now finds the container's Chromium when it is unpacked to `chrome-linux64`.
+
 ## [0.20.11] - 2026-10-20
 
 ### Added

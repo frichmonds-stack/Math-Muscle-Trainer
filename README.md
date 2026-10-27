@@ -62,6 +62,8 @@ index.html?debug=1
 
 The password is `N0v4r3`. This is a client-side classroom gate, not real security. Debug tools can jump between screens, load canned learner personas, start quick test workouts, switch light/dark mode and color palettes, show the classroom feedback message, exit debug mode, and clear progress saved in the current browser.
 
+**Screen size** previews the app at an exact device size: small phone, phone, phone landscape, iPad portrait, iPad landscape, laptop or desktop. The preview is scaled down to fit the window when needed, and the label shows the size and scale. `Touch: On/Off` makes the preview behave like a touch screen (on-screen keypad, touch-sized layout, mouse drags act as swipes). While the preview shows, the other debug buttons act on the app inside it. The choice is remembered on refresh; `Off` returns to the normal view. Use a local server or the live site rather than opening `index.html` as a file, because browsers block the panel from controlling a file-based preview.
+
 ## Check it
 
 Run the lightweight repo checks before publishing a snapshot:

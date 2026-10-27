@@ -30,6 +30,10 @@ The first debug-mode slice includes:
 8. `Exit Debug` to clear the session unlock and remove the visible debug UI.
 9. A clear-progress action for the current browser.
 
+Later additions:
+
+- Screen-size preview (2026-10-27): the panel shows the app inside an iframe at an exact device size (the list shared with `tools/visual-check`, ADR-0016), scaled down to fit the window, with optional touch emulation. Panel actions run inside the preview while it is showing. The framed copy loads with `debugPreview=1` (plus `debugTouch=1` for touch), shows no debug UI, and only accepts panel actions when the session is unlocked. Turning the preview off reloads the page so changes made inside it show.
+
 ## Consequences
 
 - UI polish and classroom review can switch between realistic learner states quickly.

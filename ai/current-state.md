@@ -1,11 +1,11 @@
 # Current State
 
-Last updated: 2026-10-20
+Last updated: 2026-10-27
 
 ## Version And Publication
 
-- Local root app version is `v0.20.11`.
-- The current rolling live build is `docs/live`, and `docs/index.html` marks it as `v0.20.11 new-user zero states`.
+- Local root app version is `v0.20.12`.
+- The current rolling live build is `docs/live`, and `docs/index.html` marks it as `v0.20.12 screen-size tools`.
 - The latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - `wrangler.jsonc` provides an optional assets-only Cloudflare Workers deployment of `docs/live/` as `math-muscle-trainer`; no Worker script or package infrastructure is present.
 
@@ -17,8 +17,8 @@ Last updated: 2026-10-20
 - Product-specific UI remains internal; design/system docs now define a future hybrid component architecture without selecting or installing an external library.
 - GitHub Pages is disabled (no Pages site since 2026-10-16). `docs/live` remains the rolling build copied by the publish script. Cloudflare Workers Builds on `main` is intended to upload an inactive version only (`npx wrangler versions upload`), with the owner promoting a version from the Cloudflare dashboard (ADR-0018). The build/deploy commands live only in the dashboard, not the repo.
 
-- Dev-only screenshot and click-through tooling lives in `tools/visual-check/` (ADR-0016); the app stays dependency-free.
-- `tests/` holds 216 Node tests that load the real `js/` files into a sandbox with a fake DOM (`node --test tests/`).
+- Dev-only screenshot, screen-fit, review-sheet and click-through tooling lives in `tools/visual-check/` (ADR-0016) and covers seven screen sizes from small phone to desktop; the app stays dependency-free.
+- `tests/` holds 217 Node tests that load the real `js/` files into a sandbox with a fake DOM (`node --test tests/`).
 
 ## Implemented Capabilities
 
@@ -27,13 +27,14 @@ Last updated: 2026-10-20
 - Learn includes multiplication `x1` through `x12`, addition lesson flows, and subtraction/division placeholders.
 - Progress includes workout records, streaks, fact tracking, operation mastery, and related evidence views.
 - New users with no saved workouts or answered facts see zero-state cards on Home, Workout Log, Operation Mastery, Workout Tracker and Records instead of grids of zeros (`hasTrainingHistory()` in `app-core.js`, `renderZeroStates()` toggling `.is-zero-state` on `[data-zero-state]` sections; `[data-zero-hide]` marks what to hide). Untrained operations show `-` instead of `0%` in Mastery, and Next Focus no longer praises facts that were never answered.
-- Debug mode is opt-in via Home arm-mark double-click or `?debug=1` / `#debug`, then the classroom password `N0v4r3`.
+- Debug mode is opt-in via Home arm-mark double-click or `?debug=1` / `#debug`, then the classroom password `N0v4r3`. Its Screen size section previews the app at seven device sizes, with optional touch emulation (ADR-0009).
 
 ## Active Workstream
 
 - Cloud interim overlay (temporary): cloud Claude sessions load `ai/cloud-interim.md` through the `SessionStart` hook in `.claude/settings.json`; `scripts/check-repo.mjs` is the Node port of `check-repo.ps1`. Remove per the overlay's removal steps when cloud work ends.
 - Cloudflare is the only live channel. `v0.20.8` (PR #2, merge `4a58e56`) went live on 2026-10-18; the merge to `main` promoted it automatically. Pending: the owner sets the production Deploy command to `npx wrangler versions upload` in Worker > Settings > Build and verifies with a test push (ADR-0018). Until verified, treat any push or merge to `main` as a deployment that needs `deploy now`.
 - AI workflow documentation uses routed context and command procedures. `Normal Close` is retired; `execute now` owns local implementation and matching docs, and `Publish Close` owns release checks, Git delivery, and the approved AI Project Manager/Notion closeout. Notion delivery requires the opt-in configuration in committed HEAD.
+- Responsive layout (`TASK-UI-002`, `ai/active-task.md`): replacing the fixed 1194x834 iPad-landscape canvas (ADR-0007) with a layout that fills any screen without scrolling, plus swipeable pages on phones. Batch 0 (tools) is done; the current app fails the fit check on phones and only fills 48% of a 1920x1080 desktop.
 - Highest product implementation priorities remain lesson-system direction, lesson content expansion, and clearer progress/evidence communication.
 
 ## Known Risks Or Defects

@@ -1,10 +1,27 @@
 (function () {
   const DEBUG_PASSWORD = "N0v4r3";
   const DEBUG_UNLOCK_KEY = "math-muscle-trainer-debug-unlocked-v1";
+  const DEBUG_PREVIEW_KEY = "math-muscle-trainer-debug-preview-v1";
+  const DEBUG_PARAMS = new URLSearchParams(window.location.search);
+  // The screen-size preview shows the app in an iframe at an exact device size. The framed copy
+  // loads with debugPreview=1 and is driven from the parent page's debug panel.
+  const IS_PREVIEW_FRAME = DEBUG_PARAMS.get("debugPreview") === "1";
   const DEBUG_ENABLED =
-    new URLSearchParams(window.location.search).get("debug") === "1" ||
-    window.location.hash.toLowerCase() === "#debug";
+    !IS_PREVIEW_FRAME &&
+    (DEBUG_PARAMS.get("debug") === "1" || window.location.hash.toLowerCase() === "#debug");
+  // Keep in step with tools/visual-check/lib/viewports.js (checked by tests/viewports.test.js).
+  const DEBUG_PREVIEW_SIZES = [
+    { key: "phone-small", label: "Small phone", width: 375, height: 667, touch: true },
+    { key: "phone", label: "Phone", width: 390, height: 844, touch: true },
+    { key: "phone-landscape", label: "Phone landscape", width: 844, height: 390, touch: true },
+    { key: "ipad-portrait", label: "iPad portrait", width: 820, height: 1180, touch: true },
+    { key: "ipad-landscape", label: "iPad landscape", width: 1180, height: 820, touch: true },
+    { key: "laptop", label: "Laptop", width: 1366, height: 768, touch: false },
+    { key: "desktop", label: "Desktop", width: 1920, height: 1080, touch: false },
+  ];
   let debugRequested = DEBUG_ENABLED;
+  let previewSettings = { size: null, touch: false };
+  let previewWasShown = false;
 
   function isUnlocked() {
     try {
@@ -388,29 +405,36 @@
     setDebugStatus("Appearance updated.");
   }
 
-  function handleDebugAction(event) {
-    const button = event.target.closest("[data-debug-action]");
-    if (!button) {
-      return;
-    }
+  // Actions that change the app itself. While a preview is showing they run inside the preview.
+  const PREVIEW_FORWARDED_ACTIONS = [
+    "color-mode",
+    "select-color-mode",
+    "theme",
+    "cycle-theme",
+    "feedback",
+    "clear-progress",
+    "jump",
+    "persona",
+    "workout",
+  ];
 
-    const action = button.dataset.debugAction;
-    if (action === "close") {
-      closeDebugPanel();
-      return;
-    }
-    if (action === "exit-debug") {
-      exitDebugMode();
-      return;
-    }
+  function runDebugAction(action, data) {
     if (action === "color-mode") {
-      applyDebugAppearance(null, button.dataset.debugColorMode || "light");
+      applyDebugAppearance(null, data.debugColorMode || "light");
       return;
     }
     if (action === "cycle-theme") {
       const currentIndex = THEME_OPTIONS.findIndex((theme) => theme.key === state.theme);
       const nextTheme = THEME_OPTIONS[(currentIndex + 1) % THEME_OPTIONS.length]?.key || "original";
       applyDebugAppearance(nextTheme, null);
+      return;
+    }
+    if (action === "theme") {
+      applyDebugAppearance(data.value, null);
+      return;
+    }
+    if (action === "select-color-mode") {
+      applyDebugAppearance(null, data.value);
       return;
     }
     if (action === "feedback") {
@@ -427,17 +451,70 @@
       return;
     }
     if (action === "jump") {
-      requestView(button.dataset.debugView || "home");
-      setDebugStatus(`Jumped to ${button.dataset.debugView || "home"}.`);
+      requestView(data.debugView || "home");
+      setDebugStatus(`Jumped to ${data.debugView || "home"}.`);
       return;
     }
     if (action === "persona") {
-      loadDebugPersona(button.dataset.debugPersona || "active-week");
+      loadDebugPersona(data.debugPersona || "active-week");
       return;
     }
     if (action === "workout") {
-      startDebugWorkout(button.dataset.debugOperation || "addition", button.dataset.debugSession || "question-goal");
+      startDebugWorkout(data.debugOperation || "addition", data.debugSession || "question-goal");
     }
+  }
+
+  // Run an app action in the preview when one is showing, otherwise on this page.
+  function routeDebugAction(action, data, description) {
+    const frame = document.querySelector("[data-debug-preview-frame]");
+    if (!previewSettings.size || !frame || !PREVIEW_FORWARDED_ACTIONS.includes(action)) {
+      runDebugAction(action, data);
+      return;
+    }
+    try {
+      frame.contentWindow.mathMuscleDebugPreview.run(action, data);
+      setDebugStatus(`Preview: ${description}.`);
+    } catch (error) {
+      setDebugStatus("Could not reach the preview. Open the app through a web server (not as a file) to control it from here.");
+    }
+  }
+
+  function handleDebugAction(event) {
+    const button = event.target.closest("[data-debug-action]");
+    if (!button) {
+      return;
+    }
+
+    const action = button.dataset.debugAction;
+    if (action === "close") {
+      closeDebugPanel();
+      return;
+    }
+    if (action === "exit-debug") {
+      const reloadAfterPreview = previewWasShown;
+      previewWasShown = false;
+      setPreviewSettings({ size: null, touch: false });
+      exitDebugMode();
+      if (reloadAfterPreview) {
+        // Reload after the debug flag has left the URL, so the page reopens as the normal app.
+        window.location.reload();
+      }
+      return;
+    }
+    if (action === "preview-size") {
+      const size = DEBUG_PREVIEW_SIZES.find((item) => item.key === button.dataset.debugSize);
+      setPreviewSettings({ size: size ? size.key : null, touch: size ? size.touch : false });
+      return;
+    }
+    if (action === "preview-touch") {
+      setPreviewSettings({ ...previewSettings, touch: !previewSettings.touch });
+      return;
+    }
+    if (action === "preview-reload") {
+      document.querySelector("[data-debug-preview-frame]")?.contentWindow?.location.reload();
+      return;
+    }
+    routeDebugAction(action, { ...button.dataset }, button.textContent.trim());
   }
 
   function handleDebugChange(event) {
@@ -446,11 +523,202 @@
       return;
     }
     if (select.dataset.debugSelect === "theme") {
-      applyDebugAppearance(select.value, null);
+      routeDebugAction("theme", { value: select.value }, `palette ${select.value}`);
       return;
     }
     if (select.dataset.debugSelect === "color-mode") {
-      applyDebugAppearance(null, select.value);
+      routeDebugAction("select-color-mode", { value: select.value }, `${select.value} mode`);
+    }
+  }
+
+  function loadPreviewSettings() {
+    try {
+      const saved = JSON.parse(window.localStorage.getItem(DEBUG_PREVIEW_KEY) || "null");
+      if (saved && DEBUG_PREVIEW_SIZES.some((item) => item.key === saved.size)) {
+        return { size: saved.size, touch: Boolean(saved.touch) };
+      }
+    } catch (error) {
+      // Saved preview settings are a convenience only.
+    }
+    return { size: null, touch: false };
+  }
+
+  function savePreviewSettings() {
+    try {
+      if (previewSettings.size) {
+        window.localStorage.setItem(DEBUG_PREVIEW_KEY, JSON.stringify(previewSettings));
+      } else {
+        window.localStorage.removeItem(DEBUG_PREVIEW_KEY);
+      }
+    } catch (error) {
+      // Local storage can be unavailable in some browser modes.
+    }
+  }
+
+  function getPreviewFrameUrl(touch) {
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.hash = "";
+    url.searchParams.set("debugPreview", "1");
+    if (touch) {
+      url.searchParams.set("debugTouch", "1");
+    }
+    return url.toString();
+  }
+
+  function setPreviewSettings(nextSettings) {
+    previewSettings = nextSettings;
+    savePreviewSettings();
+    renderPreviewControls();
+    if (!previewSettings.size) {
+      document.querySelector("[data-debug-preview]")?.remove();
+      document.body.classList.remove("debug-preview-active");
+      if (previewWasShown) {
+        // Progress, palette or mode may have changed inside the preview; reload to pick them up.
+        window.location.reload();
+      }
+      return;
+    }
+    previewWasShown = true;
+    let overlay = document.querySelector("[data-debug-preview]");
+    if (!overlay) {
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        `
+          <div class="debug-preview" data-debug-preview>
+            <p class="debug-preview-label" data-debug-preview-label></p>
+            <div class="debug-preview-device" data-debug-preview-device>
+              <iframe title="App preview" data-debug-preview-frame></iframe>
+            </div>
+          </div>
+        `,
+      );
+      overlay = document.querySelector("[data-debug-preview]");
+    }
+    document.body.classList.add("debug-preview-active");
+    const frame = overlay.querySelector("[data-debug-preview-frame]");
+    const frameUrl = getPreviewFrameUrl(previewSettings.touch);
+    // Changing only the size keeps the preview's current screen; touch emulation needs a reload.
+    if (frame.dataset.src !== frameUrl) {
+      frame.dataset.src = frameUrl;
+      frame.src = frameUrl;
+    }
+    layoutPreview();
+  }
+
+  function layoutPreview() {
+    const overlay = document.querySelector("[data-debug-preview]");
+    const size = DEBUG_PREVIEW_SIZES.find((item) => item.key === previewSettings.size);
+    if (!overlay || !size) {
+      return;
+    }
+    const label = overlay.querySelector("[data-debug-preview-label]");
+    const device = overlay.querySelector("[data-debug-preview-device]");
+    const frame = overlay.querySelector("[data-debug-preview-frame]");
+    const availableWidth = window.innerWidth - 32;
+    const availableHeight = window.innerHeight - label.offsetHeight - 40;
+    const scale = Math.min(1, availableWidth / size.width, availableHeight / size.height);
+    frame.style.width = `${size.width}px`;
+    frame.style.height = `${size.height}px`;
+    frame.style.transform = `scale(${scale})`;
+    device.style.width = `${Math.floor(size.width * scale)}px`;
+    device.style.height = `${Math.floor(size.height * scale)}px`;
+    label.textContent = [
+      size.label,
+      `${size.width}\u00d7${size.height}`,
+      previewSettings.touch ? "touch" : "mouse",
+      scale < 1 ? `shown at ${Math.round(scale * 100)}%` : "actual size",
+    ].join(" \u00b7 ");
+  }
+
+  function renderPreviewControls() {
+    document.querySelectorAll('[data-debug-action="preview-size"]').forEach((button) => {
+      const isActive = (button.dataset.debugSize || null) === (previewSettings.size || "off");
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+    const touchButton = document.querySelector('[data-debug-action="preview-touch"]');
+    if (touchButton) {
+      touchButton.textContent = `Touch: ${previewSettings.touch ? "On" : "Off"}`;
+      touchButton.setAttribute("aria-pressed", previewSettings.touch ? "true" : "false");
+      touchButton.disabled = !previewSettings.size;
+    }
+    const reloadButton = document.querySelector('[data-debug-action="preview-reload"]');
+    if (reloadButton) {
+      reloadButton.disabled = !previewSettings.size;
+    }
+  }
+
+  // Inside the preview: make the page behave as on a touch screen. Media queries for pointer and
+  // hover are rewritten in place, and mouse presses are echoed as touch events so swipes work.
+  function emulateTouchScreen() {
+    const TRUE_QUERY = "(min-width: 0px)";
+    const FALSE_QUERY = "(max-width: 0px)";
+    const toTouchQuery = (query) =>
+      query
+        .replace(/\(\s*(any-)?pointer\s*:\s*coarse\s*\)/g, TRUE_QUERY)
+        .replace(/\(\s*(any-)?pointer\s*:\s*fine\s*\)/g, FALSE_QUERY)
+        .replace(/\(\s*(any-)?hover\s*:\s*hover\s*\)/g, FALSE_QUERY)
+        .replace(/\(\s*(any-)?hover\s*:\s*none\s*\)/g, TRUE_QUERY);
+    const nativeMatchMedia = window.matchMedia.bind(window);
+    window.matchMedia = (query) => nativeMatchMedia(toTouchQuery(String(query)));
+
+    const rewriteRules = (rules) => {
+      for (const rule of rules) {
+        if (rule.media && typeof rule.media.mediaText === "string") {
+          rule.media.mediaText = toTouchQuery(rule.media.mediaText);
+        }
+        if (rule.cssRules) {
+          rewriteRules(rule.cssRules);
+        }
+      }
+    };
+    for (const sheet of document.styleSheets) {
+      try {
+        rewriteRules(sheet.cssRules);
+      } catch (error) {
+        // Browsers block stylesheet access for pages opened as files; media queries stay as they are.
+      }
+    }
+
+    let touchTarget = null;
+    const echoTouch = (type, event) => {
+      if (event.button !== 0) {
+        return;
+      }
+      try {
+        const target = type === "touchstart" ? event.target : touchTarget || event.target;
+        const touch = new Touch({
+          identifier: 1,
+          target,
+          clientX: event.clientX,
+          clientY: event.clientY,
+          pageX: event.pageX,
+          pageY: event.pageY,
+        });
+        const active = type === "touchend" ? [] : [touch];
+        touchTarget = type === "touchend" ? null : target;
+        target.dispatchEvent(
+          new TouchEvent(type, { bubbles: true, cancelable: true, touches: active, targetTouches: active, changedTouches: [touch] }),
+        );
+      } catch (error) {
+        // Touch events cannot be built in this browser; clicks still work.
+      }
+    };
+    document.addEventListener("mousedown", (event) => echoTouch("touchstart", event), true);
+    document.addEventListener("mouseup", (event) => echoTouch("touchend", event), true);
+    document.documentElement.classList.add("debug-touch-emulation");
+
+    if (typeof updatePracticeInputMode === "function") {
+      updatePracticeInputMode();
+    }
+  }
+
+  function initialisePreviewFrame() {
+    if (DEBUG_PARAMS.get("debugTouch") === "1") {
+      emulateTouchScreen();
+    }
+    if (isUnlocked()) {
+      window.mathMuscleDebugPreview = { run: runDebugAction };
     }
   }
 
@@ -478,6 +746,21 @@
           <p class="debug-note">
             Client-side classroom gate only. These tools affect progress saved in this browser.
           </p>
+
+          <section class="debug-section">
+            <h3>Screen size</h3>
+            <div class="debug-button-grid">
+              ${DEBUG_PREVIEW_SIZES.map(
+                (size) =>
+                  `<button type="button" data-debug-action="preview-size" data-debug-size="${size.key}">${size.label}</button>`,
+              ).join("")}
+              <button type="button" data-debug-action="preview-size" data-debug-size="off">Off</button>
+            </div>
+            <div class="debug-button-grid debug-appearance-actions">
+              <button type="button" data-debug-action="preview-touch">Touch: Off</button>
+              <button type="button" data-debug-action="preview-reload">Reload Preview</button>
+            </div>
+          </section>
 
           <section class="debug-section">
             <h3>Jump</h3>
@@ -548,6 +831,8 @@
     document.querySelector("[data-debug-open]")?.addEventListener("click", openDebugPanel);
     document.querySelector(".debug-panel")?.addEventListener("click", handleDebugAction);
     document.querySelector(".debug-panel")?.addEventListener("change", handleDebugChange);
+    window.addEventListener("resize", layoutPreview);
+    setPreviewSettings(loadPreviewSettings());
   }
 
   function renderDebugLock() {
@@ -622,7 +907,14 @@
     });
   }
 
+  if (IS_PREVIEW_FRAME) {
+    initialisePreviewFrame();
+  }
+
   window.addEventListener("load", () => {
+    if (IS_PREVIEW_FRAME) {
+      return;
+    }
     bindHiddenArmTrigger();
     if (debugRequested) {
       requestDebugAccess();

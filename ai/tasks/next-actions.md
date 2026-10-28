@@ -1,14 +1,15 @@
 # Next Actions
 
-Last updated: 2026-10-20
+Last updated: 2026-10-27
 
 Use this file as a small priority queue. Broader unresolved decisions belong in `ai/open-threads.md`. Long-range concepts belong in `docs/product/roadmap.md` or `docs/product/idea-bank.md`.
 
 ## Now
 
+- `TASK-UI-002` Responsive layout: fill any screen without scrolling, swipeable pages on phones. Batches 0-1 are done; Batches 2-4 are in `ai/active-task.md`.
 - `TASK-DESIGN-001` Draft the Lesson Experience System brief so future lessons share one structure for explanations, examples, hints, guided practice, final practice, completion, and navigation.
 - `TASK-LEARN-001` Define the detailed Learning Interaction System task loop across Workout and Learn: prompts, inputs, scaffolds, feedback, answer reveal, lockout, retry timing, and progress gates.
-- `TASK-QA-001` Continue manual iPad/tablet QA for Practice keypad fit, portrait behavior, light-mode contrast, and key Learn/Progress touch interactions.
+- `TASK-QA-001` Continue manual iPad/tablet QA for Practice keypad fit, portrait behavior, light-mode contrast, and key Learn/Progress touch interactions (the debug Screen size preview covers other devices from a desktop).
 
 ## Next
 

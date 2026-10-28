@@ -28,11 +28,10 @@ Use a shared app-shell contract across the main app surfaces:
 - Actionable lesson/fact tiles can use hover/focus/press states because they open lessons, start training, or drill into detail.
 - Insight and coaching sections can use open columns/lists when scanning and comparison matter more than tapping every block.
 - Avoid visible page-section boxes inside the app canvas unless the surface is an intentional card, dialog, or repeated item.
-- Desktop/tablet-landscape rendering preserves an iPad-landscape-style app canvas (`1194 x 834`) fitted inside the browser viewport, rather than stretching the app shell into arbitrary desktop window shapes.
-- Narrow/mobile layouts can still switch to controlled scrolling and portrait-oriented responsive rules.
+- Superseded by ADR-0019 (2026-10-27): the app fills the window at every size, fits each screen without page scrolling, and splits screens into swipeable pages on phones. The earlier rule was a fixed iPad-landscape canvas (`1194 x 834`) with scrolling narrow layouts.
 
 ## Consequences
 
 Future UI work should classify each element by role before styling it. This keeps cards, lists, chips, selectors, metric panels, and action tiles consistent without forcing every section into the same visual layout.
 
-Desktop review should use the app canvas as the design surface. Extra browser space outside that canvas is ambient frame, not part of the app layout to fill.
+Desktop review covers the whole window at the reference sizes in `tools/visual-check/lib/viewports.js` (ADR-0019).

@@ -75,6 +75,7 @@ async function initialise() {
   setEndWorkoutDialogContent(null);
   showView("home");
   initialiseCarouselGestures();
+  initialisePageSwipers();
 
   elements.settingsForm.addEventListener("submit", (event) => {
     event.preventDefault();

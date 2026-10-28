@@ -19,8 +19,8 @@ The UI should make arithmetic practice feel purposeful and energetic without bec
 - Static metrics must not look tappable.
 - Practice and Learn tasks stay prompt-response-feedback focused.
 - Do not make text tiny just to force a layout to fit.
-- Fit primary workflows inside the iPad landscape frame where practical.
-- Allow content-earned scrolling for Learn, Progress, history, Options, portrait, and phone layouts.
+- Fit every screen inside the window without page scrolling, at phone, tablet and desktop sizes (ADR-0019).
+- On phones, split content-heavy screens into swipeable pages instead of scrolling.
 - Motion should communicate state rather than decorate.
 - Theme colors are identity; semantic colors are meaning.
 - Do not rely on color alone for important states.
@@ -84,8 +84,8 @@ Debug remains teacher/developer tooling, not learner-facing product functionalit
 - Do not rely on color alone.
 - Distinguish theme colors from semantic colors.
 - Do not make text tiny merely to force a layout to fit.
-- Fit primary workflows in the iPad landscape frame where practical.
-- Allow content-earned scrolling for Learn, Progress, history, Options, portrait, and phone layouts.
+- Fit every screen inside the window without page scrolling (ADR-0019); screens not yet reworked still scroll on narrow and portrait layouts.
+- On phones, split content-heavy screens into swipeable pages instead of scrolling.
 - Screen ownership must stay clear across Home, Setup, Practice, Learn, Results, Progress, Options, dialogs, and Debug.
 - Motion should communicate state rather than decorate.
 - Reduced-motion behavior should be supported where motion is used.

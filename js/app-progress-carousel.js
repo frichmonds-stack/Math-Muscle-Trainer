@@ -179,6 +179,12 @@ function initialiseCarouselGestures() {
         swipeState.tracking = false;
         return;
       }
+      // A paged screen (phone layouts) uses sideways swipes to change page, not view.
+      const swiper = target instanceof HTMLElement ? target.closest("[data-page-swiper]") : null;
+      if (swiper && typeof isPageSwiperPaged === "function" && isPageSwiperPaged(swiper)) {
+        swipeState.tracking = false;
+        return;
+      }
       swipeState.tracking = true;
       swipeState.startX = event.touches[0].clientX;
       swipeState.startY = event.touches[0].clientY;

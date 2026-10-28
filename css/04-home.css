@@ -1,5 +1,5 @@
 .home-dashboard {
-  width: min(1040px, 100%);
+  width: min(65rem, 100%);
   display: grid;
   gap: clamp(1rem, 2.15vw, 1.42rem);
   align-content: center;
@@ -49,8 +49,8 @@
 }
 
 .home-brand-mark {
-  width: clamp(92px, 9.8vw, 126px);
-  height: clamp(92px, 9.8vw, 126px);
+  width: clamp(5.75rem, 9.8vw, 7.875rem);
+  height: clamp(5.75rem, 9.8vw, 7.875rem);
   border: 0;
   border-radius: 0;
   padding: 0;
@@ -120,7 +120,7 @@
   grid-template-rows: auto 1fr;
   gap: 0.48rem;
   align-content: start;
-  min-height: 214px;
+  min-height: 13.375rem;
   padding: clamp(0.72rem, 1.35vw, 0.92rem);
   background:
     radial-gradient(circle at top right, rgba(var(--accent-rgb), 0.2), transparent 42%),
@@ -191,7 +191,7 @@
   grid-template-columns: 26px minmax(0, 1fr) max-content;
   align-items: center;
   gap: 0.54rem;
-  min-height: 39px;
+  min-height: 2.4375rem;
   padding: 0.36rem 0.56rem;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.045);
@@ -331,7 +331,7 @@
   grid-template-rows: auto minmax(0, 1fr);
   gap: 0.44rem;
   align-content: start;
-  min-height: 126px;
+  min-height: 7.875rem;
 }
 
 .home-snapshot-head {
@@ -413,7 +413,7 @@
   place-items: end center;
   min-height: 72px;
   color: var(--muted);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -423,7 +423,7 @@
   z-index: 1;
   align-self: start;
   color: color-mix(in srgb, var(--text) 78%, var(--muted) 22%);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
   line-height: 1;
 }
 
@@ -486,7 +486,7 @@
 .home-accuracy-day small {
   margin-top: 0.32rem;
   color: var(--muted);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
   font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
@@ -617,7 +617,7 @@
 }
 
 .weekly-day-pill {
-  min-height: 76px;
+  min-height: 4.75rem;
   border-radius: 16px;
   border: 1px solid var(--stroke);
   display: grid;

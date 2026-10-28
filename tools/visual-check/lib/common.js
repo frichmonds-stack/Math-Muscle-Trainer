@@ -49,7 +49,10 @@ function findChromium() {
   const candidates = [];
   try {
     for (const d of fs.readdirSync(base)) {
-      if (/^chromium-\d+$/.test(d)) candidates.push(path.join(base, d, "chrome-linux", "chrome"));
+      // Older Playwright builds unpack to chrome-linux, newer ones to chrome-linux64.
+      if (/^chromium-\d+$/.test(d)) {
+        candidates.push(path.join(base, d, "chrome-linux", "chrome"), path.join(base, d, "chrome-linux64", "chrome"));
+      }
     }
   } catch (e) { /* ignore */ }
   return candidates.sort().reverse().find((p) => fs.existsSync(p));

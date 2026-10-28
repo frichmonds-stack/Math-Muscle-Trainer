@@ -1,5 +1,5 @@
 .options-dialog {
-  width: min(640px, calc(100% - 1rem));
+  width: min(40rem, calc(100% - 1rem));
   padding: 0;
   border: 1px solid var(--stroke);
   border-radius: 8px;
@@ -24,7 +24,7 @@
   display: grid;
   gap: 0.8rem;
   padding: 0.85rem 1rem 1rem;
-  max-height: min(82vh, 760px);
+  max-height: min(82vh, 47.5rem);
   overflow-y: auto;
   overscroll-behavior: contain;
 }

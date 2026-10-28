@@ -1,8 +1,4 @@
 :root {
-  --app-frame-max-width: 1194px;
-  --app-frame-target-width: 1194;
-  --app-frame-target-height: 834;
-  --app-frame-aspect-ratio: 1194 / 834;
   --app-shell-padding: clamp(0.9rem, 1.5vw, 1.25rem);
   --bg: #050505;
   --bg-soft: #0d0d0d;
@@ -64,7 +60,7 @@
   --interactive-duration: 140ms;
   --home-action-height: 46px;
   --top-ui-offset: clamp(0.55rem, 1.8vh, 0.95rem);
-  --app-content-max-width: 980px;
+  --app-content-max-width: 61.25rem;
   --carousel-label-width: 24ch;
   --selector-chip-width: 18ch;
 }

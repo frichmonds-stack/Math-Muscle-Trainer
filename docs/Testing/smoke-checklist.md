@@ -61,6 +61,7 @@ Use this lightweight checklist before routine publish closes and after UI change
 3. Unlock with the classroom password.
 4. Confirm debug badge/panel appears without dimming the whole app excessively.
 5. Load one persona and confirm Progress/Home update.
+6. Under Screen size, pick Phone: the app shows in a phone-sized frame with a size label. With Touch on, Home shows page 1 with dots; drag sideways to change page and tap a dot. Start a 1 minute workout from page 2 and confirm Practice fits with the keypad. Jump to Progress from the panel and confirm the preview changes. Pick Off and confirm the normal view returns.
 
 ## Pass Criteria
 

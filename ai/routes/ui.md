@@ -3,7 +3,7 @@
 ## Relevant Files
 
 - `css/*.css` (name order is cascade order; see ADR-0015)
-- `tools/visual-check/` for screenshot comparison and smoke checks (ADR-0016)
+- `tools/visual-check/` for screenshot comparison, screen-fit checks, review sheets and smoke checks (ADR-0016)
 - `index.html`
 - generated markup in `js/app-progress-*.js` and `js/app-techniques-*.js`
 - `docs/design/visual-design-system.md`
@@ -33,7 +33,7 @@
 - creating new one-off component styles
 - contradicting screen ownership rules
 - making static metrics look tappable
-- crowding the iPad frame or shrinking controls too far
+- crowding a screen past what fits at the seven reference sizes, or shrinking controls too far (check the fit report)
 
 ## Owner Decisions That May Be Required
 
@@ -47,7 +47,8 @@
 
 ## Minimum Local Checks
 
-- visual review
+- visual review, using the debug-mode Screen size preview for other devices
+- for layout changes: `tools/visual-check/run-all.sh --review <appDir>` (fit report plus review sheet)
 - `git diff --check`
 
 ## Minimum Manual QA

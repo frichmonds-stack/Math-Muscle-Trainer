@@ -29,6 +29,7 @@ Project guidance for Codex and other AI coding sessions in this repo.
   - `js/app-core.js` - constants, state, storage normalization, setup helpers.
   - `js/app-practice.js` - question pools, workout flow, answer handling.
   - `js/app-progress-*.js` - progress analytics, trackers, records, calendar, carousel behavior (split by area; script order in `index.html`).
+  - `js/app-page-swiper.js` - phone page swiping for fit-to-screen layouts (ADR-0019).
   - `js/app-techniques-*.js` - Learn / Techniques lessons; lesson data in `js/app-techniques-content.js`.
   - `js/app-init.js` - startup rendering and event binding.
   - `js/app-debug.js` - opt-in teacher/developer debug mode, loaded only through `?debug=1` / `#debug` behavior.
@@ -129,7 +130,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\publish-snapshot.p
 
 - Node and Python may not be installed in every local environment. Use the PowerShell checks as the reliable repo-native guard.
 - Where Node is available, run unit tests with `node --test tests/` (see `tests/README.md`).
-- Where Node is available, `tools/visual-check/` (dev-only, ADR-0016) captures deterministic screenshots, compares them, and runs a click-through smoke check; see its README.
+- Where Node is available, `tools/visual-check/` (dev-only, ADR-0016) captures deterministic screenshots, compares them, checks that screens fit at seven device sizes, builds a review sheet, and runs a click-through smoke check; see its README.
 
 ## Coding Conventions
 

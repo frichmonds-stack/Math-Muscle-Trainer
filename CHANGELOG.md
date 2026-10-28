@@ -6,6 +6,26 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.13] - 2026-10-27
+
+### Changed
+- The app fills the window at every screen size instead of a fixed iPad-landscape box; on screens larger than 1194x834 everything scales up (ADR-0019).
+- Home, Countdown and Practice fit on one screen without scrolling on phones (portrait and landscape) and iPad portrait. On phones Home is three pages you swipe between, with dots; phone landscape pairs cards side by side and puts the Practice keypad beside the question.
+- Touch phones now use the on-screen number pad in Practice, like tablets.
+- During the short pause after each answer, the answer box stays focused and locked instead of being switched off, so a phone's own keyboard (keypad set to off) should no longer drop and reappear between questions.
+
+### Fixed
+- Home's reps and accuracy day labels were 9px; they are now 10px.
+
+## [0.20.12] - 2026-10-27
+
+### Added
+- Debug mode Screen size preview: shows the app at small phone, phone, phone landscape, iPad portrait, iPad landscape, laptop or desktop size, with optional touch emulation, and runs debug actions inside the preview.
+- Dev tooling (`tools/visual-check/`): a screen-fit checker (scrolling, off-screen or cut-off content, touch-target and text sizes), an HTML review sheet, and four more capture sizes (small phone, phone landscape, laptop, desktop).
+
+### Fixed
+- `tools/visual-check` now finds the container's Chromium when it is unpacked to `chrome-linux64`.
+
 ## [0.20.11] - 2026-10-20
 
 ### Added

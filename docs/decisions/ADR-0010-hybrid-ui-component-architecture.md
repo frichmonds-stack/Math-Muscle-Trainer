@@ -23,7 +23,7 @@ Use a hybrid component model.
 
 Internal ownership should continue to cover product-specific UI such as:
 
-- app shell and iPad frame
+- app shell (the fixed iPad frame was replaced by a fluid shell in ADR-0019)
 - training dock
 - Home training modules
 - custom operation choices where behavior is product-specific

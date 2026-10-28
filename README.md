@@ -14,7 +14,8 @@ A strength-themed arithmetic practice webapp built with plain HTML, CSS, and Jav
 - Supports addition difficulty presets (`easy`, `medium`, `hard`) for quick setup
 - Supports positive and negative integer multiplication while keeping the practice range magnitude-based
 - Keeps the practice screen minimal with a question timer, workout timer, countdown start, and quick right/wrong feedback
-- Adds a touch-first number pad for iPad/tablet-friendly answering without disabling keyboard input
+- Adds a touch-first number pad on touch screens (phones and tablets) without disabling keyboard input
+- Fills the window on phones, tablets and desktops; Home and Practice fit on one screen without scrolling, and on phones Home splits into pages you swipe between
 - Uses adaptive question weighting to bring back new or missed facts more often, plus hidden adaptive Home quick starts that begin easy for new users
 - Tracks daily workouts, reps, accuracy, and streaks with browser-local workout history and a Home snapshot for Workout Streak, Total Reps, and Accuracy
 - Captures browser-local answer telemetry so mastery can use accuracy, fluency, coverage, retention, and consistency signals
@@ -61,6 +62,8 @@ index.html?debug=1
 ```
 
 The password is `N0v4r3`. This is a client-side classroom gate, not real security. Debug tools can jump between screens, load canned learner personas, start quick test workouts, switch light/dark mode and color palettes, show the classroom feedback message, exit debug mode, and clear progress saved in the current browser.
+
+**Screen size** previews the app at an exact device size: small phone, phone, phone landscape, iPad portrait, iPad landscape, laptop or desktop. The preview is scaled down to fit the window when needed, and the label shows the size and scale. `Touch: On/Off` makes the preview behave like a touch screen (on-screen keypad, touch-sized layout, mouse drags act as swipes). While the preview shows, the other debug buttons act on the app inside it. The choice is remembered on refresh; `Off` returns to the normal view. Use a local server or the live site rather than opening `index.html` as a file, because browsers block the panel from controlling a file-based preview.
 
 ## Check it
 

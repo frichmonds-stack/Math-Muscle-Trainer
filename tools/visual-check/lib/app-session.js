@@ -76,17 +76,30 @@ async function answerCurrent(page, { wrong = false } = {}) {
 async function walkScreens(page, shot) {
   const go = async (view) => { await page.evaluate((v) => requestView(v), view); await settle(page); };
 
-  await shot("01-home");
-  // Phone layouts split Home into swipe pages (js/app-page-swiper.js); visit each one.
-  const homePages = await page.evaluate(() => {
-    const swiper = document.querySelector('[data-page-swiper="home"]');
+  // Phone layouts split some screens into swipe pages (js/app-page-swiper.js). swiperPages returns
+  // the page count (1 when the screen is not paged); showSwiperPage moves to a page when paged.
+  const swiperPages = (name) => page.evaluate((n) => {
+    const swiper = document.querySelector(`[data-page-swiper="${n}"]`);
     return swiper && typeof isPageSwiperPaged === "function" && isPageSwiperPaged(swiper) ? getPageSwiperCount(swiper) : 1;
-  });
-  for (let i = 1; i < homePages; i += 1) {
-    await page.evaluate((index) => setPageSwiperIndex(document.querySelector('[data-page-swiper="home"]'), index), i);
-    await shot(`01-home-page-${i + 1}`);
-  }
-  if (homePages > 1) await page.evaluate(() => setPageSwiperIndex(document.querySelector('[data-page-swiper="home"]'), 0));
+  }, name);
+  const showSwiperPage = async (name, index) => {
+    await page.evaluate(([n, i]) => {
+      const swiper = document.querySelector(`[data-page-swiper="${n}"]`);
+      if (swiper && isPageSwiperPaged(swiper)) setPageSwiperIndex(swiper, i);
+    }, [name, index]);
+  };
+  // Shoot every page after the first of a paged screen, then return to the first page.
+  const shootSwiperPages = async (name, prefix) => {
+    const count = await swiperPages(name);
+    for (let i = 1; i < count; i += 1) {
+      await showSwiperPage(name, i);
+      await shot(`${prefix}-page-${i + 1}`);
+    }
+    if (count > 1) await showSwiperPage(name, 0);
+  };
+
+  await shot("01-home");
+  await shootSwiperPages("home", "01-home");
   await go("setup");
   await shot("02-setup");
 
@@ -108,13 +121,18 @@ async function walkScreens(page, shot) {
   await page.click("#optionsCloseButton");
 
   // Configure a 5-question addition workout through the real setup UI.
+  // On phones Setup is three pages: Skill, Workout type, Goal.
   await go("setup");
   await page.click('input[name="operation"][value="addition"] >> xpath=..');
   await page.click('input[name="additionDifficulty"][value="easy"] >> xpath=..');
+  await showSwiperPage("setup", 1);
   await page.click('input[name="sessionType"][value="question-goal"] >> xpath=..');
+  await showSwiperPage("setup", 2);
   await page.click('input[name="questionPreset"][value="custom"] >> xpath=..');
   await page.fill("#questionCustom", "5");
+  await showSwiperPage("setup", 0);
   await shot("03-setup-configured");
+  await shootSwiperPages("setup", "03-setup-configured");
   await page.click("#setupStartButton");
   await page.clock.runFor(4500); // countdown
   if ((await page.evaluate(() => state.view)) !== "practice") throw new Error("Workout did not reach practice view");

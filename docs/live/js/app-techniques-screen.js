@@ -231,7 +231,7 @@ function viewMatchesButton(view, buttonTarget) {
 
 // Views that use the fit-to-screen layout (ADR-0019). Screens join as they are reworked; once
 // every view is listed, the older scrolling rules in css/14-responsive.css can go.
-const FIT_SCREEN_VIEWS = ["home", "countdown", "practice"];
+const FIT_SCREEN_VIEWS = ["home", "setup", "countdown", "practice", "results"];
 
 function showView(view) {
   state.view = view;

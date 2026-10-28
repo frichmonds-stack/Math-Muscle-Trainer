@@ -6,6 +6,16 @@ The format is inspired by Keep a Changelog and uses a simple project-friendly ve
 
 ## [Unreleased]
 
+## [0.20.14] - 2026-10-28
+
+### Changed
+- Setup and Results fit on one screen without scrolling on phones (portrait and landscape) and iPad portrait (ADR-0019).
+- On phones Setup is three pages you swipe between, with dots: Skill (operation and difficulty), Workout type and options, and Goal (attempt goal, time or isolation settings). Once a workout type is chosen, Start shows above the dots on every page. Phone landscape lays each page out in two columns; iPad portrait keeps one page with tighter grids.
+- On phones and iPad portrait the Results Summary stats are a 3x2 grid; the Tracker calendar uses smaller day cells, with the streak numbers beside the calendar in phone landscape; Next Focus cards are tighter and sit in three columns in phone landscape.
+
+### Fixed
+- On touch screens the Results panel arrows and the Tracker month arrows were 22px and 14px; they are now 44px tap targets.
+
 ## [0.20.13] - 2026-10-27
 
 ### Changed

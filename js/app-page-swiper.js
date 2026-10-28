@@ -2,10 +2,14 @@
 // data-swiper-page="N" (several items can share a page) inside a [data-page-swiper] container,
 // and a [data-swiper-dots] element receives one dot button per page. CSS decides when a swiper
 // is paged: it shows the dots and hides items that are not on the current page. On larger
-// layouts the dots stay hidden and every page shows together.
+// layouts the dots stay hidden and every page shows together. Items inside an .is-hidden element
+// (Setup steps not reached yet) do not count, so a page appears once it has something to show;
+// call refreshPageSwipers() after showing or hiding such items.
 
 function getPageSwiperCount(swiper) {
-  const pages = [...swiper.querySelectorAll("[data-swiper-page]")].map((item) => Number(item.dataset.swiperPage) || 1);
+  const pages = [...swiper.querySelectorAll("[data-swiper-page]")]
+    .filter((item) => !item.closest(".is-hidden"))
+    .map((item) => Number(item.dataset.swiperPage) || 1);
   return pages.length ? Math.max(...pages) : 1;
 }
 
@@ -37,6 +41,13 @@ function setPageSwiperIndex(swiper, index) {
   const count = getPageSwiperCount(swiper);
   swiper.dataset.pageIndex = String(Math.min(count - 1, Math.max(0, index)));
   renderPageSwiper(swiper);
+}
+
+// Re-count pages and keep each swiper's current page in range.
+function refreshPageSwipers() {
+  document.querySelectorAll("[data-page-swiper]").forEach((swiper) => {
+    setPageSwiperIndex(swiper, getPageSwiperIndex(swiper));
+  });
 }
 
 function shiftPageSwiper(swiper, direction) {

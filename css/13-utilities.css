@@ -157,6 +157,11 @@
   gap: 0.1rem;
 }
 
+/* A single page needs no dot, but the dots keep their space so the layout does not jump. */
+.page-swiper-dots:has(> :only-child) {
+  visibility: hidden;
+}
+
 .page-swiper-dot {
   display: grid;
   place-items: center;

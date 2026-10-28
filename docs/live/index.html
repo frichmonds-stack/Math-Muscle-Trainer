@@ -175,8 +175,8 @@
               </div>
             </div>
             <div class="screen-grid setup-grid">
-              <section class="panel operation-panel" id="setupOperationPanel">
-                <div class="section-heading compact">
+              <section class="panel operation-panel" id="setupOperationPanel" data-page-swiper="setup">
+                <div class="section-heading compact" data-swiper-page="1">
                   <div>
                     <h2>Choose which operation to focus on.</h2>
                   </div>
@@ -185,6 +185,7 @@
                 <div
                   class="operation-choice-grid"
                   id="operationChoiceGrid"
+                  data-swiper-page="1"
                   role="radiogroup"
                   aria-label="Arithmetic operation"
                 >
@@ -266,7 +267,7 @@
                 </div>
 
                 <div class="setup-step-shell" id="setupStepShell">
-                  <div class="field option-field is-hidden setup-step-field" id="additionDifficultyField">
+                  <div class="field option-field is-hidden setup-step-field" id="additionDifficultyField" data-swiper-page="1">
                     <span>Addition Difficulty</span>
                     <p class="field-hint">You can choose more than one.</p>
                     <div
@@ -289,7 +290,7 @@
                     </div>
                   </div>
 
-                  <div class="field option-field is-hidden setup-step-field" id="subtractionDifficultyField">
+                  <div class="field option-field is-hidden setup-step-field" id="subtractionDifficultyField" data-swiper-page="1">
                     <span>Subtraction Difficulty</span>
                     <p class="field-hint">You can choose more than one.</p>
                     <div
@@ -312,7 +313,7 @@
                     </div>
                   </div>
 
-                  <div class="field option-field is-hidden setup-step-field" id="sessionTypeField">
+                  <div class="field option-field is-hidden setup-step-field" id="sessionTypeField" data-swiper-page="2">
                     <span>Workout Type</span>
                     <div
                       class="choice-row centered-choice workout-type-grid"
@@ -354,7 +355,7 @@
                   </div>
 
                   <form id="settingsForm" class="settings-form setup-settings-form is-hidden">
-                  <div class="field option-field">
+                  <div class="field option-field" data-swiper-page="2">
                     <span>Workout Options</span>
                     <div class="setup-option-list">
                       <label class="toggle compact-toggle bare-toggle">
@@ -404,7 +405,7 @@
                     </div>
                   </div>
 
-                  <section class="field option-field extra-options-field">
+                  <section class="field option-field extra-options-field" data-swiper-page="3">
 
                     <div class="field is-hidden" id="isolationField">
                       <span>Isolation Target</span>
@@ -588,6 +589,7 @@
             </div>
                 </form>
                 </div>
+                <nav class="page-swiper-dots" data-swiper-dots aria-label="Setup pages"></nav>
               </section>
             </div>
           </section>

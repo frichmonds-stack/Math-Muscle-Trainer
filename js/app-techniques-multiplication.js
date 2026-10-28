@@ -104,7 +104,7 @@ function getTechniqueCardStatus(table) {
 }
 
 function getTechniqueTableGridMarkup() {
-  return TABLE_FACTORS.map((factor) => {
+  return TABLE_FACTORS.map((factor, index) => {
     const available = isTechniqueAvailable(factor);
     const status = getTechniqueCardStatus(factor);
 
@@ -113,6 +113,7 @@ function getTechniqueTableGridMarkup() {
         class="technique-card${status.classes}"
         type="button"
         data-technique-select="${factor}"
+        data-swiper-page="${Math.floor(index / 6) + 1}"
         ${available ? "" : "disabled"}
       >
         ${status.pill ? `<span class="technique-card-pill">${status.pill}</span>` : ""}

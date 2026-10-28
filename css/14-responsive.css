@@ -688,6 +688,42 @@
   #resultsScreen .results-stats {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  /* Progress: the carousel fills the screen like Results; Workout Log stats are a 3x2 grid. */
+  #progressScreen.screen.is-active {
+    display: grid;
+    overflow: hidden;
+  }
+
+  #progressScreen .carousel-panel {
+    --carousel-frame-height: 100%;
+  }
+
+  #progressScreen .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #progressScreen .mastery-overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Learn: the menu or lesson fills the screen below the header. */
+  #techniquesScreen.is-active {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  #techniquesScreen .techniques-screen-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  #techniqueScreenShell {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
 }
 
 /* Phones, portrait and landscape: Home becomes swipe pages and Practice compacts to one screen. */
@@ -958,142 +994,143 @@
   }
 
   /* Results: compact Summary, Tracker and Next Focus so each slide fits without scrolling. */
-  #resultsScreen .focused-view-head {
+  :is(#resultsScreen, #progressScreen) .focused-view-head {
     margin-bottom: 0;
   }
 
-  #resultsScreen .carousel-panel {
+  :is(#resultsScreen, #progressScreen) .carousel-panel {
     padding-inline: 0;
   }
 
-  #resultsScreen .carousel-actions-floating {
+  :is(#resultsScreen, #progressScreen) .carousel-actions-floating {
     margin-bottom: 0.3rem;
   }
 
-  #resultsScreen .slide-heading h2,
-  #resultsScreen .tracker-slide-head h2 {
+  :is(#resultsScreen, #progressScreen) .slide-heading h2,
+  :is(#resultsScreen, #progressScreen) .tracker-slide-head h2 {
     font-size: 1.35rem;
   }
 
-  #resultsScreen .results-stats {
+  :is(#resultsScreen, #progressScreen) .results-stats {
     gap: 0.45rem;
   }
 
-  #resultsScreen .results-stats .stat-block {
+  :is(#resultsScreen, #progressScreen) .results-stats .stat-block {
     padding: 0.55rem 0.25rem;
   }
 
-  #resultsScreen .results-stats .stat-value {
+  :is(#resultsScreen, #progressScreen) .results-stats .stat-value {
     font-size: 1.45rem;
   }
 
-  #resultsScreen .results-stats .stat-label {
+  :is(#resultsScreen, #progressScreen) .results-stats .stat-label {
     font-size: 0.8rem;
   }
 
-  #resultsScreen .tracker-layout {
+  :is(#resultsScreen, #progressScreen) .tracker-layout {
     gap: 0.6rem;
     min-height: 0;
     margin-top: 0;
   }
 
-  #resultsScreen .tracker-left-column {
+  :is(#resultsScreen, #progressScreen) .tracker-left-column {
     gap: 0.45rem;
     padding-bottom: 0.5rem;
   }
 
-  #resultsScreen .tracker-side-panel {
+  :is(#resultsScreen, #progressScreen) .tracker-side-panel {
     gap: 0.4rem;
   }
 
-  #resultsScreen .tracker-stat-grid {
+  :is(#resultsScreen, #progressScreen) .tracker-stat-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 1rem;
   }
 
-  #resultsScreen .tracker-side-panel .compact-stat {
+  :is(#resultsScreen, #progressScreen) .tracker-side-panel .compact-stat {
     padding: 0.1rem 0 0.3rem;
   }
 
-  #resultsScreen .tracker-side-panel .compact-stat .stat-value {
+  :is(#resultsScreen, #progressScreen) .tracker-side-panel .compact-stat .stat-value {
     font-size: 1.4rem;
   }
 
-  #resultsScreen .tracker-side-panel .compact-stat .stat-label {
+  :is(#resultsScreen, #progressScreen) .tracker-side-panel .compact-stat .stat-label {
     margin-top: 0;
     font-size: 0.78rem;
   }
 
-  #resultsScreen .tracker-mini-card {
+  :is(#resultsScreen, #progressScreen) .tracker-mini-card {
     min-height: 0;
     padding: 0.12rem 0;
   }
 
-  #resultsScreen .tracker-mini-value {
+  :is(#resultsScreen, #progressScreen) .tracker-mini-value {
     font-size: 1.05rem;
   }
 
-  #resultsScreen .operation-reps-breakdown {
+  :is(#resultsScreen, #progressScreen) .operation-reps-breakdown {
     margin-top: 0.1rem;
     padding-top: 0.2rem;
   }
 
-  #resultsScreen .operation-reps-labels {
+  :is(#resultsScreen, #progressScreen) .operation-reps-labels {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 1rem;
     row-gap: 0.12rem;
   }
 
-  #resultsScreen .tracker-calendar-wrap {
+  :is(#resultsScreen, #progressScreen) .tracker-calendar-wrap {
     gap: 0.2rem;
     padding-top: 0.5rem;
   }
 
-  #resultsScreen .tracker-calendar-head {
+  :is(#resultsScreen, #progressScreen) .tracker-calendar-head {
     margin-bottom: 0;
   }
 
-  #resultsScreen .calendar-weekdays {
+  :is(#resultsScreen, #progressScreen) .calendar-weekdays {
     gap: 0.2rem;
     margin-bottom: 0.1rem;
     font-size: 0.66rem;
     letter-spacing: 0.04em;
   }
 
-  #resultsScreen .calendar-grid {
+  :is(#resultsScreen, #progressScreen) .calendar-grid {
     gap: 0.2rem;
   }
 
-  #resultsScreen .calendar-grid.compact .calendar-day {
+  #resultsScreen .calendar-grid.compact .calendar-day,
+  #progressScreen .calendar-grid .calendar-day {
     min-height: clamp(1.4rem, 5.4dvh, 2.9rem);
     padding: 0.15rem 0.25rem;
     gap: 0;
     border-radius: 8px;
   }
 
-  #resultsScreen .day-number {
+  :is(#resultsScreen, #progressScreen) .day-number {
     font-size: 0.8rem;
   }
 
-  #resultsScreen .focus-columns {
+  :is(#resultsScreen, #progressScreen) .focus-columns {
     gap: 0.3rem;
   }
 
-  #resultsScreen .focus-column {
+  :is(#resultsScreen, #progressScreen) .focus-column {
     gap: 0.2rem;
   }
 
-  #resultsScreen .focus-panel-title {
+  :is(#resultsScreen, #progressScreen) .focus-panel-title {
     font-size: 0.9rem;
   }
 
-  #resultsScreen .focus-card-grid {
+  :is(#resultsScreen, #progressScreen) .focus-card-grid {
     gap: 0;
     grid-auto-rows: auto;
   }
 
-  #resultsScreen .single-column-grid .focus-card,
-  #resultsScreen .focus-card {
+  :is(#resultsScreen, #progressScreen) .single-column-grid .focus-card,
+  :is(#resultsScreen, #progressScreen) .focus-card {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -1102,24 +1139,398 @@
     padding: 0.3rem 0.2rem;
   }
 
-  #resultsScreen .focus-card-top {
+  :is(#resultsScreen, #progressScreen) .focus-card-top {
     flex: 1 0 100%;
   }
 
-  #resultsScreen .focus-card .fact-name,
-  #resultsScreen .focus-metric,
-  #resultsScreen .focus-meta-row {
+  :is(#resultsScreen, #progressScreen) .focus-card .fact-name,
+  :is(#resultsScreen, #progressScreen) .focus-metric,
+  :is(#resultsScreen, #progressScreen) .focus-meta-row {
     font-size: 0.8rem;
     line-height: 1.3;
   }
 
-  #resultsScreen .focus-chip {
+  :is(#resultsScreen, #progressScreen) .focus-chip {
     padding: 0.12rem 0.45rem;
   }
 
-  #resultsScreen .focus-panel .empty-state {
+  :is(#resultsScreen, #progressScreen) .focus-panel .empty-state {
     min-height: 0;
     padding: 0.3rem 0.2rem;
+  }
+  /* Progress: each carousel slide is one phone page; compact its content so it fits. */
+  #progressScreen .stats-grid {
+    gap: 0.45rem;
+  }
+
+  #progressScreen .stats-grid .stat-block {
+    padding: 0.55rem 0.25rem;
+  }
+
+  #progressScreen .stats-grid .stat-value {
+    font-size: 1.45rem;
+  }
+
+  #progressScreen .stats-grid .stat-label {
+    font-size: 0.8rem;
+  }
+
+  #progressScreen .slide-heading-with-filter {
+    gap: 0.3rem;
+  }
+
+  #progressScreen .mastery-overview-grid {
+    gap: 0.45rem;
+  }
+
+  #progressScreen .mastery-card {
+    gap: 0.35rem;
+    min-height: 0;
+    padding: 0.55rem;
+  }
+
+  #progressScreen .mastery-card-head .section-kicker {
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+  }
+
+  #progressScreen .mastery-card-head strong {
+    font-size: 1.15rem;
+  }
+
+  #progressScreen .mastery-card .mastery-score {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  #progressScreen .mastery-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+
+  #progressScreen .mastery-snapshot-metrics {
+    gap: 0.2rem;
+  }
+
+  #progressScreen .mastery-snapshot-metrics div {
+    padding: 0.25rem 0.1rem;
+    text-align: center;
+  }
+
+  #progressScreen .mastery-snapshot-metrics span {
+    font-size: 0.64rem;
+    letter-spacing: 0.02em;
+  }
+
+  #progressScreen .mastery-snapshot-metrics strong {
+    font-size: 0.82rem;
+  }
+
+  #progressScreen .mastery-snapshot-metrics span {
+    text-transform: none;
+  }
+
+  #progressScreen [data-zero-state].is-zero-state .zero-state-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.3rem;
+    padding: 0.6rem 0.7rem;
+  }
+
+  #progressScreen .zero-state-card .zero-state-button {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 2.75rem;
+    padding: 0.4rem 1rem;
+  }
+
+  #progressScreen .zero-state-card .fact-meta {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  #progressScreen .mastery-card .mastery-rank-track {
+    display: none;
+  }
+
+  #progressScreen .calendar-grid .calendar-day {
+    min-height: clamp(1.4rem, 4.6dvh, 2.9rem);
+  }
+
+  #progressScreen .mastery-detail-panel {
+    gap: 0.45rem;
+    padding: 0.6rem;
+  }
+
+  #progressScreen .mastery-detail-head h3 {
+    font-size: 1.25rem;
+  }
+
+  #progressScreen .mastery-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  #progressScreen .mastery-detail-grid section {
+    align-content: start;
+    gap: 0.35rem;
+  }
+
+  #progressScreen .mastery-signal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.3rem;
+  }
+
+  #progressScreen .mastery-signal-grid div {
+    padding: 0.3rem 0.35rem;
+  }
+
+  #progressScreen .facts-header-content {
+    gap: 0.3rem;
+  }
+
+  #progressScreen .table-grid {
+    gap: 0.4rem;
+  }
+
+  #progressScreen .table-card {
+    min-height: 0;
+    gap: 0.22rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 14px;
+  }
+
+  #progressScreen .table-card-top {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  #progressScreen .table-card .table-pill {
+    padding: 0.12rem 0.4rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.02em;
+  }
+
+  #progressScreen .table-card .fact-meta,
+  #progressScreen .table-card-stats {
+    font-size: 0.78rem;
+  }
+
+  #progressScreen .facts-selector-row {
+    width: 100%;
+    margin-top: 0;
+    row-gap: 0.3rem;
+  }
+
+  #progressScreen .records-split {
+    gap: 0.3rem;
+  }
+
+  #progressScreen .records-panel-head {
+    min-height: 0;
+  }
+
+  #progressScreen .records-split .focus-panel {
+    gap: 0.2rem;
+  }
+
+  #progressScreen .record-card {
+    padding: 0.22rem 0.2rem;
+  }
+
+  #progressScreen .record-card .focus-chip {
+    padding: 0.04rem 0.4rem;
+    font-size: 0.64rem;
+  }
+
+  #progressScreen .record-card .fact-name,
+  #progressScreen .record-card .focus-metric,
+  #progressScreen .record-card .focus-meta-row {
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+
+  /* Learn: the menu is two swipe pages of six cards; lessons compact to one screen. */
+  #techniquesScreen .focused-view-head {
+    margin-bottom: 0;
+  }
+
+  #techniquesScreen .techniques-screen-panel {
+    padding-top: 0;
+  }
+
+  #techniquesScreen .page-swiper-dots {
+    position: static;
+    flex: 0 0 auto;
+    margin-top: 0.4rem;
+  }
+
+  .techniques-screen-panel:not(:has([data-swiper-page])) > .page-swiper-dots {
+    display: none;
+  }
+
+  #techniquesScreen .technique-menu-shell {
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 0.6rem;
+    height: 100%;
+  }
+
+  #techniquesScreen .technique-menu-title-block {
+    gap: 0.25rem;
+  }
+
+  #techniquesScreen .technique-menu-title-block h2 {
+    font-size: 1.35rem;
+  }
+
+  #techniquesScreen .techniques-copy {
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+
+  #techniquesScreen .technique-table-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+    gap: 0.5rem;
+    min-height: 0;
+  }
+
+  #techniquesScreen .technique-card {
+    min-height: 0;
+    padding: 0.6rem;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  #techniquesScreen .technique-lesson-wrap {
+    height: 100%;
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+
+  #techniquesScreen .technique-lesson-head h2 {
+    font-size: 1.3rem;
+  }
+
+  #techniquesScreen .technique-stage-pills {
+    gap: 0.25rem;
+  }
+
+  #techniquesScreen .technique-lesson-wrap > .technique-lesson-head .section-kicker {
+    margin: 0;
+  }
+
+  #techniquesScreen .technique-stage-pill {
+    min-height: 1.6rem;
+    padding: 0.2rem 0.42rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.04em;
+  }
+
+  #techniquesScreen .technique-lesson-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-height: 0;
+    padding: 0.7rem;
+  }
+
+  #techniquesScreen .technique-rule-grid,
+  #techniquesScreen .technique-switch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  #techniquesScreen .technique-example-card {
+    padding: 0.45rem;
+  }
+
+  #techniquesScreen .technique-action-row,
+  #techniquesScreen .technique-question-meta {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #techniquesScreen .technique-action-row {
+    margin-top: auto;
+  }
+
+  #techniquesScreen .technique-practice-problem {
+    min-height: 0;
+    padding: 0.8rem 0.5rem 0.5rem;
+  }
+
+  #techniquesScreen .technique-practice-problem .technique-question,
+  #techniquesScreen .technique-question {
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  #techniquesScreen .technique-input-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.4rem;
+  }
+
+  #techniquesScreen .technique-input-row .answer-field input {
+    min-height: 46px;
+  }
+
+  #techniquesScreen .technique-input-row .answer-field input::placeholder {
+    font-size: 0.9rem;
+  }
+
+  #techniquesScreen .technique-input-row .primary-button {
+    padding-inline: 0.8rem;
+  }
+
+  #techniquesScreen .technique-hint {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  #techniquesScreen .technique-keypad {
+    gap: 0.25rem;
+    margin: 0;
+  }
+
+  #techniquesScreen .technique-keypad .ghost-button {
+    min-height: clamp(36px, 5.6dvh, 48px);
+    padding: 0.2rem;
+  }
+
+  #techniquesScreen .technique-operator-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+    padding-top: 0;
+  }
+
+  #techniquesScreen .technique-operator-button {
+    min-width: 0;
+    min-height: 4.4rem;
+    padding: 0.4rem 0.2rem;
+  }
+
+  #techniquesScreen .technique-pattern-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.3rem;
+  }
+
+  #techniquesScreen .technique-pattern-row {
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    min-height: 0;
+    padding: 0.3rem 0.4rem;
+    border-radius: 12px;
+    font-size: 0.92rem;
+  }
+
+  #techniquesScreen .technique-pattern-row .technique-inline-input {
+    width: 3rem;
+    min-height: 2.2rem;
+    padding: 0.3rem 0.4rem;
+  }
+
+  #techniquesScreen .technique-pattern-row .technique-inline-input.is-wide {
+    width: 3.6rem;
   }
 }
 
@@ -1256,60 +1667,97 @@
   }
 
   /* Results: streak numbers beside the calendar, Next Focus in three columns. */
-  #resultsScreen .slide-heading h2,
-  #resultsScreen .tracker-slide-head h2 {
+  :is(#resultsScreen, #progressScreen) .slide-heading h2,
+  :is(#resultsScreen, #progressScreen) .tracker-slide-head h2 {
     font-size: 1.2rem;
   }
 
-  #resultsScreen .results-stats .stat-block {
+  :is(#resultsScreen, #progressScreen) .results-stats .stat-block {
     padding: 0.25rem;
   }
 
-  #resultsScreen .results-top-actions {
+  :is(#resultsScreen, #progressScreen) .results-top-actions {
     margin-top: 0;
   }
 
-  #resultsScreen .results-stats .stat-value {
+  :is(#resultsScreen, #progressScreen) .results-stats .stat-value {
     font-size: 1.25rem;
   }
 
-  #resultsScreen .tracker-layout {
+  :is(#resultsScreen, #progressScreen) .tracker-layout {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     gap: 1rem;
   }
 
-  #resultsScreen .tracker-left-column {
+  :is(#resultsScreen, #progressScreen) .tracker-left-column {
     padding: 0 1rem 0 0;
     border-bottom: 0;
     border-right: 1px solid var(--stroke);
   }
 
-  #resultsScreen .tracker-calendar-wrap {
+  :is(#resultsScreen, #progressScreen) .tracker-calendar-wrap {
     padding-top: 0;
     border-top: 0;
   }
 
-  #resultsScreen .calendar-grid.compact .calendar-day {
+  #resultsScreen .calendar-grid.compact .calendar-day,
+  #progressScreen .calendar-grid .calendar-day {
     min-height: clamp(1.4rem, 6.2dvh, 2.6rem);
   }
 
-  #resultsScreen .focus-columns {
+  :is(#resultsScreen, #progressScreen) .focus-columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
   }
 
-  #resultsScreen .focus-column + .focus-column {
+  :is(#resultsScreen, #progressScreen) .focus-column + .focus-column {
     padding-top: 0;
     padding-left: 0.8rem;
     border-top: 0;
     border-left: 1px solid var(--stroke);
   }
 
-  #resultsScreen .focus-column {
+  :is(#resultsScreen, #progressScreen) .focus-column {
     padding-right: 0.8rem;
   }
 
-  #resultsScreen .focus-column:last-child {
+  :is(#resultsScreen, #progressScreen) .focus-column:last-child {
     padding-right: 0;
+  }
+}
+
+/* Touch screens: 44px selector arrows and a 32px help button on Progress and Learn (TASK-UI-002). */
+@media (pointer: coarse) {
+  .fact-carousel-selector,
+  .mastery-view-controls .fact-carousel-selector {
+    grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+    gap: 0.1rem;
+    padding: 0;
+  }
+
+  .fact-carousel-selector,
+  .fact-range-nav {
+    width: calc(var(--facts-selector-width) + 3.6rem);
+  }
+
+  .facts-selector-row {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(calc(var(--facts-selector-width) + 3.6rem), calc(var(--facts-selector-width) + 3.6rem))
+    );
+  }
+
+  .fact-range-button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .inline-help-button {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .technique-selector-row {
+    --facts-selector-width: 20ch;
   }
 }

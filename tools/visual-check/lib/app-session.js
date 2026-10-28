@@ -103,17 +103,50 @@ async function walkScreens(page, shot) {
   await go("setup");
   await shot("02-setup");
 
+  // Learn: the menu (swipe pages on phones) for addition and multiplication, then lesson stages.
+  const render = async (fn, arg) => { await page.evaluate(fn, arg); await settle(page); };
   await go("techniques");
   await shot("04-learn-menu");
+  await shootSwiperPages("learn", "04-learn-menu");
+  await page.click('[data-technique-operation-shift="-1"]');
+  await settle(page);
+  await shot("04-learn-menu-multiplication");
+  await shootSwiperPages("learn", "04-learn-menu-multiplication");
+  await page.click('[data-technique-operation-shift="1"]');
+  await settle(page);
   await page.click('[data-addition-technique="make-10"]');
   await shot("05-learn-lesson-make-10");
-  await page.evaluate(() => { resetTechniqueState(state.technique.selectedTable, "menu"); renderTechniqueScreen(); });
+  const additionSteps = [["practice-1", "practice"], ["practice-3", "compare"], ["final-practice", "final-intro"], ["complete", "complete"]];
+  for (const [step, name] of additionSteps) {
+    await render((id) => jumpToAdditionLessonStep(id), step);
+    await shot(`05-learn-make-10-${name}`);
+  }
+  await render(() => {
+    state.technique.additionLessonId = "bridging-expert";
+    state.technique.additionLesson = createAdditionLessonState("bridging-expert");
+    renderTechniqueScreen();
+  });
+  await shot("05-learn-bridging-expert-idea");
+  await render(() => { resetTechniqueState(7, "lesson", "multiplication"); renderTechniqueScreen(); });
+  await shot("05-learn-x7-rule");
+  await render(() => { setTechniqueStage("pattern"); renderTechniqueScreen(); });
+  await shot("05-learn-x7-pattern");
+  await render(() => { setTechniqueStage("guided"); handleTechniqueAction("show-guided-hint"); });
+  await shot("05-learn-x7-guided-hint");
+  await render(() => { state.technique.mode = "celebration"; renderTechniqueScreen(); });
+  await shot("05-learn-celebration");
+  await render(() => { resetTechniqueState(state.technique.selectedTable, "menu"); renderTechniqueScreen(); });
 
   await go("progress");
   const slides = await page.evaluate(() => PROGRESS_SLIDES.slice());
   for (let i = 0; i < slides.length; i += 1) {
     await page.evaluate((index) => { state.progressSlideIndex = index; renderProgressCarousel(); }, i);
     await shot(`06-progress-${i + 1}-${slides[i]}`);
+    if (slides[i] === "mastery") {
+      await render(() => { state.masterySelection = "multiplication"; renderMasterySystem(); });
+      await shot("06-progress-2-mastery-detail");
+      await render(() => { state.masterySelection = "overview"; renderMasterySystem(); });
+    }
   }
 
   await page.evaluate(() => openOptionsDialog());

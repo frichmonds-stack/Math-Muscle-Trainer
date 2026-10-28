@@ -113,9 +113,6 @@
   font-size: 0.78rem;
   line-height: 1.18;
   max-width: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .technique-card-pill {

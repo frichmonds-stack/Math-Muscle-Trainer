@@ -584,6 +584,10 @@ function handleTechniqueTableClick(event) {
     state.technique.selectedOperation = operationOptions[nextIndex];
     state.technique.mode = "menu";
     state.technique.additionLessonId = "";
+    const learnSwiper = document.querySelector('[data-page-swiper="learn"]');
+    if (learnSwiper) {
+      learnSwiper.dataset.pageIndex = "0";
+    }
     renderTechniqueScreen();
     return;
   }

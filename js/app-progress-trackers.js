@@ -409,7 +409,7 @@ function getAdditionTechniqueCardStatus(lesson) {
 }
 
 function getAdditionTechniqueGridMarkup() {
-  return ADDITION_LESSONS.map((lesson) => {
+  return ADDITION_LESSONS.map((lesson, index) => {
     const status = getAdditionTechniqueCardStatus(lesson);
 
     return `
@@ -417,6 +417,7 @@ function getAdditionTechniqueGridMarkup() {
         class="technique-card${status.classes}"
         type="button"
         data-addition-technique="${lesson.id}"
+        data-swiper-page="${Math.floor(index / 6) + 1}"
         ${lesson.selectable ? "" : "disabled"}
       >
         ${status.pill ? `<span class="technique-card-pill">${status.pill}</span>` : ""}

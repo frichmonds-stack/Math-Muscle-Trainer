@@ -2,7 +2,9 @@
 
 ## TASK-UI-002 Responsive layout
 
-Status: `implementing` (Batch 0 published as `v0.20.12`, Batch 1 as `v0.20.13`; Batch 2 implemented as `v0.20.14`, awaiting `publish close`; Batches 3-4 proposed)
+Status: `implementing` (Batch 0 published as `v0.20.12`, Batch 1 as `v0.20.13`, Batch 2 as `v0.20.14` via PR #7 `fcb74d6`; Batch 3 is an incomplete, untested WIP commit on `claude/v0-20-11-deployment-backlog-v9xjbt` - do not merge; Batch 4 proposed)
+
+Batch 3 WIP (2026-10-28, stopped mid-batch): partial Progress/Learn fit CSS, Learn swiper markup hooks and part of `walkScreens`. Not done: `v0.20.15` bump, CHANGELOG, `docs/live` copy, docs, and all checks (`node scripts/check-repo.mjs` reports 9 failures, likely root vs `docs/live` drift). Owner decisions: all nine plan recommendations (44px arrows, 32px help; compact Records cards at every size; Learn phone pages of 6; notes wrap in full; smaller stage pills; lesson-card scroll only as a recorded exception; Mastery 2x2; one batch).
 
 Branch: `claude/v0-20-11-deployment-backlog-v9xjbt`. Commit only on `publish close`; never push or merge to `main` from the cloud (ADR-0018).
 

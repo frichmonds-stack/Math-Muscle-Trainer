@@ -612,7 +612,7 @@ body[data-color-mode="light"] .tracker-side-panel .compact-stat:hover {
 .mastery-score small {
   margin-top: -0.34rem;
   color: var(--muted);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
   font-weight: 800;
 }
 
@@ -919,6 +919,54 @@ body[data-color-mode="light"] .tracker-side-panel .compact-stat:hover {
 
 .records-split {
   gap: 0.95rem;
+}
+
+/* Records: two-line cards so both lists fit without scrolling (TASK-UI-002). */
+.progress-slide[data-progress-slide="records"] .record-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.7rem;
+  min-height: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+/* Line 1: name, operation and date, chip. Line 2: the results. */
+.progress-slide[data-progress-slide="records"] .record-card .focus-card-top {
+  display: contents;
+}
+
+.progress-slide[data-progress-slide="records"] .record-card .focus-card-top + .focus-meta-row {
+  order: 1;
+}
+
+.progress-slide[data-progress-slide="records"] .record-card .focus-chip {
+  order: 2;
+  margin-left: auto;
+}
+
+.progress-slide[data-progress-slide="records"] .record-card::after {
+  content: "";
+  order: 3;
+  flex-basis: 100%;
+}
+
+.progress-slide[data-progress-slide="records"] .record-card .focus-metric,
+.progress-slide[data-progress-slide="records"] .record-card .focus-meta-row:last-child {
+  order: 4;
+}
+
+/* Progress empty states: text beside the button, so the slide's own content still fits. */
+#progressScreen [data-zero-state].is-zero-state .zero-state-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+#progressScreen .zero-state-card .zero-state-button {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin-top: 0;
 }
 
 .results-title-highlight {

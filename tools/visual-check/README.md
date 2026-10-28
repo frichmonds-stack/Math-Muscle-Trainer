@@ -49,7 +49,8 @@ per file and writes red-highlighted diff PNGs (default `<dirB>/_diff`).
 - Modes: `dark`, `light` (palette fixed to `original`).
 - Screens: home, setup (empty), setup configured (addition / Target Reps / custom 5),
   Learn menu, Make 10 lesson, all 7 Progress slides, Options dialog, Practice mid-question
-  (after 1 answer), all 3 Results slides.
+  (after 1 answer), all 3 Results slides. On phone sizes, where Home and Setup are swipe pages,
+  each page is a separate screen (`01-home-page-N`, `03-setup-configured-page-N`).
 
 File names: `<state>__<viewport>__<mode>__<NN-screen>-p<tile>.png`. Long pages are
 captured as viewport-sized tiles (`-p1`, `-p2`, ... max 6) rather than `fullPage`, because

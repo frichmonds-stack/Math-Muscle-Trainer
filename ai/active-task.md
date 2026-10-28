@@ -2,9 +2,9 @@
 
 ## TASK-UI-002 Responsive layout
 
-Status: `implementing` (Batch 0 published as `v0.20.12`, Batch 1 as `v0.20.13`; Batch 2 planned, needs `execute now`; Batches 3-4 proposed)
+Status: `implementing` (Batch 0 published as `v0.20.12`, Batch 1 as `v0.20.13`; Batch 2 implemented as `v0.20.14`, awaiting `publish close`; Batches 3-4 proposed)
 
-Branch: `claude/magical-tesla-xwpqeh`. Commit only on `publish close`; never push or merge to `main` from the cloud (ADR-0018).
+Branch: `claude/v0-20-11-deployment-backlog-v9xjbt`. Commit only on `publish close`; never push or merge to `main` from the cloud (ADR-0018).
 
 ### Owner decisions (2026-10-27)
 
@@ -25,14 +25,14 @@ Recorded in ADR-0019. Landed: fluid shell with root-font scaling; `FIT_SCREEN_VI
 
 Patterns for later batches: give a screen `data-page-swiper` pages and dots, add its view to `FIT_SCREEN_VIEWS`, put its phone rules in the phone section at the end of `14-responsive.css`, and convert px caps that should grow to rem.
 
+### Batch 2: Setup and Results (implemented `v0.20.14`, awaiting `publish close`)
+
+- Owner decision (2026-10-28): Start shows on every Setup page, above the dots. It stays the one `#setupStartButton` inside the settings form; on phones the form and step shell are `display: contents`, so Start sits at the bottom of the page above the dots. It appears once a workout type is chosen, as before.
+- Landed: `setup` and `results` in `FIT_SCREEN_VIEWS`. Setup on phones is three `data-page-swiper="setup"` pages (1 Skill: operation 2x2 plus difficulty; 2 Workout type 2x2 plus options; 3 Goal: presets in one row, isolation or free-training settings); phone landscape lays each page out in two columns. Pages count only once they have visible items (`getPageSwiperCount` skips items inside `.is-hidden`; `toggleSetupFields()` calls `refreshPageSwipers()`), and a lone dot is hidden. iPad portrait: tighter grids, no pages. Results on phones and iPad portrait: Summary stats 3x2; Tracker with smaller day cells, streak numbers beside the calendar in phone landscape; Next Focus tightened, three columns in phone landscape. Results panel arrows and Tracker month arrows are 44px on touch screens (`css/09-results.css`). `walkScreens` visits Setup pages 2 and 3 (`03-setup-configured-page-N`).
+- Checks (2026-10-28, cloud): every Setup and Results screen fits at all seven sizes (fit report before: Setup configured failed on phones and iPad portrait; all Results slides failed on touch sizes for 22px arrows, and on phones for page scrolling). Extra browser test of other Setup paths (multiplication isolation, division timed custom, subtraction spar timed) at five touch sizes: every page fits, Start visible and starting the workout from page 1, swipe changes page not view. Not verified on a real device.
+
 ### Next batches
 
-2. Setup and Results at every size (replace their iPad-landscape-only rules in `06-setup.css` and `09-results.css`). Plan agreed in discussion, not yet authorized:
-   - Before (fit report after Batch 1): Setup fits until an operation is picked, then scrolls on phones and iPad portrait (`03-setup-configured`). Results scrolls on phones; its slide arrows are 22px on touch screens.
-   - Setup on phones: three swipe pages. 1 Skill: operation as a 2x2 grid plus its difficulty or table options. 2 Workout type plus options (Targeted, Regrouping). 3 Goal: attempt goal or time presets in one row, then Start. iPad portrait: the same tighter grids, no pages.
-   - Open owner decision: Start button on every Setup page above the dots (recommended) or only on page 3.
-   - Results on phones: Summary stats as a 3x2 grid; Tracker with smaller calendar cells (streak numbers beside the calendar in landscape); Next Focus tightened. Results arrows 44px on touch screens.
-   - Add `setup` and `results` to `FIT_SCREEN_VIEWS`; extend `walkScreens` to visit Setup pages; browser-test the Setup pages.
 3. Progress and Learn at every size (Progress arrows are 22px, Learn card notes are truncated).
 4. Final pass at every size: remove the older scrolling rules and the fit layer once every view is in `FIT_SCREEN_VIEWS`, then `publish close`.
 

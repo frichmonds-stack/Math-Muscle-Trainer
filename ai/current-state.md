@@ -4,8 +4,8 @@ Last updated: 2026-10-28
 
 ## Version And Publication
 
-- Local root app version is `v0.20.13`.
-- The current rolling live build is `docs/live`, and `docs/index.html` marks it as `v0.20.13 fit-to-screen Home and Practice`.
+- Local root app version is `v0.20.14` (TASK-UI-002 Batch 2, implemented on branch `claude/v0-20-11-deployment-backlog-v9xjbt`, awaiting `publish close`).
+- The rolling live build `docs/live` holds the `v0.20.14` copy, and `docs/index.html` marks it as `v0.20.14 fit-to-screen Setup and Results`; neither is committed or deployed yet.
 - `v0.20.13` is live on Cloudflare as deployment `877dbd21` (PR #5 merge `15084fe`, 2026-10-28); it reached production automatically from the merge, not by owner promotion.
 - The latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - `wrangler.jsonc` provides an optional assets-only Cloudflare Workers deployment of `docs/live/` as `math-muscle-trainer`; no Worker script or package infrastructure is present.
@@ -13,7 +13,7 @@ Last updated: 2026-10-28
 ## Architecture
 
 - The app is a static `index.html` + `css/*.css` + `js/app-*.js` browser app with no bundler or package manager. Progress and Learn code is split by area into `js/app-progress-*.js` and `js/app-techniques-*.js`; `index.html` script order is load order.
-- Layout (ADR-0019): the shell fills the window at every size and the root font size scales up on screens larger than 1194x834. Views in `FIT_SCREEN_VIEWS` (`js/app-techniques-screen.js`: home, countdown, practice) fit the window without page scrolling at every size, via a labelled layer at the end of `css/14-responsive.css`; other views still scroll on narrow and portrait layouts until their batch. On phones (`(max-width: 600px), (max-height: 500px)`) Home is three swipe pages (`js/app-page-swiper.js`). Touch screens of every size use the Practice keypad.
+- Layout (ADR-0019): the shell fills the window at every size and the root font size scales up on screens larger than 1194x834. Views in `FIT_SCREEN_VIEWS` (`js/app-techniques-screen.js`: home, setup, countdown, practice, results) fit the window without page scrolling at every size, via a labelled layer at the end of `css/14-responsive.css`; Learn and Progress still scroll on narrow and portrait layouts until their batch. On phones (`(max-width: 600px), (max-height: 500px)`) Home and Setup are three swipe pages each (`js/app-page-swiper.js`; a page counts only once it has visible items). Touch screens of every size use the Practice keypad and 44px Results arrows.
 - Source-of-truth runtime files live at the repo root; `docs/live` is the rolling publishable copy and `docs/v*` holds preserved archives.
 - Browser-local storage uses `math-muscle-trainer-*` keys with legacy fallback reads for older saved progress and preferences.
 - Product-specific UI remains internal; design/system docs now define a future hybrid component architecture without selecting or installing an external library.
@@ -36,7 +36,7 @@ Last updated: 2026-10-28
 - Cloud interim overlay (temporary): cloud Claude sessions load `ai/cloud-interim.md` through the `SessionStart` hook in `.claude/settings.json`; `scripts/check-repo.mjs` is the Node port of `check-repo.ps1`. Remove per the overlay's removal steps when cloud work ends.
 - Cloudflare is the only live channel, and merges to `main` still auto-deploy: `v0.20.8` (PR #2), `v0.20.11` (PR #4, `4465b4ee`, 2026-10-23) and `v0.20.13` (PR #5, `877dbd21`, 2026-10-28) all went live from the merge (the dashboard Deployments list shows source Build). The owner's Deploy-command fix (ADR-0018) is still not in place; until it is set and verified, treat any push or merge to `main` as a deployment that needs `deploy now`.
 - AI workflow documentation uses routed context and command procedures. `Normal Close` is retired; `execute now` owns local implementation and matching docs, and `Publish Close` owns release checks, Git delivery, and the approved AI Project Manager/Notion closeout. Notion delivery requires the opt-in configuration in committed HEAD.
-- Responsive layout (`TASK-UI-002`, `ai/active-task.md`): replacing the fixed 1194x834 iPad-landscape canvas with a layout that fills any screen without scrolling, plus swipeable pages on phones (ADR-0019). Batch 0 (tools, `v0.20.12`) and Batch 1 (shell, Home, Countdown, Practice, `v0.20.13`) were merged to `main` via PR #5 and are live; Setup, Results, Progress and Learn still scroll on phones and iPad portrait.
+- Responsive layout (`TASK-UI-002`, `ai/active-task.md`): replacing the fixed 1194x834 iPad-landscape canvas with a layout that fills any screen without scrolling, plus swipeable pages on phones (ADR-0019). Batch 0 (tools, `v0.20.12`) and Batch 1 (shell, Home, Countdown, Practice, `v0.20.13`) were merged to `main` via PR #5 and are live; Batch 2 (Setup and Results, `v0.20.14`) is implemented locally and awaits `publish close`; Progress and Learn still scroll on phones and iPad portrait.
 - Highest product implementation priorities remain lesson-system direction, lesson content expansion, and clearer progress/evidence communication.
 
 ## Known Risks Or Defects
@@ -49,6 +49,7 @@ Last updated: 2026-10-28
 
 ## Latest Verified Checks
 
+- 2026-10-28 (cloud): TASK-UI-002 Batch 2 (`v0.20.14`, uncommitted): `node scripts/check-repo.mjs` and `git diff --check` pass, 217/217 unit tests, smoke 45/45 on root and `docs/live`. Fit report: every Setup and Results screen fits at all seven sizes in both data states (before: Setup configured failed on phones and iPad portrait, every Results slide failed on touch sizes); 162/262 screen checks fit overall (before 112/250), no other screen changed. Screenshot compare against the pre-change baseline: 486/690 identical; at iPad landscape only the three Results slides changed (44px arrows move the content down 22px) and the Options dialog version text; laptop and desktop changed only in that version text.
 - 2026-10-20 (cloud): TASK-UI-001 zero states: 216/216 unit tests, smoke 45/45, all 130 populated-data screenshots identical to a pre-change baseline (only empty-data screens changed, reviewed in dark, light and phone views), `git diff --check` passes.
 - 2026-10-18 (cloud): `v0.20.10` BUG-004/BUG-005 fixes, dead Make 10 screen removal and ADR-0018 docs: 211/211 unit tests, smoke 45/45 on root and `docs/live`, 252/252 screenshots identical to a fresh pre-change baseline, `node scripts/check-repo.mjs` and `git diff --check` pass.
 - 2026-10-18 (cloud): JS split of progress and techniques code: 211/211 unit tests, smoke 45/45 on root and `docs/live`, 252/252 identical screenshots, top-level declarations unchanged apart from two removed never-called helpers.

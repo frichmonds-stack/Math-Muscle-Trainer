@@ -15,7 +15,7 @@ const KEYPAD_PREFERENCE_STORAGE_KEY = `${PRODUCT_STORAGE_PREFIX}-keypad-preferen
 const LEGACY_KEYPAD_PREFERENCE_STORAGE_KEYS = [
   `${LEGACY_PRODUCT_STORAGE_PREFIX}-keypad-preference-v1`,
 ];
-const APP_VERSION = "v0.20.13";
+const APP_VERSION = "v0.20.14";
 const FACTOR_LIMIT = 12;
 const TABLE_FACTORS = Array.from({ length: FACTOR_LIMIT }, (_, index) => index + 1);
 const QUESTION_PRESETS = [10, 20, 30];
@@ -2135,6 +2135,10 @@ function toggleSetupFields() {
     "is-hidden",
     !showAdvancedSettings || !questionGoalMode || questionPreset !== "custom",
   );
+  // Phone layouts page Setup (js/app-page-swiper.js); steps that appear or hide change the pages.
+  if (typeof refreshPageSwipers === "function") {
+    refreshPageSwipers();
+  }
 }
 
 function readSettings() {

@@ -1,6 +1,6 @@
 # Next Actions
 
-Last updated: 2026-10-27
+Last updated: 2026-10-28
 
 Use this file as a small priority queue. Broader unresolved decisions belong in `ai/open-threads.md`. Long-range concepts belong in `docs/product/roadmap.md` or `docs/product/idea-bank.md`.
 
@@ -20,7 +20,7 @@ Use this file as a small priority queue. Broader unresolved decisions belong in 
 
 ## Blocked / Awaiting Owner Decision
 
-- `TASK-DEPLOY-001` Owner: set the Cloudflare production Deploy command to `npx wrangler versions upload` (Worker > Settings > Build) and verify with a test push that nothing goes live (ADR-0018); then record the date in `ai/current-state.md` and lift the interim rule.
+- `TASK-DEPLOY-001` The ADR-0018 fix is still not in place as of 2026-10-28: the PR #4 and PR #5 merges both auto-deployed (Deployments shows source Build). Owner: set the Cloudflare production Deploy command to `npx wrangler versions upload` (Worker > Settings > Build), verify with a test push that Deployments still shows the previous version active, then record the date in `ai/current-state.md` and lift the interim rule.
 - `TASK-DATA-001` Expand negative-number support only after `THREAD-DATA-001` defines the data model and learner-facing scope.
 - `TASK-HOME-001` Rework Home's daily routine and adaptive behavior only after `THREAD-HOME-001` decides how ambitious the dashboard should become.
 - `TASK-PROGRESS-002` Deep mastery communication changes depend on `THREAD-PROGRESS-001`.

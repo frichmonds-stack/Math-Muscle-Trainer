@@ -1,11 +1,12 @@
 # Current State
 
-Last updated: 2026-10-27
+Last updated: 2026-10-28
 
 ## Version And Publication
 
 - Local root app version is `v0.20.13`.
 - The current rolling live build is `docs/live`, and `docs/index.html` marks it as `v0.20.13 fit-to-screen Home and Practice`.
+- `v0.20.13` is live on Cloudflare as deployment `877dbd21` (PR #5 merge `15084fe`, 2026-10-28); it reached production automatically from the merge, not by owner promotion.
 - The latest preserved numbered snapshot is `docs/v17` for `v0.20.0`.
 - `wrangler.jsonc` provides an optional assets-only Cloudflare Workers deployment of `docs/live/` as `math-muscle-trainer`; no Worker script or package infrastructure is present.
 
@@ -33,9 +34,9 @@ Last updated: 2026-10-27
 ## Active Workstream
 
 - Cloud interim overlay (temporary): cloud Claude sessions load `ai/cloud-interim.md` through the `SessionStart` hook in `.claude/settings.json`; `scripts/check-repo.mjs` is the Node port of `check-repo.ps1`. Remove per the overlay's removal steps when cloud work ends.
-- Cloudflare is the only live channel. `v0.20.8` (PR #2, merge `4a58e56`) went live on 2026-10-18; the merge to `main` promoted it automatically. Pending: the owner sets the production Deploy command to `npx wrangler versions upload` in Worker > Settings > Build and verifies with a test push (ADR-0018). Until verified, treat any push or merge to `main` as a deployment that needs `deploy now`.
+- Cloudflare is the only live channel, and merges to `main` still auto-deploy: `v0.20.8` (PR #2), `v0.20.11` (PR #4, `4465b4ee`, 2026-10-23) and `v0.20.13` (PR #5, `877dbd21`, 2026-10-28) all went live from the merge (the dashboard Deployments list shows source Build). The owner's Deploy-command fix (ADR-0018) is still not in place; until it is set and verified, treat any push or merge to `main` as a deployment that needs `deploy now`.
 - AI workflow documentation uses routed context and command procedures. `Normal Close` is retired; `execute now` owns local implementation and matching docs, and `Publish Close` owns release checks, Git delivery, and the approved AI Project Manager/Notion closeout. Notion delivery requires the opt-in configuration in committed HEAD.
-- Responsive layout (`TASK-UI-002`, `ai/active-task.md`): replacing the fixed 1194x834 iPad-landscape canvas with a layout that fills any screen without scrolling, plus swipeable pages on phones (ADR-0019). Batch 0 (tools, `v0.20.12`) and Batch 1 (shell, Home, Countdown, Practice, `v0.20.13`) are published to `claude/magical-tesla-xwpqeh`, not yet merged to `main`; Setup, Results, Progress and Learn still scroll on phones and iPad portrait.
+- Responsive layout (`TASK-UI-002`, `ai/active-task.md`): replacing the fixed 1194x834 iPad-landscape canvas with a layout that fills any screen without scrolling, plus swipeable pages on phones (ADR-0019). Batch 0 (tools, `v0.20.12`) and Batch 1 (shell, Home, Countdown, Practice, `v0.20.13`) were merged to `main` via PR #5 and are live; Setup, Results, Progress and Learn still scroll on phones and iPad portrait.
 - Highest product implementation priorities remain lesson-system direction, lesson content expansion, and clearer progress/evidence communication.
 
 ## Known Risks Or Defects
